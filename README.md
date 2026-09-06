@@ -4,7 +4,6 @@
   Standalone FetLife userscript dock — filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, and toasts.
 </p>
 
-<<<<<<< HEAD
 <p align="center">
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Typical-Bits/fl-tools-basic?style=flat-square&label=release" /></a>
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?style=flat-square" /></a>
@@ -13,9 +12,6 @@
   <a href="https://github.com/Typical-Bits/fl-tools-basic/issues"><img alt="Issues" src="https://img.shields.io/github/issues/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
-=======
-**License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) (`LICENSE`, `@license CC-BY-NC-4.0`)
->>>>>>> origin/polish/v1.1.1-pass
 
 **Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.1)
 
@@ -32,7 +28,6 @@ Download counts are **Release asset downloads** only (install from [Releases](ht
 
 ## Install
 
-<<<<<<< HEAD
 1. Install [Violentmonkey](https://violentmonkey.github.io/) (preferred) or [Tampermonkey](https://www.tampermonkey.net/).
 2. Download **`FL_Tools_Basic.user.js`** from the [latest release](https://github.com/Typical-Bits/fl-tools-basic/releases/latest).
 3. Open / confirm the install prompt in your userscript manager.
@@ -40,26 +35,10 @@ Download counts are **Release asset downloads** only (install from [Releases](ht
 
 Direct asset (counted downloads + manager updates):  
 https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
-=======
-1. Open the latest Release asset in your manager:  
-   https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
-2. Confirm the install prompt (Violentmonkey / Tampermonkey).
-3. Visit https://fetlife.com — the dock appears on the right.
-
-Releases page: https://github.com/Typical-Bits/fl-tools-basic/releases/latest
-
-`@updateURL` / `@downloadURL` point at the Release asset so manager update checks increment the download counter. Prefer installing from Releases (not raw `main`) so updates stay tracked.
->>>>>>> origin/polish/v1.1.1-pass
 
 `@updateURL` / `@downloadURL` point at the Release asset so manager update checks increment the download counter.
 
-<<<<<<< HEAD
 ## What’s included
-=======
-- Lighter edition — Pro-only features (highlighter, whitelist, mutes, snooze, notes, import/export, etc.) are not included.
-- If **FL_Tools Pro** is already claimed on the page, Basic yields quietly (dual-install safe).
-- Local-only storage; English UI; DOM-only (no private APIs).
->>>>>>> origin/polish/v1.1.1-pass
 
 - Filters + soft-block  
 - NSFW / SFW display modes  
