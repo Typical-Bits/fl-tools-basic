@@ -1,33 +1,58 @@
 # FL_Tools Basic
 
-Standalone FetLife userscript dock (**FL Tools**): filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts.
+<p align="center">
+  Standalone FetLife userscript dock — filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, and toasts.
+</p>
 
-**License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+<p align="center">
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Typical-Bits/fl-tools-basic?style=flat-square&label=release" /></a>
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?style=flat-square" /></a>
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/issues"><img alt="Issues" src="https://img.shields.io/github/issues/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
+  <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
+</p>
 
-## Compatible with
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.0)
 
-- **Violentmonkey** (preferred)
-- **Tampermonkey**
-- Any userscript manager / editor you prefer
+| Stat | Value |
+|------|-------|
+| Edition | **Basic** (lighter; Pro-only features not included) |
+| Userscript | `FL_Tools_Basic.user.js` |
+| Runs on | `https://fetlife.com/*` |
+| Managers | Violentmonkey (preferred), Tampermonkey, others |
+| Storage | `localStorage` only (`@grant none`) |
+| Dual-install | Yields quietly if **FL_Tools Pro** is already claimed |
 
-## Downloads
-
-[![GitHub downloads (all releases)](https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?label=downloads)](https://github.com/Typical-Bits/fl-tools-basic/releases)
-
-Counts are **Release asset downloads** (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
+Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
 
 ## Install
 
-- Latest release (counted downloads + manager updates): https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
-- Releases page: https://github.com/Typical-Bits/fl-tools-basic/releases/latest
+1. Install [Violentmonkey](https://violentmonkey.github.io/) (preferred) or [Tampermonkey](https://www.tampermonkey.net/).
+2. Download **`FL_Tools_Basic.user.js`** from the [latest release](https://github.com/Typical-Bits/fl-tools-basic/releases/latest).
+3. Open / confirm the install prompt in your userscript manager.
+4. Visit https://fetlife.com — the dock appears on the right.
 
-`@updateURL` / `@downloadURL` point at the Release asset so Violentmonkey / Tampermonkey update checks increment the download counter.
+Direct asset (counted downloads + manager updates):  
+https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 
-## Notes
+`@updateURL` / `@downloadURL` point at the Release asset so manager update checks increment the download counter.
 
-- Lighter edition — Pro-only features (highlighter, whitelist, mutes, snooze, notes, import/export, etc.) are not included.
-- If **FL_Tools Pro** is already claimed on the page, Basic yields quietly.
+## What’s included
 
-## Author
+- Filters + soft-block  
+- NSFW / SFW display modes  
+- Seen chip  
+- Keyboard shortcuts  
+- Org cards, infinite scroll, toasts  
+- Dock-styled confirm modal (no `window.confirm`)  
 
-TypicalBits
+**Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar.
+
+## License
+
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — TypicalBits. Full text in [`LICENSE`](LICENSE). Header: `@license CC-BY-NC-4.0`.
+
+## Changelog
+
+See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) for downloadable versions and notes.
