@@ -1,0 +1,51 @@
+name: sanity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  userscript-header:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Header + license + no-secrets sanity
+        run: |
+          set -euo pipefail
+          f=FL_Tools_Basic.user.js
+          test -f "$f"
+          test -f LICENSE
+          test -f README.md
+
+          # Userscript header must be present and closed.
+          head -n 30 "$f" | grep -q '^// ==UserScript==$'
+          head -n 30 "$f" | grep -q '^// ==/UserScript==$'
+
+          ver=$(sed -n 's|^// @version[[:space:]]*||p' "$f" | head -n1 | tr -d '\r')
+          test -n "$ver"
+          echo "version=$ver"
+
+          for key in name namespace version updateURL downloadURL description author license match; do
+            grep -q "^// @$key" "$f" || { echo "missing @$key"; exit 1; }
+          done
+
+          grep -q '^// @license[[:space:]]*CC-BY-NC-4.0' "$f"
+          grep -q 'Attribution-NonCommercial 4.0' LICENSE
+          grep -q 'CC BY-NC 4.0' README.md
+
+          # Release-asset update model (not raw main).
+          grep -q 'releases/latest/download/FL_Tools_Basic.user.js' "$f"
+
+          # Banner version comment should match @version.
+          grep -q "FL_Tools Basic v${ver}" "$f"
+
+          # No obvious embedded secrets / private tokens.
+          if grep -nE 'ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|BEGIN (RSA |OPENSSH )?PRIVATE KEY' "$f" LICENSE README.md; then
+            echo "possible secret material found" >&2
+            exit 1
+          fi
+
+          echo "sanity ok"
