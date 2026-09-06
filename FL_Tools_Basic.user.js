@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.0.5
+// @version      1.1.0
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.0.5 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.1.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -55,7 +55,7 @@
   const style = document.createElement("style");
   style.textContent = `
     /* Dark: neutral black/gray (no blue-slate). Accent = favicon red only. */
-    #life-tools-dock {
+    #fl-tools-dock {
       color-scheme: dark;
       --lt-bg: #111111;
       --lt-bg-elev: #1a1a1a;
@@ -76,7 +76,7 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
       color: var(--lt-text);
     }
-    html.light #life-tools-dock {
+    html.light #fl-tools-dock {
       color-scheme: light;
       --lt-bg: #f9fafb;
       --lt-bg-elev: #ffffff;
@@ -89,20 +89,20 @@
       --lt-accent-soft: rgba(225, 29, 72, 0.1);
       --lt-gold: #737373;
     }
-    #life-tools-dock.dock-top { top: 72px; bottom: auto; transform: none; max-height: calc(100vh - 84px); }
-    #life-tools-dock.dock-center { top: 50%; bottom: auto; transform: translateY(-50%); max-height: calc(100vh - 24px); }
-    #life-tools-dock.dock-bottom { top: auto; bottom: 16px; transform: none; max-height: calc(100vh - 32px); }
-    #life-tools-dock.dragging { user-select: none; cursor: ns-resize; }
-    #life-tools-dock.lt-grow-up {
+    #fl-tools-dock.dock-top { top: 72px; bottom: auto; transform: none; max-height: calc(100vh - 84px); }
+    #fl-tools-dock.dock-center { top: 50%; bottom: auto; transform: translateY(-50%); max-height: calc(100vh - 24px); }
+    #fl-tools-dock.dock-bottom { top: auto; bottom: 16px; transform: none; max-height: calc(100vh - 32px); }
+    #fl-tools-dock.dragging { user-select: none; cursor: ns-resize; }
+    #fl-tools-dock.lt-grow-up {
       justify-content: flex-end;
     }
     /* Near bottom: keep header→body order so the panel name stays on top;
        dock is bottom-anchored / flex-end so open panels expand upward. */
-    #life-tools-dock.lt-grow-up .life-tool-panel {
+    #fl-tools-dock.lt-grow-up .fl-tool-panel {
       display: flex;
       flex-direction: column;
     }
-    .life-tool-panel {
+    .fl-tool-panel {
       background: var(--lt-bg);
       border: 1px solid var(--lt-border-soft);
       border-radius: var(--lt-radius);
@@ -113,52 +113,52 @@
       box-shadow: 0 1px 2px rgba(0,0,0,.22);
       overflow-x: hidden;
     }
-    html.light .life-tool-panel {
+    html.light .fl-tool-panel {
       background: var(--lt-bg);
       border-color: var(--lt-border-soft);
       box-shadow: 0 1px 2px rgba(0,0,0,.08);
     }
-    .life-tool-header {
+    .fl-tool-header {
       display: flex; justify-content: space-between; align-items: center;
       cursor: ns-resize; gap: 8px;
       padding-bottom: 2px;
     }
-    .life-tool-title {
+    .fl-tool-title {
       font-weight: 600; color: var(--lt-text);
       font-size: 13px; letter-spacing: 0.02em;
       line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     /* Remembered last / currently opened panel — favicon red accent. */
-    .life-tool-panel.lt-last-panel {
+    .fl-tool-panel.lt-last-panel {
       border-color: rgba(225, 29, 72, 0.45);
       box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48;
     }
-    .life-tool-panel.lt-last-panel > .life-tool-header .life-tool-title::after {
+    .fl-tool-panel.lt-last-panel > .fl-tool-header .fl-tool-title::after {
       content: "";
       display: inline-block;
       width: 6px; height: 6px; margin-left: 6px; vertical-align: middle;
       border-radius: 50%; background: #e11d48;
     }
-    .life-tool-panel.lt-panel-open {
+    .fl-tool-panel.lt-panel-open {
       border-color: rgba(225, 29, 72, 0.65);
       box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48,
         0 0 0 1px rgba(225, 29, 72, 0.22);
     }
-    html.light .life-tool-panel.lt-last-panel {
+    html.light .fl-tool-panel.lt-last-panel {
       box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48;
     }
-    html.light .life-tool-panel.lt-panel-open {
+    html.light .fl-tool-panel.lt-panel-open {
       box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48,
         0 0 0 1px rgba(225, 29, 72, 0.2);
     }
     .flhp-legend { margin-top: 6px; color: var(--lt-text-muted); font-size: 11px; line-height: 1.45; font-weight: 400; }
     .flhp-legend-row { display: flex; align-items: center; gap: 6px; margin: 1px 0; }
-    .life-tool-chevron {
+    .fl-tool-chevron {
       background: none; border: none; color: var(--lt-text-muted);
       cursor: pointer; font-size: 13px; padding: 0 2px; line-height: 1;
       transition: color .15s ease;
     }
-    .life-tool-chevron:hover { color: var(--lt-text); }
+    .fl-tool-chevron:hover { color: var(--lt-text); }
     .lt-why-hidden {
       position: absolute; left: 6px; top: 6px; z-index: 12;
       font-size: 10px; padding: 1px 6px; border-radius: 999px;
@@ -167,12 +167,12 @@
       overflow: hidden; text-overflow: ellipsis;
     }
     html.light .lt-why-hidden { background: rgba(255,255,255,.88); color: #171717; }
-    .life-tool-body {
+    .fl-tool-body {
       margin-top: 6px; max-height: min(58vh, 520px);
       overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable;
       padding-right: 2px; box-sizing: border-box;
     }
-    .life-tool-hidden { display: none !important; }
+    .fl-tool-hidden { display: none !important; }
     .fl-chip-row { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 8px; max-height: 72px; overflow: auto; }
     .fl-chip {
       display: inline-flex; align-items: center; gap: 4px;
@@ -212,9 +212,9 @@
       width: auto; flex: 0 0 auto; margin: 0; padding: 0 10px;
       height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);
     }
-    .life-tool-panel input[type="text"], .life-tool-panel input[type="number"],
-    .life-tool-panel input[type="search"],
-    .life-tool-panel select, .life-tool-panel textarea {
+    .fl-tool-panel input[type="text"], .fl-tool-panel input[type="number"],
+    .fl-tool-panel input[type="search"],
+    .fl-tool-panel select, .fl-tool-panel textarea {
       width: 100%; box-sizing: border-box; padding: 5px 8px;
       background: var(--lt-bg-input) !important; color: var(--lt-text) !important;
       border: 1px solid var(--lt-border); border-radius: 6px;
@@ -223,22 +223,22 @@
       color-scheme: dark;
       -webkit-text-fill-color: var(--lt-text);
     }
-    html.light .life-tool-panel select,
-    html.light .life-tool-panel input[type="text"],
-    html.light .life-tool-panel input[type="number"],
-    html.light .life-tool-panel input[type="search"],
-    html.light .life-tool-panel textarea {
+    html.light .fl-tool-panel select,
+    html.light .fl-tool-panel input[type="text"],
+    html.light .fl-tool-panel input[type="number"],
+    html.light .fl-tool-panel input[type="search"],
+    html.light .fl-tool-panel textarea {
       color-scheme: light;
     }
-    .life-tool-panel select option,
-    .life-tool-panel select optgroup {
+    .fl-tool-panel select option,
+    .fl-tool-panel select optgroup {
       background: var(--lt-bg-input);
       color: var(--lt-text);
     }
-    .life-tool-panel input:focus, .life-tool-panel select:focus, .life-tool-panel textarea:focus {
+    .fl-tool-panel input:focus, .fl-tool-panel select:focus, .fl-tool-panel textarea:focus {
       outline: none; border-color: var(--lt-accent);
     }
-    .life-tool-panel label { cursor: pointer; color: var(--lt-text); }
+    .fl-tool-panel label { cursor: pointer; color: var(--lt-text); }
     .life-hint { color: var(--lt-text-muted); font-size: 11px; margin: 0 0 6px; }
     .life-subhead {
       display: flex; justify-content: space-between; align-items: center;
@@ -304,7 +304,7 @@
     html.light .toggleSwitch::after { background: #262626; }
     html.light .fl-switch-input:checked + .toggleSwitch { background: var(--lt-accent); }
     html.light .fl-switch-input:checked + .toggleSwitch::after { background: #262626; }
-    @media (max-width: 720px) { #life-tools-dock { width: min(260px, calc(100vw - 16px)); } }
+    @media (max-width: 720px) { #fl-tools-dock { width: min(260px, calc(100vw - 16px)); } }
     #fl-dock-actions {
       display: flex; gap: 6px; width: 100%; box-sizing: border-box; align-items: stretch;
     }
@@ -350,70 +350,70 @@
     }
     #fl-block-panel .life-alert-strong { margin-top: 8px; }
     #fl-soft-list { max-height: 220px; overflow-y: auto; margin: 4px 0 8px; }
-    html.life-tools-hide-banners [data-controller="push-notifications-banner"],
-    html.life-tools-hide-banners [data-controller="pwa-install--prompt"],
-    html.life-tools-hide-banners [data-pwa-install-cta] { display: none !important; }
-    html.life-tools-nsfw main img, html.life-tools-nsfw main video,
-    html.life-tools-nsfw #main-content img, html.life-tools-nsfw #main-content video,
-    html.life-tools-nsfw #ptr-main-element img, html.life-tools-nsfw #ptr-main-element video,
-    html.life-tools-nsfw .content_container img, html.life-tools-nsfw .content_container video,
-    html.life-tools-nsfw main [class*="blur"], html.life-tools-nsfw .content_container [class*="blur"],
-    html.life-tools-nsfw #main-content [class*="blur"] {
+    html.fl-tools-hide-banners [data-controller="push-notifications-banner"],
+    html.fl-tools-hide-banners [data-controller="pwa-install--prompt"],
+    html.fl-tools-hide-banners [data-pwa-install-cta] { display: none !important; }
+    html.fl-tools-nsfw main img, html.fl-tools-nsfw main video,
+    html.fl-tools-nsfw #main-content img, html.fl-tools-nsfw #main-content video,
+    html.fl-tools-nsfw #ptr-main-element img, html.fl-tools-nsfw #ptr-main-element video,
+    html.fl-tools-nsfw .content_container img, html.fl-tools-nsfw .content_container video,
+    html.fl-tools-nsfw main [class*="blur"], html.fl-tools-nsfw .content_container [class*="blur"],
+    html.fl-tools-nsfw #main-content [class*="blur"] {
       filter: none !important;
       -webkit-filter: none !important;
     }
     /* SFW: blur page media. Profile hero/friends live in #main-content, often outside <main>. */
-    html.life-tools-sfw main img,
-    html.life-tools-sfw main picture img,
-    html.life-tools-sfw #main-content img,
-    html.life-tools-sfw #main-content picture img,
-    html.life-tools-sfw #ptr-main-element img,
-    html.life-tools-sfw #ptr-main-element picture img,
-    html.life-tools-sfw .content_container img,
-    html.life-tools-sfw .content_container picture img,
-    html.life-tools-sfw [data-story-uid] img,
-    html.life-tools-sfw [data-feed-dwell-target] img,
-    html.life-tools-sfw [data-test-id="profile-header"] img {
+    html.fl-tools-sfw main img,
+    html.fl-tools-sfw main picture img,
+    html.fl-tools-sfw #main-content img,
+    html.fl-tools-sfw #main-content picture img,
+    html.fl-tools-sfw #ptr-main-element img,
+    html.fl-tools-sfw #ptr-main-element picture img,
+    html.fl-tools-sfw .content_container img,
+    html.fl-tools-sfw .content_container picture img,
+    html.fl-tools-sfw [data-story-uid] img,
+    html.fl-tools-sfw [data-feed-dwell-target] img,
+    html.fl-tools-sfw [data-test-id="profile-header"] img {
       filter: blur(var(--lt-sfw-blur, 10px)) !important;
       -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;
     }
-    html.life-tools-sfw.life-tools-blur-videos main video,
-    html.life-tools-sfw.life-tools-blur-videos #main-content video,
-    html.life-tools-sfw.life-tools-blur-videos #ptr-main-element video,
-    html.life-tools-sfw.life-tools-blur-videos .content_container video,
-    html.life-tools-sfw.life-tools-blur-videos [data-story-uid] video,
-    html.life-tools-sfw.life-tools-blur-videos #account-sidebar video {
+    html.fl-tools-sfw.fl-tools-blur-videos main video,
+    html.fl-tools-sfw.fl-tools-blur-videos #main-content video,
+    html.fl-tools-sfw.fl-tools-blur-videos #ptr-main-element video,
+    html.fl-tools-sfw.fl-tools-blur-videos .content_container video,
+    html.fl-tools-sfw.fl-tools-blur-videos [data-story-uid] video,
+    html.fl-tools-sfw.fl-tools-blur-videos #account-sidebar video {
       filter: blur(var(--lt-sfw-blur, 10px)) !important;
       -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;
     }
-    html.life-tools-sfw:not(.life-tools-blur-videos) main video,
-    html.life-tools-sfw:not(.life-tools-blur-videos) #main-content video,
-    html.life-tools-sfw:not(.life-tools-blur-videos) #ptr-main-element video,
-    html.life-tools-sfw:not(.life-tools-blur-videos) .content_container video,
-    html.life-tools-sfw:not(.life-tools-blur-videos) [data-story-uid] video {
+    html.fl-tools-sfw:not(.fl-tools-blur-videos) main video,
+    html.fl-tools-sfw:not(.fl-tools-blur-videos) #main-content video,
+    html.fl-tools-sfw:not(.fl-tools-blur-videos) #ptr-main-element video,
+    html.fl-tools-sfw:not(.fl-tools-blur-videos) .content_container video,
+    html.fl-tools-sfw:not(.fl-tools-blur-videos) [data-story-uid] video {
       filter: none !important;
       -webkit-filter: none !important;
     }
     /* Site chrome / tiny feed avatars stay sharp unless "blur avatars" is on.
        Do NOT exempt bare header img — profile-header + feed story headers hold real media. */
-    html.life-tools-sfw:not(.life-tools-blur-avatars) nav img,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) [data-controller="nav"] img,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) img.life-tools-avatar,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) .flex-none img.size-24px,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) .flex-none img.size-36px,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) .flex-none img.xs\:size-36px,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) img.size-20px,
-    html.life-tools-sfw:not(.life-tools-blur-avatars) img.size-24px {
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) nav img,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) [data-controller="nav"] img,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) img.fl-tools-avatar,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-24px,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-36px,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.xs\:size-36px,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-20px,
+    html.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-24px {
       filter: none !important;
       -webkit-filter: none !important;
     }
     /* Account menu profile media always blurred in SFW (even if avatars stay sharp). */
-    html.life-tools-sfw #account-sidebar img,
-    html.life-tools-sfw #account-sidebar picture img {
+    html.fl-tools-sfw #account-sidebar img,
+    html.fl-tools-sfw #account-sidebar picture img {
       filter: blur(var(--lt-sfw-blur, 10px)) !important;
       -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;
     }
-    #life-tools-dock, #life-tools-dock * {
+    #fl-tools-dock, #fl-tools-dock * {
       filter: none !important;
       -webkit-filter: none !important;
     }
@@ -472,16 +472,8 @@
     .lt-qa-bar.lt-qa-feed button:hover, .lt-qa-bar.lt-qa-feed a.lt-qa-btn:hover {
       color: #f3f4f6; border-color: rgba(225, 29, 72, 0.5); background: rgba(225, 29, 72, 0.1);
     }
-    .lt-qa-bar .lt-qa-menu {
-      position: absolute; right: 0; bottom: 100%; margin-bottom: 2px;
-      background: var(--lt-bg, #111111); border: 1px solid var(--lt-border, #2e2e2e);
-      border-radius: 8px; padding: 3px; display: none; flex-direction: column;
-      min-width: 72px; z-index: 30; box-shadow: 0 4px 14px rgba(0,0,0,.35);
-    }
-    .lt-qa-bar .lt-qa-menu.open { display: flex; }
-    .lt-qa-bar .lt-qa-menu button {
-      width: 100%; text-align: left; border-radius: 6px; height: auto; line-height: 1.35;
-      padding: 4px 8px; background: transparent;
+    .lt-qa-bar button:focus-visible, .lt-qa-bar a.lt-qa-btn:focus-visible {
+      outline: 2px solid var(--lt-accent); outline-offset: 1px;
     }
     #fl-limit-hist-list { max-height: 180px; overflow-y: auto; margin: 4px 0 8px; }
     .lt-row { display:flex; align-items:center; gap:6px; margin:0 0 4px; font-size:12px; }
@@ -523,7 +515,7 @@
     }
     #fl-panel-search::placeholder { color: var(--lt-text-muted); }
     #fl-panel-search:focus { outline: none; border-color: var(--lt-accent); }
-    .life-tool-panel.lt-panel-search-miss { display: none !important; }
+    .fl-tool-panel.lt-panel-search-miss { display: none !important; }
     html.light .lt-qa-bar button, html.light .lt-qa-bar a.lt-qa-btn {
       background: rgba(255,255,255,0.65); color: #525252; border-color: rgba(115,115,115,0.35);
     }
@@ -533,10 +525,38 @@
     html.light .lt-qa-bar.lt-qa-feed button, html.light .lt-qa-bar.lt-qa-feed a.lt-qa-btn {
       background: transparent; border-color: rgba(115, 115, 115, 0.4); color: #737373;
     }
-    html.light .lt-qa-bar .lt-qa-menu { background: #fff; border-color: #d1d5db; }
     html.light .lt-row a { color: #262626; }
     html.light .life-btn:hover { border-color: #a3a3a3; }
     html.light .fl-suggest-row .fl-suggest-del { color: #737373; }
+
+    /* Dock-styled confirm modal (replaces window.confirm for soft-block visible). */
+    #fl-confirm-overlay {
+      position: fixed; inset: 0; z-index: 2147483646;
+      background: rgba(0,0,0,.55);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px; box-sizing: border-box;
+    }
+    #fl-confirm-dialog {
+      width: min(320px, 100%);
+      background: var(--lt-bg, #111111);
+      color: var(--lt-text, #f3f4f6);
+      border: 1px solid var(--lt-border, #2e2e2e);
+      border-radius: var(--lt-radius, 8px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.45);
+      padding: 14px 14px 12px;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 13px; line-height: 1.45;
+    }
+    #fl-confirm-dialog .fl-confirm-msg { margin: 0 0 12px; color: var(--lt-text, #f3f4f6); }
+    #fl-confirm-dialog .fl-confirm-actions {
+      display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;
+    }
+    #fl-confirm-dialog .fl-confirm-actions .life-btn { margin: 0; width: auto; min-width: 72px; }
+    html.light #fl-confirm-dialog {
+      background: var(--lt-bg, #f9fafb);
+      color: var(--lt-text, #171717);
+      border-color: var(--lt-border, #d1d5db);
+    }
 
 
 `;
@@ -545,7 +565,7 @@
   /* Keep the dock pinned to the right; Advanced chooses top / center / bottom. */
   let dockDidDrag = false;
   function applyDockPlacement(place) {
-    const dock = document.getElementById("life-tools-dock") || ensureDockRaw();
+    const dock = document.getElementById("fl-tools-dock") || ensureDockRaw();
     const pos = place === "top" || place === "center" || place === "bottom" ? place : "bottom";
     try { localStorage.removeItem("fl_dock_top"); } catch (_) {}
     dock.classList.remove("dock-top", "dock-center", "dock-bottom");
@@ -591,7 +611,7 @@
     }
   }
   function keepDockInWindow(dock) {
-    dock = dock || document.getElementById("life-tools-dock");
+    dock = dock || document.getElementById("fl-tools-dock");
     if (!dock || !dock.classList.contains("dock-top") || !dock.style.top) return;
     const cur = parseInt(dock.style.top, 10);
     if (!Number.isFinite(cur)) return;
@@ -607,8 +627,8 @@
     dock.dataset.dragReady = "1";
     let active = false, startY = 0, origTop = 0;
     dock.addEventListener("mousedown", (e) => {
-      if (!e.target.closest(".life-tool-header")) return;
-      if (e.target.closest("input, textarea, select, label") && !e.target.closest(".life-tool-chevron")) return;
+      if (!e.target.closest(".fl-tool-header")) return;
+      if (e.target.closest("input, textarea, select, label") && !e.target.closest(".fl-tool-chevron")) return;
       const r = dock.getBoundingClientRect();
       startY = e.clientY;
       origTop = r.top;
@@ -636,21 +656,26 @@
     if (!setupDockDrag.resizeBound) {
       setupDockDrag.resizeBound = true;
       window.addEventListener("resize", () => {
-        keepDockInWindow(document.getElementById("life-tools-dock"));
+        keepDockInWindow(document.getElementById("fl-tools-dock"));
       }, { passive: true });
     }
   }
   function ensureDockRaw() {
-    let dock = document.getElementById("life-tools-dock");
+    let dock = document.getElementById("fl-tools-dock");
     if (!dock) {
       dock = document.createElement("div");
-      dock.id = "life-tools-dock";
+      dock.id = "fl-tools-dock";
+      dock.setAttribute("role", "complementary");
+      dock.setAttribute("aria-label", t("dockLabel"));
       document.body.appendChild(dock);
+    } else {
+      if (!dock.getAttribute("role")) dock.setAttribute("role", "complementary");
+      if (!dock.getAttribute("aria-label")) dock.setAttribute("aria-label", t("dockLabel"));
     }
     return dock;
   }
   function ensureDock() {
-    const existed = !!document.getElementById("life-tools-dock");
+    const existed = !!document.getElementById("fl-tools-dock");
     const dock = ensureDockRaw();
     setupDockDrag(dock);
     setupDockGrowObserver(dock);
@@ -661,7 +686,7 @@
     return dock;
   }
   function syncDockGrowDirection() {
-    const dock = document.getElementById("life-tools-dock");
+    const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     if (dock.classList.contains("dock-top") && dock.style.top) {
       const cur = parseInt(dock.style.top, 10);
@@ -706,16 +731,18 @@
   function setPanelOpenState(bodyId, toggleId, open) {
     const body = document.getElementById(bodyId);
     const btn = document.getElementById(toggleId);
-    if (body) body.classList.toggle("life-tool-hidden", !open);
+    if (body) body.classList.toggle("fl-tool-hidden", !open);
     if (btn) {
       btn.textContent = open ? "▾" : "▸";
       btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.setAttribute("aria-label", open ? t("collapsePanel") : t("expandPanel"));
+      if (bodyId && !btn.getAttribute("aria-controls")) btn.setAttribute("aria-controls", bodyId);
     }
   }
   /* Migrate away from v5.26.0 Tools nest — put panels back on the dock. */
   function unnestFromToolsStack() {
     const tools = document.getElementById("fl-tools-panel");
-    const dock = document.getElementById("life-tools-dock");
+    const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     const tail = dockTailAnchor();
     const body = document.getElementById("fl-tools-body");
@@ -746,26 +773,26 @@
     syncDockGrowDirection();
   }  function panelBodyIsOpen(panel) {
     if (!panel) return false;
-    const body = panel.querySelector(".life-tool-body");
+    const body = panel.querySelector(".fl-tool-body");
     if (!body) return false;
-    return !body.classList.contains("life-tool-hidden");
+    return !body.classList.contains("fl-tool-hidden");
   }
   function syncOpenPanelHighlight() {
-    document.querySelectorAll(".life-tool-panel.lt-panel-open").forEach((el) => {
+    document.querySelectorAll(".fl-tool-panel.lt-panel-open").forEach((el) => {
       el.classList.remove("lt-panel-open");
     });
-    document.querySelectorAll("#life-tools-dock > .life-tool-panel").forEach((panel) => {
+    document.querySelectorAll("#fl-tools-dock > .fl-tool-panel").forEach((panel) => {
       if (panelBodyIsOpen(panel)) panel.classList.add("lt-panel-open");
     });
   }
   function markLastDockPanel() {
     const id = readLastPanel();
-    document.querySelectorAll(".life-tool-panel.lt-last-panel").forEach((el) => {
+    document.querySelectorAll(".fl-tool-panel.lt-last-panel").forEach((el) => {
       el.classList.remove("lt-last-panel");
     });
     if (id && id !== "none" && id !== "fl-tools-panel") {
       const panel = document.getElementById(id);
-      if (panel && panel.classList.contains("life-tool-panel")) {
+      if (panel && panel.classList.contains("fl-tool-panel")) {
         panel.classList.add("lt-last-panel");
       }
     }
@@ -927,6 +954,12 @@
       softBlockConfirm: "Soft-block {n} visible people on this page?",
       softBlockedN: "Soft-blocked {n} people",
       softBlockNone: "No visible people to soft-block",
+      confirmOk: "Soft-block",
+      confirmCancel: "Cancel",
+      confirmTitle: "Confirm",
+      dockLabel: "FL Tools",
+      expandPanel: "Expand panel",
+      collapsePanel: "Collapse panel",
     }
   };
   function t(key, vars) {
@@ -1752,7 +1785,7 @@
       } catch (err) {
         if (btn) { btn.textContent = t("loadError"); btn.disabled = false; }
         if (countInput) countInput.disabled = false;
-        console.error("Life Tools Filter Error:", err);
+        console.error("FL_Tools Filter Error:", err);
         return;
       }
     }
@@ -2010,7 +2043,7 @@
   function applyThemeSync() {
     const html = document.documentElement;
     const light = html.classList.contains("light");
-    const dock = document.getElementById("life-tools-dock");
+    const dock = document.getElementById("fl-tools-dock");
     if (dock) dock.dataset.flTheme = light ? "light" : "dark";
     /* CSS already keys off html.light — this pass refreshes data attrs for new UI. */
   }
@@ -2046,9 +2079,9 @@
   }
   function applyPanelSearch(q) {
     const query = String(q || "").trim().toLowerCase();
-    const dock = document.getElementById("life-tools-dock");
+    const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
-    dock.querySelectorAll(".life-tool-panel").forEach((panel) => {
+    dock.querySelectorAll(".fl-tool-panel").forEach((panel) => {
       const id = panel.id || "";
       if (id === "fl-shortcuts-panel") {
         panel.classList.remove("lt-panel-search-miss");
@@ -2075,13 +2108,13 @@
       tagSmallImages._donePath = location.pathname;
     }
     document.querySelectorAll("img").forEach((img) => {
-      if (img.closest && img.closest("#life-tools-dock")) return;
+      if (img.closest && img.closest("#fl-tools-dock")) return;
       const w = img.naturalWidth || img.width || img.clientWidth;
       const h = img.naturalHeight || img.height || img.clientHeight;
       if (!(w > 0 && h > 0)) return;
       const small = Math.max(w, h) <= 96;
-      if (img.classList.contains("life-tools-avatar") === small) return;
-      img.classList.toggle("life-tools-avatar", small);
+      if (img.classList.contains("fl-tools-avatar") === small) return;
+      img.classList.toggle("fl-tools-avatar", small);
     });
   }
   function toggleNsfwMode() {
@@ -2202,7 +2235,7 @@
     const el = document.getElementById("fl-selector-warn");
     if (el) {
       const listBroken = issues.some((x) => x.kind === "list");
-      el.classList.toggle("life-tool-hidden", !listBroken);
+      el.classList.toggle("fl-tool-hidden", !listBroken);
       el.textContent = listBroken ? t("selectorWarn") : "";
     }
     if (!issues.length) return;
@@ -2220,7 +2253,7 @@
     scheduleMarkupSelfCheck();
   }
   function applyBannerPref() {
-    document.documentElement.classList.toggle("life-tools-hide-banners", !!loadFilterSettings().hideBanners);
+    document.documentElement.classList.toggle("fl-tools-hide-banners", !!loadFilterSettings().hideBanners);
   }
   function isBlockedInterstitial() {
     if (/you.?ve blocked/i.test(document.title || "")) return true;
@@ -2231,14 +2264,14 @@
     if (!isHomeFeed() || isBlockedInterstitial()) return [];
     const root = document.querySelector("main") || document.body;
     const nodes = root.querySelectorAll("[data-story-uid], [data-feed-story], [data-controller*='feed-story']");
-    return Array.from(nodes).filter((n) => !n.closest("#life-tools-dock") && (n.innerText || "").length > 40);
+    return Array.from(nodes).filter((n) => !n.closest("#fl-tools-dock") && (n.innerText || "").length > 40);
   }
   function applyFeedFilter(settings) {
     settings = settings || loadFilterSettings();
-    document.querySelectorAll(".life-tools-collapse-post").forEach((el) => {
-      el.classList.remove("life-tools-collapse-post");
+    document.querySelectorAll(".fl-tools-collapse-post").forEach((el) => {
+      el.classList.remove("fl-tools-collapse-post");
       delete el.dataset.ltCollapseBound;
-      const btn = el.querySelector(".life-tools-expand-post");
+      const btn = el.querySelector(".fl-tools-expand-post");
       if (btn) btn.remove();
     });
     if (!isHomeFeed() || isBlockedInterstitial()) {
@@ -2330,7 +2363,7 @@
     const parent = node.parentElement;
     if (/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|CODE|PRE|SVG|MARK)$/i.test(parent.tagName)) return;
     if (parent.isContentEditable || (parent.closest && parent.closest("[contenteditable='true']"))) return;
-    if (parent.closest && (parent.closest("#life-tools-dock") || parent.closest("mark.lt-limit-hl") || parent.closest(".lt-limit-hl"))) return;
+    if (parent.closest && (parent.closest("#fl-tools-dock") || parent.closest("mark.lt-limit-hl") || parent.closest(".lt-limit-hl"))) return;
     const text = node.nodeValue;
     if (!text) return;
     re.lastIndex = 0;
@@ -2369,13 +2402,13 @@
     highlightProfileLimitTerms._busy = true;
     try {
       roots.forEach((root) => {
-        if (!root || (root.id === "life-tools-dock")) return;
-        if (root.closest && root.closest("#life-tools-dock")) return;
+        if (!root || (root.id === "fl-tools-dock")) return;
+        if (root.closest && root.closest("#fl-tools-dock")) return;
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
           acceptNode(n) {
             const p = n.parentElement;
             if (!p) return NodeFilter.FILTER_REJECT;
-            if (p.closest && (p.closest("#life-tools-dock") || p.closest("mark.lt-limit-hl") || p.closest(".lt-limit-hl"))) return NodeFilter.FILTER_REJECT;
+            if (p.closest && (p.closest("#fl-tools-dock") || p.closest("mark.lt-limit-hl") || p.closest(".lt-limit-hl"))) return NodeFilter.FILTER_REJECT;
             if (p.isContentEditable || (p.closest && p.closest("[contenteditable='true']"))) return NodeFilter.FILTER_REJECT;
             if (/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|CODE|PRE|SVG|MARK)$/i.test(p.tagName)) return NodeFilter.FILTER_REJECT;
             return NodeFilter.FILTER_ACCEPT;
@@ -2395,16 +2428,16 @@
     if (!panel) {
       panel = document.createElement("div");
       panel.id = "fl-block-panel";
-      panel.className = "life-tool-panel";
+      panel.className = "fl-tool-panel";
       const softCore =
         '<input id="fl-soft-search" type="text" placeholder="' + escapeAttr(t("softSearch")) + '" style="margin-bottom:6px">' +
         '<div id="fl-soft-list"></div>' +
         '<button type="button" id="fl-soft-block-visible-block" class="life-btn life-btn-gray">' + t("softBlockVisible") + "</button>" +
         '<button type="button" id="fl-soft-backup" class="life-btn life-btn-gray">' + t("softBackup") + "</button>";
       panel.innerHTML =
-        '<div class="life-tool-header" id="fl-block-header"><div class="life-tool-title">' + t("blockPanel") +
-        '</div><button type="button" id="fl-block-toggle" class="life-tool-chevron">▸</button></div>' +
-        '<div id="fl-block-body" class="life-tool-body life-tool-hidden">' +
+        '<div class="fl-tool-header" id="fl-block-header"><div class="fl-tool-title">' + t("blockPanel") +
+        '</div><button type="button" id="fl-block-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-block-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
+        '<div id="fl-block-body" class="fl-tool-body fl-tool-hidden">' +
         '<div id="fl-soft-count" class="life-hint">' + t("softCount", { n: "0" }) + "</div>" +
         softCore +
         "</div>";
@@ -2413,10 +2446,9 @@
         if (dockDidDrag) { dockDidDrag = false; return; }
         if (e.target.closest("input, label, select, button") && e.target.id !== "fl-block-toggle") return;
         const body = document.getElementById("fl-block-body");
-        const closed = !body.classList.contains("life-tool-hidden");
-        body.classList.toggle("life-tool-hidden", closed);
-        document.getElementById("fl-block-toggle").textContent = closed ? "▸" : "▾";
-        if (!closed) { collapseOtherPanels("fl-block-panel"); }
+        const open = body.classList.contains("fl-tool-hidden");
+        setPanelOpenState("fl-block-body", "fl-block-toggle", open);
+        if (open) collapseOtherPanels("fl-block-panel");
         else syncOpenPanelHighlight();
       });
       const softSearch = document.getElementById("fl-soft-search");
@@ -2653,7 +2685,7 @@
         if (method.toLowerCase() !== "delete") return;
         const who = profileNickname();
         if (!loadBlockReason(who)) return;
-        if (e.target.closest("#life-tools-dock")) return;
+        if (e.target.closest("#fl-tools-dock")) return;
         e.preventDefault();
         e.stopPropagation();
         const dockBar = document.getElementById("fl-exclude-alert");
@@ -2772,10 +2804,7 @@
   }
   function openBlockPanel() {
     ensureBlockPanel();
-    const body = document.getElementById("fl-block-body");
-    const toggle = document.getElementById("fl-block-toggle");
-    if (body) body.classList.remove("life-tool-hidden");
-    if (toggle) toggle.textContent = "▾";
+    setPanelOpenState("fl-block-body", "fl-block-toggle", true);
     collapseOtherPanels("fl-block-panel");
   }
   function showSoftBlockNotice(nick, rec) {
@@ -2835,7 +2864,7 @@
     bar.appendChild(row);
   }
   function applyExcludeBlur(settings) {
-    document.documentElement.classList.remove("life-tools-exclude-blur");
+    document.documentElement.classList.remove("fl-tools-exclude-blur");
     const stored = loadFilterSettings();
     settings = Object.assign({}, stored, settings || {});
     if (!String(settings.limits || "").trim()) settings.limits = stored.limits || stored.exclude || "";
@@ -2875,11 +2904,11 @@
     mode = mode || ds.mode;
     blurPx = blurPx == null ? ds.blurPx : blurPx;
     document.documentElement.style.setProperty("--lt-sfw-blur", blurPx + "px");
-    document.documentElement.classList.remove("life-tools-nsfw", "life-tools-sfw");
-    if (mode === "nsfw") document.documentElement.classList.add("life-tools-nsfw");
-    if (mode === "sfw") document.documentElement.classList.add("life-tools-sfw");
-    document.documentElement.classList.toggle("life-tools-blur-avatars", !!(ds.blurAvatars));
-    document.documentElement.classList.toggle("life-tools-blur-videos", ds.blurVideos !== false);
+    document.documentElement.classList.remove("fl-tools-nsfw", "fl-tools-sfw");
+    if (mode === "nsfw") document.documentElement.classList.add("fl-tools-nsfw");
+    if (mode === "sfw") document.documentElement.classList.add("fl-tools-sfw");
+    document.documentElement.classList.toggle("fl-tools-blur-avatars", !!(ds.blurAvatars));
+    document.documentElement.classList.toggle("fl-tools-blur-videos", ds.blurVideos !== false);
   }
   function persistDisplay() {
     const box = document.getElementById("fl-nsfw-toggle");
@@ -2930,6 +2959,91 @@
   }
 
 
+
+  /* Dock-styled confirm (Escape / Cancel = false). Replaces window.confirm. */
+  function confirmDock(message, onResult) {
+    const prev = document.getElementById("fl-confirm-overlay");
+    if (prev) prev.remove();
+    const prevFocus = document.activeElement;
+    const overlay = document.createElement("div");
+    overlay.id = "fl-confirm-overlay";
+    overlay.setAttribute("role", "presentation");
+    const dialog = document.createElement("div");
+    dialog.id = "fl-confirm-dialog";
+    dialog.setAttribute("role", "dialog");
+    dialog.setAttribute("aria-modal", "true");
+    dialog.setAttribute("aria-labelledby", "fl-confirm-title");
+    dialog.setAttribute("aria-describedby", "fl-confirm-msg");
+    /* Inherit dock tokens when dock exists. */
+    const dock = document.getElementById("fl-tools-dock");
+    if (dock) {
+      try {
+        const cs = getComputedStyle(dock);
+        ["--lt-bg", "--lt-bg-elev", "--lt-border", "--lt-text", "--lt-text-muted", "--lt-accent", "--lt-radius"].forEach((k) => {
+          const v = cs.getPropertyValue(k);
+          if (v) dialog.style.setProperty(k, v.trim());
+        });
+      } catch (_) {}
+    }
+    const title = document.createElement("div");
+    title.id = "fl-confirm-title";
+    title.className = "fl-tool-title";
+    title.style.marginBottom = "8px";
+    title.textContent = t("confirmTitle");
+    const msg = document.createElement("p");
+    msg.id = "fl-confirm-msg";
+    msg.className = "fl-confirm-msg";
+    msg.textContent = message;
+    const actions = document.createElement("div");
+    actions.className = "fl-confirm-actions";
+    const cancel = document.createElement("button");
+    cancel.type = "button";
+    cancel.className = "life-btn life-btn-gray";
+    cancel.textContent = t("confirmCancel");
+    const ok = document.createElement("button");
+    ok.type = "button";
+    ok.className = "life-btn life-btn-red";
+    ok.textContent = t("confirmOk");
+    actions.appendChild(cancel);
+    actions.appendChild(ok);
+    dialog.appendChild(title);
+    dialog.appendChild(msg);
+    dialog.appendChild(actions);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+
+    let settled = false;
+    function finish(result) {
+      if (settled) return;
+      settled = true;
+      document.removeEventListener("keydown", onKey, true);
+      overlay.remove();
+      try { if (prevFocus && prevFocus.focus) prevFocus.focus(); } catch (_) {}
+      if (typeof onResult === "function") onResult(!!result);
+    }
+    function onKey(e) {
+      if (e.key === "Escape") {
+        e.preventDefault(); e.stopPropagation();
+        finish(false);
+        return;
+      }
+      if (e.key === "Tab") {
+        const focusables = [cancel, ok];
+        const i = focusables.indexOf(document.activeElement);
+        if (e.shiftKey) {
+          if (i <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus(); }
+        } else {
+          if (i === focusables.length - 1 || i === -1) { e.preventDefault(); focusables[0].focus(); }
+        }
+      }
+    }
+    cancel.addEventListener("click", (e) => { e.preventDefault(); finish(false); });
+    ok.addEventListener("click", (e) => { e.preventDefault(); finish(true); });
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) finish(false); });
+    document.addEventListener("keydown", onKey, true);
+    setTimeout(() => { try { ok.focus(); } catch (_) {} }, 0);
+  }
+
   function softBlockNick(nick) {
     if (!nick) return;
     saveBlockReason(nick, [], "soft");
@@ -2961,12 +3075,14 @@
       showTextToast(t("softBlockNone"), false);
       return;
     }
-    if (!window.confirm(t("softBlockConfirm", { n: nicks.length }))) return;
-    nicks.forEach((nick) => saveBlockReason(nick, [], "soft"));
-    ensureBlockPanel();
-    renderSoftList();
-    applyFilter(loadFilterSettings());
-    showTextToast(t("softBlockedN", { n: nicks.length }), false);
+    confirmDock(t("softBlockConfirm", { n: nicks.length }), (ok) => {
+      if (!ok) return;
+      nicks.forEach((nick) => saveBlockReason(nick, [], "soft"));
+      ensureBlockPanel();
+      renderSoftList();
+      applyFilter(loadFilterSettings());
+      showTextToast(t("softBlockedN", { n: nicks.length }), false);
+    });
   }
 
 
@@ -3023,7 +3139,7 @@
     wrap.innerHTML =
       '<hr class="life-hr"><div class="life-subhead" id="fl-limit-hist-toggle"><span>' + t("limitHistory") +
       '</span><span id="fl-limit-hist-chevron">▸</span></div>' +
-      '<div id="fl-limit-hist-body" class="life-tool-hidden">' +
+      '<div id="fl-limit-hist-body" class="fl-tool-hidden">' +
       '<div id="fl-limit-hist-count" class="life-hint"></div>' +
       '<input id="fl-limit-hist-search" type="text" placeholder="' + escapeAttr(t("limitHistSearch")) + '" style="margin-bottom:6px">' +
       '<div id="fl-limit-hist-list"></div>' +
@@ -3033,8 +3149,8 @@
     document.getElementById("fl-limit-hist-toggle").addEventListener("click", (e) => {
       e.stopPropagation();
       const b = document.getElementById("fl-limit-hist-body");
-      const open = b.classList.contains("life-tool-hidden");
-      b.classList.toggle("life-tool-hidden", !open);
+      const open = b.classList.contains("fl-tool-hidden");
+      b.classList.toggle("fl-tool-hidden", !open);
       document.getElementById("fl-limit-hist-chevron").textContent = open ? "▾" : "▸";
       if (open) renderLimitHistory();
     });
@@ -3144,6 +3260,24 @@
     }
     return nameRow.querySelector('a.link[href^="/"][title], a.link.text-base[href^="/"], a.link[href^="/"]');
   }
+  function decorateSoftBlockChip(sb) {
+    if (!sb) return sb;
+    sb.type = "button";
+    sb.textContent = "SB";
+    sb.title = t("qaSoftBlock");
+    sb.setAttribute("aria-label", t("qaSoftBlock"));
+    sb.setAttribute("data-lt-qa", "sb");
+    return sb;
+  }
+  function makeSoftBlockChip(nick) {
+    const sb = document.createElement("button");
+    decorateSoftBlockChip(sb);
+    sb.addEventListener("click", (e) => {
+      e.preventDefault(); e.stopPropagation();
+      softBlockNick(nick);
+    });
+    return sb;
+  }
   /* Home feed: Soft-block chip under avatar / beside status name. */
   function enhanceFeedStoryActions() {
     if (!isHomeFeed() || isMediaPage()) return;
@@ -3162,25 +3296,12 @@
       if (existing.length) {
         existing.slice(1).forEach((n) => n.remove());
         const keep = existing[0];
-        /* Basic: Soft-block only — drop leftover Pro snooze/menus. */
-        keep.querySelectorAll("[data-lt-qa]").forEach((btn) => {
-          if (btn.getAttribute("data-lt-qa") !== "sb") btn.remove();
-        });
-        keep.querySelectorAll(".lt-qa-menu").forEach((n) => n.remove());
         if (!keep.querySelector("[data-lt-qa='sb']")) {
           const nick = storyAuthorNick(host);
-          if (nick) {
-            const sb = document.createElement("button");
-            sb.type = "button";
-            sb.textContent = "SB";
-            sb.title = t("qaSoftBlock");
-            sb.setAttribute("data-lt-qa", "sb");
-            sb.addEventListener("click", (e) => {
-              e.preventDefault(); e.stopPropagation();
-              softBlockNick(nick);
-            });
-            keep.appendChild(sb);
-          }
+          if (nick) keep.appendChild(makeSoftBlockChip(nick));
+        } else {
+          const sb = keep.querySelector("[data-lt-qa='sb']");
+          if (sb) decorateSoftBlockChip(sb);
         }
         if (status && keep) {
           const mount = findStatusChipAnchor(host);
@@ -3200,16 +3321,7 @@
       const bar = document.createElement("div");
       bar.className = "lt-qa-bar lt-qa-feed" + (status ? " lt-qa-feed-inline" : "");
       if (uid) bar.setAttribute("data-lt-story", uid);
-      const sb = document.createElement("button");
-      sb.type = "button";
-      sb.textContent = "SB";
-      sb.title = t("qaSoftBlock");
-      sb.setAttribute("data-lt-qa", "sb");
-      sb.addEventListener("click", (e) => {
-        e.preventDefault(); e.stopPropagation();
-        softBlockNick(nick);
-      });
-      bar.appendChild(sb);
+      bar.appendChild(makeSoftBlockChip(nick));
       if (status) mount.insertAdjacentElement("afterend", bar);
       else mount.appendChild(bar);
     });
@@ -3224,36 +3336,16 @@
       if (!nick) return;
       const existing = face.querySelector(".lt-qa-bar");
       if (existing) {
-        existing.querySelectorAll("[data-lt-qa]").forEach((el) => {
-          if (el.getAttribute("data-lt-qa") !== "sb") el.remove();
-        });
-        existing.querySelectorAll(".lt-qa-menu").forEach((el) => el.remove());
         if (!existing.querySelector("[data-lt-qa='sb']")) {
-          const sb = document.createElement("button");
-          sb.type = "button";
-          sb.textContent = "SB";
-          sb.title = t("qaSoftBlock");
-          sb.setAttribute("data-lt-qa", "sb");
-          sb.addEventListener("click", (e) => {
-            e.preventDefault(); e.stopPropagation();
-            softBlockNick(nick);
-          });
-          existing.appendChild(sb);
+          existing.appendChild(makeSoftBlockChip(nick));
+        } else {
+          decorateSoftBlockChip(existing.querySelector("[data-lt-qa='sb']"));
         }
         return;
       }
       const bar = document.createElement("div");
       bar.className = "lt-qa-bar";
-      const sb = document.createElement("button");
-      sb.type = "button";
-      sb.textContent = "SB";
-      sb.title = t("qaSoftBlock");
-      sb.setAttribute("data-lt-qa", "sb");
-      sb.addEventListener("click", (e) => {
-        e.preventDefault(); e.stopPropagation();
-        softBlockNick(nick);
-      });
-      bar.appendChild(sb);
+      bar.appendChild(makeSoftBlockChip(nick));
       face.appendChild(bar);
     });
   }
@@ -3304,11 +3396,6 @@
     if (next) next.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function removeFeedSettingsPanel() {
-    const old = document.getElementById("fl-feed-panel");
-    if (old) old.remove();
-  }
-
   function wireSiteControls() {
     if (wireSiteControls.bound) return;
     if (!document.getElementById("fl-nsfw-toggle")) return;
@@ -3326,11 +3413,11 @@
     const ds = loadDisplaySettings();
     const box = document.createElement("div");
     box.id = "fl-site-panel";
-    box.className = "life-tool-panel";
+    box.className = "fl-tool-panel";
     box.innerHTML =
-      '<div class="life-tool-header" id="fl-site-header"><div class="life-tool-title">' + t("nsfwPanel") +
-      '</div><button type="button" id="fl-site-toggle" class="life-tool-chevron">▸</button></div>' +
-      '<div id="fl-site-body" class="life-tool-body life-tool-hidden">' +
+      '<div class="fl-tool-header" id="fl-site-header"><div class="fl-tool-title">' + t("nsfwPanel") +
+      '</div><button type="button" id="fl-site-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-site-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
+      '<div id="fl-site-body" class="fl-tool-body fl-tool-hidden">' +
       '<div class="life-hint">' + t("nsfwHint") + "</div>" +
       switchHtml("fl-nsfw-toggle", t("nsfwMode"), ds.mode !== "sfw") +
       '<div class="life-hint" id="fl-nsfw-state">' + (ds.mode === "sfw" ? t("modeSfw") : t("modeNsfw")) + "</div>" +
@@ -3344,10 +3431,9 @@
       if (dockDidDrag) { dockDidDrag = false; return; }
       if (e.target.closest("input, label")) return;
       const body = document.getElementById("fl-site-body");
-      const closed = !body.classList.contains("life-tool-hidden");
-      body.classList.toggle("life-tool-hidden", closed);
-      document.getElementById("fl-site-toggle").textContent = closed ? "▸" : "▾";
-      if (!closed) collapseOtherPanels("fl-site-panel");
+      const open = body.classList.contains("fl-tool-hidden");
+      setPanelOpenState("fl-site-body", "fl-site-toggle", open);
+      if (open) collapseOtherPanels("fl-site-panel");
       else syncOpenPanelHighlight();
     });
     wireSiteControls();
@@ -3388,11 +3474,9 @@
       if (e.key === "f" || e.key === "F") {
         e.preventDefault();
         const body = document.getElementById("fl-panel-body");
-        const toggle = document.getElementById("fl-panel-toggle");
         if (body) {
-          const open = body.classList.contains("life-tool-hidden");
-          body.classList.toggle("life-tool-hidden", !open);
-          if (toggle) toggle.textContent = open ? "▾" : "▸";
+          const open = body.classList.contains("fl-tool-hidden");
+          setPanelOpenState("fl-panel-body", "fl-panel-toggle", open);
           localStorage.setItem("fl_panel_collapsed", open ? "0" : "1");
           if (open) collapseOtherPanels("fl-filter-panel");
           syncOpenPanelHighlight();
@@ -3409,7 +3493,7 @@
       } else if (e.key === "Escape") {
         collapseOtherPanels("");
         const body = document.getElementById("fl-panel-body");
-        if (body) body.classList.add("life-tool-hidden");
+        if (body) body.classList.add("fl-tool-hidden");
       }
     });
   }
@@ -3422,11 +3506,11 @@
     const s = loadFilterSettings();
     const panel = document.createElement("div");
     panel.id = "fl-filter-panel";
-    panel.className = "life-tool-panel";
+    panel.className = "fl-tool-panel";
     panel.innerHTML =
-      '<div class="life-tool-header" id="fl-panel-header"><div class="life-tool-title">' + t("profileSettings") +
-      '</div><button type="button" id="fl-panel-toggle" class="life-tool-chevron">▾</button></div>' +
-      '<div id="fl-panel-body" class="life-tool-body">' +
+      '<div class="fl-tool-header" id="fl-panel-header"><div class="fl-tool-title">' + t("profileSettings") +
+      '</div><button type="button" id="fl-panel-toggle" class="fl-tool-chevron" aria-expanded="true" aria-controls="fl-panel-body" aria-label="' + t("collapsePanel") + '">▾</button></div>' +
+      '<div id="fl-panel-body" class="fl-tool-body">' +
       '<label style="display:block;margin-bottom:4px;">' + t("combineMode") + "</label>" +
       '<select id="fl-combine-mode" style="margin-bottom:8px">' +
       '<option value="and"' + ((s.combineMode || "and") !== "or" ? " selected" : "") + ">" + t("combineAnd") + "</option>" +
@@ -3454,11 +3538,11 @@
       '<div class="life-hint">' + t("limitsFiltersHint") + "</div>" +
       chipFieldHtml("fl-limits", t("limitsFilter"), t("limitsPh"), s.limits || "") +
       '<div id="fl-filter-count" style="margin:8px 0;font-size:12px;"></div>' +
-      '<div id="fl-selector-warn" class="life-tool-hidden"></div>' +
+      '<div id="fl-selector-warn" class="fl-tool-hidden"></div>' +
       '<div id="fl-last-place" class="life-hint"></div>' +
       '<div id="fl-loc-wrap"><hr class="life-hr">' +
       '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span><span id="fl-loc-chevron">▸</span></div>' +
-      '<div id="fl-loc-body" class="life-tool-hidden">' +
+      '<div id="fl-loc-body" class="fl-tool-hidden">' +
       chipFieldHtml("fl-cities", t("citiesFilter"), t("citiesPh"), s.cities || "") +
       '<label style="display:block;margin-bottom:4px;">' + t("myCity") + "</label>" +
       '<input id="fl-my-city" type="text" placeholder="' + escapeAttr(t("myCityPh")) + '" value="' + escapeAttr(s.myCity || "") + '" style="margin-bottom:6px;width:100%;box-sizing:border-box;">' +
@@ -3466,7 +3550,7 @@
       "</div></div>" +
       '<div id="fl-rel-wrap"><hr class="life-hr">' +
       '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span><span id="fl-rel-chevron">▸</span></div>' +
-      '<div id="fl-rel-body" class="life-tool-hidden"><div class="life-hint">' + t("relHint") + "</div>" +
+      '<div id="fl-rel-body" class="fl-tool-hidden"><div class="life-hint">' + t("relHint") + "</div>" +
       switchHtml("fl-rel-follow", t("relNone"), s.relFollow) +
       switchHtml("fl-rel-following", t("relFollowing"), s.relFollowing) +
       switchHtml("fl-rel-followsyu", t("relFollowsYou"), s.relFollowsYou) +
@@ -3476,8 +3560,7 @@
     const panelBody = document.getElementById("fl-panel-body");
     const toggleBtn = document.getElementById("fl-panel-toggle");
     function setCollapsed(collapsed) {
-      panelBody.classList.toggle("life-tool-hidden", collapsed);
-      toggleBtn.textContent = collapsed ? "▸" : "▾";
+      setPanelOpenState("fl-panel-body", "fl-panel-toggle", !collapsed);
       localStorage.setItem("fl_panel_collapsed", collapsed ? "1" : "0");
       if (!collapsed) collapseOtherPanels("fl-filter-panel");
       else syncOpenPanelHighlight();
@@ -3486,14 +3569,14 @@
     document.getElementById("fl-panel-header").addEventListener("click", (e) => {
       if (dockDidDrag) { dockDidDrag = false; return; }
       if (e.target.closest("input, textarea, button, select") && e.target.id !== "fl-panel-toggle") return;
-      setCollapsed(!panelBody.classList.contains("life-tool-hidden"));
+      setCollapsed(!panelBody.classList.contains("fl-tool-hidden"));
     });
     function bindSubmenuGroup(items) {
       function setOpen(item, open) {
         const body = document.getElementById(item.body);
         const chevron = document.getElementById(item.chevron);
         if (!body) return;
-        body.classList.toggle("life-tool-hidden", !open);
+        body.classList.toggle("fl-tool-hidden", !open);
         if (chevron) chevron.textContent = open ? "▾" : "▸";
       }
       items.forEach((item) => {
@@ -3502,7 +3585,7 @@
         toggle.addEventListener("click", (e) => {
           e.stopPropagation();
           const body = document.getElementById(item.body);
-          const opening = body && body.classList.contains("life-tool-hidden");
+          const opening = body && body.classList.contains("fl-tool-hidden");
           items.forEach((other) => setOpen(other, opening && other.body === item.body));
         });
       });
@@ -3557,12 +3640,12 @@
     const s = loadFilterSettings();
     const box = document.createElement("div");
     box.id = "fl-advanced-panel";
-    box.className = "life-tool-panel";
+    box.className = "fl-tool-panel";
     const mode = s.orgMode || (s.hideOrgs ? "hide" : "off");
     box.innerHTML =
-      '<div class="life-tool-header" id="fl-advanced-header"><div class="life-tool-title">' + t("advancedSettings") +
-      '</div><button type="button" id="fl-advanced-toggle" class="life-tool-chevron">▸</button></div>' +
-      '<div id="fl-advanced-body" class="life-tool-body life-tool-hidden">' +
+      '<div class="fl-tool-header" id="fl-advanced-header"><div class="fl-tool-title">' + t("advancedSettings") +
+      '</div><button type="button" id="fl-advanced-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-advanced-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
+      '<div id="fl-advanced-body" class="fl-tool-body fl-tool-hidden">' +
       '<label style="display:block;margin-bottom:4px;">' + t("orgFilter") + "</label>" +
       '<select id="fl-org-mode" style="margin-bottom:8px">' +
       '<option value="off"' + ((mode !== "dim" && mode !== "hide") ? " selected" : "") + ">" + t("orgShow") + "</option>" +
@@ -3579,10 +3662,9 @@
       if (dockDidDrag) { dockDidDrag = false; return; }
       if (e.target.closest("input, label, select, button") && e.target.id !== "fl-advanced-toggle") return;
       const body = document.getElementById("fl-advanced-body");
-      const closed = !body.classList.contains("life-tool-hidden");
-      body.classList.toggle("life-tool-hidden", closed);
-      document.getElementById("fl-advanced-toggle").textContent = closed ? "▸" : "▾";
-      if (!closed) collapseOtherPanels("fl-advanced-panel");
+      const open = body.classList.contains("fl-tool-hidden");
+      setPanelOpenState("fl-advanced-body", "fl-advanced-toggle", open);
+      if (open) collapseOtherPanels("fl-advanced-panel");
       else syncOpenPanelHighlight();
     });
     const applyAdv = () => {
@@ -3651,7 +3733,7 @@
     Object.keys(map).forEach((hid) => {
       const header = document.getElementById(hid);
       if (!header) return;
-      const title = header.querySelector(".life-tool-title");
+      const title = header.querySelector(".fl-tool-title");
       if (title) title.textContent = t(map[hid]);
     });
   }
@@ -3669,21 +3751,19 @@
     if (!box) {
       box = document.createElement("div");
       box.id = "fl-shortcuts-panel";
-      box.className = "life-tool-panel";
+      box.className = "fl-tool-panel";
       box.innerHTML =
-        '<div class="life-tool-header" id="fl-shortcuts-header"><div class="life-tool-title">' + t("shortcuts") +
-        '</div><button type="button" id="fl-shortcuts-toggle" class="life-tool-chevron" aria-expanded="false">▸</button></div>' +
-        '<div id="fl-shortcuts-body" class="life-tool-body life-tool-hidden">' + legendHtml + "</div>";
+        '<div class="fl-tool-header" id="fl-shortcuts-header"><div class="fl-tool-title">' + t("shortcuts") +
+        '</div><button type="button" id="fl-shortcuts-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-shortcuts-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
+        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + "</div>";
       ensureDock().appendChild(box);
       document.getElementById("fl-shortcuts-header").addEventListener("click", (e) => {
         if (dockDidDrag) { dockDidDrag = false; return; }
         if (e.target.closest("input, label, select, button") && e.target.id !== "fl-shortcuts-toggle") return;
         const body = document.getElementById("fl-shortcuts-body");
-        const closed = !body.classList.contains("life-tool-hidden");
-        body.classList.toggle("life-tool-hidden", closed);
-        document.getElementById("fl-shortcuts-toggle").textContent = closed ? "▸" : "▾";
-        document.getElementById("fl-shortcuts-toggle").setAttribute("aria-expanded", closed ? "false" : "true");
-        if (!closed) collapseOtherPanels("fl-shortcuts-panel");
+        const open = body.classList.contains("fl-tool-hidden");
+        setPanelOpenState("fl-shortcuts-body", "fl-shortcuts-toggle", open);
+        if (open) collapseOtherPanels("fl-shortcuts-panel");
         else syncOpenPanelHighlight();
         syncDockGrowDirection();
       });
@@ -3750,19 +3830,19 @@
   function boot() {
     try {
       try { localStorage.removeItem("fl_filter_presets"); } catch (_) {}
-      ensureDock(); ensurePanelSearch(); buildFilterPanel(); buildDisplayPanel(); removeFeedSettingsPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
+      ensureDock(); ensurePanelSearch(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
      
       applyFilter(getCurrentFilterSettings()); applyExtras(); setupKeyboard();
       setupHomeScrollRestore(); setupThemeSync();
       if (isProfileHome()) scheduleExcludeBlur();
-    } catch (err) { console.error("Life Tools boot error:", err); }
+    } catch (err) { console.error("FL_Tools boot error:", err); }
   }
   let debounce = null;
   function schedule() {
     if (debounce) clearTimeout(debounce);
     debounce = setTimeout(function () {
       try {
-        ensureDock(); buildFilterPanel(); buildDisplayPanel(); removeFeedSettingsPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
+        ensureDock(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
         /* Media detail: keep dock/panels alive, avoid full filter/extras storms while comments load. */
         if (isMediaPage()) {
           applyDisplayMode(loadDisplaySettings().mode);
@@ -3785,7 +3865,7 @@
           return;
         }
         applyFilter(getCurrentFilterSettings()); applyExtras();
-      } catch (err) { console.error("Life Tools schedule error:", err); }
+      } catch (err) { console.error("FL_Tools schedule error:", err); }
     }, 120);
   }
   function start() {
@@ -3806,8 +3886,8 @@
       page.__FL_TOOLS_CLAIM__ = page.__FL_TOOLS_CLAIM__ || "basic";
     } catch (_) {}
     /* Another instance already built the dock — do not double-boot. */
-    if (document.getElementById("life-tools-dock")) return;
-    try { ensureDock(); buildFilterPanel(); buildDisplayPanel(); removeFeedSettingsPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); } catch (err) { console.error(err); }
+    if (document.getElementById("fl-tools-dock")) return;
+    try { ensureDock(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); } catch (err) { console.error(err); }
     boot();
     setTimeout(boot, 800);
     setTimeout(boot, 2500);
@@ -3817,7 +3897,7 @@
       for (const m of mutations) {
         for (const node of m.addedNodes || []) {
           if (node.nodeType !== 1) continue;
-          if (node.closest && (node.closest("#life-tools-dock") || node.closest(".lt-hide-reason") || node.closest(".lt-limit-hl") || node.closest("mark.lt-limit-hl"))) continue;
+          if (node.closest && (node.closest("#fl-tools-dock") || node.closest(".lt-hide-reason") || node.closest(".lt-limit-hl") || node.closest("mark.lt-limit-hl"))) continue;
           if (isCommentRelatedNode(node)) continue;
           const id = node.id || "";
           if (id.indexOf("relation_button") === 0 || (node.closest && node.closest("turbo-frame[id^='relation_button']"))) {
