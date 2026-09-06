@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.1.0
+// @version      1.1.1
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.1.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.1.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,24 +24,31 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  /* Silent yield if Pro already claimed (dual-install). Prefer page-world
-     signals — Pro may run sandboxed (@grant) so attribute-only checks miss. */
+  /* Silent yield if Pro already claimed (dual-install), or if another Basic
+     already stamped this document. Prefer page-world signals — Pro may run
+     sandboxed (@grant) so attribute-only checks miss.
+     Do NOT treat sessionStorage "basic" as yield: it persists across reloads
+     and would skip boot on every refresh. sessionStorage "pro" is intentional. */
   try {
     const root = document.documentElement;
     const page =
       (typeof unsafeWindow !== "undefined" && unsafeWindow) ||
       window;
+    let ssClaim = null;
+    try { ssClaim = sessionStorage.getItem("fl_tools_claim"); } catch (_) {}
     const claim =
       (page && page.__FL_TOOLS_CLAIM__) ||
       root.getAttribute("data-fl-tools-claim") ||
       root.getAttribute("data-fl-tools-edition") ||
-      (function () {
-        try { return sessionStorage.getItem("fl_tools_claim"); } catch (_) { return null; }
-      })();
+      ssClaim;
     if (claim === "pro" || (page && page.__FL_TOOLS_BOOTED__)) return;
-    if (!root.getAttribute("data-fl-tools-edition")) {
-      root.setAttribute("data-fl-tools-edition", "basic");
-    }
+    /* Same-document dual Basic: DOM/page stamp only (not sessionStorage). */
+    if (root.getAttribute("data-fl-tools-claim") === "basic") return;
+    if (page && page.__FL_TOOLS_CLAIM__ === "basic") return;
+    if (document.getElementById("fl-tools-basic-style") || document.getElementById("fl-tools-dock")) return;
+    root.setAttribute("data-fl-tools-edition", "basic");
+    root.setAttribute("data-fl-tools-claim", "basic");
+    try { if (page) page.__FL_TOOLS_CLAIM__ = page.__FL_TOOLS_CLAIM__ || "basic"; } catch (_) {}
   } catch (_) {}
 
   /* Member-card selectors. FetLife wraps some lists in [data-member-card];
@@ -52,8 +59,10 @@
   const FOLLOWS_YOU_PATH = "M12 1v2H0v2h12v2l4-3zM4 9l-4 3 4 3v-2h12v-2H4z";
 
   /* Injected CSS: FetLife-matched dock tokens, SFW blur, compact, soft feed/card chips. */
-  const style = document.createElement("style");
-  style.textContent = `
+  if (!document.getElementById("fl-tools-basic-style")) {
+    const style = document.createElement("style");
+    style.id = "fl-tools-basic-style";
+    style.textContent = `
     /* Dark: neutral black/gray (no blue-slate). Accent = favicon red only. */
     #fl-tools-dock {
       color-scheme: dark;
@@ -560,7 +569,8 @@
 
 
 `;
-  (document.head || document.documentElement).appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
+  }
 
   /* Keep the dock pinned to the right; Advanced chooses top / center / bottom. */
   let dockDidDrag = false;
@@ -705,7 +715,15 @@
   function setupDockGrowObserver(dock) {
     if (!dock || dock.dataset.growObs) return;
     dock.dataset.growObs = "1";
-    const mo = new MutationObserver(() => { syncDockGrowDirection(); });
+    let growRaf = 0;
+    const mo = new MutationObserver(() => {
+      if (growRaf) return;
+      growRaf = requestAnimationFrame(() => {
+        growRaf = 0;
+        syncDockGrowDirection();
+      });
+    });
+    /* Class toggles on panels are frequent — debounce to one layout read/frame. */
     mo.observe(dock, { subtree: true, attributes: true, attributeFilter: ["class"] });
     if (!setupDockGrowObserver.win) {
       setupDockGrowObserver.win = true;
@@ -764,14 +782,14 @@
       }
     }
     maybeCollapse("fl-filter-panel", "fl-panel-body", "fl-panel-toggle");
-    maybeCollapse("flhp-panel", "flhp-main", "flhp-toggle", ["flhp-bar"]);
     maybeCollapse("fl-site-panel", "fl-site-body", "fl-site-toggle");
     maybeCollapse("fl-advanced-panel", "fl-advanced-body", "fl-advanced-toggle");
     maybeCollapse("fl-block-panel", "fl-block-body", "fl-block-toggle");
     maybeCollapse("fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle");
     if (exceptId) notePanelOpen(exceptId);
     syncDockGrowDirection();
-  }  function panelBodyIsOpen(panel) {
+  }
+  function panelBodyIsOpen(panel) {
     if (!panel) return false;
     const body = panel.querySelector(".fl-tool-body");
     if (!body) return false;
@@ -1038,7 +1056,15 @@
     showSeenChip: true, dimSeenToday: true
   };
   function loadFilterSettings() {
-    const merged = Object.assign({}, FILTER_DEFAULTS, readJsonKey([FILTER_KEY, "fl_profile_filter_settings_v3", "fl_profile_filter_settings_v2"]) || {});
+    let raw = null;
+    let fromLegacy = false;
+    try {
+      if (!localStorage.getItem(FILTER_KEY)) {
+        fromLegacy = !!(localStorage.getItem("fl_profile_filter_settings_v3") || localStorage.getItem("fl_profile_filter_settings_v2"));
+      }
+    } catch (_) {}
+    raw = readJsonKey([FILTER_KEY, "fl_profile_filter_settings_v3", "fl_profile_filter_settings_v2"]);
+    const merged = Object.assign({}, FILTER_DEFAULTS, raw || {});
     if (merged.showSeenChip == null && merged.dimSeenToday != null) merged.showSeenChip = !!merged.dimSeenToday;
     if (merged.showSeenChip == null) merged.showSeenChip = true;
     merged.dimSeenToday = !!merged.showSeenChip;
@@ -1049,9 +1075,15 @@
     const seen = {};
     merged.limits = limits.filter((term) => { if (seen[term]) return false; seen[term] = true; return true; }).join(", ");
     merged.exclude = merged.limits;
+    /* Write-forward legacy v2/v3 keys so a later read always hits FILTER_KEY. */
+    if (fromLegacy && raw) {
+      try { saveFilterSettings(merged); } catch (_) {}
+    }
     return merged;
   }
-  function saveFilterSettings(settings) { localStorage.setItem(FILTER_KEY, JSON.stringify(settings)); }
+  function saveFilterSettings(settings) {
+    try { localStorage.setItem(FILTER_KEY, JSON.stringify(settings)); } catch (_) {}
+  }
 
   /* Parse "32 F switch • City" style lines. Orgs often have no age — skip age then. */
   const GENDER_TOKENS = { m:1, f:1, mtf:1, ftm:1, cd:1, tv:1, ts:1, is:1, b:1, gf:1, gq:1, nb:1, t:1, male:1, female:1, intersex:1, trans:1, "non-binary":1, nonbinary:1, agender:1, bigender:1, genderqueer:1, genderfluid:1 };
@@ -1635,19 +1667,18 @@
     const counter = document.getElementById("fl-filter-count");
     if (counter) counter.textContent = t("showing", { shown: shown, total: cards.length });
     reportTextMatches(settings);
-    if (isListPage()) {
-      enhanceMemberCardActions();
+    if (isListPage()) enhanceMemberCardActions();
     enhanceFeedStoryActions();
-    }
   }
   function getCurrentFilterSettings() {
+    const stored = loadFilterSettings();
     return {
       minAge: val("fl-min-age") || "18", maxAge: val("fl-max-age"),
       include: "",
       genders: chipValue("fl-genders"), roles: chipValue("fl-roles"), limits: chipValue("fl-limits"),
       exclude: chipValue("fl-limits"),
-      minPics: loadFilterSettings().minPics, minVids: loadFilterSettings().minVids, minWritings: loadFilterSettings().minWritings,
-      hideOrgs: (val("fl-org-mode") || loadFilterSettings().orgMode || "off") === "hide", orgMode: val("fl-org-mode") || loadFilterSettings().orgMode || "off",
+      minPics: stored.minPics, minVids: stored.minVids, minWritings: stored.minWritings,
+      hideOrgs: (val("fl-org-mode") || stored.orgMode || "off") === "hide", orgMode: val("fl-org-mode") || stored.orgMode || "off",
       dimHidden: true,
       relFollow: checked("fl-rel-follow"), relFollowing: checked("fl-rel-following"),
       relFollowsYou: checked("fl-rel-followsyu"), relFriends: checked("fl-rel-friends"),
@@ -1656,19 +1687,19 @@
       showToasts: checked("fl-show-toasts"),
       hideBanners: checked("fl-hide-banners"),
       collapsePosts: false, sortBy: val("fl-sort-by") || "none",
-      combineMode: val("fl-combine-mode") || loadFilterSettings().combineMode || "and",
-      matchScope: val("fl-match-scope") || loadFilterSettings().matchScope || "card",
-      roleMode: val("fl-role-mode") || loadFilterSettings().roleMode || "must",
-      preferRoles: document.getElementById("fl-prefer-roles") ? chipValue("fl-prefer-roles") : (loadFilterSettings().preferRoles || ""),
+      combineMode: val("fl-combine-mode") || stored.combineMode || "and",
+      matchScope: val("fl-match-scope") || stored.matchScope || "card",
+      roleMode: val("fl-role-mode") || stored.roleMode || "must",
+      preferRoles: document.getElementById("fl-prefer-roles") ? chipValue("fl-prefer-roles") : (stored.preferRoles || ""),
       cities: chipValue("fl-cities"),
-      myCity: val("fl-my-city") || loadFilterSettings().myCity || "",
-      sameCityOnly: document.getElementById("fl-same-city-only") ? checked("fl-same-city-only") : !!loadFilterSettings().sameCityOnly,
+      myCity: val("fl-my-city") || stored.myCity || "",
+      sameCityOnly: document.getElementById("fl-same-city-only") ? checked("fl-same-city-only") : !!stored.sameCityOnly,
       showSeenChip: document.getElementById("fl-show-seen-chip")
         ? checked("fl-show-seen-chip")
-        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(loadFilterSettings())),
+        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(stored)),
       dimSeenToday: document.getElementById("fl-show-seen-chip")
         ? checked("fl-show-seen-chip")
-        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(loadFilterSettings()))
+        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(stored))
     };
   }
   function currentBatchSize() { return Math.min(500, Math.max(20, toInt(val("fl-autoload-count") || loadFilterSettings().autoloadCount, 100))); }
@@ -2064,7 +2095,7 @@
     if (!wrap) {
       wrap = document.createElement("div");
       wrap.id = "fl-panel-search-wrap";
-      wrap.innerHTML = '<input type="search" id="fl-panel-search" placeholder="' + escapeAttr(t("panelSearchPh")) + '" autocomplete="off">';
+      wrap.innerHTML = '<input type="search" id="fl-panel-search" placeholder="' + escapeAttr(t("panelSearchPh")) + '" aria-label="' + escapeAttr(t("panelSearchPh")) + '" autocomplete="off">';
       const input = wrap.firstChild;
       const run = () => applyPanelSearch(input.value);
       input.addEventListener("input", run);
@@ -2898,7 +2929,9 @@
     merged.markReadScroll = false;
     return merged;
   }
-  function saveDisplaySettings(s) { localStorage.setItem(DISPLAY_KEY, JSON.stringify(s)); }
+  function saveDisplaySettings(s) {
+    try { localStorage.setItem(DISPLAY_KEY, JSON.stringify(s)); } catch (_) {}
+  }
   function applyDisplayMode(mode, blurPx) {
     const ds = loadDisplaySettings();
     mode = mode || ds.mode;
@@ -2960,7 +2993,7 @@
 
 
 
-  /* Dock-styled confirm (Escape / Cancel = false). Replaces window.confirm. */
+  /* Dock-styled confirm (Escape / Cancel = false; Enter / OK = true). Replaces window.confirm. */
   function confirmDock(message, onResult) {
     const prev = document.getElementById("fl-confirm-overlay");
     if (prev) prev.remove();
@@ -3025,6 +3058,13 @@
       if (e.key === "Escape") {
         e.preventDefault(); e.stopPropagation();
         finish(false);
+        return;
+      }
+      if (e.key === "Enter") {
+        /* Default action: confirm (OK is focused initially). */
+        if (document.activeElement === cancel) return;
+        e.preventDefault(); e.stopPropagation();
+        finish(true);
         return;
       }
       if (e.key === "Tab") {
@@ -3477,7 +3517,7 @@
         if (body) {
           const open = body.classList.contains("fl-tool-hidden");
           setPanelOpenState("fl-panel-body", "fl-panel-toggle", open);
-          localStorage.setItem("fl_panel_collapsed", open ? "0" : "1");
+          try { localStorage.setItem("fl_panel_collapsed", open ? "0" : "1"); } catch (_) {}
           if (open) collapseOtherPanels("fl-filter-panel");
           syncOpenPanelHighlight();
           syncDockGrowDirection();
@@ -3561,7 +3601,7 @@
     const toggleBtn = document.getElementById("fl-panel-toggle");
     function setCollapsed(collapsed) {
       setPanelOpenState("fl-panel-body", "fl-panel-toggle", !collapsed);
-      localStorage.setItem("fl_panel_collapsed", collapsed ? "1" : "0");
+      try { localStorage.setItem("fl_panel_collapsed", collapsed ? "1" : "0"); } catch (_) {}
       if (!collapsed) collapseOtherPanels("fl-filter-panel");
       else syncOpenPanelHighlight();
     }
@@ -3884,6 +3924,8 @@
           root.getAttribute("data-fl-tools-edition") === "pro") return;
       page.__FL_TOOLS_BOOTED__ = "basic";
       page.__FL_TOOLS_CLAIM__ = page.__FL_TOOLS_CLAIM__ || "basic";
+      root.setAttribute("data-fl-tools-edition", "basic");
+      root.setAttribute("data-fl-tools-claim", "basic");
     } catch (_) {}
     /* Another instance already built the dock — do not double-boot. */
     if (document.getElementById("fl-tools-dock")) return;
