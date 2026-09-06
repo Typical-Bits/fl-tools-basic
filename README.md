@@ -18,8 +18,10 @@ Counts are **Release asset downloads** (install from [Releases](https://github.c
 
 ## Install
 
-- Latest release: https://github.com/Typical-Bits/fl-tools-basic/releases/latest
-- Raw (auto-update URL): https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/FL_Tools_Basic.user.js
+- Latest release (counted downloads + manager updates): https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
+- Releases page: https://github.com/Typical-Bits/fl-tools-basic/releases/latest
+
+`@updateURL` / `@downloadURL` point at the Release asset so Violentmonkey / Tampermonkey update checks increment the download counter.
 
 ## Author
 
