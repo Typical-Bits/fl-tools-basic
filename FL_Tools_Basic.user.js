@@ -7,6 +7,7 @@
 // @tag          Social Media
 // @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts. Standalone.
 // @author       TypicalBits
+// @license      CC-BY-NC-4.0
 // @icon         https://fetlife.com/favicons/favicon-32.png
 // @iconURL      https://fetlife.com/favicons/favicon-32.png
 // @defaulticon  https://fetlife.com/favicons/favicon-32.png
