@@ -4,6 +4,12 @@ Standalone FetLife userscript dock (filters, soft-block, NSFW/SFW, Seen chip, sh
 
 **License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
+## Compatible with
+
+- **Violentmonkey** (preferred)
+- **Tampermonkey**
+- Any userscript manager / editor you prefer
+
 ## Downloads
 
 [![GitHub downloads (all releases)](https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?label=downloads)](https://github.com/Typical-Bits/fl-tools-basic/releases)
