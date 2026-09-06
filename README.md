@@ -1,6 +1,6 @@
 # FL_Tools Basic
 
-Standalone FetLife userscript dock (filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts).
+Standalone FetLife userscript dock (**FL Tools**): filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts.
 
 **License:** [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
@@ -22,6 +22,11 @@ Counts are **Release asset downloads** (install from [Releases](https://github.c
 - Releases page: https://github.com/Typical-Bits/fl-tools-basic/releases/latest
 
 `@updateURL` / `@downloadURL` point at the Release asset so Violentmonkey / Tampermonkey update checks increment the download counter.
+
+## Notes
+
+- Lighter edition — Pro-only features (highlighter, whitelist, mutes, snooze, notes, import/export, etc.) are not included.
+- If **FL_Tools Pro** is already claimed on the page, Basic yields quietly.
 
 ## Author
 
