@@ -13,7 +13,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.8](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.8)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.9](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.9)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
@@ -24,20 +24,20 @@
 | Runs on | `https://fetlife.com/*` |
 | Managers | Violentmonkey (preferred), Tampermonkey, others |
 | Storage | `localStorage` only (`@grant none`) |
-| Dual-install | Yields quietly if **FL_Tools Pro** is already claimed |
+| Dual-install | Yields only if **FL_Tools Pro is live** on this page. Disable Pro and reload to use Basic. |
 
 Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
 
 ## Settings UI
 
-The Basic settings panel stays visible on the right with grouped controls, descriptive switches, and search. Sections remain expanded and settings save automatically on this device.
+A red launcher button on the right opens the settings rail. Sections are collapsed (accordion). Click the launcher, press `F`, or use × / Esc / click-outside to close. Settings save automatically on this device.
 
 ## Install
 
 1. Install [Violentmonkey](https://violentmonkey.github.io/) (preferred) or [Tampermonkey](https://www.tampermonkey.net/).
 2. Download **`FL_Tools_Basic.user.js`** from the [latest release](https://github.com/Typical-Bits/fl-tools-basic/releases/latest).
 3. Open / confirm the install prompt in your userscript manager.
-4. Visit https://fetlife.com — the dock appears on the right.
+4. Visit https://fetlife.com — the launcher appears on the right.
 
 Direct asset (counted downloads + manager updates):  
 https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
@@ -65,9 +65,8 @@ See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) f
 
 ## Release and performance controls
 
-The settings panel includes theme-aware icon treatment, a compact panel option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally.
+The settings panel includes theme-aware icon treatment, a compact launcher option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally.
 
 Maintainers can run **Actions → Bump release version** with a semantic version. The workflow updates the userscript header and README release link; publishing a GitHub Release validates both before uploading the matching asset.
-
 
 The dock now chooses a less crowded side of the viewport, supports double-clicking the panel to remember that side, and keeps labels within the viewport. Identity labels can be clicked to copy their name. Accessibility settings respect reduced-motion preferences and include a high-contrast switch.
