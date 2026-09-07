@@ -24,6 +24,14 @@ jobs:
           grep -q "FL_Tools Basic v$ver" FL_Tools_Basic.user.js
           grep -q "releases/tag/$RELEASE_TAG" README.md
           test -f assets/fl-tools-launcher-icon.svg
+      - name: Validate generated userscript syntax
+        run: |
+          set -euo pipefail
+          node --check FL_Tools_Basic.user.js
+          tag_ver="${GITHUB_REF_NAME#v}"
+          file_ver="$(sed -n 's#^// @version[[:space:]]*##p' FL_Tools_Basic.user.js | head -n1)"
+          test "$file_ver" = "$tag_ver"
+
       - name: Upload release asset
         env:
           GH_TOKEN: ${{ github.token }}
