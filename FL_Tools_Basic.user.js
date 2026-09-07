@@ -25,7 +25,7 @@
 
   const FL_EDITION = "basic";
   const FL_PERF_KEY = "fl_perf_settings";
-  const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false };
+  const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false };
   function flLoadPerf() {
     try { return Object.assign({}, FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
     catch (_) { return Object.assign({}, FL_PERF_DEFAULTS); }
@@ -41,7 +41,7 @@
     const p = flLoadPerf();
     document.documentElement.classList.toggle("fl-tools-lightweight", !!p.lightweight);
     document.documentElement.classList.toggle("fl-tools-launcher-compact", !!p.compactLauncher);
-    flSetPerfStatus(p.lightweight ? "Lightweight scanning is on · changes save automatically" : "Standard scanning · changes save automatically");
+    flSetPerfStatus(p.paused ? "Scanning paused · changes save automatically" : (p.lightweight ? "Lightweight scanning is on · changes save automatically" : "Standard scanning · changes save automatically"));
   }
   const FL_TOOLS_ICON_SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#141416\"/><path fill=\"#c92132\" d=\"M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z\"/><path fill=\"#fff4f4\" fill-rule=\"evenodd\" d=\"M40.65,31.52L43.78,31.71L43.78,36.29L40.65,36.48L39.87,38.36L41.95,40.71L38.71,43.95L36.36,41.87L34.48,42.65L34.29,45.78L29.71,45.78L29.52,42.65L27.64,41.87L25.29,43.95L22.05,40.71L24.13,38.36L23.35,36.48L20.22,36.29L20.22,31.71L23.35,31.52L24.13,29.64L22.05,27.29L25.29,24.05L27.64,26.13L29.52,25.35L29.71,22.22L34.29,22.22L34.48,25.35L36.36,26.13L38.71,24.05L41.95,27.29L39.87,29.64Z M37,34a5,5 0 1,0 -10,0a5,5 0 1,0 10,0Z\"/></svg>";
   /* Silent yield if Pro already claimed (dual-install), or if another Basic
@@ -697,13 +697,13 @@
     const perfControls = document.getElementById("fl-perf-controls");
     if (!perfControls) {
       const box = document.createElement("div"); box.id = "fl-perf-controls";
-      box.innerHTML = '<div class="fl-perf-title">Performance</div><label><input id="fl-lightweight-mode" type="checkbox"> Lightweight scanning</label><label><input id="fl-compact-launcher" type="checkbox"> Compact launcher</label><label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label>';
+      box.innerHTML = '<div class="fl-perf-title">Performance</div><label><input id="fl-lightweight-mode" type="checkbox"> Lightweight scanning</label><label><input id="fl-compact-launcher" type="checkbox"> Compact panel</label><label><input id="fl-pause-scanning" type="checkbox"> Pause scanning</label><label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label>';
       dock.appendChild(box);
       const p = flLoadPerf();
-      const light = box.querySelector("#fl-lightweight-mode"); const compact = box.querySelector("#fl-compact-launcher"); const delay = box.querySelector("#fl-scan-delay");
-      light.checked=!!p.lightweight; compact.checked=!!p.compactLauncher; delay.value=String(p.scanDelay);
-      const save=()=>{flSavePerf({lightweight:light.checked,compactLauncher:compact.checked,scanDelay:Number(delay.value)||120}); flApplyPerf();};
-      light.addEventListener("change",save); compact.addEventListener("change",save); delay.addEventListener("change",save);
+      const light = box.querySelector("#fl-lightweight-mode"); const compact = box.querySelector("#fl-compact-launcher"); const paused = box.querySelector("#fl-pause-scanning"); const delay = box.querySelector("#fl-scan-delay");
+      light.checked=!!p.lightweight; compact.checked=!!p.compactLauncher; paused.checked=!!p.paused; delay.value=String(p.scanDelay);
+      const save=()=>{flSavePerf({lightweight:light.checked,compactLauncher:compact.checked,paused:paused.checked,scanDelay:Number(delay.value)||120}); flApplyPerf();};
+      light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save);
     }
     dock.classList.add("fl-settings-rail");
     dock.setAttribute("aria-labelledby", "fl-rail-title");
@@ -729,7 +729,7 @@
         #fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }
         #fl-perf-controls .fl-perf-title { color:var(--lt-text); font-weight:700; font-size:12px; margin-bottom:5px; }
         html.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }
-        html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }
+        html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }\n    html.fl-tools-launcher-compact #fl-tools-dock.fl-settings-rail { padding:10px!important; }\n    html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }
         #fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }
         #fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:4px; }
         #fl-rail-status { order:-2; padding:10px 11px; border:1px solid #e11d4838; border-radius:9px;
