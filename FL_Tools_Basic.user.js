@@ -58,7 +58,7 @@
   }
   function flSetPerfStatus(text) {
     const node = document.getElementById("fl-rail-status");
-    if (node) node.textContent = text;
+    if (node) { const t = FL_TELEMETRY.snapshot(); node.textContent = `${text} · scans ${t.scans} · skipped ${t.skipped} · last ${t.lastScanMs}ms`; }
   }
   function flApplyPerf() {
     const p = flLoadPerf();
