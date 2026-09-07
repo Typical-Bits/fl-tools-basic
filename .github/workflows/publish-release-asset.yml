@@ -1,0 +1,30 @@
+name: Publish release asset
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - name: Validate version and README
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          set -euo pipefail
+          ver="${RELEASE_TAG#v}"
+          grep -q "^// @version[[:space:]]*$ver$" FL_Tools_Basic.user.js
+          grep -q "FL_Tools Basic v$ver" FL_Tools_Basic.user.js
+          grep -q "releases/tag/$RELEASE_TAG" README.md
+          test -f assets/fl-tools-icon.svg
+      - name: Upload release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" FL_Tools_Basic.user.js --clobber

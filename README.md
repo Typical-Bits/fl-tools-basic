@@ -15,7 +15,7 @@
 
 **Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.4](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.4)
 
-<p align="center"><img src="assets/fl-tools-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
+<p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
 | Stat | Value |
 |------|-------|
@@ -62,3 +62,12 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 ## Changelog
 
 See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) for downloadable versions and notes.
+
+## Release and performance controls
+
+The settings panel includes theme-aware icon treatment, a compact panel option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally.
+
+Maintainers can run **Actions → Bump release version** with a semantic version. The workflow updates the userscript header and README release link; publishing a GitHub Release validates both before uploading the matching asset.
+
+
+The dock now chooses a less crowded side of the viewport, supports double-clicking the panel to remember that side, and keeps labels within the viewport. Identity labels can be clicked to copy their name. Accessibility settings respect reduced-motion preferences and include a high-contrast switch.

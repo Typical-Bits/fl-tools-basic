@@ -1,0 +1,44 @@
+name: Bump release version
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Semantic version without a leading v"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update versioned files
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+          [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]
+          python3 - "$VERSION" <<'PY'
+          import pathlib, re, sys
+          version = sys.argv[1]
+          script = pathlib.Path("FL_Tools_Basic.user.js")
+          text = script.read_text()
+          text = re.sub(r'(^// @version\s+)\S+', r'\g<1>' + version, text, count=1, flags=re.M)
+          text = re.sub(r'(FL_Tools Basic v)\S+', r'\g<1>' + version, text, count=1)
+          script.write_text(text)
+          readme = pathlib.Path("README.md")
+          readme_text = readme.read_text()
+          readme_text = re.sub(r'(releases/tag/v)\d+\.\d+\.\d+', r'\g<1>' + version, readme_text, count=1)
+          readme.write_text(readme_text)
+          PY
+          grep -q "^// @version[[:space:]]*$VERSION$" "FL_Tools_Basic.user.js"
+          grep -q "releases/tag/v$VERSION" README.md
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "FL_Tools_Basic.user.js" README.md
+          git commit -m "Bump release to v$VERSION"
+          git push
