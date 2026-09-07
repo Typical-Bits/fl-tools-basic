@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.1.8
+// @version      1.1.9
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
-// @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts. Standalone.
+// @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts. Yields to live FL_Tools Pro.
 // @author       TypicalBits
 // @license      CC-BY-NC-4.0
 // @icon         data:image/png;base64,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
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.1.6 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.1.9 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.1.8";
+  const FL_TOOLS_VERSION = "1.1.9";
   /* Shared handoff API for companion userscripts. Pro is always the primary edition. */
   const FL_TOOLS_HANDOFF = (() => {
     const root = window;
@@ -107,31 +107,46 @@
     flApplyAccessibility(); flSmartDockPlacement();
   }
   const FL_TOOLS_ICON_SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" role=\"img\" aria-label=\"FL Tools\">\n  <rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#141416\"/>\n  <path fill=\"#c92132\" d=\"M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z\"/>\n  <path fill=\"#fff4f4\" fill-rule=\"evenodd\" d=\"M40.65,31.52L43.78,31.71L43.78,36.29L40.65,36.48L39.87,38.36L41.95,40.71L38.71,43.95L36.36,41.87L34.48,42.65L34.29,45.78L29.71,45.78L29.52,42.65L27.64,41.87L25.29,43.95L22.05,40.71L24.13,38.36L23.35,36.48L20.22,36.29L20.22,31.71L23.35,31.52L24.13,29.64L22.05,27.29L25.29,24.05L27.64,26.13L29.52,25.35L29.71,22.22L34.29,22.22L34.48,25.35L36.36,26.13L38.71,24.05L41.95,27.29L39.87,29.64Z M37,34a5,5 0 1,0 -10,0a5,5 0 1,0 10,0Z\"/>\n</svg>";
-  /* Silent yield if Pro already claimed (dual-install), or if another Basic
-     already stamped this document. Prefer page-world signals — Pro may run
-     sandboxed (@grant) so attribute-only checks miss.
-     Do NOT treat sessionStorage "basic" as yield: it persists across reloads
-     and would skip boot on every refresh. sessionStorage "pro" is intentional. */
-  try {
+  /* Dual-install: yield only if Pro is LIVE on this page load.
+     sessionStorage "pro" is a leftover hint and must NOT block Basic after
+     Pro is disabled (it survives tab reloads). */
+  function flPageRoot() {
+    return (typeof unsafeWindow !== "undefined" && unsafeWindow) || window;
+  }
+  function flLiveProActive() {
+    const page = flPageRoot();
     const root = document.documentElement;
-    const page =
-      (typeof unsafeWindow !== "undefined" && unsafeWindow) ||
-      window;
-    let ssClaim = null;
-    try { ssClaim = sessionStorage.getItem("fl_tools_claim"); } catch (_) {}
-    const claim =
-      (page && page.__FL_TOOLS_CLAIM__) ||
-      root.getAttribute("data-fl-tools-claim") ||
-      root.getAttribute("data-fl-tools-edition") ||
-      ssClaim;
-    if (claim === "pro" || (page && page.__FL_TOOLS_BOOTED__)) return;
-    /* Same-document dual Basic: DOM/page stamp only (not sessionStorage). */
-    if (root.getAttribute("data-fl-tools-claim") === "basic") return;
-    if (page && page.__FL_TOOLS_CLAIM__ === "basic") return;
-    if (document.getElementById("fl-tools-basic-style") || document.getElementById("fl-tools-dock")) return;
+    if (page && page.__FL_TOOLS_BOOTED__ === "pro") return true;
+    if (page && page.__FL_TOOLS_CLAIM__ === "pro") return true;
+    if (page && page.FLTools && page.FLTools.edition === "pro") return true;
+    if (root.getAttribute("data-fl-tools-live") === "pro") return true;
+    if (root.getAttribute("data-fl-tools-claim") === "pro") return true;
+    if (root.getAttribute("data-fl-tools-edition") === "pro") return true;
+    return false;
+  }
+  function flClaimBasic() {
+    const root = document.documentElement;
+    const page = flPageRoot();
     root.setAttribute("data-fl-tools-edition", "basic");
     root.setAttribute("data-fl-tools-claim", "basic");
-    try { if (page) page.__FL_TOOLS_CLAIM__ = page.__FL_TOOLS_CLAIM__ || "basic"; } catch (_) {}
+    root.removeAttribute("data-fl-tools-live");
+    try { sessionStorage.setItem("fl_tools_claim", "basic"); } catch (_) {}
+    try {
+      if (page) {
+        page.__FL_TOOLS_CLAIM__ = "basic";
+        page.__FL_TOOLS_BOOTED__ = page.__FL_TOOLS_BOOTED__ === "pro" ? page.__FL_TOOLS_BOOTED__ : "basic";
+      }
+    } catch (_) {}
+  }
+  try {
+    const root = document.documentElement;
+    const page = flPageRoot();
+    if (flLiveProActive()) return;
+    /* Same-document dual Basic: DOM/page stamp only. */
+    if (page && page.__FL_TOOLS_BOOTED__ === "basic") return;
+    if (root.getAttribute("data-fl-tools-claim") === "basic" && document.getElementById("fl-tools-dock")) return;
+    if (document.getElementById("fl-tools-basic-style") && document.getElementById("fl-tools-dock")) return;
+    flClaimBasic();
   } catch (_) {}
 
   /* Member-card selectors. FetLife wraps some lists in [data-member-card];
@@ -754,47 +769,170 @@
     }
   }
 
-  /* Basic settings stay visible; there are no collapse or hide controls. */
+  /* Settings rail: launcher button + collapsible panels. */
+  function setSettingsRailOpen(open, focus) {
+    const dock = document.getElementById("fl-tools-dock");
+    if (!dock) return;
+    dock.classList.toggle("fl-rail-open", !!open);
+    syncSettingsRail();
+    if (focus) {
+      const target = document.getElementById(open ? "fl-rail-close" : "fl-settings-launcher");
+      if (target) target.focus({ preventScroll: true });
+    }
+  }
+  function syncSettingsRail() {
+    const dock = document.getElementById("fl-tools-dock");
+    const launcher = document.getElementById("fl-settings-launcher");
+    if (!dock || !launcher) return;
+    const open = dock.classList.contains("fl-rail-open");
+    launcher.setAttribute("aria-expanded", String(open));
+    launcher.setAttribute("aria-label", (open ? "Close" : "Open") + " FL Tools settings");
+    launcher.title = (open ? "Close" : "Open") + " settings · drag to reposition";
+    positionSettingsRail();
+  }
+  function positionSettingsRail() {
+    const dock = document.getElementById("fl-tools-dock");
+    const launcher = document.getElementById("fl-settings-launcher");
+    if (!dock || !launcher) return;
+    const height = window.innerHeight;
+    let top = NaN;
+    try { top = parseFloat(localStorage.getItem("fl_settings_launcher_top")); } catch (_) {}
+    if (!Number.isFinite(top)) {
+      const anchor = (loadFilterSettings() || {}).dockAnchor || "bottom";
+      top = anchor === "top" ? 72 : anchor === "center" ? (height - 48) / 2 : height - 64;
+    }
+    top = Math.max(8, Math.min(Math.max(8, height - 56), top));
+    launcher.style.top = top + "px";
+    const panelHeight = dock.getBoundingClientRect().height || 240;
+    const desired = top > height / 2 ? top - panelHeight - 10 : top + 58;
+    dock.style.setProperty("top", Math.max(8, Math.min(height - panelHeight - 8, desired)) + "px", "important");
+  }
+  function setPanelOpenState(bodyId, toggleId, open) {
+    const body = document.getElementById(bodyId);
+    const btn = document.getElementById(toggleId);
+    if (body) body.classList.toggle("fl-tool-hidden", !open);
+    if (btn) {
+      btn.textContent = open ? "▾" : "▸";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.setAttribute("aria-label", open ? "Collapse panel" : "Expand panel");
+    }
+  }
+  function collapseOtherPanels(exceptId) {
+    [
+      ["fl-filter-panel", "fl-panel-body", "fl-panel-toggle"],
+      ["fl-site-panel", "fl-site-body", "fl-site-toggle"],
+      ["fl-advanced-panel", "fl-advanced-body", "fl-advanced-toggle"],
+      ["fl-block-panel", "fl-block-body", "fl-block-toggle"],
+      ["fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle"]
+    ].forEach(([panelId, bodyId, toggleId]) => {
+      if (exceptId === panelId) return;
+      setPanelOpenState(bodyId, toggleId, false);
+    });
+    const perfBody = document.getElementById("fl-perf-body");
+    if (exceptId !== "fl-perf-controls" && perfBody) {
+      perfBody.classList.add("fl-tool-hidden");
+      const chev = document.getElementById("fl-perf-toggle");
+      if (chev) { chev.textContent = "▸"; chev.setAttribute("aria-expanded", "false"); }
+    }
+    if (exceptId) notePanelOpen(exceptId);
+    syncOpenPanelHighlight();
+    syncDockGrowDirection();
+  }
+  function bindPanelHeader(headerId, bodyId, toggleId, panelId) {
+    const header = document.getElementById(headerId);
+    if (!header || header.dataset.collapseBound) return;
+    header.dataset.collapseBound = "1";
+    header.addEventListener("click", (e) => {
+      if (typeof dockDidDrag !== "undefined" && dockDidDrag) { dockDidDrag = false; return; }
+      if (e.target.closest("input, textarea, select, label") && !e.target.closest(".fl-tool-chevron")) return;
+      const body = document.getElementById(bodyId);
+      const opening = !!(body && body.classList.contains("fl-tool-hidden"));
+      setPanelOpenState(bodyId, toggleId, opening);
+      if (opening) collapseOtherPanels(panelId);
+      else syncOpenPanelHighlight();
+      syncDockGrowDirection();
+    });
+  }
+  function bindAllPanelHeaders() {
+    bindPanelHeader("fl-panel-header", "fl-panel-body", "fl-panel-toggle", "fl-filter-panel");
+    bindPanelHeader("fl-site-header", "fl-site-body", "fl-site-toggle", "fl-site-panel");
+    bindPanelHeader("fl-advanced-header", "fl-advanced-body", "fl-advanced-toggle", "fl-advanced-panel");
+    bindPanelHeader("fl-block-header", "fl-block-body", "fl-block-toggle", "fl-block-panel");
+    bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
+  }
   function ensureBasicSettingsPanel(dock) {
     flApplyPerf();
     const perfControls = document.getElementById("fl-perf-controls");
     if (!perfControls) {
-      const box = document.createElement("div"); box.id = "fl-perf-controls";
-      box.innerHTML = '<div class="fl-perf-title">Performance</div><label><input id="fl-lightweight-mode" type="checkbox"> Lightweight scanning</label><label><input id="fl-compact-launcher" type="checkbox"> Compact panel</label><label><input id="fl-pause-scanning" type="checkbox"> Pause scanning</label><label><input id="fl-high-contrast" type="checkbox"> High contrast</label><label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label>';
+      const box = document.createElement("div"); box.id = "fl-perf-controls"; box.className = "fl-tool-panel";
+      box.innerHTML = '<div class="fl-tool-header" id="fl-perf-header"><div class="fl-tool-title">Performance</div>' +
+        '<button type="button" id="fl-perf-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+        '<div id="fl-perf-body" class="fl-tool-body fl-tool-hidden">' +
+        '<label><input id="fl-lightweight-mode" type="checkbox"> Lightweight scanning</label>' +
+        '<label><input id="fl-compact-launcher" type="checkbox"> Compact launcher</label>' +
+        '<label><input id="fl-pause-scanning" type="checkbox"> Pause scanning</label>' +
+        '<label><input id="fl-high-contrast" type="checkbox"> High contrast</label>' +
+        '<label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label></div>';
       dock.appendChild(box);
       const p = flLoadPerf();
       const light = box.querySelector("#fl-lightweight-mode"); const compact = box.querySelector("#fl-compact-launcher"); const paused = box.querySelector("#fl-pause-scanning"); const contrast = box.querySelector("#fl-high-contrast"); const delay = box.querySelector("#fl-scan-delay");
       light.checked=!!p.lightweight; compact.checked=!!p.compactLauncher; paused.checked=!!p.paused; contrast.checked=!!p.highContrast; delay.value=String(p.scanDelay);
       const save=()=>{flSavePerf({lightweight:light.checked,compactLauncher:compact.checked,paused:paused.checked,highContrast:contrast.checked,scanDelay:Number(delay.value)||120,dockSide:flLoadPerf().dockSide}); flApplyPerf();};
-      light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save);
+      light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save); contrast.addEventListener("change",save);
+      box.querySelector("#fl-perf-header").addEventListener("click", (e) => {
+        if (e.target.closest("input, select, label")) return;
+        const body = document.getElementById("fl-perf-body");
+        const opening = body.classList.contains("fl-tool-hidden");
+        body.classList.toggle("fl-tool-hidden", !opening);
+        const chev = document.getElementById("fl-perf-toggle");
+        if (chev) { chev.textContent = opening ? "▾" : "▸"; chev.setAttribute("aria-expanded", opening ? "true" : "false"); }
+        if (opening) collapseOtherPanels("fl-perf-controls");
+      });
     }
     dock.classList.add("fl-settings-rail");
+    dock.setAttribute("role", "region");
     dock.setAttribute("aria-labelledby", "fl-rail-title");
     if (!document.getElementById("fl-settings-rail-style")) {
       const style = document.createElement("style");
       style.id = "fl-settings-rail-style";
       style.textContent = `
-                #fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;
+        #fl-settings-launcher { position:fixed!important; right:12px!important; left:auto!important; bottom:auto!important;
+          width:48px!important; height:48px!important; display:flex!important; align-items:center; justify-content:center;
+          z-index:2147483001; padding:0!important; margin:0!important; border:1px solid #e11d4866!important;
+          border-radius:12px!important; background:#171a1f!important; color:#fb7185!important;
+          box-shadow:0 4px 16px #0006; cursor:grab; touch-action:none; user-select:none; }
+        #fl-settings-launcher svg { width:34px; height:34px; pointer-events:none; }
+        #fl-settings-launcher:hover, #fl-settings-launcher[aria-expanded="true"] { border-color:#fb7185!important; background:#252329!important; }
+        #fl-settings-launcher:focus-visible { outline:2px solid #fb7185; outline-offset:3px; }
+        #fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;
           max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;
-          right:12px!important; left:auto!important; 
-          display:flex!important; flex-direction:column!important; justify-content:flex-start!important;
+          right:12px!important; left:auto!important; bottom:auto!important; transform:none!important;
+          display:none!important; flex-direction:column!important; justify-content:flex-start!important;
           gap:10px!important; padding:18px!important; background:var(--lt-bg)!important;
           border:1px solid var(--lt-border)!important; border-radius:14px!important; box-shadow:0 18px 50px #0007;
-          overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left; }
+          overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left;
+          z-index:2147483000!important; }
+        #fl-tools-dock.fl-settings-rail.fl-rail-open { display:flex!important; }
         #fl-tools-dock.fl-settings-rail > * { flex-shrink:0; min-width:0; }
         #fl-rail-header { order:-3; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
         #fl-rail-header .fl-brand-icon { width:32px; height:32px; flex:none; }
         #fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }
         #fl-rail-header .fl-brand-copy { flex:1; min-width:0; }
-        #fl-perf-controls { order:20; padding:10px 12px; border:1px solid var(--lt-border); border-radius:10px; background:var(--lt-bg-elev); color:var(--lt-text); font-size:11px; }
+        #fl-perf-controls { order:20; }
         #fl-perf-controls label { display:flex; gap:8px; align-items:center; margin:7px 0; color:var(--lt-text-muted); }
         #fl-perf-controls input { accent-color:var(--lt-accent); }
         #fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }
-        #fl-perf-controls .fl-perf-title { color:var(--lt-text); font-weight:700; font-size:12px; margin-bottom:5px; }
         html.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }
-        html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }\n    html.fl-tools-launcher-compact #fl-tools-dock.fl-settings-rail { padding:10px!important; }\n    html.fl-tools-high-contrast #fl-tools-dock, html.fl-tools-high-contrast .fl-tool-panel { border-width:2px!important; }\n    html.fl-tools-reduced-motion *, html.fl-tools-reduced-motion *::before, html.fl-tools-reduced-motion *::after { animation-duration:0.001ms!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }\n    html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }
+        html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }
+        html.fl-tools-launcher-compact #fl-tools-dock.fl-settings-rail { padding:10px!important; }
+        html.fl-tools-high-contrast #fl-tools-dock, html.fl-tools-high-contrast .fl-tool-panel { border-width:2px!important; }
+        html.fl-tools-reduced-motion *, html.fl-tools-reduced-motion *::before, html.fl-tools-reduced-motion *::after { animation-duration:0.001ms!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }
+        html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }
         #fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }
         #fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:4px; }
+        #fl-rail-close { background:transparent; color:var(--lt-text-muted); border:0; border-radius:8px;
+          width:32px; height:32px; flex:none; cursor:pointer; font:22px/1 Arial,sans-serif; }
+        #fl-rail-close:hover { background:var(--lt-bg-elev); color:var(--lt-text); }
         #fl-rail-status { order:-2; padding:10px 11px; border:1px solid #e11d4838; border-radius:9px;
           background:var(--lt-accent-soft); color:var(--lt-text); font-size:11px; line-height:1.5; }
         #fl-tools-dock.fl-settings-rail #fl-panel-search-wrap { order:-1; margin:0; }
@@ -802,8 +940,9 @@
         #fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:10px; background:var(--lt-bg-elev); box-shadow:none; }
         #fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:42px; padding:10px 13px; cursor:pointer; }
         #fl-tools-dock.fl-settings-rail .fl-tool-title { font-size:12px; letter-spacing:0; white-space:normal; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:28px; min-height:28px; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:28px; min-height:28px; background:none; border:none; color:var(--lt-text-muted); cursor:pointer; font-size:13px; }
         #fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 13px 12px; margin:0; max-height:none; overflow:visible; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-body.fl-tool-hidden { display:none !important; }
         #fl-tools-dock.fl-settings-rail .fl-switch { padding:9px 0; margin:0; gap:12px; }
         #fl-tools-dock.fl-settings-rail .fl-switch + .fl-switch { border-top:1px solid var(--lt-border-soft); }
         #fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:13px; line-height:1.35; }
@@ -816,22 +955,67 @@
         #fl-tools-dock.fl-settings-rail.lt-dock-compact { padding:12px!important; gap:6px!important; }
         #fl-tools-dock.fl-settings-rail.lt-dock-compact .fl-switch { padding:5px 0; }
         @media(prefers-reduced-motion:reduce) { #fl-tools-dock.fl-settings-rail * { transition:none!important; } }
-      
-        #fl-tools-dock.fl-settings-rail .fl-tool-header, #fl-tools-dock.fl-settings-rail .life-subhead { cursor:default; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-body { display:block!important; }
-    `;
+      `;
       (document.head || document.documentElement).appendChild(style);
     }
     if (!document.getElementById("fl-rail-header")) {
       const header = document.createElement("div");
       header.id = "fl-rail-header";
-      header.innerHTML = '<span class="fl-brand-icon">' + FL_TOOLS_ICON_SVG + '</span><div class="fl-brand-copy"><h2 id="fl-rail-title">FL Tools Basic</h2><div id="fl-rail-subtitle">Settings · Your browsing preferences</div></div>';
+      header.innerHTML = '<span class="fl-brand-icon">' + FL_TOOLS_ICON_SVG + '</span><div class="fl-brand-copy"><h2 id="fl-rail-title">FL Tools Basic</h2><div id="fl-rail-subtitle">Settings · Your browsing preferences</div></div>' +
+        '<button type="button" id="fl-rail-close" aria-label="Close settings">×</button>';
       dock.prepend(header);
+      header.querySelector("#fl-rail-close").addEventListener("click", () => setSettingsRailOpen(false, true));
       const status = document.createElement("div");
       status.id = "fl-rail-status";
       status.textContent = "Changes save automatically on this device.";
       header.after(status);
     }
+    if (!document.getElementById("fl-settings-launcher")) {
+      const launcher = document.createElement("button");
+      launcher.type = "button";
+      launcher.id = "fl-settings-launcher";
+      launcher.setAttribute("aria-controls", "fl-tools-dock");
+      launcher.setAttribute("aria-expanded", "false");
+      launcher.setAttribute("aria-label", "Open FL Tools settings");
+      launcher.innerHTML = FL_TOOLS_ICON_SVG;
+      document.body.appendChild(launcher);
+      let drag = null, didDrag = false;
+      launcher.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0) return;
+        drag = { y:event.clientY, top:launcher.getBoundingClientRect().top };
+        didDrag = false;
+        launcher.setPointerCapture(event.pointerId);
+      });
+      launcher.addEventListener("pointermove", (event) => {
+        if (!drag) return;
+        const delta = event.clientY - drag.y;
+        if (Math.abs(delta) > 4) didDrag = true;
+        if (!didDrag) return;
+        const top = Math.max(8, Math.min(window.innerHeight - 56, drag.top + delta));
+        try { localStorage.setItem("fl_settings_launcher_top", String(top)); } catch (_) {}
+        positionSettingsRail();
+      });
+      launcher.addEventListener("pointerup", () => { drag = null; });
+      launcher.addEventListener("pointercancel", () => { drag = null; didDrag = true; });
+      launcher.addEventListener("click", () => {
+        if (didDrag) { didDrag = false; return; }
+        setSettingsRailOpen(!dock.classList.contains("fl-rail-open"), true);
+      });
+      window.addEventListener("resize", positionSettingsRail, { passive:true });
+      document.addEventListener("pointerdown", (event) => {
+        if (dock.contains(event.target) || launcher.contains(event.target)) return;
+        if (event.target.closest('[role="dialog"], [role="alertdialog"], .fl-confirm-overlay, .life-qa-menu, .lt-qa-menu')) return;
+        if (dock.classList.contains("fl-rail-open")) setSettingsRailOpen(false, false);
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape" || !dock.classList.contains("fl-rail-open")) return;
+        if (event.target.id === "fl-panel-search" && event.target.value) return;
+        setSettingsRailOpen(false, dock.contains(document.activeElement));
+      }, true);
+      if (typeof ResizeObserver !== "undefined") new ResizeObserver(positionSettingsRail).observe(dock);
+    }
+    bindAllPanelHeaders();
+    syncSettingsRail();
   }
 
   function ensureDockRaw() {
@@ -860,6 +1044,7 @@
     return dock;
   }
   function syncDockGrowDirection() {
+    if (document.getElementById("fl-settings-launcher")) { positionSettingsRail(); return; }
     const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     if (dock.classList.contains("dock-top") && dock.style.top) {
@@ -2607,8 +2792,8 @@
         '<button type="button" id="fl-soft-backup" class="life-btn life-btn-gray">' + t("softBackup") + "</button>";
       panel.innerHTML =
         '<div class="fl-tool-header" id="fl-block-header"><div class="fl-tool-title">' + t("blockPanel") +
-        '</div></div>' +
-        '<div id="fl-block-body" class="fl-tool-body">' +
+        '</div><button type="button" id="fl-block-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+        '<div id="fl-block-body" class="fl-tool-body fl-tool-hidden">' +
         '<div id="fl-soft-count" class="life-hint">' + t("softCount", { n: "0" }) + "</div>" +
         softCore +
         "</div>";
@@ -2625,6 +2810,7 @@
       }
       renderSoftList();
       enhanceBlockPanelHistory();
+      bindPanelHeader("fl-block-header", "fl-block-body", "fl-block-toggle", "fl-block-panel");
     } else if (panel.parentNode !== dock) {
       dock.insertBefore(panel, dock.firstChild);
     }
@@ -3581,8 +3767,8 @@
     box.className = "fl-tool-panel";
     box.innerHTML =
       '<div class="fl-tool-header" id="fl-site-header"><div class="fl-tool-title">' + t("nsfwPanel") +
-      '</div></div>' +
-      '<div id="fl-site-body" class="fl-tool-body">' +
+      '</div><button type="button" id="fl-site-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+      '<div id="fl-site-body" class="fl-tool-body fl-tool-hidden">' +
       '<div class="life-hint">' + t("nsfwHint") + "</div>" +
       switchHtml("fl-nsfw-toggle", t("nsfwMode"), ds.mode !== "sfw") +
       '<div class="life-hint" id="fl-nsfw-state">' + (ds.mode === "sfw" ? t("modeSfw") : t("modeNsfw")) + "</div>" +
@@ -3592,7 +3778,7 @@
       switchHtml("fl-blur-videos", t("blurVideos"), ds.blurVideos !== false) +
       "</div>";
     ensureDock().appendChild(box);
-
+    bindPanelHeader("fl-site-header", "fl-site-body", "fl-site-toggle", "fl-site-panel");
     wireSiteControls();
   }
 
@@ -3630,8 +3816,12 @@
       if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.target.isContentEditable) return;
       if (e.key === "f" || e.key === "F") {
         e.preventDefault();
-        const input = document.getElementById("fl-combine-mode");
-        if (input) input.focus();
+        setSettingsRailOpen(true, false);
+        const body = document.getElementById("fl-panel-body");
+        if (body) {
+          setPanelOpenState("fl-panel-body", "fl-panel-toggle", true);
+          collapseOtherPanels("fl-filter-panel");
+        }
       } else if (e.key === "s" || e.key === "S") {
         e.preventDefault(); toggleNsfwMode();
       } else if (e.key === "n" || e.key === "N") jumpNextUnread();
@@ -3652,8 +3842,8 @@
     panel.className = "fl-tool-panel";
     panel.innerHTML =
       '<div class="fl-tool-header" id="fl-panel-header"><div class="fl-tool-title">' + t("profileSettings") +
-      '</div></div>' +
-      '<div id="fl-panel-body" class="fl-tool-body">' +
+      '</div><button type="button" id="fl-panel-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+      '<div id="fl-panel-body" class="fl-tool-body fl-tool-hidden">' +
       '<label style="display:block;margin-bottom:4px;">' + t("combineMode") + "</label>" +
       '<select id="fl-combine-mode" style="margin-bottom:8px">' +
       '<option value="and"' + ((s.combineMode || "and") !== "or" ? " selected" : "") + ">" + t("combineAnd") + "</option>" +
@@ -3684,21 +3874,46 @@
       '<div id="fl-selector-warn" class="fl-tool-hidden"></div>' +
       '<div id="fl-last-place" class="life-hint"></div>' +
       '<div id="fl-loc-wrap"><hr class="life-hr">' +
-      '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span></div>' +
-      '<div id="fl-loc-body">' +
+      '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span><span id="fl-loc-chevron">▸</span></div>' +
+      '<div id="fl-loc-body" class="fl-tool-hidden">' +
       chipFieldHtml("fl-cities", t("citiesFilter"), t("citiesPh"), s.cities || "") +
       '<label style="display:block;margin-bottom:4px;">' + t("myCity") + "</label>" +
       '<input id="fl-my-city" type="text" placeholder="' + escapeAttr(t("myCityPh")) + '" value="' + escapeAttr(s.myCity || "") + '" style="margin-bottom:6px;width:100%;box-sizing:border-box;">' +
       switchHtml("fl-same-city-only", t("sameCityOnly"), !!s.sameCityOnly) +
       "</div></div>" +
       '<div id="fl-rel-wrap"><hr class="life-hr">' +
-      '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span></div>' +
-      '<div id="fl-rel-body"><div class="life-hint">' + t("relHint") + "</div>" +
+      '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span><span id="fl-rel-chevron">▸</span></div>' +
+      '<div id="fl-rel-body" class="fl-tool-hidden"><div class="life-hint">' + t("relHint") + "</div>" +
       switchHtml("fl-rel-follow", t("relNone"), s.relFollow) +
       switchHtml("fl-rel-following", t("relFollowing"), s.relFollowing) +
       switchHtml("fl-rel-followsyu", t("relFollowsYou"), s.relFollowsYou) +
       switchHtml("fl-rel-friends", t("relFriends"), s.relFriends) + "</div></div></div>";
         ensureDock().insertBefore(panel, ensureDock().firstChild);
+    bindPanelHeader("fl-panel-header", "fl-panel-body", "fl-panel-toggle", "fl-filter-panel");
+    function bindSubmenuGroup(items) {
+      function setOpen(item, open) {
+        const body = document.getElementById(item.body);
+        const chevron = document.getElementById(item.chevron);
+        if (!body) return;
+        body.classList.toggle("fl-tool-hidden", !open);
+        if (chevron) chevron.textContent = open ? "▾" : "▸";
+      }
+      items.forEach((item) => {
+        const toggle = document.getElementById(item.toggle);
+        if (!toggle || toggle.dataset.collapseBound) return;
+        toggle.dataset.collapseBound = "1";
+        toggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const body = document.getElementById(item.body);
+          const opening = body && body.classList.contains("fl-tool-hidden");
+          items.forEach((other) => setOpen(other, opening && other.body === item.body));
+        });
+      });
+    }
+    bindSubmenuGroup([
+      { toggle: "fl-loc-toggle", body: "fl-loc-body", chevron: "fl-loc-chevron" },
+      { toggle: "fl-rel-toggle", body: "fl-rel-body", chevron: "fl-rel-chevron" }
+    ]);
 
     ["fl-combine-mode", "fl-match-scope", "fl-role-mode"].forEach((id) => {
       const el = document.getElementById(id);
@@ -3750,8 +3965,8 @@
     const mode = s.orgMode || (s.hideOrgs ? "hide" : "off");
     box.innerHTML =
       '<div class="fl-tool-header" id="fl-advanced-header"><div class="fl-tool-title">' + t("advancedSettings") +
-      '</div></div>' +
-      '<div id="fl-advanced-body" class="fl-tool-body">' +
+      '</div><button type="button" id="fl-advanced-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+      '<div id="fl-advanced-body" class="fl-tool-body fl-tool-hidden">' +
       '<label style="display:block;margin-bottom:4px;">' + t("orgFilter") + "</label>" +
       '<select id="fl-org-mode" style="margin-bottom:8px">' +
       '<option value="off"' + ((mode !== "dim" && mode !== "hide") ? " selected" : "") + ">" + t("orgShow") + "</option>" +
@@ -3764,6 +3979,7 @@
       switchHtml("fl-hide-banners", t("hideBanners"), !!s.hideBanners) +
       "</div>";
     ensureDock().appendChild(box);
+    bindPanelHeader("fl-advanced-header", "fl-advanced-body", "fl-advanced-toggle", "fl-advanced-panel");
 
     const applyAdv = () => {
       const next = getCurrentFilterSettings();
@@ -3851,10 +4067,12 @@
       box.className = "fl-tool-panel";
       box.innerHTML =
         '<div class="fl-tool-header" id="fl-shortcuts-header"><div class="fl-tool-title">' + t("shortcuts") +
-        '</div></div>' +
-        '<div id="fl-shortcuts-body" class="fl-tool-body">' + legendHtml + "</div>";
+        '</div><button type="button" id="fl-shortcuts-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + "</div>";
       ensureDock().appendChild(box);
-
+      bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
+    } else {
+      bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
     }
   }
 
@@ -3918,7 +4136,7 @@
   function boot() {
     try {
       try { localStorage.removeItem("fl_filter_presets"); } catch (_) {}
-      ensureDock(); flInstallUiEnhancements(); ensurePanelSearch(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
+      ensureDock(); flInstallUiEnhancements(); ensurePanelSearch(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
      
       applyFilter(getCurrentFilterSettings()); applyExtras(); setupKeyboard();
       setupHomeScrollRestore(); setupThemeSync();
@@ -3930,7 +4148,7 @@
     if (debounce) clearTimeout(debounce);
     debounce = setTimeout(function () {
       try {
-        ensureDock(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel();
+        ensureDock(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
         /* Media detail: keep dock/panels alive, avoid full filter/extras storms while comments load. */
         if (isMediaPage()) {
           applyDisplayMode(loadDisplaySettings().mode);
@@ -3957,27 +4175,17 @@
     }, Math.max(80, Math.min(1000, Number(flLoadPerf().scanDelay) || 120)));
   }
   function start() {
-    /* Page-world single-flight: Pro (or another Basic) already owns the page. */
+    /* Page-world single-flight. Yield only for a live Pro instance. */
     try {
-      const page =
-        (typeof unsafeWindow !== "undefined" && unsafeWindow) ||
-        window;
-      if (page.__FL_TOOLS_BOOTED__) return;
-      if (page.__FL_TOOLS_CLAIM__ === "pro") return;
-      try {
-        if (sessionStorage.getItem("fl_tools_claim") === "pro") return;
-      } catch (_) {}
-      const root = document.documentElement;
-      if (root.getAttribute("data-fl-tools-claim") === "pro" ||
-          root.getAttribute("data-fl-tools-edition") === "pro") return;
+      if (flLiveProActive()) return;
+      const page = flPageRoot();
+      if (page.__FL_TOOLS_BOOTED__ === "basic" && document.getElementById("fl-tools-dock")) return;
+      flClaimBasic();
       page.__FL_TOOLS_BOOTED__ = "basic";
-      page.__FL_TOOLS_CLAIM__ = page.__FL_TOOLS_CLAIM__ || "basic";
-      root.setAttribute("data-fl-tools-edition", "basic");
-      root.setAttribute("data-fl-tools-claim", "basic");
     } catch (_) {}
-    /* Another instance already built the dock — do not double-boot. */
+    /* Another Basic already built the dock — do not double-boot. */
     if (document.getElementById("fl-tools-dock")) return;
-    try { ensureDock(); flInstallUiEnhancements(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); } catch (err) { console.error(err); }
+    try { ensureDock(); flInstallUiEnhancements(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders(); } catch (err) { console.error(err); }
     boot();
     setTimeout(boot, 800);
     setTimeout(boot, 2500);
