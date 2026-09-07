@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.1.7
+// @version      1.1.8
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -48,15 +48,10 @@
     const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     const p = flLoadPerf();
-    let side = p.dockSide;
-    if (side !== "left" && side !== "right") {
-      const controls = [...document.querySelectorAll("button, [role='button'], input, select")].filter((el) => {
-        const r = el.getBoundingClientRect(); return r.width > 20 && r.height > 20 && r.top < innerHeight && r.bottom > 0;
-      });
-      const rightDensity = controls.filter((el) => el.getBoundingClientRect().right > innerWidth - 260).length;
-      const leftDensity = controls.filter((el) => el.getBoundingClientRect().left < 260).length;
-      side = rightDensity > leftDensity ? "left" : "right";
-    }
+    // Keep the dock anchored once chosen. Other userscripts must move around it.
+    const side = p.dockSide === "left" || p.dockSide === "right"
+      ? p.dockSide
+      : (dock.dataset.dockSide === "left" || dock.dataset.dockSide === "right" ? dock.dataset.dockSide : "right");
     dock.style.left = side === "left" ? "12px" : "auto";
     dock.style.right = side === "right" ? "12px" : "auto";
     dock.dataset.dockSide = side;
