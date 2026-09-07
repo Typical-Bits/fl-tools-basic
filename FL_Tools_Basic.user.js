@@ -671,9 +671,7 @@
     }
   }
 
-  /* Settings styling inspired by Amazon Dark Pattern Blocker by expDARE:
-     https://github.com/ExtraPotions/velvet-crane-orbit (CC BY-NC 4.0).
-     Basic settings stay visible; there are no collapse or hide controls. */
+  /* Basic settings stay visible; there are no collapse or hide controls. */
   function ensureBasicSettingsPanel(dock) {
     dock.classList.add("fl-settings-rail");
     dock.setAttribute("aria-labelledby", "fl-rail-title");
