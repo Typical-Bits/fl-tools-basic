@@ -62,3 +62,9 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 ## Changelog
 
 See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) for downloadable versions and notes.
+
+## Release and performance controls
+
+The settings panel includes theme-aware icon treatment, a compact panel option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally.
+
+Maintainers can run **Actions → Bump release version** with a semantic version. The workflow updates the userscript header and README release link; publishing a GitHub Release validates both before uploading the matching asset.
