@@ -40,7 +40,8 @@
   function flApplyPerf() {
     const p = flLoadPerf();
     document.documentElement.classList.toggle("fl-tools-lightweight", !!p.lightweight);
-    document.documentElement.classList.toggle("fl-tools-launcher-compact", !!p.compactLauncher);\n    flApplyAccessibility(); flSmartDockPlacement();
+    document.documentElement.classList.toggle("fl-tools-launcher-compact", !!p.compactLauncher);
+    flApplyAccessibility(); flSmartDockPlacement();
     flSetPerfStatus(p.paused ? "Scanning paused · changes save automatically" : (p.lightweight ? "Lightweight scanning is on · changes save automatically" : "Standard scanning · changes save automatically"));
   }
   function flSmartDockPlacement() {
