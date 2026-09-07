@@ -68,3 +68,6 @@ See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) f
 The settings panel includes theme-aware icon treatment, a compact panel option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally.
 
 Maintainers can run **Actions → Bump release version** with a semantic version. The workflow updates the userscript header and README release link; publishing a GitHub Release validates both before uploading the matching asset.
+
+
+The dock now chooses a less crowded side of the viewport, supports double-clicking the panel to remember that side, and keeps labels within the viewport. Identity labels can be clicked to copy their name. Accessibility settings respect reduced-motion preferences and include a high-contrast switch.
