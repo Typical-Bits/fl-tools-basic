@@ -8,9 +8,9 @@
 // @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts. Standalone.
 // @author       TypicalBits
 // @license      CC-BY-NC-4.0
-// @icon         https://fetlife.com/favicons/favicon-32.png
-// @iconURL      https://fetlife.com/favicons/favicon-32.png
-// @defaulticon  https://fetlife.com/favicons/favicon-32.png
+// @icon         data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAGf0lEQVR4nN1b228UVRg//As935nZW9vZFkop0BsmEltATIi+icrFRNMEJBrjBaNPgAGqosQEjb7ogxrj9cEn5KYiQrWAaEm9BFpNSIy8iMESoZhoNMf8prvrdnd251xmZ8Amv6SZPef7ft/vzJz7x1j43xwiWsK5eIpIHCVyJjkX00SOvJZQ4DQBjpyLYSLqV4gtNPB1nDs/JB2cBSaFEGsQC9P5E0K0E4lTYQ42pNtkWiQXIHxvyLQplBUnXdfNqwY/yLm4EGZ0wM3Jk/k+2SZSiQkA3ye8PnmTm1UR4SLn7i11g+fcXUnk/KXi/K2WRfJUvl92iXRiAsA3OICLWh3xJxGtCAzedd085+JXFUPL3WbfMXCz25yYACvLeCxzc6oiXBRCzK2Mf47KN1/Ek7mOkuOhdD4xAeC7yGNbbp5GXXFiVsdI5K7Xcfx+6+KS4525+YkJAN9FHu+1qn4GMxBC3FVqfd2h7pjXW3J80OuRIoHg4XN/a3eJx1GvV9fGRKHj4zfoDj1Fp0UsVf7+ogN8VvJICVfTDvUxzsXTuspj+Ct3/FyuM3YBduc6Z3EAJ10bnIudrDC91ar4kdczyznG4h4nE1vw8AWf5RzASd+WOMI4d37Urfhqc1fV6/d2y2KDV1AfrnDlm4U5SDleaekysTcJAa7oVnwkM7eKgP5QZAb4CPL9cKZd2xbnzhVmQqLfyQSSALZnO6TTgMBhE7Zr+QUnE7tMn4hbsxWKwCu6xI2uT+h2MvK1loV1fQ7n5ht9gkynMBy8HPD9B2HUmxkdsGgyDRx1YQO2VHyCm64ITKfw87kFSkQq8Xm+z5+pbcq0yQzVJojfUAZlUcfEFzg2RIAN6TYjQpU45PXIVanqBRSe4bcofIBrpAJ0Omk5YtgiQcCkZWMZSfxfObmyAbiCc2QCDJctOqLEQ5l2H42wDc6RCOCJlPH3mCTAGdytBVib9iInN7Fuo5z+6vQs4FnUfsDdWoBdzdG//uce2yrl9PQsnNu8NXI/4G4twLsB824dnLn9Xjm195AcW7ys9OynbbuqBMCz4u8oizqoa+P7HYW9QhZW4HDZ5odJ8H//csEP8Or4d3J86a3yzOoheXnkeJUAeIbfUAZl8Qx1bUQAd2sBRj374Iv457epqsArUVnGRoTRfL+9ACOGIwBe4bBgVQFbJhxGvD57AfYZzs7GFg3Kq2Pj1sH/8e33cqx7uRGHvV63vQCvh6zC6mF86W2Br/3Uh4fk2bUb5dcLB3xgCLy0/+PAzwE2TP2Du7UAT2TrL33r9gOrh6qC+vmZPTXLn3/2xarysGHq//HsPHsBVqX+O31RAVoWYzqGtcreHi0fVv/SgU+qRgfYgk3Y1uEStOjSFsAhV+5rVe8Hrhw/VfN7VglgYv19NevDtiqPA609PndrAYgcuTk7NxIBxroGQuuPLRyIRADsW6rExlQKYVHxqeKEyFqARYPWAhzxepWP7ZlKIeBBxWVrPQFUFjwT6zdZC/CAxg4xUy2YJld+UHYWZ9IJYqgLq3/p4GGrThAcwTVyAYgceaOT05oaBw2DGOpqlT+/+yWrYVD9toihAESOvF9jB6fWRAhDHXp79AkAXvvKljeZCIGbbjxMtwKwS2GLzJ8Kn/4mtqmw6QEtM6mE7euwKXKciyFwqbfdHrkARI7MhogQ13IYp1DNFjfVmGlFoEWkSrfFktgQwQGKysZnwwQgcmSrSPlH43FvieGeUj6CO4rM1gCAVgg7vCwHxvRKAc49ukW5PnzZtnykAlDh7hB64kZvi+9p7tSa6MQmABXuD2Hh9KViS+oCx/JR30hjURor4u503t+QjCpw2ILNRnBljTBavMams49QCzgxVr8Gew0JQOTIds3OMWiM72jwZWxG5FxupAN0jjsMTpdRJ4ZchN9ZXBkh69Ke/ELhjAHf+z3xXcCewEXJz2Jy5i+n650z4N6xzZ0iw4uSYjg+hzP9whsB/QKe4bc4uRA52xmyq2J2KtMVF65eyC0wXs3ZQAjRU0iWcCbjdo6Lj1uyHT4acbEyHOJseaLUmvgJJIumJueOypSZk0mTigucO6NVuYSu63qqSVPXN/ykqfbAzDEiWjGTWva/DR5pc8vq5g4KIQZUEievP/iJkyvrBl+eQ4jUsuRJR/fN4xNnmn9zkFo2k5F93bb62aYmcSez/SOiPiQYYeoIQUyyTGJoZXBC+jw47hBC9KrE9i84+PAjB2F6JwAAAABJRU5ErkJggg==
+// @iconURL      data:image/png;base64,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
+// @defaulticon  data:image/png;base64,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
 // @match        https://fetlife.com/*
 // @grant        none
 // @run-at       document-idle
@@ -24,6 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
+  const FL_TOOLS_ICON_SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" aria-hidden=\"true\"><rect width=\"64\" height=\"64\" rx=\"14\" fill=\"#141416\"/><path fill=\"#c92132\" d=\"M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z\"/><path fill=\"#fff4f4\" fill-rule=\"evenodd\" d=\"M40.65,31.52L43.78,31.71L43.78,36.29L40.65,36.48L39.87,38.36L41.95,40.71L38.71,43.95L36.36,41.87L34.48,42.65L34.29,45.78L29.71,45.78L29.52,42.65L27.64,41.87L25.29,43.95L22.05,40.71L24.13,38.36L23.35,36.48L20.22,36.29L20.22,31.71L23.35,31.52L24.13,29.64L22.05,27.29L25.29,24.05L27.64,26.13L29.52,25.35L29.71,22.22L34.29,22.22L34.48,25.35L36.36,26.13L38.71,24.05L41.95,27.29L39.87,29.64Z M37,34a5,5 0 1,0 -10,0a5,5 0 1,0 10,0Z\"/></svg>";
   /* Silent yield if Pro already claimed (dual-install), or if another Basic
      already stamped this document. Prefer page-world signals — Pro may run
      sandboxed (@grant) so attribute-only checks miss.
@@ -670,6 +671,68 @@
       }, { passive: true });
     }
   }
+
+  /* Basic settings stay visible; there are no collapse or hide controls. */
+  function ensureBasicSettingsPanel(dock) {
+    dock.classList.add("fl-settings-rail");
+    dock.setAttribute("aria-labelledby", "fl-rail-title");
+    if (!document.getElementById("fl-settings-rail-style")) {
+      const style = document.createElement("style");
+      style.id = "fl-settings-rail-style";
+      style.textContent = `
+                #fl-tools-dock.fl-settings-rail { width:360px!important; max-width:calc(100vw - 24px)!important;
+          max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;
+          right:12px!important; left:auto!important; 
+          display:flex!important; flex-direction:column!important; justify-content:flex-start!important;
+          gap:10px!important; padding:18px!important; background:var(--lt-bg)!important;
+          border:1px solid var(--lt-border)!important; border-radius:14px!important; box-shadow:0 18px 50px #0007;
+          overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left; }
+        #fl-tools-dock.fl-settings-rail > * { flex-shrink:0; min-width:0; }
+        #fl-rail-header { order:-3; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
+        #fl-rail-header .fl-brand-icon { width:32px; height:32px; flex:none; }
+        #fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }
+        #fl-rail-header .fl-brand-copy { flex:1; min-width:0; }
+        #fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }
+        #fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:4px; }
+        #fl-rail-status { order:-2; padding:10px 11px; border:1px solid #e11d4838; border-radius:9px;
+          background:var(--lt-accent-soft); color:var(--lt-text); font-size:11px; line-height:1.5; }
+        #fl-tools-dock.fl-settings-rail #fl-panel-search-wrap { order:-1; margin:0; }
+        #fl-tools-dock.fl-settings-rail #fl-panel-search { height:34px; border-radius:8px; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:10px; background:var(--lt-bg-elev); box-shadow:none; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:42px; padding:10px 13px; cursor:pointer; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-title { font-size:12px; letter-spacing:0; white-space:normal; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:28px; min-height:28px; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 13px 12px; margin:0; max-height:none; overflow:visible; }
+        #fl-tools-dock.fl-settings-rail .fl-switch { padding:9px 0; margin:0; gap:12px; }
+        #fl-tools-dock.fl-settings-rail .fl-switch + .fl-switch { border-top:1px solid var(--lt-border-soft); }
+        #fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:13px; line-height:1.35; }
+        #fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:11px; color:var(--lt-text-muted); margin-top:3px; }
+        #fl-tools-dock.fl-settings-rail .toggleSwitch { width:34px; height:20px; border-radius:20px; background:#626873; }
+        #fl-tools-dock.fl-settings-rail .toggleSwitch::after { width:16px; height:16px; top:2px; left:2px; background:#fff; }
+        #fl-tools-dock.fl-settings-rail .fl-switch-input:checked + .toggleSwitch { background:var(--lt-accent); }
+        #fl-tools-dock.fl-settings-rail .fl-switch-input:checked + .toggleSwitch::after { transform:translateX(14px); }
+        #fl-tools-dock.fl-settings-rail :is(button,input,select,textarea):focus-visible { outline:2px solid var(--lt-accent); outline-offset:2px; }
+        #fl-tools-dock.fl-settings-rail.lt-dock-compact { padding:12px!important; gap:6px!important; }
+        #fl-tools-dock.fl-settings-rail.lt-dock-compact .fl-switch { padding:5px 0; }
+        @media(prefers-reduced-motion:reduce) { #fl-tools-dock.fl-settings-rail * { transition:none!important; } }
+      
+        #fl-tools-dock.fl-settings-rail .fl-tool-header, #fl-tools-dock.fl-settings-rail .life-subhead { cursor:default; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-body { display:block!important; }
+    `;
+      (document.head || document.documentElement).appendChild(style);
+    }
+    if (!document.getElementById("fl-rail-header")) {
+      const header = document.createElement("div");
+      header.id = "fl-rail-header";
+      header.innerHTML = '<span class="fl-brand-icon">' + FL_TOOLS_ICON_SVG + '</span><div class="fl-brand-copy"><h2 id="fl-rail-title">FL Tools Basic</h2><div id="fl-rail-subtitle">Settings · Your browsing preferences</div></div>';
+      dock.prepend(header);
+      const status = document.createElement("div");
+      status.id = "fl-rail-status";
+      status.textContent = "Changes save automatically on this device.";
+      header.after(status);
+    }
+  }
+
   function ensureDockRaw() {
     let dock = document.getElementById("fl-tools-dock");
     if (!dock) {
@@ -687,7 +750,7 @@
   function ensureDock() {
     const existed = !!document.getElementById("fl-tools-dock");
     const dock = ensureDockRaw();
-    setupDockDrag(dock);
+    ensureBasicSettingsPanel(dock);
     setupDockGrowObserver(dock);
     if (!existed) {
       if (!applySavedDockTop(dock)) applyDockPlacement((loadFilterSettings() || {}).dockAnchor || "bottom");
@@ -746,17 +809,7 @@
   function readLastPanel() {
     try { return localStorage.getItem(LAST_PANEL_KEY) || ""; } catch (_) { return ""; }
   }
-  function setPanelOpenState(bodyId, toggleId, open) {
-    const body = document.getElementById(bodyId);
-    const btn = document.getElementById(toggleId);
-    if (body) body.classList.toggle("fl-tool-hidden", !open);
-    if (btn) {
-      btn.textContent = open ? "▾" : "▸";
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      btn.setAttribute("aria-label", open ? t("collapsePanel") : t("expandPanel"));
-      if (bodyId && !btn.getAttribute("aria-controls")) btn.setAttribute("aria-controls", bodyId);
-    }
-  }
+
   /* Migrate away from v5.26.0 Tools nest — put panels back on the dock. */
   function unnestFromToolsStack() {
     const tools = document.getElementById("fl-tools-panel");
@@ -772,23 +825,7 @@
     });
     if (tools) tools.remove();
   }
-  function collapseOtherPanels(exceptId) {
-    function maybeCollapse(panelId, bodyId, toggleId, extra) {
-      if (exceptId === panelId) return;
-      if (extra && extra.indexOf(exceptId) !== -1) return;
-      setPanelOpenState(bodyId, toggleId, false);
-      if (panelId === "fl-filter-panel") {
-        try { localStorage.setItem("fl_panel_collapsed", "1"); } catch (_) {}
-      }
-    }
-    maybeCollapse("fl-filter-panel", "fl-panel-body", "fl-panel-toggle");
-    maybeCollapse("fl-site-panel", "fl-site-body", "fl-site-toggle");
-    maybeCollapse("fl-advanced-panel", "fl-advanced-body", "fl-advanced-toggle");
-    maybeCollapse("fl-block-panel", "fl-block-body", "fl-block-toggle");
-    maybeCollapse("fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle");
-    if (exceptId) notePanelOpen(exceptId);
-    syncDockGrowDirection();
-  }
+
   function panelBodyIsOpen(panel) {
     if (!panel) return false;
     const body = panel.querySelector(".fl-tool-body");
@@ -847,6 +884,8 @@
   }
 
   function switchHtml(id, label, on) {
+    const descriptions = {"fl-nsfw-toggle":"Show unblurred media. Turn off for SFW browsing.","fl-blur-avatars":"Also blur profile pictures in SFW mode.","fl-blur-videos":"Also blur video previews in SFW mode.","fl-auto-scroll":"Load more results as you approach the end of the page.","fl-show-toasts":"Show brief feedback after actions.","fl-show-seen-chip":"Label profiles you have already visited.","fl-hide-banners":"Hide FL Tools informational banners."};
+    if (descriptions[id]) label += '<small class="fl-rail-description">' + descriptions[id] + "</small>";
     return '<label class="fl-switch"><span class="fl-switch-text">' + label +
       '</span><input id="' + id + '" type="checkbox" class="fl-switch-input" role="switch"' +
       (on ? " checked" : "") + ' aria-checked="' + (on ? "true" : "false") +
@@ -2467,21 +2506,13 @@
         '<button type="button" id="fl-soft-backup" class="life-btn life-btn-gray">' + t("softBackup") + "</button>";
       panel.innerHTML =
         '<div class="fl-tool-header" id="fl-block-header"><div class="fl-tool-title">' + t("blockPanel") +
-        '</div><button type="button" id="fl-block-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-block-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
-        '<div id="fl-block-body" class="fl-tool-body fl-tool-hidden">' +
+        '</div></div>' +
+        '<div id="fl-block-body" class="fl-tool-body">' +
         '<div id="fl-soft-count" class="life-hint">' + t("softCount", { n: "0" }) + "</div>" +
         softCore +
         "</div>";
       dock.insertBefore(panel, dock.firstChild);
-      document.getElementById("fl-block-header").addEventListener("click", (e) => {
-        if (dockDidDrag) { dockDidDrag = false; return; }
-        if (e.target.closest("input, label, select, button") && e.target.id !== "fl-block-toggle") return;
-        const body = document.getElementById("fl-block-body");
-        const open = body.classList.contains("fl-tool-hidden");
-        setPanelOpenState("fl-block-body", "fl-block-toggle", open);
-        if (open) collapseOtherPanels("fl-block-panel");
-        else syncOpenPanelHighlight();
-      });
+
       const softSearch = document.getElementById("fl-soft-search");
       if (softSearch) softSearch.addEventListener("input", renderSoftList);
       const backup = document.getElementById("fl-soft-backup");
@@ -2835,8 +2866,8 @@
   }
   function openBlockPanel() {
     ensureBlockPanel();
-    setPanelOpenState("fl-block-body", "fl-block-toggle", true);
-    collapseOtherPanels("fl-block-panel");
+    const panel = document.getElementById("fl-block-panel");
+    if (panel) panel.scrollIntoView({ block:"nearest" });
   }
   function showSoftBlockNotice(nick, rec) {
     if (!nick || !rec || rec.type === "official") {
@@ -3178,22 +3209,15 @@
     wrap.id = "fl-limit-hist-wrap";
     wrap.innerHTML =
       '<hr class="life-hr"><div class="life-subhead" id="fl-limit-hist-toggle"><span>' + t("limitHistory") +
-      '</span><span id="fl-limit-hist-chevron">▸</span></div>' +
-      '<div id="fl-limit-hist-body" class="fl-tool-hidden">' +
+      '</span></div>' +
+      '<div id="fl-limit-hist-body">' +
       '<div id="fl-limit-hist-count" class="life-hint"></div>' +
       '<input id="fl-limit-hist-search" type="text" placeholder="' + escapeAttr(t("limitHistSearch")) + '" style="margin-bottom:6px">' +
       '<div id="fl-limit-hist-list"></div>' +
       '<button type="button" id="fl-limit-hist-dl" class="life-btn life-btn-gray">' + t("limitHistDownload") + "</button>" +
       '<button type="button" id="fl-limit-hist-clear" class="life-btn life-btn-gray">' + t("limitHistClear") + "</button></div>";
     body.appendChild(wrap);
-    document.getElementById("fl-limit-hist-toggle").addEventListener("click", (e) => {
-      e.stopPropagation();
-      const b = document.getElementById("fl-limit-hist-body");
-      const open = b.classList.contains("fl-tool-hidden");
-      b.classList.toggle("fl-tool-hidden", !open);
-      document.getElementById("fl-limit-hist-chevron").textContent = open ? "▾" : "▸";
-      if (open) renderLimitHistory();
-    });
+
     document.getElementById("fl-limit-hist-search").addEventListener("input", renderLimitHistory);
     document.getElementById("fl-limit-hist-dl").addEventListener("click", (e) => {
       e.stopPropagation();
@@ -3456,8 +3480,8 @@
     box.className = "fl-tool-panel";
     box.innerHTML =
       '<div class="fl-tool-header" id="fl-site-header"><div class="fl-tool-title">' + t("nsfwPanel") +
-      '</div><button type="button" id="fl-site-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-site-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
-      '<div id="fl-site-body" class="fl-tool-body fl-tool-hidden">' +
+      '</div></div>' +
+      '<div id="fl-site-body" class="fl-tool-body">' +
       '<div class="life-hint">' + t("nsfwHint") + "</div>" +
       switchHtml("fl-nsfw-toggle", t("nsfwMode"), ds.mode !== "sfw") +
       '<div class="life-hint" id="fl-nsfw-state">' + (ds.mode === "sfw" ? t("modeSfw") : t("modeNsfw")) + "</div>" +
@@ -3467,15 +3491,7 @@
       switchHtml("fl-blur-videos", t("blurVideos"), ds.blurVideos !== false) +
       "</div>";
     ensureDock().appendChild(box);
-    document.getElementById("fl-site-header").addEventListener("click", (e) => {
-      if (dockDidDrag) { dockDidDrag = false; return; }
-      if (e.target.closest("input, label")) return;
-      const body = document.getElementById("fl-site-body");
-      const open = body.classList.contains("fl-tool-hidden");
-      setPanelOpenState("fl-site-body", "fl-site-toggle", open);
-      if (open) collapseOtherPanels("fl-site-panel");
-      else syncOpenPanelHighlight();
-    });
+
     wireSiteControls();
   }
 
@@ -3513,27 +3529,13 @@
       if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.target.isContentEditable) return;
       if (e.key === "f" || e.key === "F") {
         e.preventDefault();
-        const body = document.getElementById("fl-panel-body");
-        if (body) {
-          const open = body.classList.contains("fl-tool-hidden");
-          setPanelOpenState("fl-panel-body", "fl-panel-toggle", open);
-          try { localStorage.setItem("fl_panel_collapsed", open ? "0" : "1"); } catch (_) {}
-          if (open) collapseOtherPanels("fl-filter-panel");
-          syncOpenPanelHighlight();
-          syncDockGrowDirection();
-        }
+        const input = document.getElementById("fl-combine-mode");
+        if (input) input.focus();
       } else if (e.key === "s" || e.key === "S") {
-        e.preventDefault();
-        toggleNsfwMode();
-      } else if (e.key === "n" || e.key === "N") {
-        jumpNextUnread();
-      } else if (e.key === "t" || e.key === "T") {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else if (e.key === "Escape") {
-        collapseOtherPanels("");
-        const body = document.getElementById("fl-panel-body");
-        if (body) body.classList.add("fl-tool-hidden");
+        e.preventDefault(); toggleNsfwMode();
+      } else if (e.key === "n" || e.key === "N") jumpNextUnread();
+      else if (e.key === "t" || e.key === "T") {
+        e.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" });
       }
     });
   }
@@ -3549,7 +3551,7 @@
     panel.className = "fl-tool-panel";
     panel.innerHTML =
       '<div class="fl-tool-header" id="fl-panel-header"><div class="fl-tool-title">' + t("profileSettings") +
-      '</div><button type="button" id="fl-panel-toggle" class="fl-tool-chevron" aria-expanded="true" aria-controls="fl-panel-body" aria-label="' + t("collapsePanel") + '">▾</button></div>' +
+      '</div></div>' +
       '<div id="fl-panel-body" class="fl-tool-body">' +
       '<label style="display:block;margin-bottom:4px;">' + t("combineMode") + "</label>" +
       '<select id="fl-combine-mode" style="margin-bottom:8px">' +
@@ -3581,59 +3583,22 @@
       '<div id="fl-selector-warn" class="fl-tool-hidden"></div>' +
       '<div id="fl-last-place" class="life-hint"></div>' +
       '<div id="fl-loc-wrap"><hr class="life-hr">' +
-      '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span><span id="fl-loc-chevron">▸</span></div>' +
-      '<div id="fl-loc-body" class="fl-tool-hidden">' +
+      '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span></div>' +
+      '<div id="fl-loc-body">' +
       chipFieldHtml("fl-cities", t("citiesFilter"), t("citiesPh"), s.cities || "") +
       '<label style="display:block;margin-bottom:4px;">' + t("myCity") + "</label>" +
       '<input id="fl-my-city" type="text" placeholder="' + escapeAttr(t("myCityPh")) + '" value="' + escapeAttr(s.myCity || "") + '" style="margin-bottom:6px;width:100%;box-sizing:border-box;">' +
       switchHtml("fl-same-city-only", t("sameCityOnly"), !!s.sameCityOnly) +
       "</div></div>" +
       '<div id="fl-rel-wrap"><hr class="life-hr">' +
-      '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span><span id="fl-rel-chevron">▸</span></div>' +
-      '<div id="fl-rel-body" class="fl-tool-hidden"><div class="life-hint">' + t("relHint") + "</div>" +
+      '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span></div>' +
+      '<div id="fl-rel-body"><div class="life-hint">' + t("relHint") + "</div>" +
       switchHtml("fl-rel-follow", t("relNone"), s.relFollow) +
       switchHtml("fl-rel-following", t("relFollowing"), s.relFollowing) +
       switchHtml("fl-rel-followsyu", t("relFollowsYou"), s.relFollowsYou) +
       switchHtml("fl-rel-friends", t("relFriends"), s.relFriends) + "</div></div></div>";
         ensureDock().insertBefore(panel, ensureDock().firstChild);
 
-    const panelBody = document.getElementById("fl-panel-body");
-    const toggleBtn = document.getElementById("fl-panel-toggle");
-    function setCollapsed(collapsed) {
-      setPanelOpenState("fl-panel-body", "fl-panel-toggle", !collapsed);
-      try { localStorage.setItem("fl_panel_collapsed", collapsed ? "1" : "0"); } catch (_) {}
-      if (!collapsed) collapseOtherPanels("fl-filter-panel");
-      else syncOpenPanelHighlight();
-    }
-    setCollapsed(localStorage.getItem("fl_panel_collapsed") !== "0");
-    document.getElementById("fl-panel-header").addEventListener("click", (e) => {
-      if (dockDidDrag) { dockDidDrag = false; return; }
-      if (e.target.closest("input, textarea, button, select") && e.target.id !== "fl-panel-toggle") return;
-      setCollapsed(!panelBody.classList.contains("fl-tool-hidden"));
-    });
-    function bindSubmenuGroup(items) {
-      function setOpen(item, open) {
-        const body = document.getElementById(item.body);
-        const chevron = document.getElementById(item.chevron);
-        if (!body) return;
-        body.classList.toggle("fl-tool-hidden", !open);
-        if (chevron) chevron.textContent = open ? "▾" : "▸";
-      }
-      items.forEach((item) => {
-        const toggle = document.getElementById(item.toggle);
-        if (!toggle) return;
-        toggle.addEventListener("click", (e) => {
-          e.stopPropagation();
-          const body = document.getElementById(item.body);
-          const opening = body && body.classList.contains("fl-tool-hidden");
-          items.forEach((other) => setOpen(other, opening && other.body === item.body));
-        });
-      });
-    }
-    bindSubmenuGroup([
-      { toggle: "fl-loc-toggle", body: "fl-loc-body", chevron: "fl-loc-chevron" },
-      { toggle: "fl-rel-toggle", body: "fl-rel-body", chevron: "fl-rel-chevron" }
-    ]);
     ["fl-combine-mode", "fl-match-scope", "fl-role-mode"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.addEventListener("change", autoApplyFilters);
@@ -3684,8 +3649,8 @@
     const mode = s.orgMode || (s.hideOrgs ? "hide" : "off");
     box.innerHTML =
       '<div class="fl-tool-header" id="fl-advanced-header"><div class="fl-tool-title">' + t("advancedSettings") +
-      '</div><button type="button" id="fl-advanced-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-advanced-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
-      '<div id="fl-advanced-body" class="fl-tool-body fl-tool-hidden">' +
+      '</div></div>' +
+      '<div id="fl-advanced-body" class="fl-tool-body">' +
       '<label style="display:block;margin-bottom:4px;">' + t("orgFilter") + "</label>" +
       '<select id="fl-org-mode" style="margin-bottom:8px">' +
       '<option value="off"' + ((mode !== "dim" && mode !== "hide") ? " selected" : "") + ">" + t("orgShow") + "</option>" +
@@ -3698,15 +3663,7 @@
       switchHtml("fl-hide-banners", t("hideBanners"), !!s.hideBanners) +
       "</div>";
     ensureDock().appendChild(box);
-    document.getElementById("fl-advanced-header").addEventListener("click", (e) => {
-      if (dockDidDrag) { dockDidDrag = false; return; }
-      if (e.target.closest("input, label, select, button") && e.target.id !== "fl-advanced-toggle") return;
-      const body = document.getElementById("fl-advanced-body");
-      const open = body.classList.contains("fl-tool-hidden");
-      setPanelOpenState("fl-advanced-body", "fl-advanced-toggle", open);
-      if (open) collapseOtherPanels("fl-advanced-panel");
-      else syncOpenPanelHighlight();
-    });
+
     const applyAdv = () => {
       const next = getCurrentFilterSettings();
       next.orgMode = val("fl-org-mode") || "off";
@@ -3783,9 +3740,8 @@
     const legendHtml =
       '<div class="flhp-legend">' +
       '<div class="flhp-legend-row"><strong>S</strong> — NSFW / SFW</div>' +
-      '<div class="flhp-legend-row"><strong>F</strong> — filters panel</div>' +
+      '<div class="flhp-legend-row"><strong>F</strong> — focus filters</div>' +
       '<div class="flhp-legend-row"><strong>N</strong> — next unread</div>' +
-      '<div class="flhp-legend-row"><strong>Esc</strong> — collapse panels</div>' +
       '<div class="flhp-legend-row"><strong>T</strong> — jump to top</div>' +
       "</div>";
     if (!box) {
@@ -3794,19 +3750,10 @@
       box.className = "fl-tool-panel";
       box.innerHTML =
         '<div class="fl-tool-header" id="fl-shortcuts-header"><div class="fl-tool-title">' + t("shortcuts") +
-        '</div><button type="button" id="fl-shortcuts-toggle" class="fl-tool-chevron" aria-expanded="false" aria-controls="fl-shortcuts-body" aria-label="' + t("expandPanel") + '">▸</button></div>' +
-        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + "</div>";
+        '</div></div>' +
+        '<div id="fl-shortcuts-body" class="fl-tool-body">' + legendHtml + "</div>";
       ensureDock().appendChild(box);
-      document.getElementById("fl-shortcuts-header").addEventListener("click", (e) => {
-        if (dockDidDrag) { dockDidDrag = false; return; }
-        if (e.target.closest("input, label, select, button") && e.target.id !== "fl-shortcuts-toggle") return;
-        const body = document.getElementById("fl-shortcuts-body");
-        const open = body.classList.contains("fl-tool-hidden");
-        setPanelOpenState("fl-shortcuts-body", "fl-shortcuts-toggle", open);
-        if (open) collapseOtherPanels("fl-shortcuts-panel");
-        else syncOpenPanelHighlight();
-        syncDockGrowDirection();
-      });
+
     }
   }
 
@@ -3999,3 +3946,4 @@
   if (document.readyState === "interactive" || document.readyState === "complete") start();
   else document.addEventListener("DOMContentLoaded", start, { once: true });
 })();
+
