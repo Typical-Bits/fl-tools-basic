@@ -24,6 +24,25 @@
   "use strict";
 
   const FL_EDITION = "basic";
+  const FL_TOOLS_VERSION = "1.1.8";
+  /* Shared handoff API for companion userscripts. Pro is always the primary edition. */
+  const FL_TOOLS_HANDOFF = (() => {
+    const root = window;
+    const current = root.FLTools;
+    if (current && current.edition === "pro" && FL_EDITION === "basic") return current;
+    const api = current && typeof current === "object" ? current : {};
+    Object.assign(api, {
+      edition: FL_EDITION,
+      version: FL_TOOLS_VERSION,
+      primary: FL_EDITION === "pro" || !current || current.edition !== "pro",
+      launcherId: "fl-settings-launcher",
+      dockId: "fl-tools-dock",
+      isPrimary() { return this.edition === "pro" || !root.FLTools || root.FLTools.edition !== "pro"; }
+    });
+    root.FLTools = api;
+    root.dispatchEvent(new CustomEvent("fltools:ready", { detail: api }));
+    return api;
+  })();
   const FL_PERF_KEY = "fl_perf_settings";
   const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, dockSide: "auto" };
   function flLoadPerf() {
