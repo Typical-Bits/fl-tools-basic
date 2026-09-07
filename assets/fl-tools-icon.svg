@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FL Tools">
+  <rect width="64" height="64" rx="14" fill="#141416"/>
+  <path fill="#c92132" d="M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z"/>
+  <path fill="#fff4f4" d="M39 22c-5-2-10 2-9 8L20 40a3.5 3.5 0 0 0 5 5l10-10c6 1 10-4 8-9l-5 5-4-4Z"/>
+</svg>
