@@ -13,7 +13,9 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.1)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.2](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.2)
+
+<p align="center"><img src="assets/fl-tools-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
 | Stat | Value |
 |------|-------|
@@ -25,6 +27,10 @@
 | Dual-install | Yields quietly if **FL_Tools Pro** is already claimed |
 
 Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
+
+## Settings UI
+
+The Basic settings panel stays visible on the right with grouped controls, descriptive switches, and search. Sections remain expanded and settings save automatically on this device.
 
 ## Install
 
