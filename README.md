@@ -15,7 +15,7 @@
 
 **Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.4](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.4)
 
-<p align="center"><img src="assets/fl-tools-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
+<p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
 | Stat | Value |
 |------|-------|
