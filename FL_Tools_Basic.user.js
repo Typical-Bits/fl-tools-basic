@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.1.1
+// @version      1.1.3
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.1.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.1.3 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -680,7 +680,7 @@
       const style = document.createElement("style");
       style.id = "fl-settings-rail-style";
       style.textContent = `
-                #fl-tools-dock.fl-settings-rail { width:360px!important; max-width:calc(100vw - 24px)!important;
+                #fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;
           max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;
           right:12px!important; left:auto!important; 
           display:flex!important; flex-direction:column!important; justify-content:flex-start!important;
