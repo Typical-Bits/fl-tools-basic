@@ -45,6 +45,10 @@
   })();
   const FL_PERF_KEY = "fl_perf_settings";
   const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, dockSide: "auto" };
+  const FL_TELEMETRY = { scans: 0, skipped: 0, durationMs: 0, lastScanMs: 0, record(start, skipped = false) {
+    if (skipped) { this.skipped += 1; return; }
+    this.scans += 1; this.lastScanMs = performance.now() - start; this.durationMs += this.lastScanMs;
+  }, snapshot() { return { scans: this.scans, skipped: this.skipped, durationMs: Math.round(this.durationMs), lastScanMs: Math.round(this.lastScanMs) }; } };
   function flLoadPerf() {
     try { return Object.assign({}, FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
     catch (_) { return Object.assign({}, FL_PERF_DEFAULTS); }
