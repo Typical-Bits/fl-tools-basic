@@ -40,7 +40,7 @@ jobs:
           set -euo pipefail
           tag="v$VERSION"
           if gh release view "$tag" >/dev/null 2>&1; then
-            gh release edit "$tag" --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
+            gh release edit "$tag" --title "FL_Tools Basic v$VERSION" --notes "Adds a compact About & diagnostics panel with version, page context, active-option count, live scan telemetry, captured errors, and one-click copy. Runtime, migration, syntax, and UI-contract checks passed."
           else
-            gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
+            gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds a compact About & diagnostics panel with version, page context, active-option count, live scan telemetry, captured errors, and one-click copy. Runtime, migration, syntax, and UI-contract checks passed."
           fi
