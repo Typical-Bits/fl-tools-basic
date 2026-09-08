@@ -1,7 +1,7 @@
 # FL_Tools Basic
 
 <p align="center">
-  Standalone FetLife userscript dock — filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, and toasts.
+  FetLife userscript dock — filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, and toasts.
 </p>
 
 <p align="center">
@@ -13,18 +13,16 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.1)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases/latest)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
 | Stat | Value |
 |------|-------|
-| Edition | **Basic** (lighter; Pro-only features not included) |
 | Userscript | `FL_Tools_Basic.user.js` |
 | Runs on | `https://fetlife.com/*` |
 | Managers | Violentmonkey (preferred), Tampermonkey, others |
 | Storage | `localStorage` only (`@grant none`) |
-| Dual-install | Yields only if **FL_Tools Pro is live** on this page. Disable Pro and reload to use Basic. |
 
 Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
 
@@ -39,21 +37,20 @@ A compact red launcher button on the right opens the settings rail. Sections use
 3. Open / confirm the install prompt in your userscript manager.
 4. Visit https://fetlife.com — the launcher appears on the right.
 
-Direct asset (counted downloads + manager updates):  
+Direct asset (counted downloads + manager updates):
 https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 
 `@updateURL` / `@downloadURL` point at the Release asset so manager update checks increment the download counter.
 
 ## What’s included
 
-- Filters + soft-block  
-- NSFW / SFW display modes  
-- Seen chip  
-- Keyboard shortcuts  
-- Org cards, infinite scroll, toasts  
-- Dock-styled confirm modal (no `window.confirm`)  
-
-**Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar.
+- Filters and soft-block
+- NSFW / SFW display modes
+- Seen chip
+- Keyboard shortcuts
+- Org cards, infinite scroll, toasts
+- Dock-styled confirm modal (no `window.confirm`)
+- Collapsible settings rail and launcher button
 
 ## License
 
@@ -67,4 +64,4 @@ See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) f
 
 The settings panel includes theme-aware icon treatment, compact launcher mode, lightweight scanning, configurable scan delay, and a pause toggle with a visible status indicator. It respects reduced-motion preferences and includes a high-contrast mode. The status line can show local scan telemetry (scans / skipped).
 
-The dock recognizes other FL Tools editions, respects their position, chooses a less crowded side of the viewport, and can remember a preferred side. Labels remain within the viewport, and identity labels can be clicked to copy their name.
+The dock stays on one side of the viewport, can remember a preferred side, keeps labels on-screen, and lets you click an identity label to copy its name.
