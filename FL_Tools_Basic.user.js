@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.1.9
+// @version      1.2.0
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.1.9";
+  const FL_TOOLS_VERSION = "1.2.0";
   /* Shared handoff API for companion userscripts. Pro is always the primary edition. */
   const FL_TOOLS_HANDOFF = (() => {
     const root = window;
@@ -370,7 +370,6 @@
       padding: 8px 10px; border-radius: var(--lt-radius); font-size: 12px; line-height: 1.4;
       cursor: pointer;
     }
-    .fl-switch-input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
     .fl-switch {
       display: flex; align-items: center; justify-content: space-between; gap: 10px;
       color: var(--lt-text); cursor: pointer; margin: 6px 0; width: 100%;
@@ -383,6 +382,7 @@
       width: 36px; height: 18px;
       background: #6b6b6b; border: 0;
       border-radius: 12px; cursor: pointer; box-sizing: border-box;
+      padding: 0; margin: 0; appearance: none; -webkit-appearance: none;
       transition: background .15s ease;
       vertical-align: top;
     }
@@ -393,24 +393,24 @@
       box-shadow: 0 1px 2px rgba(0,0,0,.35);
       transition: transform .15s ease, background .15s ease;
     }
-    .fl-switch-input:checked + .toggleSwitch {
+    .toggleSwitch[aria-checked="true"] {
       background: var(--lt-accent); /* favicon / FL red-600 family */
     }
-    .fl-switch-input:checked + .toggleSwitch::after {
+    .toggleSwitch[aria-checked="true"]::after {
       transform: translateX(18px); background: #e8e8e8;
     }
     .fl-switch:hover .toggleSwitch::after { background: #cfcfcf; }
-    .fl-switch-input:checked + .toggleSwitch::after,
-    .fl-switch:hover .fl-switch-input:checked + .toggleSwitch::after {
+    .toggleSwitch[aria-checked="true"]::after,
+    .fl-switch:hover .toggleSwitch[aria-checked="true"]::after {
       background: #e8e8e8;
     }
-    .fl-switch-input:focus-visible + .toggleSwitch {
+    .toggleSwitch:focus-visible {
       outline: 1px dotted currentColor; outline-offset: 2px;
     }
     html.light .toggleSwitch { background: #a3a3a3; }
     html.light .toggleSwitch::after { background: #262626; }
-    html.light .fl-switch-input:checked + .toggleSwitch { background: var(--lt-accent); }
-    html.light .fl-switch-input:checked + .toggleSwitch::after { background: #262626; }
+    html.light .toggleSwitch[aria-checked="true"] { background: var(--lt-accent); }
+    html.light .toggleSwitch[aria-checked="true"]::after { background: #262626; }
     @media (max-width: 720px) { #fl-tools-dock { width: min(260px, calc(100vw - 16px)); } }
     #fl-dock-actions {
       display: flex; gap: 6px; width: 100%; box-sizing: border-box; align-items: stretch;
@@ -868,10 +868,10 @@
       box.innerHTML = '<div class="fl-tool-header" id="fl-perf-header"><div class="fl-tool-title">Performance</div>' +
         '<button type="button" id="fl-perf-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
         '<div id="fl-perf-body" class="fl-tool-body fl-tool-hidden">' +
-        '<label><input id="fl-lightweight-mode" type="checkbox"> Lightweight scanning</label>' +
-        '<label><input id="fl-compact-launcher" type="checkbox"> Compact launcher</label>' +
-        '<label><input id="fl-pause-scanning" type="checkbox"> Pause scanning</label>' +
-        '<label><input id="fl-high-contrast" type="checkbox"> High contrast</label>' +
+        switchHtml("fl-lightweight-mode", "Lightweight scanning", false) +
+        switchHtml("fl-compact-launcher", "Compact launcher", false) +
+        switchHtml("fl-pause-scanning", "Pause scanning", false) +
+        switchHtml("fl-high-contrast", "High contrast", false) +
         '<label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label></div>';
       dock.appendChild(box);
       const p = flLoadPerf();
@@ -920,7 +920,6 @@
         #fl-rail-header .fl-brand-copy { flex:1; min-width:0; }
         #fl-perf-controls { order:20; }
         #fl-perf-controls label { display:flex; gap:8px; align-items:center; margin:7px 0; color:var(--lt-text-muted); }
-        #fl-perf-controls input { accent-color:var(--lt-accent); }
         #fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }
         html.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }
         html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }
@@ -949,12 +948,17 @@
         #fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:11px; color:var(--lt-text-muted); margin-top:3px; }
         #fl-tools-dock.fl-settings-rail .toggleSwitch { width:34px; height:20px; border-radius:20px; background:#626873; }
         #fl-tools-dock.fl-settings-rail .toggleSwitch::after { width:16px; height:16px; top:2px; left:2px; background:#fff; }
-        #fl-tools-dock.fl-settings-rail .fl-switch-input:checked + .toggleSwitch { background:var(--lt-accent); }
-        #fl-tools-dock.fl-settings-rail .fl-switch-input:checked + .toggleSwitch::after { transform:translateX(14px); }
+        #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked="true"] { background:var(--lt-accent); }
+        #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked="true"]::after { transform:translateX(14px); }
         #fl-tools-dock.fl-settings-rail :is(button,input,select,textarea):focus-visible { outline:2px solid var(--lt-accent); outline-offset:2px; }
         #fl-tools-dock.fl-settings-rail.lt-dock-compact { padding:12px!important; gap:6px!important; }
         #fl-tools-dock.fl-settings-rail.lt-dock-compact .fl-switch { padding:5px 0; }
         @media(prefers-reduced-motion:reduce) { #fl-tools-dock.fl-settings-rail * { transition:none!important; } }
+        @media(forced-colors:active) {
+          #fl-settings-launcher, #fl-tools-dock.fl-settings-rail, #fl-tools-dock.fl-settings-rail .fl-tool-panel { border:1px solid CanvasText!important; }
+          #fl-tools-dock.fl-settings-rail .toggleSwitch { border:1px solid ButtonText; background:ButtonFace; forced-color-adjust:auto; }
+          #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked="true"] { background:Highlight; }
+        }
       `;
       (document.head || document.documentElement).appendChild(style);
     }
@@ -1159,11 +1163,19 @@
 
   function syncSwitchAria(input) {
     if (!input || !input.classList || !input.classList.contains("fl-switch-input")) return;
+    if (typeof input.checked !== "boolean") input.checked = input.getAttribute("aria-checked") === "true";
     input.setAttribute("aria-checked", input.checked ? "true" : "false");
   }
   function setupSwitchAriaSync() {
     if (setupSwitchAriaSync.bound) return;
     setupSwitchAriaSync.bound = true;
+    document.addEventListener("click", (e) => {
+      const control = e.target && e.target.closest ? e.target.closest("button.fl-switch-input") : null;
+      if (!control) return;
+      control.checked = control.getAttribute("aria-checked") !== "true";
+      syncSwitchAria(control);
+      control.dispatchEvent(new Event("change", { bubbles: true }));
+    }, true);
     document.addEventListener("change", (e) => {
       if (e.target && e.target.classList && e.target.classList.contains("fl-switch-input")) syncSwitchAria(e.target);
     }, true);
@@ -1172,10 +1184,10 @@
   function switchHtml(id, label, on) {
     const descriptions = {"fl-nsfw-toggle":"Show unblurred media. Turn off for SFW browsing.","fl-blur-avatars":"Also blur profile pictures in SFW mode.","fl-blur-videos":"Also blur video previews in SFW mode.","fl-auto-scroll":"Load more results as you approach the end of the page.","fl-show-toasts":"Show brief feedback after actions.","fl-show-seen-chip":"Label profiles you have already visited.","fl-hide-banners":"Hide FL Tools informational banners."};
     if (descriptions[id]) label += '<small class="fl-rail-description">' + descriptions[id] + "</small>";
-    return '<label class="fl-switch"><span class="fl-switch-text">' + label +
-      '</span><input id="' + id + '" type="checkbox" class="fl-switch-input" role="switch"' +
-      (on ? " checked" : "") + ' aria-checked="' + (on ? "true" : "false") +
-      '"><span class="toggleSwitch" aria-hidden="true"></span></label>';
+    return '<div class="fl-switch"><span class="fl-switch-text" id="' + id + '-label">' + label +
+      '</span><button id="' + id + '" type="button" class="fl-switch-input toggleSwitch" role="switch"' +
+      ' aria-labelledby="' + id + '-label" aria-checked="' + (on ? "true" : "false") +
+      '"></button></div>';
   }
 
   /* UI strings (English). */
@@ -1808,7 +1820,7 @@
     const btn = document.getElementById("fl-load-more");
     if (btn && !btn.disabled) btn.textContent = t("loadNext", { n: currentBatchSize() });
   }
-  function checked(id) { const el = document.getElementById(id); return !!(el && el.checked); }
+  function checked(id) { const el = document.getElementById(id); return !!(el && (typeof el.checked === "boolean" ? el.checked : el.getAttribute("aria-checked") === "true")); }
 
   let isAutoLoading = false, currentNextPageUrl = null;
   const seenMemberIds = new Set();
@@ -2156,7 +2168,7 @@
     window.addEventListener("scroll", () => {
       if (isBlockedSettingsPage()) return;
       const enabled = document.getElementById("fl-auto-scroll")
-        ? document.getElementById("fl-auto-scroll").checked
+        ? checked("fl-auto-scroll")
         : !!loadFilterSettings().autoScroll;
       if (!enabled || isAutoLoading) return;
       const left = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight) - ((window.scrollY || 0) + window.innerHeight);
@@ -2476,7 +2488,8 @@
   function toggleNsfwMode() {
     const box = document.getElementById("fl-nsfw-toggle");
     if (box) {
-      box.checked = !box.checked;
+      box.checked = box.getAttribute("aria-checked") !== "true";
+      syncSwitchAria(box);
       box.dispatchEvent(new Event("change"));
       return;
     }
@@ -4175,6 +4188,7 @@
     }, Math.max(80, Math.min(1000, Number(flLoadPerf().scanDelay) || 120)));
   }
   function start() {
+    setupSwitchAriaSync();
     /* Page-world single-flight. Yield only for a live Pro instance. */
     try {
       if (flLiveProActive()) return;
