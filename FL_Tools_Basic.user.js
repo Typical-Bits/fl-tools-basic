@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.0
+// @version      1.2.1
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.0";
+  const FL_TOOLS_VERSION = "1.2.1";
   /* Shared handoff API for companion userscripts. Pro is always the primary edition. */
   const FL_TOOLS_HANDOFF = (() => {
     const root = window;
@@ -908,7 +908,7 @@
           max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;
           right:12px!important; left:auto!important; bottom:auto!important; transform:none!important;
           display:none!important; flex-direction:column!important; justify-content:flex-start!important;
-          gap:10px!important; padding:18px!important; background:var(--lt-bg)!important;
+          gap:6px!important; padding:12px!important; background:var(--lt-bg)!important;
           border:1px solid var(--lt-border)!important; border-radius:14px!important; box-shadow:0 18px 50px #0007;
           overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left;
           z-index:2147483000!important; }
@@ -919,7 +919,7 @@
         #fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }
         #fl-rail-header .fl-brand-copy { flex:1; min-width:0; }
         #fl-perf-controls { order:20; }
-        #fl-perf-controls label { display:flex; gap:8px; align-items:center; margin:7px 0; color:var(--lt-text-muted); }
+        #fl-perf-controls label { display:flex; gap:7px; align-items:center; margin:4px 0; color:var(--lt-text-muted); }
         #fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }
         html.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }
         html.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }
@@ -928,24 +928,24 @@
         html.fl-tools-reduced-motion *, html.fl-tools-reduced-motion *::before, html.fl-tools-reduced-motion *::after { animation-duration:0.001ms!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }
         html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }
         #fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }
-        #fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:4px; }
+        #fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:2px; }
         #fl-rail-close { background:transparent; color:var(--lt-text-muted); border:0; border-radius:8px;
           width:32px; height:32px; flex:none; cursor:pointer; font:22px/1 Arial,sans-serif; }
         #fl-rail-close:hover { background:var(--lt-bg-elev); color:var(--lt-text); }
-        #fl-rail-status { order:-2; padding:10px 11px; border:1px solid #e11d4838; border-radius:9px;
+        #fl-rail-status { order:-2; padding:7px 9px; border:1px solid #e11d4838; border-radius:8px;
           background:var(--lt-accent-soft); color:var(--lt-text); font-size:11px; line-height:1.5; }
         #fl-tools-dock.fl-settings-rail #fl-panel-search-wrap { order:-1; margin:0; }
-        #fl-tools-dock.fl-settings-rail #fl-panel-search { height:34px; border-radius:8px; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:10px; background:var(--lt-bg-elev); box-shadow:none; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:42px; padding:10px 13px; cursor:pointer; }
+        #fl-tools-dock.fl-settings-rail #fl-panel-search { height:30px; border-radius:7px; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:8px; background:var(--lt-bg-elev); box-shadow:none; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:36px; padding:6px 10px; cursor:pointer; }
         #fl-tools-dock.fl-settings-rail .fl-tool-title { font-size:12px; letter-spacing:0; white-space:normal; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:28px; min-height:28px; background:none; border:none; color:var(--lt-text-muted); cursor:pointer; font-size:13px; }
-        #fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 13px 12px; margin:0; max-height:none; overflow:visible; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:26px; min-height:26px; background:none; border:none; color:var(--lt-text-muted); cursor:pointer; font-size:13px; }
+        #fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 10px 8px; margin:0; max-height:none; overflow:visible; }
         #fl-tools-dock.fl-settings-rail .fl-tool-body.fl-tool-hidden { display:none !important; }
-        #fl-tools-dock.fl-settings-rail .fl-switch { padding:9px 0; margin:0; gap:12px; }
+        #fl-tools-dock.fl-settings-rail .fl-switch { padding:6px 0; margin:0; gap:10px; }
         #fl-tools-dock.fl-settings-rail .fl-switch + .fl-switch { border-top:1px solid var(--lt-border-soft); }
-        #fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:13px; line-height:1.35; }
-        #fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:11px; color:var(--lt-text-muted); margin-top:3px; }
+        #fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:12px; line-height:1.3; }
+        #fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:10px; color:var(--lt-text-muted); margin-top:2px; }
         #fl-tools-dock.fl-settings-rail .toggleSwitch { width:34px; height:20px; border-radius:20px; background:#626873; }
         #fl-tools-dock.fl-settings-rail .toggleSwitch::after { width:16px; height:16px; top:2px; left:2px; background:#fff; }
         #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked="true"] { background:var(--lt-accent); }
