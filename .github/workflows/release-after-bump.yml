@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - FL_Tools_Basic.user.js
+      - .github/workflows/release-after-bump.yml
   workflow_run:
     workflows: ["Bump release version"]
     types: [completed]
@@ -38,5 +39,8 @@ jobs:
         run: |
           set -euo pipefail
           tag="v$VERSION"
-          if gh release view "$tag" >/dev/null 2>&1; then exit 0; fi
-          gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release edit "$tag" --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
+          else
+            gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
+          fi
