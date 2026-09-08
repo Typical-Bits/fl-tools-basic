@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.6
+// @version      1.2.7
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.6 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.7 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,17 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.6";
+  const FL_TOOLS_VERSION = "1.2.7";
+  const FL_SETTINGS_SCHEMA = 1;
+  const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
+  function flNormaliseObject(defaults, value) {
+    const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
+    const clean = {};
+    Object.keys(defaults).forEach((key) => {
+      clean[key] = typeof source[key] === typeof defaults[key] ? source[key] : defaults[key];
+    });
+    return clean;
+  }
   /* Shared handoff API for companion userscripts. Pro is always the primary edition. */
   const FL_TOOLS_HANDOFF = (() => {
     const root = window;
@@ -50,7 +60,7 @@
     this.scans += 1; this.lastScanMs = performance.now() - start; this.durationMs += this.lastScanMs;
   }, snapshot() { return { scans: this.scans, skipped: this.skipped, durationMs: Math.round(this.durationMs), lastScanMs: Math.round(this.lastScanMs) }; } };
   function flLoadPerf() {
-    try { return Object.assign({}, FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
+    try { return flNormaliseObject(FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
     catch (_) { return Object.assign({}, FL_PERF_DEFAULTS); }
   }
   function flSavePerf(next) {
@@ -1417,8 +1427,17 @@
     return merged;
   }
   function saveFilterSettings(settings) {
-    try { localStorage.setItem(FILTER_KEY, JSON.stringify(settings)); } catch (_) {}
+    try { localStorage.setItem(FILTER_KEY, JSON.stringify(flNormaliseObject(FILTER_DEFAULTS, settings))); } catch (_) {}
   }
+  function migrateFlSettings() {
+    let schema = 0;
+    try { schema = Number(localStorage.getItem(FL_SETTINGS_SCHEMA_KEY) || 0); } catch (_) {}
+    if (schema >= FL_SETTINGS_SCHEMA) return;
+    saveFilterSettings(loadFilterSettings());
+    flSavePerf(flLoadPerf());
+    try { localStorage.setItem(FL_SETTINGS_SCHEMA_KEY, String(FL_SETTINGS_SCHEMA)); } catch (_) {}
+  }
+  migrateFlSettings();
 
   /* Parse "32 F switch • City" style lines. Orgs often have no age — skip age then. */
   const GENDER_TOKENS = { m:1, f:1, mtf:1, ftm:1, cd:1, tv:1, ts:1, is:1, b:1, gf:1, gq:1, nb:1, t:1, male:1, female:1, intersex:1, trans:1, "non-binary":1, nonbinary:1, agender:1, bigender:1, genderqueer:1, genderfluid:1 };

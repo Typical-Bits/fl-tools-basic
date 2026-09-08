@@ -13,7 +13,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.6](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.6)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.7](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.7)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
@@ -52,6 +52,7 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 - Keyboard shortcuts  
 - Org cards, infinite scroll, toasts  
 - Dock-styled confirm modal (no `window.confirm`)  
+- Automatic validation and migration of settings from older releases  
 
 **Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar.
 
