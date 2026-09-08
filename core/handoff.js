@@ -1,5 +1,5 @@
 /* FL Tools edition handoff. Hosted on Typical-Bits/fl-tools-basic.
-   Pro is primary while its heartbeat is fresh (<4s). */
+   Pro is primary while its heartbeat is fresh (<4s) AND UI exists. */
 (function (root) {
   var HEARTBEAT_MS = 1500;
   var FRESH_MS = 4000;
@@ -16,6 +16,7 @@
     var html = document.documentElement;
     var beat = Number((page && page.__FL_TOOLS_HEARTBEAT__) || (html && html.getAttribute("data-fl-tools-beat")) || 0);
     if (!beat || Date.now() - beat >= FRESH_MS) return false;
+    if (!document.getElementById("fl-tools-dock") && !document.getElementById("fl-settings-launcher")) return false;
     if (page && page.__FL_TOOLS_BOOTED__ === "pro") return true;
     if (page && page.__FL_TOOLS_CLAIM__ === "pro") return true;
     if (page && page.FLTools && page.FLTools.edition === "pro") return true;
