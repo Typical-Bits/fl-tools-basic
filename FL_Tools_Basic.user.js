@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.8
+// @version      1.2.9
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.8 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.9 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.8";
+  const FL_TOOLS_VERSION = "1.2.9";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   function flNormaliseObject(defaults, value) {
@@ -53,6 +53,12 @@
     root.dispatchEvent(new CustomEvent("fltools:ready", { detail: api }));
     return api;
   })();
+  const FL_LAUNCHER_PROTOCOL = "userscript-launcher-v1";
+  function flDeclareLauncher(node, controls, meta) {
+    node.dataset.userscriptLauncher = FL_LAUNCHER_PROTOCOL; node.dataset.launcherOwner = meta.owner; node.dataset.launcherId = meta.id; node.dataset.launcherPriority = String(meta.priority); node.dataset.launcherPreferredPosition = meta.preferredPosition;
+    let frame = 0; const publish = () => { frame = 0; const rects = controls().filter((el) => el && el.isConnected && el.getClientRects().length).map((el) => el.getBoundingClientRect()); if (!rects.length) return; const area = { left: Math.round(Math.min(...rects.map((r) => r.left))), top: Math.round(Math.min(...rects.map((r) => r.top))), right: Math.round(Math.max(...rects.map((r) => r.right))), bottom: Math.round(Math.max(...rects.map((r) => r.bottom))) }; node.dataset.launcherOccupiedArea = JSON.stringify(area); window.dispatchEvent(new CustomEvent("userscript-launcher:change", { detail: { protocol: FL_LAUNCHER_PROTOCOL, owner: meta.owner, id: meta.id, priority: meta.priority, preferredPosition: meta.preferredPosition, occupiedArea: area } })); };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(publish); }; if (typeof ResizeObserver !== "undefined") { const observer = new ResizeObserver(schedule); controls().filter(Boolean).forEach((el) => observer.observe(el)); } window.addEventListener("resize", schedule, { passive: true }); return { publish: schedule };
+  }
   const FL_PERF_KEY = "fl_perf_settings";
   const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, dockSide: "auto" };
   const FL_TELEMETRY = { scans: 0, skipped: 0, durationMs: 0, lastScanMs: 0, record(start, skipped = false) {
@@ -1008,6 +1014,8 @@
       launcher.setAttribute("aria-label", "Open FL Tools settings");
       launcher.innerHTML = FL_TOOLS_ICON_SVG;
       document.body.appendChild(launcher);
+      const launcherDeclaration = flDeclareLauncher(launcher, () => [launcher, dock], { owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom" });
+      launcherDeclaration.publish();
       let drag = null, didDrag = false;
       launcher.addEventListener("pointerdown", (event) => {
         if (event.button !== 0) return;

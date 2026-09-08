@@ -16,4 +16,8 @@ assert.match(source, /<button id=\"' \+ id \+ '\" type=\"button\" class=\"fl-swi
 assert.match(source, /aria-checked/, "switches expose accessible state");
 assert.match(source, /prefers-reduced-motion:reduce/, "reduced-motion preference is respected");
 assert.match(source, /fl-tools-high-contrast/, "high-contrast mode is available");
+assert.match(source, /userscript-launcher-v1/, "launcher coordination protocol is declared");
+assert.match(source, /owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom"/, "launcher identity and placement priority are explicit");
+assert.match(source, /launcherOccupiedArea/, "occupied launcher area is published");
+assert.match(source, /userscript-launcher:change/, "launcher changes are announced");
 console.log("UI contract OK");
