@@ -153,8 +153,6 @@
      kinksters grids often only have the rounded visual card + nickname link. */
   const NAME_LINK_SELECTOR = 'a[href^="/"][title]';
   const VISUAL_CARD_SELECTOR = ".w-full.rounded-sm.cursor-pointer";
-  const CARD_SELECTOR = "[data-member-card], " + VISUAL_CARD_SELECTOR;
-  const FOLLOWS_YOU_PATH = "M12 1v2H0v2h12v2l4-3zM4 9l-4 3 4 3v-2h12v-2H4z";
 
   /* Injected CSS: FetLife-matched dock tokens, SFW blur, compact, soft feed/card chips. */
   if (!document.getElementById("fl-tools-basic-style")) {
@@ -1476,7 +1474,6 @@
     if (id && new RegExp("/users/" + id + "/(friends|following|followers)(?:/|$)", "i").test(p)) return true;
     return false;
   }
-  function isFollowingThem(card) { return /following/i.test(relationLabel(card)) && !isFollowsYou(card); }
   function isFriend(card) {
     if (pageKind() === "friends" && isOwnRelationList()) return true;
     const btn = card.querySelector("turbo-frame[id^='relation_button'] button, turbo-frame[id^='relation_button'] span.inline-flex");
@@ -1488,8 +1485,6 @@
   }
   /* Media totals as shown on the card ("12 pics", "1 vid", "3 writings"). */
   function parsePicCount(card) { return parseCount(card, /(\d[\d,]*)\s*(?:pics?|photos?|pictures?)/i); }
-  function parseVidCount(card) { return parseCount(card, /(\d[\d,]*)\s*(?:vids?|videos?)/i); }
-  function parseWritingCount(card) { return parseCount(card, /(\d[\d,]*)\s*(?:writings?|posts?)/i); }
   function splitList(s) { return String(s || "").split(/[,;\n]+/).map((x) => x.trim().toLowerCase()).filter(Boolean); }
   function textHasTerm(text, term) {
     const raw = String(term || "").trim().toLowerCase();
@@ -1542,7 +1537,6 @@
     if (bits.length) return bits.join(" | ");
     return String(card.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
   }
-  let lastTextToastKey = "";
   /* Generic dock toast helper. */
   function showTextToast(msg, persist) {
     let toast = document.getElementById("fl-text-toast");
@@ -3564,36 +3558,6 @@
     if (el.closest) return el.closest("[data-story-uid]");
     return null;
   }
-
-
-  function storyAuthorNick(el) {
-    if (!el) return "";
-    const path = el.getAttribute("data-dwell-author-path") || "";
-    if (path) {
-      const m = path.match(/^\/([A-Za-z0-9_.-]+)/);
-      if (m) return m[1];
-    }
-    const art = el.matches && el.matches("article[data-story-uid]") ? el : el.querySelector && el.querySelector("article[data-story-uid]");
-    const node = art || el;
-    const ap = node.getAttribute && node.getAttribute("data-dwell-author-path");
-    if (ap) {
-      const m = ap.match(/^\/([A-Za-z0-9_.-]+)/);
-      if (m) return m[1];
-    }
-    const a = node.querySelector && node.querySelector('a[href^="/"][data-popover], a.link.text-base.font-bold[href^="/"]');
-    if (a) {
-      const m = ((a.getAttribute("href") || "").match(/^\/([A-Za-z0-9_.-]+)\/?$/));
-      if (m) return m[1];
-    }
-    return "";
-  }
-
-  function feedStoryHost(el) {
-    if (!el || el.nodeType !== 1) return null;
-    if (el.matches && el.matches("[data-story-uid]")) return el;
-    if (el.closest) return el.closest("[data-story-uid]");
-    return null;
-  }
   function isStatusFeedStory(host) {
     const kind = (host.getAttribute("data-dwell-content-type") || "").toLowerCase();
     if (kind === "status") return true;
@@ -3814,12 +3778,6 @@
     ensurePanelSearch();
     enhanceMemberCardActions();
     enhanceFeedStoryActions();
-  }
-  function cancelOutsideDockHide() {
-    if (outsideDockHideTimer) {
-      clearTimeout(outsideDockHideTimer);
-      outsideDockHideTimer = null;
-    }
   }
   function setupKeyboard() {
     if (setupKeyboard.bound) return;
