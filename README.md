@@ -13,7 +13,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.1.9](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.1.9)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.0)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
@@ -30,7 +30,7 @@ Download counts are **Release asset downloads** only (install from [Releases](ht
 
 ## Settings UI
 
-A red launcher button on the right opens the settings rail. Sections are collapsed (accordion). Click the launcher, press `F`, or use × / Esc / click-outside to close. Settings save automatically on this device.
+A compact red launcher button on the right opens the settings rail. Sections use an accordion layout, and every on/off setting is a keyboard-accessible toggle. Click the launcher, press `F`, or use × / Esc / click-outside to close. Settings save automatically on this device.
 
 ## Install
 
@@ -63,10 +63,8 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 
 See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) for downloadable versions and notes.
 
-## Release and performance controls
+## Performance and accessibility
 
-The settings panel includes theme-aware icon treatment, a compact launcher option, lightweight scanning, a configurable scan delay, and a pause switch with a visible status indicator. Preferences save locally. The status line can show local scan telemetry (scans / skipped).
+The settings panel includes theme-aware icon treatment, compact launcher mode, lightweight scanning, configurable scan delay, and a pause toggle with a visible status indicator. It respects reduced-motion preferences and includes a high-contrast mode. The status line can show local scan telemetry (scans / skipped).
 
-Maintainers can run **Actions → Bump release version** with a semantic version. The workflow updates the userscript header and README release link; publishing a GitHub Release validates both before uploading the matching asset.
-
-The dock now chooses a less crowded side of the viewport, supports double-clicking the panel to remember that side, and keeps labels within the viewport. Identity labels can be clicked to copy their name. Accessibility settings respect reduced-motion preferences and include a high-contrast switch.
+The dock recognizes other FL Tools editions, respects their position, chooses a less crowded side of the viewport, and can remember a preferred side. Labels remain within the viewport, and identity labels can be clicked to copy their name.

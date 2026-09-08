@@ -41,6 +41,11 @@ jobs:
 
           # Banner version comment should match @version.
           grep -q "FL_Tools Basic v${ver}" "$f"
+          grep -q "const FL_TOOLS_VERSION = \"${ver}\";" "$f"
+
+          # Settings use real switch buttons rather than hidden checkbox inputs.
+          ! grep -q 'type="checkbox"' "$f"
+          grep -q 'role="switch"' "$f"
 
           # No obvious embedded secrets / private tokens.
           if grep -nE 'ghp_[A-Za-z0-9]{20,}|gho_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|sk-[A-Za-z0-9]{20,}|BEGIN (RSA |OPENSSH )?PRIVATE KEY' "$f" LICENSE README.md; then
@@ -49,3 +54,6 @@ jobs:
           fi
 
           echo "sanity ok"
+
+      - name: UI contract
+        run: node tests/ui-contract.test.js

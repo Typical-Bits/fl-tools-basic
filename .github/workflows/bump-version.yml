@@ -29,6 +29,7 @@ jobs:
           text = script.read_text()
           text = re.sub(r'(^// @version\s+)\S+', r'\g<1>' + version, text, count=1, flags=re.M)
           text = re.sub(r'(FL_Tools Basic v)\S+', r'\g<1>' + version, text, count=1)
+          text = re.sub(r'(const FL_TOOLS_VERSION = ")[^"]+(";)', r'\g<1>' + version + r'\g<2>', text, count=1)
           script.write_text(text)
           readme = pathlib.Path("README.md")
           readme_text = readme.read_text()
