@@ -27,7 +27,7 @@ const assert = require('node:assert/strict');
     assert.equal(stored.perf.scanDelay, 120);
     await page.locator('#fl-diagnostics-panel').waitFor({ state:'attached' });
     await page.locator('#fl-diagnostics-header').evaluate((element) => element.click());
-    assert.match(await page.locator('#fl-diagnostics-output').textContent(), /FL Tools Basic 1\.2\.8[\s\S]*Scans:/);
+    assert.match(await page.locator('#fl-diagnostics-output').textContent(), /FL Tools Basic 1\.2\.9[\s\S]*Scans:/);
     await context.close();
     console.log('Basic settings migration OK');
   } finally { await browser.close(); }
