@@ -39,4 +39,4 @@ jobs:
           set -euo pipefail
           tag="v$VERSION"
           if gh release view "$tag" >/dev/null 2>&1; then exit 0; fi
-          gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Removes duplicate feed helpers and obsolete selector, parser, toast, and dock-dismissal code. Existing settings, filtering, accessibility, and companion-script behavior remain unchanged."
+          gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds versioned settings, automatic write-forward migration from legacy filter formats, and type validation that preserves valid preferences while replacing corrupt values safely. Migration, syntax, and UI-contract checks passed."
