@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.7
+// @version      1.2.8
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.7 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.8 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.7";
+  const FL_TOOLS_VERSION = "1.2.8";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   function flNormaliseObject(defaults, value) {
@@ -59,6 +59,14 @@
     if (skipped) { this.skipped += 1; return; }
     this.scans += 1; this.lastScanMs = performance.now() - start; this.durationMs += this.lastScanMs;
   }, snapshot() { return { scans: this.scans, skipped: this.skipped, durationMs: Math.round(this.durationMs), lastScanMs: Math.round(this.lastScanMs) }; } };
+  const FL_DIAGNOSTIC_ERRORS = [];
+  window.addEventListener("error", (event) => { if (/FL[_ ]?Tools/i.test(String(event.message || event.error?.stack || ""))) FL_DIAGNOSTIC_ERRORS.push(String(event.message || event.error)); });
+  function flDiagnosticsText() {
+    const telemetry = FL_TELEMETRY.snapshot();
+    const settings = typeof loadFilterSettings === "function" ? loadFilterSettings() : {};
+    const active = Object.values(settings).filter((value) => value === true).length;
+    return [`FL Tools Basic ${FL_TOOLS_VERSION}`, `Site: ${location.hostname}`, `Page: ${typeof pageKind === "function" ? pageKind() : location.pathname || "/"}`, `Active options: ${active}`, `Scans: ${telemetry.scans} · skipped ${telemetry.skipped} · last ${telemetry.lastScanMs}ms`, `Errors: ${FL_DIAGNOSTIC_ERRORS.length}${FL_DIAGNOSTIC_ERRORS.length ? " · " + FL_DIAGNOSTIC_ERRORS.at(-1) : ""}`].join("\n");
+  }
   function flLoadPerf() {
     try { return flNormaliseObject(FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
     catch (_) { return Object.assign({}, FL_PERF_DEFAULTS); }
@@ -831,7 +839,8 @@
       ["fl-site-panel", "fl-site-body", "fl-site-toggle"],
       ["fl-advanced-panel", "fl-advanced-body", "fl-advanced-toggle"],
       ["fl-block-panel", "fl-block-body", "fl-block-toggle"],
-      ["fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle"]
+      ["fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle"],
+      ["fl-diagnostics-panel", "fl-diagnostics-body", "fl-diagnostics-toggle"]
     ].forEach(([panelId, bodyId, toggleId]) => {
       if (exceptId === panelId) return;
       setPanelOpenState(bodyId, toggleId, false);
@@ -867,6 +876,7 @@
     bindPanelHeader("fl-advanced-header", "fl-advanced-body", "fl-advanced-toggle", "fl-advanced-panel");
     bindPanelHeader("fl-block-header", "fl-block-body", "fl-block-toggle", "fl-block-panel");
     bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
+    bindPanelHeader("fl-diagnostics-header", "fl-diagnostics-body", "fl-diagnostics-toggle", "fl-diagnostics-panel");
   }
   function ensureBasicSettingsPanel(dock) {
     flApplyPerf();
@@ -896,6 +906,13 @@
         if (chev) { chev.textContent = opening ? "▾" : "▸"; chev.setAttribute("aria-expanded", opening ? "true" : "false"); }
         if (opening) collapseOtherPanels("fl-perf-controls");
       });
+    }
+    if (!document.getElementById("fl-diagnostics-panel")) {
+      const diagnostics = document.createElement("div"); diagnostics.id="fl-diagnostics-panel";diagnostics.className="fl-tool-panel";
+      diagnostics.innerHTML='<div class="fl-tool-header" id="fl-diagnostics-header"><div class="fl-tool-title">About & diagnostics</div><button type="button" id="fl-diagnostics-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div><div id="fl-diagnostics-body" class="fl-tool-body fl-tool-hidden"><pre id="fl-diagnostics-output" style="white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.35 ui-monospace,monospace"></pre><button type="button" class="fl-btn" id="fl-copy-diagnostics">Copy diagnostics</button></div>';
+      dock.appendChild(diagnostics);
+      diagnostics.querySelector("#fl-diagnostics-header").addEventListener("click",()=>{diagnostics.querySelector("#fl-diagnostics-output").textContent=flDiagnosticsText();});
+      diagnostics.querySelector("#fl-copy-diagnostics").addEventListener("click",async(event)=>{event.stopPropagation();const text=flDiagnosticsText();try{await navigator.clipboard.writeText(text);flSetPerfStatus("Diagnostics copied");}catch(_){window.prompt("Copy diagnostics",text);}});
     }
     dock.classList.add("fl-settings-rail");
     dock.setAttribute("role", "region");
