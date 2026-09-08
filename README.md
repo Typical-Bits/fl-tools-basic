@@ -13,7 +13,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.1)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.3)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
