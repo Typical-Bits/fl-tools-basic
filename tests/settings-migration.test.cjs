@@ -27,7 +27,11 @@ const assert = require('node:assert/strict');
     assert.equal(stored.perf.scanDelay, 120);
     await page.locator('#fl-diagnostics-panel').waitFor({ state:'attached' });
     await page.locator('#fl-diagnostics-header').evaluate((element) => element.click());
-    assert.match(await page.locator('#fl-diagnostics-output').textContent(), /FL Tools Basic 1\.2\.9[\s\S]*Scans:/);
+    assert.match(await page.locator('#fl-diagnostics-output').textContent(), /FL Tools Basic 1\.2\.10[\s\S]*Scans:/);
+    const shortcut = page.locator('[data-fl-shortcut="filters"]');
+    await shortcut.evaluate((input) => { input.value='Alt+X'; input.dispatchEvent(new Event('change', { bubbles:true })); });
+    await page.keyboard.press('f'); assert.equal(await page.locator('#fl-tools-dock').evaluate((el) => el.classList.contains('fl-rail-open')), false);
+    await page.keyboard.press('Alt+x'); assert.equal(await page.locator('#fl-tools-dock').evaluate((el) => el.classList.contains('fl-rail-open')), true);
     await context.close();
     console.log('Basic settings migration OK');
   } finally { await browser.close(); }

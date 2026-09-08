@@ -20,4 +20,8 @@ assert.match(source, /userscript-launcher-v1/, "launcher coordination protocol i
 assert.match(source, /owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom"/, "launcher identity and placement priority are explicit");
 assert.match(source, /launcherOccupiedArea/, "occupied launcher area is published");
 assert.match(source, /userscript-launcher:change/, "launcher changes are announced");
+assert.match(source, /FL_SHORTCUT_DEFAULTS = \{ filters:"F", nsfw:"S", next:"N", top:"T" \}/, "keyboard defaults remain compatible");
+assert.match(source, /data-fl-shortcut/, "shortcuts can be edited or disabled");
+assert.match(source, /Shortcut collision detected/, "shortcut collisions are reported");
+assert.match(source, /launcherShortcutCollision/, "live companion collisions are published");
 console.log("UI contract OK");

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.9
+// @version      1.2.10
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.9 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.10 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.9";
+  const FL_TOOLS_VERSION = "1.2.10";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   function flNormaliseObject(defaults, value) {
@@ -54,10 +54,18 @@
     return api;
   })();
   const FL_LAUNCHER_PROTOCOL = "userscript-launcher-v1";
+  const FL_SHORTCUTS_KEY = "fl_tools_basic_shortcuts";
+  const FL_SHORTCUT_DEFAULTS = { filters:"F", nsfw:"S", next:"N", top:"T" };
+  function flNormaliseShortcut(value) { if (typeof value !== "string") return ""; const raw=value.trim(); if (!raw || /^off$/i.test(raw)) return ""; const parts=raw.split("+").map((v)=>v.trim()).filter(Boolean), key=parts.pop(); if(!key)return ""; const mods=["Ctrl","Alt","Shift","Meta"].filter((mod)=>parts.some((v)=>v.toLowerCase()===mod.toLowerCase())); return [...mods,key.length===1?key.toUpperCase():key].join("+"); }
+  function flLoadShortcuts() { try { const saved=JSON.parse(localStorage.getItem(FL_SHORTCUTS_KEY)||"{}"); return Object.fromEntries(Object.entries(FL_SHORTCUT_DEFAULTS).map(([key,value])=>[key,flNormaliseShortcut(saved[key]===undefined?value:saved[key])])); } catch (_) { return {...FL_SHORTCUT_DEFAULTS}; } }
+  function flSaveShortcut(action,value) { const shortcuts=flLoadShortcuts(); shortcuts[action]=flNormaliseShortcut(value); try{localStorage.setItem(FL_SHORTCUTS_KEY,JSON.stringify(shortcuts));}catch(_){} flPublishShortcutMetadata(); return shortcuts[action]; }
+  function flEventShortcut(event) { return [...(event.ctrlKey?["Ctrl"]:[]),...(event.altKey?["Alt"]:[]),...(event.shiftKey?["Shift"]:[]),...(event.metaKey?["Meta"]:[]),event.key.length===1?event.key.toUpperCase():event.key].join("+"); }
+  function flShortcutMatch(event,action) { const shortcut=flLoadShortcuts()[action]; return !!shortcut&&flEventShortcut(event)===shortcut; }
+  function flPublishShortcutMetadata(){const launcher=document.getElementById("fl-settings-launcher");if(launcher)launcher.dataset.launcherShortcuts=JSON.stringify(Object.values(flLoadShortcuts()).filter(Boolean));}
   function flDeclareLauncher(node, controls, meta) {
     node.dataset.userscriptLauncher = FL_LAUNCHER_PROTOCOL; node.dataset.launcherOwner = meta.owner; node.dataset.launcherId = meta.id; node.dataset.launcherPriority = String(meta.priority); node.dataset.launcherPreferredPosition = meta.preferredPosition;
     let frame = 0; const publish = () => { frame = 0; const rects = controls().filter((el) => el && el.isConnected && el.getClientRects().length).map((el) => el.getBoundingClientRect()); if (!rects.length) return; const area = { left: Math.round(Math.min(...rects.map((r) => r.left))), top: Math.round(Math.min(...rects.map((r) => r.top))), right: Math.round(Math.max(...rects.map((r) => r.right))), bottom: Math.round(Math.max(...rects.map((r) => r.bottom))) }; node.dataset.launcherOccupiedArea = JSON.stringify(area); window.dispatchEvent(new CustomEvent("userscript-launcher:change", { detail: { protocol: FL_LAUNCHER_PROTOCOL, owner: meta.owner, id: meta.id, priority: meta.priority, preferredPosition: meta.preferredPosition, occupiedArea: area } })); };
-    const schedule = () => { if (!frame) frame = requestAnimationFrame(publish); }; if (typeof ResizeObserver !== "undefined") { const observer = new ResizeObserver(schedule); controls().filter(Boolean).forEach((el) => observer.observe(el)); } window.addEventListener("resize", schedule, { passive: true }); return { publish: schedule };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(publish); }; if (typeof ResizeObserver !== "undefined") { const observer = new ResizeObserver(schedule); controls().filter(Boolean).forEach((el) => observer.observe(el)); } window.addEventListener("resize", schedule, { passive: true }); const checkCollision=()=>{let own=[];try{own=JSON.parse(node.dataset.launcherShortcuts||"[]");}catch(_){}const collision=[...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el===node)return false;try{return JSON.parse(el.dataset.launcherShortcuts||"[]").some((value)=>own.includes(value));}catch(_){return false;}});node.dataset.launcherShortcutCollision=String(collision);};window.addEventListener("userscript-launcher:change",checkCollision);queueMicrotask(checkCollision);return { publish: schedule };
   }
   const FL_PERF_KEY = "fl_perf_settings";
   const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, dockSide: "auto" };
@@ -1015,7 +1023,7 @@
       launcher.innerHTML = FL_TOOLS_ICON_SVG;
       document.body.appendChild(launcher);
       const launcherDeclaration = flDeclareLauncher(launcher, () => [launcher, dock], { owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom" });
-      launcherDeclaration.publish();
+      flPublishShortcutMetadata();launcherDeclaration.publish();
       let drag = null, didDrag = false;
       launcher.addEventListener("pointerdown", (event) => {
         if (event.button !== 0) return;
@@ -3829,7 +3837,7 @@
     document.addEventListener("keydown", (e) => {
       const tag = (e.target && e.target.tagName) || "";
       if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.target.isContentEditable) return;
-      if (e.key === "f" || e.key === "F") {
+      if (flShortcutMatch(e,"filters")) {
         e.preventDefault();
         setSettingsRailOpen(true, false);
         const body = document.getElementById("fl-panel-body");
@@ -3837,10 +3845,10 @@
           setPanelOpenState("fl-panel-body", "fl-panel-toggle", true);
           collapseOtherPanels("fl-filter-panel");
         }
-      } else if (e.key === "s" || e.key === "S") {
+      } else if (flShortcutMatch(e,"nsfw")) {
         e.preventDefault(); toggleNsfwMode();
-      } else if (e.key === "n" || e.key === "N") jumpNextUnread();
-      else if (e.key === "t" || e.key === "T") {
+      } else if (flShortcutMatch(e,"next")) jumpNextUnread();
+      else if (flShortcutMatch(e,"top")) {
         e.preventDefault(); window.scrollTo({ top:0, behavior:"smooth" });
       }
     });
@@ -4076,6 +4084,7 @@
       '<div class="flhp-legend-row"><strong>N</strong> — next unread</div>' +
       '<div class="flhp-legend-row"><strong>T</strong> — jump to top</div>' +
       "</div>";
+    const editorHtml='<div class="fl-shortcut-editor">'+Object.entries({filters:"Filters panel",nsfw:"NSFW / SFW",next:"Next unread",top:"Jump to top"}).map(([key,label])=>'<label class="flhp-legend-row">'+label+'<input type="text" data-fl-shortcut="'+key+'" aria-label="'+label+' shortcut" placeholder="Off"></label>').join('')+'<div id="fl-shortcut-status" class="flhp-legend"></div></div>';
     if (!box) {
       box = document.createElement("div");
       box.id = "fl-shortcuts-panel";
@@ -4083,12 +4092,13 @@
       box.innerHTML =
         '<div class="fl-tool-header" id="fl-shortcuts-header"><div class="fl-tool-title">' + t("shortcuts") +
         '</div><button type="button" id="fl-shortcuts-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
-        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + "</div>";
+        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + editorHtml + "</div>";
       ensureDock().appendChild(box);
       bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
     } else {
       bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
     }
+    const shortcuts=flLoadShortcuts();box.querySelectorAll('[data-fl-shortcut]').forEach((input)=>{input.value=shortcuts[input.dataset.flShortcut]||'';if(input.dataset.bound)return;input.dataset.bound='1';input.addEventListener('change',()=>{input.value=flSaveShortcut(input.dataset.flShortcut,input.value);const values=Object.values(flLoadShortcuts()).filter(Boolean),external=[...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el.id==='fl-settings-launcher')return false;try{return JSON.parse(el.dataset.launcherShortcuts||'[]').includes(input.value);}catch{return false;}}),duplicate=new Set(values).size!==values.length;const status=document.getElementById('fl-shortcut-status');if(status)status.textContent=external||duplicate?'Shortcut collision detected.':'Shortcuts saved.';});});
   }
 
   function isCommentRelatedNode(node) {
