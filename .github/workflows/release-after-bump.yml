@@ -39,4 +39,4 @@ jobs:
           set -euo pipefail
           tag="v$VERSION"
           if gh release view "$tag" >/dev/null 2>&1; then exit 0; fi
-          gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Polished settings interface with accessible switch controls, improved contrast and reduced-motion handling, and automated UI contract validation."
+          gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Slimmer settings panel and submenus with tighter section headers, rows, search, status, and performance controls while preserving accessible switch and keyboard behavior."
