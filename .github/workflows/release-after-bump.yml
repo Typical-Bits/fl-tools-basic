@@ -36,11 +36,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.version.outputs.version }}
+          NOTES: "Shared dock CSS and edition handoff are the source of truth (assets/ + core/), inlined into the standalone userscript. Basic yields only while Pro's heartbeat is fresh (<4s) and Pro UI is present. This release also attaches handoff.js, css-core.js, css-pro.js, fl-tools-core.css, and fl-tools-pro.css for Pro to vendor or @require a tagged URL (never latest). DOM scan, yield, migration, syntax, and UI-contract checks passed."
         run: |
           set -euo pipefail
           tag="v$VERSION"
           if gh release view "$tag" >/dev/null 2>&1; then
-              gh release edit "$tag" --title "FL_Tools Basic v$VERSION" --notes "Adds configurable shortcuts for every keyboard action, including Off, editable-field protection, persistence, and internal or companion collision warnings. Runtime, migration, rebinding, syntax, and UI-contract checks passed."
+              gh release edit "$tag" --title "FL_Tools Basic v$VERSION" --notes "$NOTES"
           else
-              gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "Adds configurable shortcuts for every keyboard action, including Off, editable-field protection, persistence, and internal or companion collision warnings. Runtime, migration, rebinding, syntax, and UI-contract checks passed."
+              gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "$NOTES"
           fi
