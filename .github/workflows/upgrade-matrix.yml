@@ -1,0 +1,16 @@
+name: Upgrade matrix
+
+on: [push, pull_request]
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "24"
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/settings-migration.test.cjs
+      - run: node tests/upgrade-matrix.cjs

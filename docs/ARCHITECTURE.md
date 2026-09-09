@@ -1,6 +1,6 @@
 # FL Tools architecture
 
-Typical-Bits only. Do not publish these files to ExtraPotions.
+Typical-Bits only. Keep these files within this organization.
 
 ## Editions
 
