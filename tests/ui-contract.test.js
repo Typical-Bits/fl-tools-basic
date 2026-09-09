@@ -28,6 +28,10 @@ assert.match(source, /launcherShortcutCollision/, "live companion collisions are
 assert.match(source, /BEGIN generated:handoff/, "handoff is synced from core/handoff.js");
 assert.match(source, /BEGIN generated:css-core/, "dock CSS is synced from assets/fl-tools-core.css");
 assert.match(source, /FLToolsCore/, "shared handoff API is published");
+assert.match(source, /fl-tools-capabilities-v1/, "edition publishes the capability protocol");
+assert.match(source, /edition: FL_EDITION/, "capability announcement identifies its edition");
+assert.match(source, /fl-tools-studio-primary #fl-settings-launcher/, "launcher yields to live Studio");
+assert.doesNotMatch(source, /"pro\.[a-z-]+"/, "Basic does not announce Pro capabilities");
 assert.match(source, /fl-tools-core-style/, "shared core stylesheet id is used");
 assert.doesNotMatch(source, /^\/\/ @require\b.*releases\/latest\//m, "Basic does not @require /releases/latest/");
 assert.match(fs.readFileSync("assets/fl-tools-core.css", "utf8"), /--lt-accent:\s*#e11d48/, "core CSS tokens live in the asset");

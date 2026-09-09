@@ -27,6 +27,33 @@
   const FL_TOOLS_VERSION = "1.6.0";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
+  const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
+  const FL_CAPABILITIES = Object.freeze([
+    "basic.filters", "basic.infinite-scroll", "basic.nsfw-mode",
+    "basic.organisation-cards", "basic.seen", "basic.shortcuts",
+    "basic.soft-block", "basic.toasts"
+  ]);
+  function flStudioLive() {
+    const beat = Number(document.documentElement.getAttribute("data-fl-tools-studio-beat") || 0);
+    return document.documentElement.getAttribute("data-fl-tools-studio") === "live" && Date.now() - beat < 4000;
+  }
+  function flPublishCapabilities(live = true) {
+    window.dispatchEvent(new CustomEvent("fltools:capabilities-changed", { detail: {
+      protocol: FL_CAPABILITY_PROTOCOL, edition: FL_EDITION, version: FL_TOOLS_VERSION,
+      capabilities: FL_CAPABILITIES, live
+    } }));
+  }
+  function flSyncStudioYield() {
+    document.documentElement.classList.toggle("fl-tools-studio-primary", flStudioLive());
+  }
+  window.addEventListener("fltools:capabilities-requested", () => flPublishCapabilities(true));
+  window.addEventListener("fltools:studio-heartbeat", flSyncStudioYield);
+  window.addEventListener("pagehide", () => flPublishCapabilities(false));
+  flPublishCapabilities(true);
+  setInterval(() => { flPublishCapabilities(true); flSyncStudioYield(); }, 1500);
+  const flStudioYieldStyle = document.createElement("style");
+  flStudioYieldStyle.textContent = "html.fl-tools-studio-primary #fl-settings-launcher{display:none!important}";
+  (document.documentElement || document.head).appendChild(flStudioYieldStyle);
   function flNormaliseObject(defaults, value) {
     const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
     const clean = {};
