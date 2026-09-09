@@ -1,30 +1,18 @@
-# Basic vs Pro
+# FL Tools editions
 
-Public FetLife userscript dock. **Basic** is this public repo. **Pro** is a separate private distribution (`Typical-Bits/fl-tools-pro-dist`) that includes the Basic surface plus extra tools. Pricing and purchase flow are not documented here.
+**Basic** is the public edition. **Pro** is a private distribution containing the Basic feature set plus additional tools. **Studio** is a separate private workspace and coordination layer.
 
-Both editions may be installed at once. Pro is primary while it is *live* (fresh heartbeat). See [architecture](ARCHITECTURE.md) for the handoff contract.
+Any combination may be installed. Studio takes the launcher when present; otherwise Pro remains primary over Basic. Capabilities remain owned by their installed edition—Studio does not unlock Pro.
 
-| Capability | Basic | Pro |
-|------------|:-----:|:---:|
-| Filters (age, gender, role, limits, city, relationship) | yes | yes |
-| Soft-block | yes | yes |
-| NSFW / SFW display modes | yes | yes |
-| Seen chip | yes | yes |
-| Keyboard shortcuts (rebind / off) | yes | yes |
-| Org cards, infinite scroll, toasts | yes | yes |
-| Dock-styled confirm modal | yes | yes |
-| Settings migration + diagnostics | yes | yes |
-| Dual-install yield to the other edition | yields to live Pro | primary while live |
-| Highlighter | — | yes |
-| Whitelist | — | yes |
-| Feed mutes | — | yes |
-| Snooze | — | yes |
-| Notes | — | yes |
-| Visit log | — | yes |
-| Import / export | — | yes |
-| Pride-flag colors | — | yes |
-| Dock hide chip | — | yes |
-| Limit-hit sound | — | yes |
-| QA bar | — | yes |
+| Capability | Basic | Pro | Studio |
+|------------|:-----:|:---:|:------:|
+| Filters, soft-block, display modes and Seen chip | yes | yes | with Basic or Pro |
+| Shortcuts, org cards, infinite scroll and toasts | yes | yes | with Basic or Pro |
+| Highlighter, whitelist, mutes and snooze | — | yes | with Pro only |
+| Notes, visit log and import/export | — | yes | with Pro only |
+| Pride colours, dock controls, sound and QA | — | yes | with Pro only |
+| Unified launcher and capability inventory | — | — | yes |
+| Local workspaces | — | — | yes |
+| Visual rule builder, audit history and command palette | — | — | planned |
 
-Shared storage uses `localStorage` keys prefixed `fl_`. Shared CSS/handoff files live on Basic (`assets/`, `core/`) so Pro can vendor them or `@require` a **tagged** Basic release asset — never `latest`.
+Settings remain local. Disabling Studio restores Pro or Basic after its short liveness timeout.
