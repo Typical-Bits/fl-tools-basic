@@ -49,4 +49,7 @@ jobs:
             core/css-pro.js \
             assets/fl-tools-core.css \
             assets/fl-tools-pro.css \
+            assets/fl-tools-launcher-icon.svg \
+            assets/fl-tools-launcher-icon-64.png \
+            assets/fl-tools-launcher-icon-128.png \
             --clobber
