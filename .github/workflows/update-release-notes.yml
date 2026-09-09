@@ -21,7 +21,7 @@ jobs:
       - name: Update release notes
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.tag }}
+          TAG: ${{ inputs.tag || 'v1.2.12' }}
         run: >-
           gh release edit "$TAG"
           --repo "$GITHUB_REPOSITORY"
