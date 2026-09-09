@@ -1,4 +1,5 @@
 /* FL Tools edition handoff. Hosted on Typical-Bits/fl-tools-basic.
+   Source of truth — edit here, then run: node scripts/sync-core.mjs
    Pro is primary while its heartbeat is fresh (<4s) AND UI exists. */
 (function (root) {
   var HEARTBEAT_MS = 1500;

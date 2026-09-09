@@ -24,6 +24,12 @@ jobs:
           grep -q "FL_Tools Basic v$ver" FL_Tools_Basic.user.js
           grep -q "releases/tag/$RELEASE_TAG" README.md
           test -f assets/fl-tools-launcher-icon.svg
+          test -f assets/fl-tools-core.css
+          test -f assets/fl-tools-pro.css
+          test -f core/handoff.js
+          test -f core/css-core.js
+          test -f core/css-pro.js
+          node scripts/sync-core.mjs --check
       - name: Validate generated userscript syntax
         run: |
           set -euo pipefail
@@ -35,4 +41,12 @@ jobs:
       - name: Upload release asset
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "${{ github.event.release.tag_name }}" FL_Tools_Basic.user.js --clobber
+        run: |
+          gh release upload "${{ github.event.release.tag_name }}" \
+            FL_Tools_Basic.user.js \
+            core/handoff.js \
+            core/css-core.js \
+            core/css-pro.js \
+            assets/fl-tools-core.css \
+            assets/fl-tools-pro.css \
+            --clobber

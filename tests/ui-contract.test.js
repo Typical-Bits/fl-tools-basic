@@ -20,8 +20,17 @@ assert.match(source, /userscript-launcher-v1/, "launcher coordination protocol i
 assert.match(source, /owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom"/, "launcher identity and placement priority are explicit");
 assert.match(source, /launcherOccupiedArea/, "occupied launcher area is published");
 assert.match(source, /userscript-launcher:change/, "launcher changes are announced");
+assert.match(source, /const VISUAL_CARD_SELECTOR = "\.w-full\.rounded-sm\.cursor-pointer"/, "member-card visual selector is defined");
 assert.match(source, /FL_SHORTCUT_DEFAULTS = \{ filters:"F", nsfw:"S", next:"N", top:"T" \}/, "keyboard defaults remain compatible");
 assert.match(source, /data-fl-shortcut/, "shortcuts can be edited or disabled");
 assert.match(source, /Shortcut collision detected/, "shortcut collisions are reported");
 assert.match(source, /launcherShortcutCollision/, "live companion collisions are published");
+assert.match(source, /BEGIN generated:handoff/, "handoff is synced from core/handoff.js");
+assert.match(source, /BEGIN generated:css-core/, "dock CSS is synced from assets/fl-tools-core.css");
+assert.match(source, /FLToolsCore/, "shared handoff API is published");
+assert.match(source, /fl-tools-core-style/, "shared core stylesheet id is used");
+assert.doesNotMatch(source, /^\/\/ @require\b.*releases\/latest\//m, "Basic does not @require /releases/latest/");
+assert.match(fs.readFileSync("assets/fl-tools-core.css", "utf8"), /--lt-accent:\s*#e11d48/, "core CSS tokens live in the asset");
+assert.match(fs.readFileSync("assets/fl-tools-pro.css", "utf8"), /html\.fl-tools-dock-hidden/, "Pro-only chrome is separable");
+assert.match(fs.readFileSync("core/handoff.js", "utf8"), /var FRESH_MS = 4000/, "handoff freshness window is explicit");
 console.log("UI contract OK");
