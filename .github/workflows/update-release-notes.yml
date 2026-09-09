@@ -1,0 +1,25 @@
+name: Update release notes
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag
+        required: true
+        default: v1.2.12
+
+permissions:
+  contents: write
+
+jobs:
+  notes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update release notes
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: >-
+          gh release edit "$TAG"
+          --repo "$GITHUB_REPOSITORY"
+          --notes "Adds optional quiet update notifications. Checks are disabled by default, read release metadata only, cache results for 24 hours, compare semantic versions, never fetch executable code, and fail silently when GitHub is unavailable. Browser, syntax, migration, accessibility, and launcher-coordination checks passed."
