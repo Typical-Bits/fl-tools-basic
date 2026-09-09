@@ -1,6 +1,9 @@
 name: Update release notes
 
 on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/update-release-notes.yml]
   workflow_dispatch:
     inputs:
       tag:
