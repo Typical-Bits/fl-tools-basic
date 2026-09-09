@@ -1,6 +1,6 @@
 # FL Tools architecture
 
-Typical-Bits project only.
+Typical-Bits only. Keep these files within this organization.
 
 ## Editions
 
