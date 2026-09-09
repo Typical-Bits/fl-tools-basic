@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      1.2.11
+// @version      1.2.12
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v1.2.11 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v1.2.12 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,7 +24,7 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "1.2.11";
+  const FL_TOOLS_VERSION = "1.2.12";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   function flNormaliseObject(defaults, value) {
@@ -69,7 +69,9 @@
     const schedule = () => { if (!frame) frame = requestAnimationFrame(publish); }; if (typeof ResizeObserver !== "undefined") { const observer = new ResizeObserver(schedule); controls().filter(Boolean).forEach((el) => observer.observe(el)); } window.addEventListener("resize", schedule, { passive: true }); const checkCollision=()=>{let own=[];try{own=JSON.parse(node.dataset.launcherShortcuts||"[]");}catch(_){}const collision=[...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el===node)return false;try{return JSON.parse(el.dataset.launcherShortcuts||"[]").some((value)=>own.includes(value));}catch(_){return false;}});node.dataset.launcherShortcutCollision=String(collision);};window.addEventListener("userscript-launcher:change",checkCollision);queueMicrotask(checkCollision);return { publish: schedule };
   }
   const FL_PERF_KEY = "fl_perf_settings";
-  const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, dockSide: "auto" };
+  const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, updateNotifications:false, dockSide: "auto" };
+  function flIsNewerVersion(latest,current){const a=String(latest).split(".").map(Number),b=String(current).split(".").map(Number);if(a.some(Number.isNaN)||b.some(Number.isNaN))return false;for(let i=0;i<Math.max(a.length,b.length);i++){const difference=(a[i]||0)-(b[i]||0);if(difference)return difference>0;}return false;}
+  async function flCheckForUpdate(){const p=flLoadPerf(),launcher=document.getElementById("fl-settings-launcher");if(!p.updateNotifications){launcher?.removeAttribute("data-update-available");return;}const key="fl_tools_basic_update_check";try{const cached=JSON.parse(localStorage.getItem(key)||"null");if(cached&&Date.now()-cached.checked<86400000)return flShowUpdate(cached.latest);const response=await fetch("https://api.github.com/repos/Typical-Bits/fl-tools-basic/releases/latest",{headers:{Accept:"application/vnd.github+json"}});if(!response.ok)return;const data=await response.json(),latest=String(data.tag_name||"").replace(/^v/,"");localStorage.setItem(key,JSON.stringify({checked:Date.now(),latest}));flShowUpdate(latest);}catch(_){ }function flShowUpdate(latest){launcher?.removeAttribute("data-update-available");if(!flIsNewerVersion(latest,FL_TOOLS_VERSION))return;launcher?.setAttribute("data-update-available",latest);flSetPerfStatus("Update available: "+latest);}}
   const FL_TELEMETRY = { scans: 0, skipped: 0, durationMs: 0, lastScanMs: 0, record(start, skipped = false) {
     if (skipped) { this.skipped += 1; return; }
     this.scans += 1; this.lastScanMs = performance.now() - start; this.durationMs += this.lastScanMs;
@@ -98,6 +100,7 @@
     document.documentElement.classList.toggle("fl-tools-lightweight", !!p.lightweight);
     document.documentElement.classList.toggle("fl-tools-launcher-compact", !!p.compactLauncher);
     flApplyAccessibility(); flSmartDockPlacement();
+    flCheckForUpdate();
     flSetPerfStatus(p.paused ? "Scanning paused · changes save automatically" : (p.lightweight ? "Lightweight scanning is on · changes save automatically" : "Standard scanning · changes save automatically"));
   }
   function flSmartDockPlacement() {
@@ -901,16 +904,16 @@
       box.innerHTML = '<div class="fl-tool-header" id="fl-perf-header"><div class="fl-tool-title">Performance</div>' +
         '<button type="button" id="fl-perf-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
         '<div id="fl-perf-body" class="fl-tool-body fl-tool-hidden">' +
-        switchHtml("fl-lightweight-mode", "Lightweight scanning", false) +
+        switchHtml("fl-lightweight-mode", "Lightweight scanning", false) + switchHtml("fl-update-notifications", "Quiet update notifications", false) +
         switchHtml("fl-compact-launcher", "Compact launcher", false) +
         switchHtml("fl-pause-scanning", "Pause scanning", false) +
         switchHtml("fl-high-contrast", "High contrast", false) +
         '<label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label></div>';
       dock.appendChild(box);
       const p = flLoadPerf();
-      const light = box.querySelector("#fl-lightweight-mode"); const compact = box.querySelector("#fl-compact-launcher"); const paused = box.querySelector("#fl-pause-scanning"); const contrast = box.querySelector("#fl-high-contrast"); const delay = box.querySelector("#fl-scan-delay");
-      light.checked=!!p.lightweight; compact.checked=!!p.compactLauncher; paused.checked=!!p.paused; contrast.checked=!!p.highContrast; delay.value=String(p.scanDelay);
-      const save=()=>{flSavePerf({lightweight:light.checked,compactLauncher:compact.checked,paused:paused.checked,highContrast:contrast.checked,scanDelay:Number(delay.value)||120,dockSide:flLoadPerf().dockSide}); flApplyPerf();};
+      const light = box.querySelector("#fl-lightweight-mode"); const updates=box.querySelector("#fl-update-notifications"); const compact = box.querySelector("#fl-compact-launcher"); const paused = box.querySelector("#fl-pause-scanning"); const contrast = box.querySelector("#fl-high-contrast"); const delay = box.querySelector("#fl-scan-delay");
+      light.checked=!!p.lightweight; updates.checked=!!p.updateNotifications; compact.checked=!!p.compactLauncher; paused.checked=!!p.paused; contrast.checked=!!p.highContrast; delay.value=String(p.scanDelay);
+      const save=()=>{flSavePerf({lightweight:light.checked,updateNotifications:updates.checked,compactLauncher:compact.checked,paused:paused.checked,highContrast:contrast.checked,scanDelay:Number(delay.value)||120,dockSide:flLoadPerf().dockSide}); flApplyPerf();};
       light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save); contrast.addEventListener("change",save);
       box.querySelector("#fl-perf-header").addEventListener("click", (e) => {
         if (e.target.closest("input, select, label")) return;
