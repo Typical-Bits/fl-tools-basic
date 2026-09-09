@@ -43,7 +43,7 @@ Pro remains standalone so a private install still works offline. After a version
 
 1. **Vendor** — copy `core/handoff.js`, `core/css-core.js` (and optionally `core/css-pro.js`) into the private repo, or run the same wrap from `assets/*.css`, or
 2. **`@require` a tagged Basic asset** (never `latest`), e.g.  
-   `https://github.com/Typical-Bits/fl-tools-basic/releases/download/v1.2.14/handoff.js`  
+   `https://github.com/Typical-Bits/fl-tools-basic/releases/download/v1.5.0/handoff.js`
    Pin the tag that matches the shipped Basic CSS/handoff contract. Tagged releases attach `handoff.js`, `css-core.js`, `css-pro.js`, `fl-tools-core.css`, and `fl-tools-pro.css` alongside the userscript.
 
 ## Releases

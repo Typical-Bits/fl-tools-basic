@@ -13,7 +13,7 @@
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.2.14](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.2.14)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v1.5.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v1.5.0)
 
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
@@ -60,10 +60,6 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 - Every keyboard action can be rebound or disabled, with internal and companion-script collision warnings
 
 **Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar. Full comparison: [edition matrix](docs/EDITION-MATRIX.md).
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for how to edit shared CSS/handoff (`assets/`, `core/`) and keep `FL_Tools_Basic.user.js` in sync. Architecture notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## License
 
