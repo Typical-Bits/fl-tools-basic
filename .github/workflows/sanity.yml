@@ -55,5 +55,8 @@ jobs:
 
           echo "sanity ok"
 
+      - name: Core CSS/handoff stay in sync
+        run: node scripts/sync-core.mjs --check
+
       - name: UI contract
         run: node tests/ui-contract.test.js

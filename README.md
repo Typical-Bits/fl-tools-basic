@@ -26,6 +26,8 @@
 | Storage | `localStorage` only (`@grant none`) |
 | Dual-install | Yields only if **FL_Tools Pro is live** on this page. Disable Pro and reload to use Basic. |
 
+**Basic vs Pro:** see the [edition matrix](docs/EDITION-MATRIX.md) (Basic is public; Pro is a private distribution with extra tools).
+
 Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
 
 ## Settings UI
@@ -57,7 +59,11 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 - A neutral launcher coordination protocol publishes ownership, priority, preferred placement and occupied space
 - Every keyboard action can be rebound or disabled, with internal and companion-script collision warnings
 
-**Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar.
+**Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar. Full comparison: [edition matrix](docs/EDITION-MATRIX.md).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for how to edit shared CSS/handoff (`assets/`, `core/`) and keep `FL_Tools_Basic.user.js` in sync. Architecture notes: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## License
 

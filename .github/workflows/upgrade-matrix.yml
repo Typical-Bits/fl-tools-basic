@@ -14,3 +14,5 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: node tests/settings-migration.test.cjs
       - run: node tests/upgrade-matrix.cjs
+      - run: node tests/handoff.test.cjs
+      - run: node tests/dom-scan.test.cjs
