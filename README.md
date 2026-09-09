@@ -24,7 +24,7 @@
 | Runs on | `https://fetlife.com/*` |
 | Managers | Violentmonkey (preferred), Tampermonkey, others |
 | Storage | `localStorage` only (`@grant none`) |
-| Dual-install | Yields only if **FL_Tools Pro is live** on this page. Disable Pro and reload to use Basic. |
+| Companion installs | Yields to Pro's feature set and to Studio's primary launcher when those editions are live. |
 
 **Basic vs Pro:** see the [edition matrix](docs/EDITION-MATRIX.md) (Basic is public; Pro is a private distribution with extra tools).
 
@@ -60,6 +60,8 @@ https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools
 - Every keyboard action can be rebound or disabled, with internal and companion-script collision warnings
 
 **Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar. Full comparison: [edition matrix](docs/EDITION-MATRIX.md).
+
+When Studio is installed, Basic continues running and announces only its own capabilities. Studio may present those controls, but it cannot unlock Pro capabilities unless Pro is also installed and live.
 
 ## License
 
