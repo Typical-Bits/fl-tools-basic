@@ -45,3 +45,14 @@ jobs:
           else
               gh release create "$tag" FL_Tools_Basic.user.js --title "FL_Tools Basic v$VERSION" --notes "$NOTES"
           fi
+          # GITHUB_TOKEN-created releases do not retrigger "on: release" workflows,
+          # so attach tagged shared files here (basenames: handoff.js, css-core.js, …).
+          node scripts/sync-core.mjs --check
+          gh release upload "$tag" \
+            FL_Tools_Basic.user.js \
+            core/handoff.js \
+            core/css-core.js \
+            core/css-pro.js \
+            assets/fl-tools-core.css \
+            assets/fl-tools-pro.css \
+            --clobber
