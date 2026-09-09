@@ -38,7 +38,7 @@ const MARK = {
 };
 
 function read(rel) {
-  return readFileSync(join(ROOT, rel), "utf8");
+  return readFileSync(join(ROOT, rel), "utf8").replace(/\r\n/g, "\n");
 }
 
 function wrapCssInjector({ sourceRel, styleId, banner }) {
@@ -77,7 +77,8 @@ function writeOrCheck(rel, next) {
   const abs = join(ROOT, rel);
   let prev = null;
   try { prev = readFileSync(abs, "utf8"); } catch (_) {}
-  if (prev === next) return false;
+  const normaliseEol = value => value == null ? value : value.replace(/\r\n/g, "\n");
+  if (normaliseEol(prev) === normaliseEol(next)) return false;
   if (CHECK) {
     const why = prev == null ? "missing" : "out of date";
     throw new Error(`${rel} is ${why}. Run: node scripts/sync-core.mjs`);

@@ -9,7 +9,7 @@ on:
       tag:
         description: Release tag
         required: true
-        default: v1.2.12
+        default: v1.5.0
 
 permissions:
   contents: write
@@ -25,4 +25,4 @@ jobs:
         run: >-
           gh release edit "$TAG"
           --repo "$GITHUB_REPOSITORY"
-          --notes "Adds optional quiet update notifications. Checks are disabled by default, read release metadata only, cache results for 24 hours, compare semantic versions, never fetch executable code, and fail silently when GitHub is unavailable. Browser, syntax, migration, accessibility, and launcher-coordination checks passed."
+          --notes "Promotes FL Tools Basic to 1.5.0 with tagged shared dock CSS and handoff assets. Windows-safe source synchronization, DOM scan, live-yield, migration, syntax, UI-contract, and multi-version upgrade checks passed."
