@@ -1,5 +1,7 @@
-# FL Tools Basic 2.2.1
+# FL Tools Basic 2.2.2
 
-- Collapsed menus use a compact 220px width on desktop and mobile, expanding when a section opens.
+- Add a clear edition-specific userscript description and manager tags.
+- Display the script name as FL Tools Basic.
+- Anonymize named test fixtures using numbered SampleUser identifiers; keep selectors and assertions consistent.
 
-Update the userscript and reload FetLife tabs.
+Update the existing userscript. Download filenames and update URLs are unchanged. Historical commits and older release archives are not rewritten by this release.

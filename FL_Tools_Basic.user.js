@@ -1,11 +1,15 @@
 // ==UserScript==
-// @name         FL_Tools Basic
+// @name         FL Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.2.1
+// @version      2.2.2
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
+// @description  Customize FetLife with profile filters, soft-blocking, seen markers, media controls and easier navigation. Works with Studio and yields to Pro when installed.
+// @tag          FetLife
+// @tag          FL Tools
 // @tag          Social Media
-// @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, basic navigation, infinite scroll. Yields to live FL_Tools Pro.
+// @tag          Filters
+// @tag          Navigation
 // @author       TypicalBits
 // @license      CC-BY-NC-4.0
 // @icon        https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba
@@ -16,7 +20,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.2.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL Tools Basic v2.2.2 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -29,7 +33,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.2.1";
+  const FL_TOOLS_VERSION = "2.2.2";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";

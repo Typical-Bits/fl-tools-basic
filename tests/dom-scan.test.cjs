@@ -16,9 +16,9 @@ function memberCard({ nick, age, gender, role, extra }) {
 
 const LIST_HTML =
   "<main>" +
-  memberCard({ nick: "Alice", age: 25, gender: "F", role: "switch", extra: "Austin" }) +
-  memberCard({ nick: "Bob", age: 45, gender: "M", role: "dom", extra: "Dallas" }) +
-  memberCard({ nick: "Cara", age: 30, gender: "F", role: "sub", extra: "hard limit CNC" }) +
+  memberCard({ nick: "SampleUser1", age: 25, gender: "F", role: "switch", extra: "Austin" }) +
+  memberCard({ nick: "SampleUser2", age: 45, gender: "M", role: "dom", extra: "Dallas" }) +
+  memberCard({ nick: "SampleUser3", age: 30, gender: "F", role: "sub", extra: "hard limit CNC" }) +
   "</main>";
 
 async function openKinksters(browser, { html = LIST_HTML, beforeScript } = {}) {
@@ -98,14 +98,14 @@ function stampPro(page, { beatAgeMs, ui }) {
           dimHard: face(nick)?.classList.contains("flhp-dim-hard") || false,
           why: shell(nick)?.getAttribute("data-lt-why") || face(nick)?.getAttribute("data-lt-why") || ""
         });
-        return { alice: info("Alice"), bob: info("Bob"), cara: info("Cara") };
+        return { sampleuser1: info("SampleUser1"), sampleuser2: info("SampleUser2"), sampleuser3: info("SampleUser3") };
       });
-      assert.equal(scan.alice.display, "", "Alice (in-range, no limits hit) stays visible");
-      assert.equal(scan.alice.dimHard, false, "Alice is not hard-dimmed");
-      assert.equal(scan.bob.dimHard, true, "Bob is hard-dimmed for age");
-      assert.match(scan.bob.why, /age/i);
-      assert.equal(scan.cara.dimHard, true, "Cara is hard-dimmed for limits");
-      assert.match(scan.cara.why, /hard limits/i);
+      assert.equal(scan.sampleuser1.display, "", "SampleUser1 (in-range, no limits hit) stays visible");
+      assert.equal(scan.sampleuser1.dimHard, false, "SampleUser1 is not hard-dimmed");
+      assert.equal(scan.sampleuser2.dimHard, true, "SampleUser2 is hard-dimmed for age");
+      assert.match(scan.sampleuser2.why, /age/i);
+      assert.equal(scan.sampleuser3.dimHard, true, "SampleUser3 is hard-dimmed for limits");
+      assert.match(scan.sampleuser3.why, /hard limits/i);
       await context.close();
     }
 
@@ -126,7 +126,7 @@ function stampPro(page, { beatAgeMs, ui }) {
               showToasts: false,
               autoScroll: false
             }));
-            localStorage.setItem("fl_visit_log", JSON.stringify({ alice: "2026-09-01T12:00:00.000Z" }));
+            localStorage.setItem("fl_visit_log", JSON.stringify({ sampleuser1: "2026-09-01T12:00:00.000Z" }));
           });
         }
       });
@@ -138,16 +138,16 @@ function stampPro(page, { beatAgeMs, ui }) {
           .map((el) => el.textContent.trim());
         const bar = document.getElementById("fl-browse-chips");
         return {
-          alice: labels("Alice"),
-          bob: labels("Bob"),
+          sampleuser1: labels("SampleUser1"),
+          sampleuser2: labels("SampleUser2"),
           barText: bar ? bar.textContent : "",
           barFixed: bar ? getComputedStyle(bar).position : ""
         };
       });
-      assert.ok(!chips.alice.includes("F"), "FetLife already shows gender; tools do not restack it");
-      assert.ok(!chips.alice.includes("switch"), "FetLife already shows role; tools do not restack it");
-      assert.ok(chips.alice.includes("Seen"), "visited kinksters show a Seen chip on the card");
-      assert.ok(!chips.bob.includes("M"), "Bob’s gender is not restacked as a chip");
+      assert.ok(!chips.sampleuser1.includes("F"), "FetLife already shows gender; tools do not restack it");
+      assert.ok(!chips.sampleuser1.includes("switch"), "FetLife already shows role; tools do not restack it");
+      assert.ok(chips.sampleuser1.includes("Seen"), "visited kinksters show a Seen chip on the card");
+      assert.ok(!chips.sampleuser2.includes("M"), "SampleUser2’s gender is not restacked as a chip");
       assert.match(chips.barText, /f/i);
       assert.match(chips.barText, /switch/i);
       assert.equal(chips.barFixed, "fixed", "active filter chips stay on screen without opening the dock");
@@ -167,7 +167,7 @@ function stampPro(page, { beatAgeMs, ui }) {
       await page.addScriptTag({ content: script });
       await page.locator("#fl-tools-dock").waitFor({ state: "attached" });
       const place = await page.evaluate(() => {
-        const face = document.querySelector('[data-member-card="Alice"]')
+        const face = document.querySelector('[data-member-card="SampleUser1"]')
           ?.querySelector(".w-full.rounded-sm.cursor-pointer");
         return {
           chips: Array.from(face?.querySelectorAll(".lt-card-chip") || []).map((el) => el.textContent.trim()),
@@ -184,29 +184,29 @@ function stampPro(page, { beatAgeMs, ui }) {
         beforeScript: async (p) => {
           await p.evaluate(() => {
             localStorage.setItem("fl_block_reasons", JSON.stringify({
-              Alice: { terms: [], at: Date.now(), type: "soft" }
+              SampleUser1: { terms: [], at: Date.now(), type: "soft" }
             }));
           });
         }
       });
       await page.locator("#fl-tools-dock").waitFor({ state: "attached" });
       const blocked = await page.evaluate(() => {
-        const shell = document.querySelector('[data-member-card="Alice"]');
+        const shell = document.querySelector('[data-member-card="SampleUser1"]');
         const face = shell?.querySelector(".w-full.rounded-sm.cursor-pointer");
-        const bob = document.querySelector('[data-member-card="Bob"]');
+        const sampleuser2 = document.querySelector('[data-member-card="SampleUser2"]');
         return {
-          aliceDisplay: shell?.style.display,
-          aliceSoft: face?.classList.contains("lt-soft-blocked") || false,
-          aliceWhy: shell?.getAttribute("data-lt-why") || "",
-          bobDisplay: bob?.style.display || "",
-          bobSoft: bob?.querySelector(".w-full.rounded-sm.cursor-pointer")?.classList.contains("lt-soft-blocked") || false
+          sampleuser1Display: shell?.style.display,
+          sampleuser1Soft: face?.classList.contains("lt-soft-blocked") || false,
+          sampleuser1Why: shell?.getAttribute("data-lt-why") || "",
+          sampleuser2Display: sampleuser2?.style.display || "",
+          sampleuser2Soft: sampleuser2?.querySelector(".w-full.rounded-sm.cursor-pointer")?.classList.contains("lt-soft-blocked") || false
         };
       });
-      assert.equal(blocked.aliceDisplay, "none", "soft-blocked card is hidden");
-      assert.equal(blocked.aliceSoft, true, "soft-blocked face is marked");
-      assert.match(blocked.aliceWhy, /soft-block/);
-      assert.equal(blocked.bobDisplay, "", "unblocked card stays visible");
-      assert.equal(blocked.bobSoft, false, "unblocked card is not soft-blocked");
+      assert.equal(blocked.sampleuser1Display, "none", "soft-blocked card is hidden");
+      assert.equal(blocked.sampleuser1Soft, true, "soft-blocked face is marked");
+      assert.match(blocked.sampleuser1Why, /soft-block/);
+      assert.equal(blocked.sampleuser2Display, "", "unblocked card stays visible");
+      assert.equal(blocked.sampleuser2Soft, false, "unblocked card is not soft-blocked");
       await context.close();
     }
 

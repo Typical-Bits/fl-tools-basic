@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.1)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.2](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.2)
 
 ## Features
 
@@ -64,3 +64,9 @@ Update all installed editions and reload FetLife tabs.
 ## What changed in 2.2.1
 
 - Collapsed menus use a compact 220px width on desktop and mobile, expanding when a section opens.
+
+## What changed in 2.2.2
+
+- Add a clear edition-specific userscript description and manager tags.
+- Display the script name as FL Tools Basic.
+- Anonymize named test fixtures using numbered SampleUser identifiers; keep selectors and assertions consistent.
