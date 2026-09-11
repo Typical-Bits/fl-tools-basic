@@ -634,7 +634,7 @@ html.light #fl-confirm-dialog {
   z-index:2147483001; padding:0!important; margin:0!important; border:1px solid #e11d4866!important;
   border-radius:12px!important; background:#171a1f!important; color:#fb7185!important;
   box-shadow:0 4px 16px #0006; cursor:grab; touch-action:none; user-select:none; }
-#fl-settings-launcher svg { width:100%; height:100%; display:block; pointer-events:none; }
+#fl-settings-launcher img { width:100%; height:100%; display:block; pointer-events:none; }
 #fl-settings-launcher:hover, #fl-settings-launcher[aria-expanded="true"] { border-color:#fb7185!important; background:#252329!important; }
 #fl-settings-launcher:focus-visible { outline:2px solid #fb7185; outline-offset:3px; }
 #fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;
@@ -649,7 +649,7 @@ html.light #fl-confirm-dialog {
 #fl-tools-dock.fl-settings-rail > * { flex-shrink:0; min-width:0; }
 #fl-rail-header { order:-3; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }
 #fl-rail-header .fl-brand-icon { width:32px; height:32px; flex:none; }
-#fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }
+#fl-rail-header .fl-brand-icon img { display:block; width:100%; height:100%; }
 #fl-rail-header .fl-brand-copy { flex:1; min-width:0; }
 /* Dock accordion order. Scoped to the rail so insertBefore cannot reshuffle the menu. */
 #fl-tools-dock.fl-settings-rail #fl-block-panel { order: 1; }
