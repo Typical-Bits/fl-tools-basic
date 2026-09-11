@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.2](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.2)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.3](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.3)
 
 ## Features
 
@@ -42,11 +42,13 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-See [2.1.2 release notes](RELEASE_NOTES.md).
+See [2.1.3 release notes](RELEASE_NOTES.md).
 
-## New in 2.1.2
+## New in 2.1.3
 
-- Opening settings, Studio, or the command palette closes the other menus.
-- Keep nested menu parents accessible while closing unrelated sections.
+- Adapt desktop menus to available space and reposition expanded sections into view.
+- Scroll active sections while keeping menu navigation accessible.
+- Use mobile bottom sheets; hide launchers while a sheet is open to keep its close button accessible.
+- Remove the scanning status strip from the settings header.
 
-Install the attached userscript and reload FetLife tabs. Update all installed editions to get coordinated menu behavior.
+Update all installed editions and reload FetLife tabs.

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.1.2
+// @version      2.1.3
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.1.2 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.1.3 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -29,7 +29,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.1.2";
+  const FL_TOOLS_VERSION = "2.1.3";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -1861,11 +1861,45 @@
     positionSettingsRail();
   }
   function positionSettingsRail() {
+    if (!document.getElementById("fl-mobile-sheet-chrome")) {
+      const sheetStyle = document.createElement("style");
+      sheetStyle.id = "fl-mobile-sheet-chrome";
+      sheetStyle.textContent = "html:has(#fl-tools-dock.fl-rail-open[data-menu-layout=\"sheet\"]) :is(#fl-settings-launcher,#fl-studio-launcher),html:has(#fl-studio-panel[data-menu-layout=\"sheet\"]:not([hidden])) :is(#fl-settings-launcher,#fl-studio-launcher){visibility:hidden!important}";
+      document.documentElement.appendChild(sheetStyle);
+    }
     if (flBasicShouldYield()) return;
     const dock = document.getElementById("fl-tools-dock");
     const launcher = document.getElementById("fl-settings-launcher");
     if (!dock || !launcher) return;
-    const height = window.innerHeight;
+    const viewport = window.visualViewport;
+    const height = viewport ? viewport.height : window.innerHeight;
+    const width = viewport ? viewport.width : window.innerWidth;
+    const originY = viewport ? viewport.offsetTop : 0;
+    const originX = viewport ? viewport.offsetLeft : 0;
+    dock.style.setProperty("max-height", Math.max(0, height - 16) + "px", "important");
+    dock.style.setProperty("max-width", Math.max(0, width - 16) + "px", "important");
+    dock.style.setProperty("overflow-y", "auto", "important");
+    dock.style.setProperty("right", Math.max(8, window.innerWidth - originX - width + 8) + "px", "important");
+    const mobile = width <= 640;
+    dock.dataset.menuLayout = mobile ? "sheet" : "floating";
+    dock.style.setProperty("width", mobile ? Math.max(0, width - 16) + "px" : "300px", "important");
+    dock.style.setProperty("border-radius", mobile ? "16px 16px 0 0" : "12px", "important");
+    const bodies = Array.from(dock.querySelectorAll(":scope > .fl-tool-panel > .fl-tool-body, :scope > .fl-tool-panel > #flhp-main"));
+    for (const body of bodies) {
+      body.style.setProperty("max-height", "none", "important");
+      body.style.setProperty("overflow-y", "visible", "important");
+      body.parentElement.style.flexShrink = "0";
+    }
+    const active = bodies.find(body => body.getClientRects().length && !body.classList.contains("fl-tool-hidden"));
+    if (active) {
+      const chrome = dock.scrollHeight - active.getBoundingClientRect().height;
+      const available = Math.max(0, height - 24 - chrome);
+      active.style.setProperty("max-height", available + "px", "important");
+      active.style.setProperty("overflow-y", "auto", "important");
+      active.style.overscrollBehavior = "contain";
+      // On exceptionally short screens allow the shell to scroll rather than hide navigation.
+      dock.style.setProperty("overflow-y", available >= 48 ? "hidden" : "auto", "important");
+    }
     let top = NaN;
     try { top = parseFloat(localStorage.getItem("fl_settings_launcher_top")); } catch (_) {}
     if (!Number.isFinite(top)) {
@@ -1873,10 +1907,13 @@
       top = anchor === "top" ? 72 : anchor === "center" ? (height - 48) / 2 : height - 64;
     }
     top = Math.max(8, Math.min(Math.max(8, height - 56), top));
-    launcher.style.top = top + "px";
+    launcher.style.top = (originY + top) + "px";
     const panelHeight = dock.getBoundingClientRect().height || 240;
-    const desired = top > height / 2 ? top - panelHeight - 10 : top + 58;
-    dock.style.setProperty("top", Math.max(8, Math.min(height - panelHeight - 8, desired)) + "px", "important");
+    const below = height - top - 58, above = top - 10;
+    const upward = panelHeight > below && above > below;
+    dock.dataset.openDirection = mobile ? "sheet" : upward ? "up" : "down";
+    const desired = mobile ? height - panelHeight - 8 : upward ? top - panelHeight - 10 : top + 58;
+    dock.style.setProperty("top", (originY + Math.max(8, Math.min(height - panelHeight - 8, desired))) + "px", "important");
   }
   function setPanelOpenState(bodyId, toggleId, open) {
     const body = document.getElementById(bodyId);
@@ -2125,10 +2162,6 @@
         '<button type="button" id="fl-rail-close" aria-label="Close settings">×</button>';
       dock.prepend(header);
       header.querySelector("#fl-rail-close").addEventListener("click", () => setSettingsRailOpen(false, true));
-      const status = document.createElement("div");
-      status.id = "fl-rail-status";
-      status.textContent = "Changes save automatically on this device.";
-      header.after(status);
     }
     if (!document.getElementById("fl-settings-launcher")) {
       const launcher = document.createElement("button");
@@ -2169,6 +2202,8 @@
         setSettingsRailOpen(!dock.classList.contains("fl-rail-open"), true);
       });
       window.addEventListener("resize", positionSettingsRail, { passive:true });
+      window.visualViewport?.addEventListener("resize", positionSettingsRail, { passive:true });
+      window.visualViewport?.addEventListener("scroll", positionSettingsRail, { passive:true });
       window.addEventListener("fl-tools:launcher-position", positionSettingsRail);
       document.addEventListener("pointerdown", (event) => {
       if (flBasicShouldYield()) return;

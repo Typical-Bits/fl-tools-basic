@@ -1,6 +1,8 @@
-# FL Tools Basic 2.1.2
+# FL Tools Basic 2.1.3
 
-- Opening settings, Studio, or the command palette closes the other menus.
-- Keep nested menu parents accessible while closing unrelated sections.
+- Adapt desktop menus to available space and reposition expanded sections into view.
+- Scroll active sections while keeping menu navigation accessible.
+- Use mobile bottom sheets; hide launchers while a sheet is open to keep its close button accessible.
+- Remove the scanning status strip from the settings header.
 
-Install the attached userscript and reload FetLife tabs. Update all installed editions to get coordinated menu behavior.
+Update all installed editions and reload FetLife tabs.
