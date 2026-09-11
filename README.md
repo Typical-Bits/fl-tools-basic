@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.3](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.3)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.0)
 
 ## Features
 
@@ -42,9 +42,9 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-See [2.1.3 release notes](RELEASE_NOTES.md).
+See [2.2.0 release notes](RELEASE_NOTES.md).
 
-## New in 2.1.3
+## New in 2.2.0
 
 - Adapt desktop menus to available space and reposition expanded sections into view.
 - Scroll active sections while keeping menu navigation accessible.
@@ -52,3 +52,11 @@ See [2.1.3 release notes](RELEASE_NOTES.md).
 - Remove the scanning status strip from the settings header.
 
 Update all installed editions and reload FetLife tabs.
+
+## What changed in 2.2.0
+
+- Narrower desktop menus and tighter panel headers; mobile menu sizing is preserved.
+- Feed stories no longer trigger hard-limit/exclusion dimming from their text. Blocks, mutes and snoozes still apply.
+- Declared Hard Limits sections on profiles are excluded from term matching and highlighting.
+- Move picture previous/next navigation into the advertisement slot while preserving mobile controls.
+- Round image corners, add story footer separators and improve feed action alignment.

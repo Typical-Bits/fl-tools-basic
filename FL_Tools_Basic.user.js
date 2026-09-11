@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.1.3
+// @version      2.2.0
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.1.3 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.2.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -29,7 +29,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.1.3";
+  const FL_TOOLS_VERSION = "2.2.0";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -1882,7 +1882,13 @@
     dock.style.setProperty("right", Math.max(8, window.innerWidth - originX - width + 8) + "px", "important");
     const mobile = width <= 640;
     dock.dataset.menuLayout = mobile ? "sheet" : "floating";
-    dock.style.setProperty("width", mobile ? Math.max(0, width - 16) + "px" : "300px", "important");
+    if (!document.getElementById("fl-compact-menu-spacing")) {
+      const compactStyle = document.createElement("style");
+      compactStyle.id = "fl-compact-menu-spacing";
+      compactStyle.textContent = '@media(min-width:641px){#fl-tools-dock.fl-settings-rail .fl-tool-header{padding:4px 6px!important;min-height:26px!important}#fl-tools-dock.fl-settings-rail .fl-tool-header>button{min-height:24px!important}.lt-qa-bar .lt-qa-menu{min-width:0;width:max-content;padding:2px}.lt-qa-bar .lt-qa-menu>button{padding:3px 8px;min-height:24px;white-space:nowrap}}';
+      document.documentElement.appendChild(compactStyle);
+    }
+    dock.style.setProperty("width", mobile ? Math.max(0, width - 16) + "px" : "280px", "important");
     dock.style.setProperty("border-radius", mobile ? "16px 16px 0 0" : "12px", "important");
     const bodies = Array.from(dock.querySelectorAll(":scope > .fl-tool-panel > .fl-tool-body, :scope > .fl-tool-panel > #flhp-main"));
     for (const body of bodies) {
@@ -2433,7 +2439,7 @@
       infiniteScroll: "Enable Infinite Scroll",
       showing: "Showing {shown} of {total} loaded",
       showToasts: "Show text-match toasts",
-      hideBanners: "Hide install / push banners",
+      hideBanners: "Hide ads / install / push banners",
       jumpTop: "Jump to top",
       lastPlace: "Last place",
       selectorWarn: "No member cards found on this list page. FetLife markup may have changed.",
@@ -3821,7 +3827,57 @@
   function warnIfSelectorsBroken() {
     scheduleMarkupSelfCheck();
   }
+  function placePictureNavigation() {
+    if (flBasicShouldYield()) return;
+    if (!/^\/[^/]+\/pictures\/\d+\/?$/.test(location.pathname)) return;
+    for (const aside of document.querySelectorAll("aside")) {
+      const ad = aside.querySelector('div.text-center:has(> a:is([href^="/tiles/click/"],[href^="https://fetlife.com/tiles/click/"]) > div > img)');
+      if (!ad || ad.dataset.flNavigationReplaced) continue;
+      const link = Array.from(aside.querySelectorAll('a[data-turbo="true"][href*="/pictures/"]')).find(a => a.parentElement.classList.contains("border-y"));
+      if (!link) continue;
+      const bar = link.parentElement;
+      if (bar.dataset.flAdNavigation || !bar.querySelector('a[href*="/pictures/"]')) continue;
+      // Move native nodes so Turbo links and existing handlers keep working.
+      const host = bar.parentElement;
+      if (!host.classList.contains("lg:block") || !host.classList.contains("hidden")) continue;
+      ad.before(host);
+      ad.hidden = true;
+      ad.dataset.flNavigationReplaced = "1";
+      bar.dataset.flAdNavigation = "1";
+      bar.setAttribute("aria-label", "Picture navigation");
+      bar.setAttribute("role", "navigation");
+    }
+  }
+  function observePictureNavigation() {
+    if (observePictureNavigation.bound) return;
+    observePictureNavigation.bound = true;
+    let frame = 0;
+    const schedule = () => {
+      if (frame || !/^\/[^/]+\/pictures\/\d+\/?$/.test(location.pathname)) return;
+      frame = requestAnimationFrame(() => { frame = 0; placePictureNavigation(); });
+    };
+    new MutationObserver(schedule).observe(document.body, {childList:true,subtree:true});
+    document.addEventListener("turbo:load", schedule);
+    schedule();
+  }
   function applyBannerPref() {
+    if (!document.getElementById("fl-rounded-images-style")) {
+      const imageStyle = document.createElement("style");
+      imageStyle.id = "fl-rounded-images-style";
+      imageStyle.textContent = 'img:not(:where(#fl-tools-dock *,#fl-settings-launcher *,#fl-studio-launcher *,#fl-studio-panel *,#fl-studio-palette *)){border-radius:8px!important}';
+      imageStyle.textContent += 'footer:has([data-story-love-button-target="button"]) :is([data-controller~="comment-cta"],[data-open-story-share],[data-story-bookmark-button-target="button"]){border-inline-start:1px solid var(--fl-footer-divider,#606068)!important}';
+      imageStyle.textContent += '.lt-qa-bar.lt-qa-feed:not(.lt-qa-feed-inline){contain:inline-size;width:100%!important;min-width:0;max-width:100%;align-items:center;overflow:visible}.lt-qa-bar.lt-qa-feed:not(.lt-qa-feed-inline)>button{flex:none;white-space:nowrap;padding-inline:3px}';
+      document.documentElement.appendChild(imageStyle);
+    }
+
+    observePictureNavigation();
+    if (!document.getElementById("fl-tile-ad-style")) {
+      const style = document.createElement("style");
+      style.id = "fl-tile-ad-style";
+      // Match the complete tile wrapper, not nearby content or ordinary image links.
+      style.textContent = 'html.fl-tools-hide-banners div.text-center:has(> a:is([href^="/tiles/click/"],[href^="https://fetlife.com/tiles/click/"]) > div > img:is([src^="/tiles/"],[src^="https://fetlife.com/tiles/"])){display:none!important}';
+      document.documentElement.appendChild(style);
+    }
     document.documentElement.classList.toggle("fl-tools-hide-banners", !!loadFilterSettings().hideBanners);
   }
   function isBlockedInterstitial() {
@@ -3846,11 +3902,10 @@
     if (!isHomeFeed() || isBlockedInterstitial()) {
       return;
     }
-    const exclude = splitList(settings.exclude);
     getFeedItems().forEach((item) => {
       const text = (item.innerText || "").toLowerCase();
       let visible = true;
-      if (exclude.length) visible = !exclude.some((term) => textHasTerm(text, term));
+      // Feed stories do not participate in profile hard-limit/exclusion matching.
       if (visible) {
         const hit = Array.from(item.querySelectorAll("a[href^='/']")).some((a) => {
           const m = ((a.getAttribute("href") || "").match(/^\/([A-Za-z0-9_.-]+)(?:\/|$)/) || [])[1];
@@ -3902,6 +3957,19 @@
   function profileKeySectionsPresent() {
     return profileSectionRoots().length > 0;
   }
+  function isDeclaredHardLimits(node) {
+    const section = node.closest && node.closest('[data-expand-text-target="clampable"]');
+    const label = section && section.firstElementChild;
+    return !!(label && /^hard limits\s*:/i.test((label.textContent || "").trim()));
+  }
+  function profileMatchText(root) {
+    const copy = root.cloneNode(true);
+    copy.querySelectorAll('[data-expand-text-target="clampable"]').forEach((section) => {
+      if (isDeclaredHardLimits(section)) section.remove();
+    });
+    if (isDeclaredHardLimits(copy)) return "";
+    return copy.textContent || "";
+  }
   function profileSectionHits(settings) {
     settings = settings || loadFilterSettings();
     const terms = splitList(settings.exclude).concat(splitList(settings.limits));
@@ -3909,7 +3977,7 @@
     const roots = profileSectionRoots();
     /* Do not scan full main.innerText — freezes rich profiles while activity/widgets stream in. */
     const extra = ((profileNickname() || "") + " " + (document.title || "")).toLowerCase();
-    const text = roots.map((el) => (el.innerText || el.textContent || "").toLowerCase()).join("\n") + "\n" + extra;
+    const text = roots.map((el) => profileMatchText(el).toLowerCase()).join("\n") + "\n" + extra;
     const seen = {};
     return terms.filter((term) => {
       if (seen[term] || !textHasTerm(text, term)) return false;
@@ -3977,6 +4045,7 @@
           acceptNode(n) {
             const p = n.parentElement;
             if (!p) return NodeFilter.FILTER_REJECT;
+            if (isDeclaredHardLimits(p)) return NodeFilter.FILTER_REJECT;
             if (p.closest && (p.closest("#fl-tools-dock") || p.closest("mark.lt-limit-hl") || p.closest(".lt-limit-hl"))) return NodeFilter.FILTER_REJECT;
             if (p.isContentEditable || (p.closest && p.closest("[contenteditable='true']"))) return NodeFilter.FILTER_REJECT;
             if (/^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|CODE|PRE|SVG|MARK)$/i.test(p.tagName)) return NodeFilter.FILTER_REJECT;
