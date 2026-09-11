@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.5](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.5)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.6](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.6)
 
 ## Features
 
@@ -76,3 +76,9 @@ Update all installed editions and reload FetLife tabs.
 - Compact footer with release-note link, live Studio status, and pulse-icon diagnostics.
 - Show Jump to top only for overflowing menus; scroll the menu without moving the page.
 - Hover and active menu indicators follow the selected accent.
+
+## What changed in 2.2.6
+
+- Remember ignored hard-limit matches per profile across reloads. Alert again only for a newly matched term.
+- Normalize case and whitespace; retain acknowledgments when terms disappear and return.
+- Older ignore flags use the first observed term set as their baseline.

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.2.5
+// @version      2.2.6
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @description  Customize FetLife with profile filters, soft-blocking, seen markers, media controls and easier navigation. Works with Studio and yields to Pro when installed.
@@ -20,7 +20,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL Tools Basic v2.2.5 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL Tools Basic v2.2.6 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -33,7 +33,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.2.5";
+  const FL_TOOLS_VERSION = "2.2.6";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -4124,13 +4124,40 @@
     if (host && bar.parentNode !== host) host.insertBefore(bar, host.firstChild);
     return bar;
   }
-  function skippedBlockPrompt(nick) {
-    try { return !!(JSON.parse(localStorage.getItem("fl_skip_block_prompt") || "{}")[nick]); } catch (_) { return false; }
+  function normalizedLimitTerms(terms) {
+    return [...new Set((terms || []).map(term => String(term).trim().replace(/\s+/g, " ").toLowerCase()).filter(Boolean))];
   }
-  function skipBlockPrompt(nick) {
+  function blockPromptAcknowledgments(nick, currentTerms) {
     try {
-      const map = JSON.parse(localStorage.getItem("fl_skip_block_prompt") || "{}");
-      map[nick] = true;
+      const raw = JSON.parse(localStorage.getItem("fl_skip_block_prompt") || "{}");
+      const map = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
+      const key = String(nick || "").toLowerCase();
+      const keys = Object.keys(map).filter(k => k.toLowerCase() === key);
+      // Legacy booleans did not record terms. Seed their first observed set once.
+      if (keys.some(k => map[k] === true)) {
+        for (const k of keys) delete map[k];
+        Object.defineProperty(map, key, {value:normalizedLimitTerms(currentTerms), enumerable:true, configurable:true, writable:true});
+        localStorage.setItem("fl_skip_block_prompt", JSON.stringify(map));
+      }
+      return normalizedLimitTerms(Object.keys(map).filter(k => k.toLowerCase() === key).flatMap(k => Array.isArray(map[k]) ? map[k] : []));
+    } catch (_) { return []; }
+  }
+  function newBlockPromptTerms(nick, terms) {
+    const acknowledged = new Set(blockPromptAcknowledgments(nick, terms));
+    return (terms || []).filter(term => !acknowledged.has(normalizedLimitTerms([term])[0]));
+  }
+  function skippedBlockPrompt(nick, terms) {
+    return !!terms?.length && newBlockPromptTerms(nick, terms).length === 0;
+  }
+  function skipBlockPrompt(nick, terms) {
+    if (!nick) return;
+    try {
+      const acknowledged = blockPromptAcknowledgments(nick, terms);
+      const raw = JSON.parse(localStorage.getItem("fl_skip_block_prompt") || "{}");
+      const map = raw && typeof raw === "object" && !Array.isArray(raw) ? raw : {};
+      const key = String(nick).toLowerCase();
+      for (const k of Object.keys(map)) if (k.toLowerCase() === key) delete map[k];
+      Object.defineProperty(map, key, {value:normalizedLimitTerms([...acknowledged, ...(terms || [])]), enumerable:true});
       localStorage.setItem("fl_skip_block_prompt", JSON.stringify(map));
     } catch (_) {}
   }
@@ -4215,7 +4242,7 @@
         e.stopPropagation();
         e.preventDefault();
         clearBlockReason(rec.nick);
-        skipBlockPrompt(rec.nick);
+        skipBlockPrompt(rec.nick, rec.terms || []);
         renderSoftList();
         applyFilter(loadFilterSettings());
       });
@@ -4392,8 +4419,14 @@
   }
   function showProfileBlockPrompt(nick, hits) {
     if (!nick || loadBlockReason(nick)) return;
-    const terms = (hits || []).map((x) => String(x || "").trim()).filter(Boolean);
-    const skipped = skippedBlockPrompt(nick);
+    const allTerms = (hits || []).map((x) => String(x || "").trim()).filter(Boolean);
+    const terms = newBlockPromptTerms(nick, allTerms);
+    const skipped = false;
+    if (allTerms.length && !terms.length) {
+      hardLimitSfwMimic = false; applyDisplayMode();
+      document.getElementById("fl-exclude-alert")?.remove();
+      return;
+    }
     const urgent = !!(terms.length && !skipped);
     ensureBlockPanel();
     if (urgent) {
@@ -4455,7 +4488,7 @@
       addBtn(t("blockYes"), "red", false, () => paintProfileBlockMenu(bar, nick, terms, "fetlife"));
       if (stage === "prompt") {
         addBtn(t("blockNo"), "gray", true, () => {
-          skipBlockPrompt(nick);
+          skipBlockPrompt(nick, terms);
           hardLimitSfwMimic = false;
           applyDisplayMode();
           showProfileBlockPrompt(nick, terms);
@@ -4513,7 +4546,7 @@
       if (flBasicShouldYield()) return;
       e.stopPropagation();
       clearBlockReason(nick);
-      skipBlockPrompt(nick);
+      skipBlockPrompt(nick, terms);
       renderSoftList();
       applyFilter(loadFilterSettings());
       bar.setAttribute("data-kind", "soft-visit-cleared");
