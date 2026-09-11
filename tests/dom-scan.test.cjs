@@ -24,7 +24,7 @@ const LIST_HTML =
 async function openKinksters(browser, { html = LIST_HTML, beforeScript } = {}) {
   const context = await browser.newContext({ viewport: { width: 1000, height: 900 } });
   await context.route("https://fetlife.com/**", (route) =>
-    route.fulfill({ contentType: "text/html", body: html })
+    route.fulfill({ contentType: "text/html; charset=utf-8", body: html })
   );
   await context.route("https://api.github.com/**", (route) =>
     route.fulfill({ status: 404, body: "" })
@@ -62,7 +62,11 @@ function stampPro(page, { beatAgeMs, ui }) {
 }
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const chromePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH || "/usr/local/bin/google-chrome";
+  const browser = await chromium.launch({
+    headless: true,
+    executablePath: fs.existsSync(chromePath) ? chromePath : undefined
+  });
   try {
     {
       const { context, page } = await openKinksters(browser, {
@@ -102,6 +106,76 @@ function stampPro(page, { beatAgeMs, ui }) {
       assert.match(scan.bob.why, /age/i);
       assert.equal(scan.cara.dimHard, true, "Cara is hard-dimmed for limits");
       assert.match(scan.cara.why, /hard limits/i);
+      await context.close();
+    }
+
+    {
+      const { context, page } = await openKinksters(browser, {
+        beforeScript: async (p) => {
+          await p.evaluate(() => {
+            localStorage.setItem("fl_profile_filter_settings", JSON.stringify({
+              minAge: "18",
+              maxAge: "80",
+              genders: "F",
+              roles: "switch",
+              relFollow: true,
+              relFollowing: true,
+              relFollowsYou: true,
+              relFriends: true,
+              showSeenChip: true,
+              showToasts: false,
+              autoScroll: false
+            }));
+            localStorage.setItem("fl_visit_log", JSON.stringify({ alice: "2026-09-01T12:00:00.000Z" }));
+          });
+        }
+      });
+      await page.locator("#fl-tools-dock").waitFor({ state: "attached" });
+      const chips = await page.evaluate(() => {
+        const face = (nick) => document.querySelector(`[data-member-card="${nick}"]`)
+          ?.querySelector(".w-full.rounded-sm.cursor-pointer");
+        const labels = (nick) => Array.from(face(nick)?.querySelectorAll(".lt-card-chip, .lt-seen-chip") || [])
+          .map((el) => el.textContent.trim());
+        const bar = document.getElementById("fl-browse-chips");
+        return {
+          alice: labels("Alice"),
+          bob: labels("Bob"),
+          barText: bar ? bar.textContent : "",
+          barFixed: bar ? getComputedStyle(bar).position : ""
+        };
+      });
+      assert.ok(!chips.alice.includes("F"), "FetLife already shows gender; tools do not restack it");
+      assert.ok(!chips.alice.includes("switch"), "FetLife already shows role; tools do not restack it");
+      assert.ok(chips.alice.includes("Seen"), "visited kinksters show a Seen chip on the card");
+      assert.ok(!chips.bob.includes("M"), "Bob’s gender is not restacked as a chip");
+      assert.match(chips.barText, /f/i);
+      assert.match(chips.barText, /switch/i);
+      assert.equal(chips.barFixed, "fixed", "active filter chips stay on screen without opening the dock");
+      await context.close();
+    }
+
+    {
+      const context = await browser.newContext({ viewport: { width: 1000, height: 900 } });
+      await context.route("https://fetlife.com/**", (route) =>
+        route.fulfill({ contentType: "text/html; charset=utf-8", body: LIST_HTML })
+      );
+      await context.route("https://api.github.com/**", (route) =>
+        route.fulfill({ status: 404, body: "" })
+      );
+      const page = await context.newPage();
+      await page.goto("https://fetlife.com/p/united-states/oregon/portland/kinksters");
+      await page.addScriptTag({ content: script });
+      await page.locator("#fl-tools-dock").waitFor({ state: "attached" });
+      const place = await page.evaluate(() => {
+        const face = document.querySelector('[data-member-card="Alice"]')
+          ?.querySelector(".w-full.rounded-sm.cursor-pointer");
+        return {
+          chips: Array.from(face?.querySelectorAll(".lt-card-chip") || []).map((el) => el.textContent.trim()),
+          rail: !!face?.querySelector(".lt-card-chips")
+        };
+      });
+      assert.equal(place.rail, false, "place kinksters cards have no chip rail unless Seen");
+      assert.ok(!place.chips.includes("F"), "place kinksters cards do not restack identity chips");
       await context.close();
     }
 

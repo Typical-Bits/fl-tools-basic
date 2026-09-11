@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.0.0
+// @version      2.1.0
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
-// @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, toasts. Yields to live FL_Tools Pro.
+// @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, basic navigation, infinite scroll. Yields to live FL_Tools Pro.
 // @author       TypicalBits
 // @license      CC-BY-NC-4.0
 // @icon        data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAJOUlEQVR4nMxaC1BTVxo+9948LkHej/Da1gAKYkS7wFQonVnloTAFl6n7ANxxl3ZxtXbarlpqO7Ys1FV87O501w5swdZVcGe3sxKxagUqa7FjW2AwPMRHCVV5PxpIQkLCTXpuEkMCyD0XEvAbuHNzzn/O/f///P9//vPgGAwG8Bhcu3atpqa2qampr69/cHBwfHwcLBYEAoGPj4+fnzAqKiopKTE+Pv5xlNhMASYnJ8+cKT927Hh/fz94MiAUCt98c29WVhaHw5lWZSOAXq+vrJQUFRV1dsrAk4eQkOD9+/enp6dhGGYptBGgsrLy1Vdf02g04EmFk5NTSUlxSspmSwlueauqupCb+wdG7oNxTg7fDTgAGwgB/JubRq1Wb9/+W6hoS4lZgLa29l27XpnDoS3UeU5eXhgOHAABhu12cvdg6hwyCc2kpaXFwhKgKCo3dweK5cRxyCCc6wII4AC44wSJ4Vu4yxgpIau7du2GbAOTAKdPn7lz5w5AQALHGT4DcYcIEIjRESaB64xC3NHRAdmGL7hSqTx8uAigIZLgw6cfwQUOwE+M3XriBKKCioqOKBQKHPru8PAwSgPYL4mbDTTaKIkd4Y7hItwc45/CeChNhoaGLlz4DL9+/TpAg5tVyIrlOAG7Ig7a/6Po7opjiK0aGhrxBw8eIFJPWr1v4Dp72C8WwY5e5LtafuqYgqEF9+7dxe/fRxVAYdBb3vkYlslzBXZCCkfgh0/lCKNWH5ob/f0D+MDAACq1gbLWTSrXeSWOZKxzwxPDc0h365IuSofYFjKPa7VaRGqolubJqbkCmmwe6eGLLSikLgPYO6QXaWWNfZRuGKCOAB2FABvcoGwmOxhP/ybwXYvPMyLBrOS4wDecY9O8mZoAbEAIBEgTB0QQxnmD9HSy9V2ovASecyBGdOl1CoDqfDCgwYTqdSdP1xkhP5TgdVLah4ZJxK4wb29fFLpQnFPo5OM65xRTo1XdorT39dp2/exGDFUQRnCX49xU7jLLlDIrjo4P11FqgAAkAVwBXuwsdEPOIBp06hMT8gEDZSkRAAyqPIXHnOdYsEc10KFn9k8kE9pHeoRyWBh6AMFN5jqP6CdletoS1hC8QwKfSA4J2GAtwbusU1FMZMwCwDkyi2S9AOBiWCxXAIV2w/D3BD4C9rPeMpwgEHyaA5iwiYvq5TOxlb+gyS6R6/yJdmxuGgbFwDj9DMuhtyM8cGIN01zJIMCzHJLAUFMrR2A9U9bIYEL+OLONORSBTAwwVHtjSyyAkCl2M/Dn5pj1OzrcsYUJMI6cVzkI40ypNYMAcv0SCyBfoAB3KdRk20G4zcQAgwA39Uu8zdhEMTDA4KM/GAxNuiWT4Qc91cSUSjAHmSqdEiwRLuiUjC7ILMA3lObeUngC3EOQaJl1hxTmP5qQg0XHaY1cjbDEQxKgldJWa1VgEXGH0n42iXSihTrRwkEY0TOuLuwDjV5/VI202wnQBVABwwH10ATyntm8oTcYDmlGegyoymKR6sB9h8PIipk3Tk6MNlAsAjeLbRWIbsMkZTCsddgS5wud6iTTEmwa2AkA0abXCjEimLDDpuI0wBnzoGYEsARrAYBxf04P7DwO1TpVkWZkHh42ey5EOgmCQ8OWh6wIDl3p7uE5K00HRgSxXK/ho6O4TEZ0dnFkMszqSK58YqyCpeVYMH1ji0+Sv8j6XfILGQThkIMwEwwURV6+Qn76P0ynLdXIzy0gW7ER4JmY2Jydr3l6+dxqb//6xvWe7oc93d1wBxjYCS4uLgGBgQGBQbFxz4WFR4DBocriD/7bgHpENCumBIh69rk/vl2gmdD8p6K8tuYKcDASkjZlZm3j8njH3z/Q9O1XYL4wC+Dq5n7kHye5fP5777zV19sLFgX+AQH57x+aUI/veyVHpZznOJuj0Otv5T+1PPhfn5xsa5GCxYJSoVApletj4/0Dg27U14F5gZ6JfYX+kT+NabnZ/P+rtWBxcbW2pr2tNXp9vBfaLv9M0HEwNGwVfF65fMmqvPDT5i2iqZ9jDUfjd5QbXwskjel0jex85NZ3TbXZJV/mRbtYU5pLLDT556Rp5u5kVeu25Ft9CX43YrU4NCx8eAj1tM4aOI/HC14RDt8eds9xXOkavbXQ9Ja/xsyIaI25JLN05yPubSgtsOKebpd2zobg4YP78BmychVgDxjWcF9f39CV4RMazcgs5/VQW5FR5+nLT4rhDmNJoRiyovi2AZaJIvOtSc9HRq0z/mUcsO3E2IQeGVhb1AB9VbShJHuqenBwQKfThayYjwCQeQ78p4/IZ9/BFaU1S9OM7NW9bDSggkia/9tf7OjxbhSJxAUAvAvOvhwfBnWcLm1MN0vyyLSsMdxLd1C+4/nyaRXw6waDniDmswUoFPriYrH4e9l3fD4fBrUZBMYRWCeRQUm+LMt8ZD8u0XkmN7BYUX6GSf0SemDSJfmzfMvLn9Y69A1pY3O99Qj4BwTyePyuznuAPSDznNTUlH9+TGvl6adFvT09tgSWETDBZAzW9dCKsv2nPNgIxdBtyNbU7wOtsi0ikWv0PmnjPhPB7TqrYVguojvt+u4uYI+MjJ/jGzduIDA6C0zenDIHqezqS2eN9gNkEpOtV9GuAa0IWoXE6orgWEPxS2dt28LxqZqikFU9b0OQmERfgOvqZC3A6tUR0dHR9KW/ixcvyvqVK8Ii4ERWW/05WERs2pya9ZvtHW3SwrffACxx6tTHqamptOukpKR8Lvn3+Ljql5lZQj8/sFiAXvfir34Nk4i/Hytk2xaqH3IPTDMxjAMHCwtOlXxA8snCg4c3JiQBxwMmc38q/DOfx//wL4fkI+wWYiRJnjhxwvQ+dW9UIjlfXHrq97v3LHNxhel03dXaW+2to3I7b2m5ubtHRIh/tjEhfFXE2Ki87MO/NtyoZ9UDVHdZWWla2gtgmgAQly5d3rM3LztnZ0ys+a5yX2+P3H4yeHl7+/iYc55vvroGuVcq2C3EoO7Lyj5KTk62lEy/Oy2VtuTm5o4p1avEkRHideHiSB9fu3nFQH/vrdabHa0321ulQwN9gCVCQoJLS0vF4tXWhbNf/q6oqDhy5NgTdfl7794927ZlM1z+nob6+vrq6prGxsalun7v7+8XExOTmJgYFxf7OMofAQAA//9+M+qGAAAABklEQVQDAA5sdPYI/cXCAAAAAElFTkSuQmCC
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.0.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen chip).
+  FL_Tools Basic v2.1.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -24,15 +24,1375 @@
   "use strict";
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.0.0";
+  const FL_TOOLS_VERSION = "2.1.0";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
+  /* BEGIN generated:catalog */
   const FL_CAPABILITIES = Object.freeze([
-    "basic.filters", "basic.infinite-scroll", "basic.nsfw-mode",
-    "basic.organisation-cards", "basic.seen", "basic.shortcuts",
-    "basic.soft-block", "basic.toasts"
+    "filter.apply",
+    "filter.preset",
+    "filter.soft-block",
+    "seen.mark",
+    "seen.reset",
+    "display.mode",
+    "display.infinite-scroll",
+    "navigation.next",
+    "navigation.previous"
   ]);
+  /* END generated:catalog */
+  /* BEGIN generated:presets */
+  const FL_FILTER_PRESETS = {"default":{"minAge":"18","maxAge":"80","include":"","exclude":"","genders":"","roles":"","limits":"","minPics":"0","minVids":"0","minWritings":"0","hideOrgs":false,"dimHidden":true,"combineMode":"and","matchScope":"card","roleMode":"must","preferRoles":"","relFollow":true,"relFollowing":true,"relFollowsYou":true,"relFriends":true,"autoScroll":true,"autoloadCount":"100","showToasts":true,"hideBanners":false,"collapsePosts":false,"sortBy":"none","cities":"","sameCityOnly":false,"showSeenChip":true,"dimSeenToday":true},"minimal":{"minAge":"18","maxAge":"80","include":"","exclude":"","genders":"","roles":"","limits":"","minPics":"0","minVids":"0","minWritings":"0","hideOrgs":false,"dimHidden":false,"combineMode":"and","matchScope":"card","roleMode":"must","preferRoles":"","relFollow":true,"relFollowing":true,"relFollowsYou":true,"relFriends":true,"autoScroll":false,"autoloadCount":"100","showToasts":false,"hideBanners":false,"collapsePosts":false,"sortBy":"none","cities":"","sameCityOnly":false,"showSeenChip":false,"dimSeenToday":false},"sfw":{"minAge":"18","maxAge":"80","include":"","exclude":"","genders":"","roles":"","limits":"","minPics":"0","minVids":"0","minWritings":"0","hideOrgs":false,"dimHidden":true,"combineMode":"and","matchScope":"card","roleMode":"must","preferRoles":"","relFollow":true,"relFollowing":true,"relFollowsYou":true,"relFriends":true,"autoScroll":true,"autoloadCount":"100","showToasts":true,"hideBanners":true,"collapsePosts":false,"sortBy":"none","cities":"","sameCityOnly":false,"showSeenChip":true,"dimSeenToday":true}};
+  const FL_PRESET_DISPLAY = {"default":{"mode":"nsfw"},"minimal":{"mode":"sfw","blurPx":1},"sfw":{"mode":"sfw","blurVideos":true,"blurPx":6}};
+  /* END generated:presets */
+  /* BEGIN generated:orchestration */
+  const FL_ACTION_PROTOCOL = "fl-tools-action-v1";
+  const FL_ACTION_TARGETS = Object.freeze({
+    "filter.apply": {"kind":"dock","panel":"fl-filter-panel","label":"Open Filters"},
+    "filter.preset": {"kind":"dock","panel":"fl-filter-panel","label":"Open Filter Presets"},
+    "filter.soft-block": {"kind":"dock","panel":"fl-block-panel","label":"Open soft-block"},
+    "seen.mark": {"kind":"dock","panel":"fl-advanced-panel","label":"Open seen settings"},
+    "seen.reset": {"kind":"dock","panel":"fl-advanced-panel","label":"Reset seen"},
+    "display.mode": {"kind":"dock","panel":"fl-site-panel","label":"Open NSFW / SFW"},
+    "display.infinite-scroll": {"kind":"dock","panel":"fl-advanced-panel","label":"Open infinite scroll"},
+    "navigation.next": {"kind":"dock","panel":"fl-shortcuts-panel","label":"Open shortcuts"},
+    "navigation.previous": {"kind":"dock","panel":"fl-shortcuts-panel","label":"Previous profile"},
+    "highlight.apply": {"kind":"dock","panel":"flhp-panel","label":"Open highlighter"},
+    "whitelist.apply": {"kind":"dock","panel":"flhp-panel","label":"Open highlighter / whitelist"},
+    "mute.create": {"kind":"dock","panel":"fl-block-panel","label":"Open mutes"},
+    "snooze.create": {"kind":"dock","panel":"fl-block-panel","label":"Open snooze"},
+    "profile.note": {"kind":"dock","panel":"fl-block-panel","focus":"fl-notes-wrap","label":"Open notes"},
+    "profile.visit": {"kind":"dock","panel":"fl-advanced-panel","focus":"fl-visit-log-list","label":"Open visit log"},
+    "display.org-cards": {"kind":"dock","panel":"fl-advanced-panel","label":"Open org cards"},
+    "profile.pin": {"kind":"dock","panel":"fl-profiles-panel","label":"Open profile pins"},
+    "profile.compare": {"kind":"dock","panel":"fl-profiles-panel","label":"Open profile compare"},
+    "profile.mention": {"kind":"dock","panel":"fl-profiles-panel","label":"Open mentions / profiles"},
+    "privacy.session": {"kind":"dock","panel":"fl-profiles-panel","label":"Open private session"},
+    "profile.similar": {"kind":"dock","panel":"fl-profiles-panel","label":"Open similar profiles"},
+    "profile.watch": {"kind":"dock","panel":"fl-profiles-panel","label":"Open watches"},
+    "privacy.clear": {"kind":"dock","panel":"fl-advanced-panel","label":"Open paranoid auto-clear"},
+    "navigation.advanced": {"kind":"dock","panel":"fl-shortcuts-panel","label":"Open shortcut editor"},
+    "studio.orchestration": {"kind":"studio","tab":"home","label":"Open Studio"},
+    "studio.command-palette": {"kind":"studio","tab":"home","label":"Open command palette"},
+    "studio.workspaces": {"kind":"studio","tab":"home","label":"Open workspaces"},
+    "studio.watch-manager": {"kind":"studio","tab":"watch","label":"Open watch manager"},
+    "studio.profile-history": {"kind":"studio","tab":"history","label":"Open profile history"},
+    "studio.activity-timeline": {"kind":"studio","tab":"history","label":"Open activity timeline"},
+    "studio.vault": {"kind":"studio","tab":"vault","label":"Open vault"},
+    "studio.rules": {"kind":"studio","tab":"rules","label":"Open rules"},
+    "studio.audit": {"kind":"studio","tab":"rules","label":"Open audit log"},
+    "studio.undo": {"kind":"studio","tab":"rules","label":"Undo last Studio action"},
+    "studio.analytics": {"kind":"studio","tab":"home","label":"Open Studio analytics"}
+  });
+  const FL_ACTION_CHROME = Object.freeze({
+    "fl-filter-panel": {"body":"fl-panel-body","toggle":"fl-panel-toggle"},
+    "flhp-panel": {"body":"flhp-main","toggle":"flhp-toggle"},
+    "fl-site-panel": {"body":"fl-site-body","toggle":"fl-site-toggle"},
+    "fl-advanced-panel": {"body":"fl-advanced-body","toggle":"fl-advanced-toggle"},
+    "fl-profiles-panel": {"body":"fl-profiles-body","toggle":"fl-profiles-toggle"},
+    "fl-block-panel": {"body":"fl-block-body","toggle":"fl-block-toggle"},
+    "fl-shortcuts-panel": {"body":"fl-shortcuts-body","toggle":"fl-shortcuts-toggle"},
+    "fl-perf-controls": {"body":"fl-perf-body","toggle":"fl-perf-toggle"},
+    "fl-system-panel": {"body":"fl-system-body","toggle":"fl-system-toggle"}
+  });
+  const FL_ACTION_PARENTS = Object.freeze({
+    "fl-site-panel": "fl-filter-panel",
+    "fl-shortcuts-panel": "fl-system-panel",
+    "fl-perf-controls": "fl-system-panel",
+    "fl-advanced-panel": "fl-system-panel"
+  });
+  const FL_ACTION_ALIASES = Object.freeze({
+    "basic.filters": "filter.apply",
+    "basic.soft-block": "filter.soft-block",
+    "basic.seen": "seen.mark",
+    "basic.sfw-nsfw": "display.mode",
+    "basic.infinite-scroll": "display.infinite-scroll",
+    "basic.navigation": "navigation.next",
+    "basic.shortcuts": "navigation.next",
+    "basic.nsfw-mode": "display.mode",
+    "basic.toasts": "filter.apply",
+    "basic.organisation-cards": "display.org-cards",
+    "pro.highlighter": "highlight.apply",
+    "pro.whitelist": "whitelist.apply",
+    "pro.mutes": "mute.create",
+    "pro.snooze": "snooze.create",
+    "pro.notes": "profile.note",
+    "pro.identity-notes": "profile.note",
+    "pro.visit-history": "profile.visit",
+    "pro.visit-log": "profile.visit",
+    "pro.org-cards": "display.org-cards",
+    "pro.profile-pins": "profile.pin",
+    "pro.profile-compare": "profile.compare",
+    "pro.mentions": "profile.mention",
+    "pro.private-session": "privacy.session",
+    "pro.similar": "profile.similar",
+    "pro.watch": "profile.watch",
+    "pro.watches": "profile.watch",
+    "pro.paranoid-clear": "privacy.clear",
+    "pro.advanced-shortcuts": "navigation.advanced",
+    "pro.feed-mutes": "mute.create",
+    "studio.rule-builder": "studio.rules",
+    "studio.audit-history": "studio.audit"
+  });
+  const FL_EVENT_PROTOCOL = "fl-tools-event-v1";
+  const FL_EVENT_NAME = "fltools:event";
+  const FL_EVENT_TOPICS = Object.freeze({
+    "PROFILE_VISITED": "profile.visited",
+    "PROFILE_PIN_CREATED": "profile.pin.created",
+    "PROFILE_NOTE_CREATED": "profile.note.created",
+    "PROFILE_COMPARED": "profile.compared",
+    "MUTE_CREATED": "mute.created",
+    "SNOOZE_CREATED": "snooze.created",
+    "PROFILE_WATCH_CREATED": "profile.watch.created",
+    "PROFILE_CHANGED": "profile.changed"
+  });
+  const FL_EVENT_PAYLOAD_KEYS = Object.freeze([
+    "nick",
+    "age",
+    "gender",
+    "role",
+    "location",
+    "until",
+    "list"
+  ]);
+  function flCanonicalCapability(id) {
+    id = String(id || "").toLowerCase();
+    return FL_ACTION_ALIASES[id] || id;
+  }
+  function flEventPayload(payload) {
+    var src = payload && typeof payload === "object" && !Array.isArray(payload) ? payload : {};
+    var out = {};
+    FL_EVENT_PAYLOAD_KEYS.forEach(function (key) {
+      if (src[key] == null || src[key] === "") return;
+      if (typeof src[key] === "object") return;
+      out[key] = src[key];
+    });
+    return out;
+  }
+  function flPublishEvent(topic, payload, extra) {
+    try {
+      if (typeof sessionStorage !== "undefined" && sessionStorage.getItem("fl_private_session") === "1") return false;
+    } catch (_) {}
+    if (typeof window === "undefined" || typeof window.dispatchEvent !== "function") return false;
+    payload = flEventPayload(payload);
+    if (topic === "profile.visited") {
+      var nick = String(payload.nick || "").toLowerCase();
+      var key = "visited:" + nick;
+      var now = Date.now();
+      flPublishEvent._stamp = flPublishEvent._stamp || {};
+      if (nick && flPublishEvent._stamp[key] && now - flPublishEvent._stamp[key] < 30000) return false;
+      if (nick) flPublishEvent._stamp[key] = now;
+    }
+    var detail = {
+      protocol: FL_EVENT_PROTOCOL,
+      topic: String(topic || ""),
+      payload: payload,
+      at: new Date().toISOString(),
+      source: extra && extra.source ? extra.source : (typeof FL_EDITION !== "undefined" ? FL_EDITION : "studio")
+    };
+    try {
+      window.dispatchEvent(new CustomEvent(FL_EVENT_NAME, { detail: detail }));
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+  /* END generated:orchestration */
+  /* BEGIN generated:scanner */
+  var FLScanner = (function () {
+    "use strict";
+    const KINDS = Object.freeze({
+      PROFILE: "profile",
+      FEED: "feed",
+      TEXT: "text"
+    });
+
+    const KIND_ORDER = Object.freeze(["feed", "profile", "text"]);
+
+    const DEFAULT_MODULES = Object.freeze({
+      profile: Object.freeze(["mentions", "notes", "pins", "highlighter", "profile-model", "watches"]),
+      feed: Object.freeze(["filters", "seen", "mutes", "snooze"]),
+      text: Object.freeze(["mentions"])
+    });
+
+    const SELECTORS = Object.freeze({
+      feed: "[data-story-uid], [data-feed-story], [data-feed-dwell-target], [data-controller*='feed-story']",
+      profileCard: "[data-member-card], .w-full.rounded-sm.cursor-pointer",
+      profileLink: "a[href^='/']",
+      ignore: [
+        "#fl-tools-dock",
+        "#fl-settings-launcher",
+        "#fl-browse-chips",
+        "#fl-studio-panel",
+        "#fl-studio-palette",
+        "#fl-tools-modal-root",
+        ".lt-limit-hl",
+        "mark.lt-limit-hl",
+        ".lt-mention",
+        ".lt-pin-chip",
+        ".lt-note-chip",
+        ".lt-qa-bar",
+        ".lt-seen-chip",
+        ".lt-card-chips",
+        ".lt-card-chip",
+        ".lt-why-hidden",
+        "#fl-list-pager-clone",
+        ".fl-fetish-groups"
+      ].join(", ")
+    });
+
+    const RESERVED_NICKS = Object.freeze({
+      home: 1, p: 1, groups: 1, events: 1, inbox: 1, settings: 1, search: 1, explore: 1,
+      places: 1, help: 1, legal: 1, languages: 1, pictures: 1, videos: 1, posts: 1,
+      writings: 1, fetishes: 1, discussions: 1, notifications: 1, requests: 1, guide: 1,
+      kinksters: 1, friends: 1, following: 1, followers: 1, about: 1
+    });
+
+    const TEXT_SKIP_TAGS = /^(SCRIPT|STYLE|TEXTAREA|INPUT|SELECT|CODE|PRE|SVG|A|BUTTON|LABEL|MARK|NOSCRIPT)$/i;
+    const MENTION_HINT = /@[A-Za-z]/;
+
+    function now() {
+      return typeof performance !== "undefined" && performance.now ? performance.now() : Date.now();
+    }
+
+    function tagName(el) {
+      return String((el && el.tagName) || "").toUpperCase();
+    }
+
+    function attr(el, name) {
+      if (!el || typeof el.getAttribute !== "function") return "";
+      return el.getAttribute(name) || "";
+    }
+
+    function classNames(el) {
+      if (!el) return [];
+      if (el.classList && typeof el.classList.contains === "function") {
+        return Array.from(el.classList);
+      }
+      return String(el.className || "").split(/\s+/).filter(Boolean);
+    }
+
+    function matchSimple(el, selector) {
+      selector = String(selector || "").trim();
+      if (!el || el.nodeType !== 1 || !selector) return false;
+      if (typeof el.matches === "function") {
+        try { return el.matches(selector); } catch (_) { /* fall through to the duck-typed matcher */ }
+      }
+      let rest = selector;
+      const tag = rest.match(/^[a-zA-Z][\w-]*/);
+      if (tag) {
+        if (tagName(el) !== tag[0].toUpperCase()) return false;
+        rest = rest.slice(tag[0].length);
+      }
+      const tokenRe = /#([A-Za-z][\w-]*)|\.([A-Za-z][\w-]*)|\[([A-Za-z_:][\w-]*)(?:\s*([*^$]?=)\s*(['"]?)([^\]'"]*)\5)?\]/g;
+      let match;
+      let saw = false;
+      while ((match = tokenRe.exec(rest))) {
+        saw = true;
+        if (match[1]) {
+          if (String(el.id || "") !== match[1]) return false;
+        } else if (match[2]) {
+          if (classNames(el).indexOf(match[2]) === -1) return false;
+        } else {
+          const name = match[3];
+          const op = match[4];
+          const expected = match[6] == null ? "" : match[6];
+          const present = typeof el.hasAttribute === "function"
+            ? el.hasAttribute(name)
+            : (el.attrs ? Object.prototype.hasOwnProperty.call(el.attrs, name) : attr(el, name) !== "");
+          const value = attr(el, name);
+          if (!op) {
+            if (!present) return false;
+          } else if (op === "=") {
+            if (value !== expected) return false;
+          } else if (op === "^=") {
+            if (value.indexOf(expected) !== 0) return false;
+          } else if (op === "*=") {
+            if (value.indexOf(expected) === -1) return false;
+          } else if (op === "$=") {
+            if (value.slice(-expected.length) !== expected) return false;
+          }
+        }
+      }
+      return saw || !!tag;
+    }
+
+    function elMatches(el, selector) {
+      if (!el || el.nodeType !== 1) return false;
+      return String(selector || "").split(",").map(function (part) {
+        return part.trim();
+      }).filter(Boolean).some(function (part) {
+        return matchSimple(el, part);
+      });
+    }
+
+    function parentOf(el) {
+      return (el && (el.parentElement || el.parentNode)) || null;
+    }
+
+    function closest(el, selector) {
+      let node = el && el.nodeType === 3 ? parentOf(el) : el;
+      while (node && node.nodeType === 1) {
+        if (elMatches(node, selector)) return node;
+        node = parentOf(node);
+      }
+      return null;
+    }
+
+    function queryAll(root, selector) {
+      if (!root || root.nodeType !== 1) return [];
+      if (typeof root.querySelectorAll === "function") {
+        try { return Array.from(root.querySelectorAll(selector)); } catch (_) { /* walk */ }
+      }
+      const found = [];
+      walkElements(root, function (el) {
+        if (el !== root && elMatches(el, selector)) found.push(el);
+      });
+      return found;
+    }
+
+    function walkElements(root, visit) {
+      const kids = root && (root.children || root.childNodes || root.kids) || [];
+      Array.from(kids).forEach(function (child) {
+        if (!child || child.nodeType !== 1) return;
+        visit(child);
+        walkElements(child, visit);
+      });
+    }
+
+    function isIgnored(el, options) {
+      if (!el) return true;
+      const host = el.nodeType === 3 ? parentOf(el) : el;
+      if (!host || host.nodeType !== 1) return true;
+      if (closest(host, SELECTORS.ignore)) return true;
+      if (options && typeof options.isComment === "function" && options.isComment(host)) return true;
+      return false;
+    }
+
+    function nickFromHref(href) {
+      const raw = String(href || "").split("?")[0].split("#")[0];
+      const match = raw.match(/^\/([A-Za-z0-9_.-]+)\/?$/);
+      if (!match) return "";
+      const nick = match[1].toLowerCase();
+      return RESERVED_NICKS[nick] ? "" : nick;
+    }
+
+    function isProfileLink(el) {
+      if (tagName(el) !== "A") return false;
+      return !!nickFromHref(attr(el, "href"));
+    }
+
+    function isFeedItem(el) {
+      return elMatches(el, SELECTORS.feed);
+    }
+
+    function isProfileCard(el) {
+      if (!el || el.nodeType !== 1) return false;
+      if (attr(el, "data-member-card") || (el.hasAttribute && el.hasAttribute("data-member-card"))) return true;
+      if (!elMatches(el, ".w-full.rounded-sm.cursor-pointer")) return false;
+      if (isProfileLink(el)) return true;
+      return queryAll(el, SELECTORS.profileLink).some(isProfileLink);
+    }
+
+    function isTextCandidate(node, options) {
+      if (!node || node.nodeType !== 3) return false;
+      if (options && options.text === false) return false;
+      const parent = parentOf(node);
+      if (!parent || parent.nodeType !== 1) return false;
+      if (TEXT_SKIP_TAGS.test(tagName(parent))) return false;
+      if (parent.isContentEditable) return false;
+      if (isIgnored(parent, options)) return false;
+      return MENTION_HINT.test(node.nodeValue || node.textContent || "");
+    }
+
+    function candidate(node, kinds, reason) {
+      const unique = [];
+      (kinds || []).forEach(function (kind) {
+        if (KIND_ORDER.indexOf(kind) !== -1 && unique.indexOf(kind) === -1) unique.push(kind);
+      });
+      if (!node || !unique.length) return null;
+      return { node: node, kinds: unique, reason: reason || unique[0] };
+    }
+
+    function classify(node, options) {
+      if (!node || isIgnored(node, options)) return null;
+      if (node.nodeType === 3) {
+        return isTextCandidate(node, options) ? candidate(node, ["text"], "mention-text") : null;
+      }
+      if (node.nodeType !== 1) return null;
+      if (isFeedItem(node) && !isProfileCard(node)) return candidate(node, ["feed"], "feed-item");
+      if (isProfileCard(node)) return candidate(node, ["profile", "feed"], "profile-card");
+      if (isProfileLink(node)) return candidate(node, ["profile"], "profile-link");
+      return null;
+    }
+
+    function collectText(root, options, out) {
+      if (options && options.text === false) return;
+      const host = root.nodeType === 3 ? parentOf(root) : root;
+      if (!host) return;
+      const sample = String(host.textContent || host.nodeValue || "");
+      if (!MENTION_HINT.test(sample)) return;
+      if (typeof host.createTreeWalker === "function" || (typeof document !== "undefined" && document.createTreeWalker && host.nodeType === 1)) {
+        try {
+          const doc = host.ownerDocument || document;
+          const walker = doc.createTreeWalker(host, NodeFilter.SHOW_TEXT, null);
+          let node = host.nodeType === 3 ? root : walker.nextNode();
+          while (node) {
+            if (isTextCandidate(node, options)) out.push(candidate(node, ["text"], "mention-text"));
+            node = walker.nextNode();
+          }
+          return;
+        } catch (_) { /* walk childNodes */ }
+      }
+      function walk(node) {
+        if (!node) return;
+        if (node.nodeType === 3) {
+          if (isTextCandidate(node, options)) out.push(candidate(node, ["text"], "mention-text"));
+          return;
+        }
+        if (node.nodeType !== 1) return;
+        if (TEXT_SKIP_TAGS.test(tagName(node))) return;
+        Array.from(node.childNodes || node.kids || []).forEach(walk);
+      }
+      walk(root);
+    }
+
+    function collect(root, options) {
+      const out = [];
+      if (!root || isIgnored(root, options)) return out;
+      const self = classify(root, options);
+      if (self) out.push(self);
+      if (root.nodeType !== 1) return uniqueCandidates(out);
+
+      queryAll(root, SELECTORS.feed).forEach(function (el) {
+        if (el === root || isIgnored(el, options) || isProfileCard(el)) return;
+        out.push(candidate(el, ["feed"], "feed-item"));
+      });
+
+      queryAll(root, SELECTORS.profileCard).forEach(function (el) {
+        if (el === root || isIgnored(el, options) || !isProfileCard(el)) return;
+        const wrap = closest(el, "[data-member-card]");
+        if (wrap && wrap !== el) return;
+        out.push(candidate(el, ["profile", "feed"], "profile-card"));
+      });
+
+      queryAll(root, SELECTORS.profileLink).forEach(function (el) {
+        if (el === root || !isProfileLink(el) || isIgnored(el, options)) return;
+        if (closest(el, SELECTORS.profileCard)) return;
+        out.push(candidate(el, ["profile"], "profile-link"));
+      });
+
+      collectText(root, options, out);
+      return uniqueCandidates(out);
+    }
+
+    function fromMutations(mutations, options) {
+      const out = [];
+      Array.from(mutations || []).forEach(function (mutation) {
+        Array.from((mutation && mutation.addedNodes) || []).forEach(function (node) {
+          if (isIgnored(node, options)) return;
+          collect(node, options).forEach(function (item) { out.push(item); });
+        });
+      });
+      return uniqueCandidates(out);
+    }
+
+    function uniqueCandidates(list) {
+      const order = [];
+      const byNode = new Map();
+      (list || []).forEach(function (item) {
+        if (!item || !item.node) return;
+        const kinds = item.kinds || (item.kind ? [item.kind] : []);
+        const prev = byNode.get(item.node);
+        if (!prev) {
+          const next = candidate(item.node, kinds, item.reason);
+          if (!next) return;
+          byNode.set(item.node, next);
+          order.push(next);
+          return;
+        }
+        kinds.forEach(function (kind) {
+          if (KIND_ORDER.indexOf(kind) !== -1 && prev.kinds.indexOf(kind) === -1) prev.kinds.push(kind);
+        });
+      });
+      return order;
+    }
+
+    function merge(left, right) {
+      return uniqueCandidates([].concat(left || [], right || []));
+    }
+
+    function kindSet(candidates) {
+      const set = {};
+      uniqueCandidates(candidates).forEach(function (item) {
+        item.kinds.forEach(function (kind) { set[kind] = true; });
+      });
+      return Object.keys(set);
+    }
+
+    function modulesFor(kind) {
+      return (DEFAULT_MODULES[kind] || []).slice();
+    }
+
+    function nodesFor(candidates, kind) {
+      return uniqueCandidates(candidates).filter(function (item) {
+        return item.kinds.indexOf(kind) !== -1;
+      }).map(function (item) { return item.node; });
+    }
+
+    function createScanner(options) {
+      const opts = options || {};
+      const state = {
+        scans: 0,
+        skipped: 0,
+        durationMs: 0,
+        lastScanMs: 0,
+        paused: false,
+        delayMs: opts.delayMs == null ? 120 : Number(opts.delayMs)
+      };
+      const handlers = { profile: [], feed: [], text: [] };
+      let pending = [];
+      let timer = null;
+      let seq = 0;
+
+      function record(start, skipped) {
+        if (skipped || state.paused) {
+          state.skipped += 1;
+          return snapshot();
+        }
+        const elapsed = start == null ? 0 : now() - start;
+        state.scans += 1;
+        state.lastScanMs = elapsed;
+        state.durationMs += elapsed;
+        return snapshot();
+      }
+
+      function snapshot() {
+        return {
+          scans: state.scans,
+          skipped: state.skipped,
+          durationMs: Math.round(state.durationMs),
+          lastScanMs: Math.round(state.lastScanMs),
+          paused: state.paused,
+          delayMs: state.delayMs,
+          pending: pending.length
+        };
+      }
+
+      function register(kind, handler, meta) {
+        kind = String(kind || "").toLowerCase();
+        if (KIND_ORDER.indexOf(kind) === -1) throw new TypeError("Scanner kind must be profile, feed, or text");
+        if (typeof handler !== "function") throw new TypeError("Scanner handler must be a function");
+        const info = meta || {};
+        const id = String(info.id || handler.name || ("handler-" + (seq += 1)));
+        handlers[kind] = handlers[kind].filter(function (entry) { return entry.id !== id; });
+        handlers[kind].push({ id: id, fn: handler, modules: info.modules || modulesFor(kind) });
+        return id;
+      }
+
+      function unregister(id) {
+        const key = String(id || "");
+        KIND_ORDER.forEach(function (kind) {
+          handlers[kind] = handlers[kind].filter(function (entry) { return entry.id !== key; });
+        });
+      }
+
+      function dispatch(candidates) {
+        const batch = uniqueCandidates(candidates);
+        if (state.paused) {
+          record(null, true);
+          return { ran: [], kinds: [], skipped: true, count: batch.length };
+        }
+        if (!batch.length) return { ran: [], kinds: [], skipped: false, count: 0 };
+        const start = now();
+        const ran = [];
+        KIND_ORDER.forEach(function (kind) {
+          const items = batch.filter(function (item) { return item.kinds.indexOf(kind) !== -1; });
+          if (!items.length) return;
+          handlers[kind].forEach(function (entry) {
+            entry.fn({
+              kind: kind,
+              candidates: items,
+              nodes: items.map(function (item) { return item.node; }),
+              modules: entry.modules.slice()
+            });
+            ran.push(entry.id);
+          });
+        });
+        record(start);
+        return { ran: ran, kinds: kindSet(batch), skipped: false, count: batch.length };
+      }
+
+      function queue(candidates) {
+        pending = merge(pending, candidates);
+        if (!pending.length) return snapshot();
+        if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+        const wait = Math.max(0, Number(state.delayMs) || 0);
+        function flush() {
+          const batch = pending;
+          pending = [];
+          timer = null;
+          dispatch(batch);
+        }
+        if (wait === 0) {
+          flush();
+          return snapshot();
+        }
+        timer = setTimeout(flush, wait);
+        return snapshot();
+      }
+
+      function ingest(mutations, extra) {
+        return queue(fromMutations(mutations, extra || opts));
+      }
+
+      return {
+        KINDS: KINDS,
+        pause() { state.paused = true; },
+        resume() { state.paused = false; },
+        setDelay(ms) { state.delayMs = Math.max(0, Number(ms) || 0); },
+        shouldSkip() { return state.paused; },
+        record,
+        snapshot,
+        register,
+        unregister,
+        classify(node) { return classify(node, opts); },
+        collect(root) { return collect(root, opts); },
+        fromMutations(mutations) { return fromMutations(mutations, opts); },
+        dispatch,
+        queue,
+        ingest,
+        kindSet,
+        modulesFor,
+        resetForTests() {
+          pending = [];
+          if (timer) clearTimeout(timer);
+          timer = null;
+          KIND_ORDER.forEach(function (kind) { handlers[kind] = []; });
+          state.scans = 0;
+          state.skipped = 0;
+          state.durationMs = 0;
+          state.lastScanMs = 0;
+          state.paused = false;
+        }
+      };
+    }
+    return {
+      KINDS: KINDS,
+      KIND_ORDER: KIND_ORDER,
+      DEFAULT_MODULES: DEFAULT_MODULES,
+      SELECTORS: SELECTORS,
+      classify: classify,
+      collect: collect,
+      fromMutations: fromMutations,
+      uniqueCandidates: uniqueCandidates,
+      merge: merge,
+      kindSet: kindSet,
+      modulesFor: modulesFor,
+      nodesFor: nodesFor,
+      isIgnored: isIgnored,
+      isProfileLink: isProfileLink,
+      isProfileCard: isProfileCard,
+      isFeedItem: isFeedItem,
+      createScanner: createScanner
+    };
+  })();
+  /* END generated:scanner */
+  /* BEGIN generated:page-tweaks */
+  var FLPageTweaks = (function () {
+    "use strict";
+    const OWN_KINKS_KEY = "fl_own_kinks";
+    const FOLLOWERS_KEY = "fl_studio_follower_counts";
+    const MAX_FOLLOWER_SNAPSHOTS = 90;
+    const RELATIVE_TIME = /\b(\d+\s*(seconds?|minutes?|hours?|days?|weeks?|months?|years?)\s*ago|just now|yesterday|today)\b/i;
+    const RESERVED = Object.freeze({
+      home: 1, p: 1, groups: 1, events: 1, inbox: 1, settings: 1, search: 1, explore: 1,
+      places: 1, help: 1, legal: 1, languages: 1, pictures: 1, videos: 1, posts: 1,
+      writings: 1, fetishes: 1, discussions: 1, notifications: 1, requests: 1, guide: 1,
+      kinksters: 1, friends: 1, following: 1, followers: 1, about: 1, login: 1, signup: 1
+    });
+    const FETISH_CATEGORIES = Object.freeze([
+      ["giving", "Giving"],
+      ["receiving", "Receiving"],
+      ["wearing", "Wearing"],
+      ["watching others wear", "Watching others wear"],
+      ["into", "Into"]
+    ]);
+    const TOOLS_CHROME = "#fl-tools-dock, #fl-settings-launcher, #fl-studio-panel, #fl-studio-palette, #fl-browse-chips, #fl-studio-launcher";
+
+    function nickFromPath(href) {
+      try {
+        const raw = String(href || "");
+        if (!raw || raw.charAt(0) === "#") return "";
+        const path = raw.indexOf("://") >= 0
+          ? raw.replace(/^https?:\/\/[^/]+/i, "")
+          : raw;
+        const clean = path.split(/[?#]/)[0].replace(/\/+$/, "");
+        const parts = clean.split("/").filter(Boolean);
+        if (!parts.length) return "";
+        let nick = parts[0];
+        if (parts[0] === "users") {
+          nick = parts[2] && !/^\d+$/.test(parts[2]) ? parts[2] : "";
+        }
+        nick = String(nick || "").toLowerCase();
+        if (!nick || RESERVED[nick]) return "";
+        return nick;
+      } catch (_) {
+        return "";
+      }
+    }
+
+    function isRelativeTime(text) {
+      return RELATIVE_TIME.test(String(text || "").trim());
+    }
+
+    function formatAbsoluteTime(value) {
+      const raw = String(value || "").trim();
+      if (!raw) return "";
+      let ms = Date.parse(raw);
+      if (!Number.isFinite(ms) && /^\d{10,13}$/.test(raw)) {
+        ms = raw.length > 10 ? Number(raw) : Number(raw) * 1000;
+      }
+      if (!Number.isFinite(ms)) return "";
+      const d = new Date(ms);
+      try {
+        return d.toLocaleString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        });
+      } catch (_) {
+        return d.toISOString();
+      }
+    }
+
+    function fetishCategory(hint) {
+      const text = String(hint || "").toLowerCase();
+      for (let i = 0; i < FETISH_CATEGORIES.length; i += 1) {
+        if (text.indexOf(FETISH_CATEGORIES[i][0]) !== -1) return FETISH_CATEGORIES[i][1];
+      }
+      return "Into";
+    }
+
+    function groupFetishEntries(entries) {
+      const groups = {};
+      FETISH_CATEGORIES.forEach(function (pair) { groups[pair[1]] = []; });
+      (entries || []).forEach(function (entry) {
+        const name = String(entry && entry.name || "").trim();
+        if (!name) return;
+        const label = fetishCategory(entry && entry.hint);
+        groups[label].push(name);
+      });
+      return FETISH_CATEGORIES.map(function (pair) {
+        return { label: pair[1], items: groups[pair[1]] };
+      }).filter(function (group) { return group.items.length; });
+    }
+
+    function parseTagLine(text) {
+      const clean = String(text || "").replace(/\s+/g, " ").trim();
+      const match = clean.match(/(\d{2,3})\s*([A-Za-z+][\w+\/-]{0,24})?\s*(.*)$/);
+      if (!match) return { age: null, gender: "", role: "" };
+      const age = parseInt(match[1], 10);
+      return {
+        age: Number.isFinite(age) && age >= 18 && age <= 99 ? age : null,
+        gender: String(match[2] || "").toLowerCase(),
+        role: String(match[3] || "").toLowerCase().replace(/[•|,].*$/, "").trim()
+      };
+    }
+
+    function ageBucket(age) {
+      if (!age) return "";
+      if (age < 25) return "18–24";
+      if (age < 30) return "25–29";
+      if (age < 40) return "30–39";
+      if (age < 50) return "40–49";
+      return "50+";
+    }
+
+    function countDemographics(tagLines) {
+      const stats = { total: 0, genders: {}, roles: {}, ages: {} };
+      (tagLines || []).forEach(function (line) {
+        const parsed = parseTagLine(line);
+        if (!parsed.age && !parsed.gender && !parsed.role) return;
+        stats.total += 1;
+        if (parsed.gender) stats.genders[parsed.gender] = (stats.genders[parsed.gender] || 0) + 1;
+        if (parsed.role) stats.roles[parsed.role] = (stats.roles[parsed.role] || 0) + 1;
+        const bucket = ageBucket(parsed.age);
+        if (bucket) stats.ages[bucket] = (stats.ages[bucket] || 0) + 1;
+      });
+      return stats;
+    }
+
+    function topCounts(map, limit) {
+      return Object.keys(map || {})
+        .map(function (key) { return { key: key, count: map[key] }; })
+        .sort(function (a, b) { return b.count - a.count || a.key.localeCompare(b.key); })
+        .slice(0, limit || 3);
+    }
+
+    function formatDemographics(stats) {
+      if (!stats || !stats.total) return "No member cards on this page.";
+      const bits = [stats.total + (stats.total === 1 ? " person" : " people")];
+      topCounts(stats.genders, 3).forEach(function (row) { bits.push(row.key.toUpperCase() + " " + row.count); });
+      topCounts(stats.roles, 2).forEach(function (row) { bits.push(row.key + " " + row.count); });
+      topCounts(stats.ages, 2).forEach(function (row) { bits.push(row.key + " " + row.count); });
+      return bits.join(" · ");
+    }
+
+    function parseCountFromHeading(text) {
+      const src = String(text || "").replace(/\s+/g, " ");
+      const followers = src.match(/([\d,]+)\s*followers\b/i);
+      const following = src.match(/([\d,]+)\s*following\b/i);
+      function num(match) {
+        if (!match) return null;
+        const n = parseInt(String(match[1]).replace(/,/g, ""), 10);
+        return Number.isFinite(n) ? n : null;
+      }
+      return { followers: num(followers), following: num(following) };
+    }
+
+    function recordFollowerSnapshot(list, snapshot, at) {
+      const next = Array.isArray(list) ? list.slice() : [];
+      const followers = snapshot && Number.isFinite(snapshot.followers) ? snapshot.followers : null;
+      const following = snapshot && Number.isFinite(snapshot.following) ? snapshot.following : null;
+      if (followers == null && following == null) return next;
+      const stamp = at || new Date().toISOString();
+      const last = next[0];
+      if (last && last.followers === followers && last.following === following) {
+        const prev = Date.parse(last.at || "") || 0;
+        if (Date.parse(stamp) - prev < 12 * 3600000) return next;
+      }
+      next.unshift({ at: stamp, followers: followers, following: following });
+      return next.slice(0, MAX_FOLLOWER_SNAPSHOTS);
+    }
+
+    function formatFollowerHistory(list) {
+      const rows = Array.isArray(list) ? list : [];
+      if (!rows.length) return "Open your followers page to snapshot a count. Local only.";
+      const latest = rows[0];
+      const parts = [];
+      if (latest.followers != null) parts.push(latest.followers.toLocaleString() + " followers");
+      if (latest.following != null) parts.push(latest.following.toLocaleString() + " following");
+      if (rows.length > 1 && rows[1].followers != null && latest.followers != null) {
+        const delta = latest.followers - rows[1].followers;
+        if (delta) parts.push((delta > 0 ? "+" : "") + delta + " since last snapshot");
+      }
+      return parts.join(" · ") || "No follower counts yet.";
+    }
+
+    function inToolsChrome(el) {
+      return !!(el && el.closest && el.closest(TOOLS_CHROME));
+    }
+
+    function applyVisitedLinks(root, visitMap) {
+      if (!root || typeof root.querySelectorAll !== "function") return 0;
+      const map = visitMap && typeof visitMap === "object" ? visitMap : {};
+      let painted = 0;
+      root.querySelectorAll("a[href^='/'], a[href^='https://fetlife.com/']").forEach(function (link) {
+        if (inToolsChrome(link)) return;
+        const nick = nickFromPath(link.getAttribute("href") || "");
+        if (!nick) {
+          link.classList.remove("fl-visited-nick");
+          return;
+        }
+        const seen = Object.prototype.hasOwnProperty.call(map, nick);
+        link.classList.toggle("fl-visited-nick", seen);
+        if (seen) painted += 1;
+      });
+      return painted;
+    }
+
+    function applyTimestamps(root) {
+      if (!root || typeof root.querySelectorAll !== "function") return 0;
+      let changed = 0;
+      root.querySelectorAll("time[datetime], [datetime]").forEach(function (el) {
+        if (inToolsChrome(el) || el.getAttribute("data-fl-time") === "1") return;
+        const abs = formatAbsoluteTime(el.getAttribute("datetime"));
+        if (!abs) return;
+        const current = String(el.textContent || "").trim();
+        if (current && !isRelativeTime(current) && current.length > 12) return;
+        if (current === abs) {
+          el.setAttribute("data-fl-time", "1");
+          return;
+        }
+        if (!el.getAttribute("title")) el.setAttribute("title", current || abs);
+        el.textContent = abs;
+        el.setAttribute("data-fl-time", "1");
+        changed += 1;
+      });
+      root.querySelectorAll("[title]").forEach(function (el) {
+        if (inToolsChrome(el) || el.getAttribute("data-fl-time") === "1") return;
+        if (el.tagName === "TIME" || el.hasAttribute("datetime")) return;
+        const title = el.getAttribute("title") || "";
+        const abs = formatAbsoluteTime(title);
+        if (!abs || !isRelativeTime(el.textContent || "")) return;
+        el.textContent = abs;
+        el.setAttribute("data-fl-time", "1");
+        changed += 1;
+      });
+      return changed;
+    }
+
+    function collectOwnKinks(root) {
+      const names = [];
+      const seen = {};
+      const scope = (root && root.querySelector && (root.querySelector("#profile-fetishes") || root)) || root;
+      if (!scope || typeof scope.querySelectorAll !== "function") return names;
+      scope.querySelectorAll('a[href*="/fetishes/"]').forEach(function (link) {
+        const name = String(link.textContent || "").replace(/\s+/g, " ").trim();
+        const key = name.toLowerCase();
+        if (!name || seen[key]) return;
+        seen[key] = true;
+        names.push(name);
+      });
+      return names;
+    }
+
+    function applySharedKinks(root, kinks) {
+      const set = {};
+      (kinks || []).forEach(function (name) {
+        const key = String(name || "").trim().toLowerCase();
+        if (key) set[key] = true;
+      });
+      const scope = (root && root.querySelector && (root.querySelector("#profile-fetishes") || root)) || root;
+      if (!scope || typeof scope.querySelectorAll !== "function") return 0;
+      let hits = 0;
+      scope.querySelectorAll('a[href*="/fetishes/"]').forEach(function (link) {
+        const key = String(link.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
+        const match = !!set[key];
+        link.classList.toggle("fl-shared-kink", match);
+        if (match) hits += 1;
+      });
+      return hits;
+    }
+
+    function applyFetishGroups(root) {
+      const host = root && root.querySelector && root.querySelector("#profile-fetishes");
+      if (!host) return 0;
+      const links = Array.prototype.slice.call(host.querySelectorAll('a[href*="/fetishes/"]'));
+      if (links.length < 4) return 0;
+      if (host.getAttribute("data-fl-fetish-count") === String(links.length) && host.querySelector(".fl-fetish-group")) return links.length;
+      const entries = links.map(function (link) {
+        const parentText = String((link.parentNode && link.parentNode.textContent) || "");
+        const after = String(link.nextSibling && link.nextSibling.textContent || "");
+        return { link: link, name: String(link.textContent || "").trim(), hint: after + " " + parentText };
+      });
+      const grouped = groupFetishEntries(entries);
+      const wrap = host.ownerDocument.createElement("div");
+      wrap.className = "fl-fetish-groups";
+      grouped.forEach(function (group) {
+        const section = host.ownerDocument.createElement("div");
+        section.className = "fl-fetish-group";
+        const title = host.ownerDocument.createElement("div");
+        title.className = "fl-fetish-group-label";
+        title.textContent = group.label;
+        section.appendChild(title);
+        group.items.forEach(function (name) {
+          const match = entries.filter(function (entry) {
+            return entry.name === name && entry.link && entry.link.parentNode;
+          })[0];
+          if (!match) return;
+          section.appendChild(match.link);
+        });
+        wrap.appendChild(section);
+      });
+      host.textContent = "";
+      host.appendChild(wrap);
+      host.setAttribute("data-fl-fetish-count", String(links.length));
+      return links.length;
+    }
+
+    function applyPagerClone(root) {
+      if (!root || typeof root.querySelector !== "function") return false;
+      const existing = root.querySelector("#fl-list-pager-clone");
+      const nav = root.querySelector('nav[aria-label*="agination" i], nav .pagination, .pagination, nav[aria-label*="page" i]');
+      const source = nav && (nav.closest("nav") || nav);
+      if (!source || !source.querySelector("a[href]")) {
+        if (existing) existing.remove();
+        return false;
+      }
+      if (existing && existing.getAttribute("data-fl-pager-href") === String(source.querySelector("a[href]").getAttribute("href") || "")) {
+        return true;
+      }
+      if (existing) existing.remove();
+      const clone = source.cloneNode(true);
+      clone.id = "fl-list-pager-clone";
+      clone.setAttribute("data-fl-pager-href", String(source.querySelector("a[href]").getAttribute("href") || ""));
+      clone.setAttribute("aria-label", "Page list (copy)");
+      const main = root.querySelector("main") || root.body || root;
+      const firstCard = root.querySelector("[data-member-card], .w-full.rounded-sm.cursor-pointer");
+      if (firstCard && firstCard.parentNode) firstCard.parentNode.insertBefore(clone, firstCard);
+      else if (main && main.firstChild) main.insertBefore(clone, main.firstChild);
+      else return false;
+      return true;
+    }
+
+    function collectPageTagLines(root) {
+      const lines = [];
+      if (!root || typeof root.querySelectorAll !== "function") return lines;
+      const tags = root.querySelectorAll("[data-member-card] .text-sm.font-bold.text-gray-300");
+      if (tags.length) {
+        tags.forEach(function (el) {
+          const text = String(el.textContent || "").replace(/\s+/g, " ").trim();
+          if (/\d{2,3}\s+[A-Za-z]/.test(text)) lines.push(text.slice(0, 80));
+        });
+        return lines;
+      }
+      root.querySelectorAll("[data-member-card]").forEach(function (el) {
+        const text = String(el.textContent || "").replace(/\s+/g, " ").trim();
+        const match = text.match(/\d{2,3}\s+[A-Za-z+][\w+\/-]*\s*[A-Za-z][\w+\/-]*/);
+        if (match) lines.push(match[0].slice(0, 80));
+      });
+      return lines;
+    }
+
+    function countPageDemographics(root) {
+      return countDemographics(collectPageTagLines(root));
+    }
+
+    function tick(ctx) {
+      ctx = ctx || {};
+      const root = ctx.document;
+      if (!root) return { visited: 0, times: 0, kinks: 0, groups: 0, pager: false };
+      const visited = applyVisitedLinks(root, ctx.visitMap);
+      const times = applyTimestamps(root);
+      let groups = 0;
+      let kinks = 0;
+      if (ctx.isProfileHome) {
+        if (ctx.ownNick && ctx.profileNick && ctx.ownNick === ctx.profileNick && typeof ctx.saveOwnKinks === "function") {
+          const found = collectOwnKinks(root);
+          if (found.length) ctx.saveOwnKinks(found);
+        }
+        groups = applyFetishGroups(root);
+        kinks = applySharedKinks(root, ctx.ownKinks || []);
+      }
+      const pager = ctx.isListPage ? applyPagerClone(root) : false;
+      return { visited: visited, times: times, kinks: kinks, groups: groups, pager: pager };
+    }
+    return {
+      OWN_KINKS_KEY: OWN_KINKS_KEY,
+      FOLLOWERS_KEY: FOLLOWERS_KEY,
+      nickFromPath: nickFromPath,
+      isRelativeTime: isRelativeTime,
+      formatAbsoluteTime: formatAbsoluteTime,
+      groupFetishEntries: groupFetishEntries,
+      parseTagLine: parseTagLine,
+      countDemographics: countDemographics,
+      formatDemographics: formatDemographics,
+      parseCountFromHeading: parseCountFromHeading,
+      recordFollowerSnapshot: recordFollowerSnapshot,
+      formatFollowerHistory: formatFollowerHistory,
+      collectOwnKinks: collectOwnKinks,
+      applyVisitedLinks: applyVisitedLinks,
+      applyTimestamps: applyTimestamps,
+      applySharedKinks: applySharedKinks,
+      applyFetishGroups: applyFetishGroups,
+      applyPagerClone: applyPagerClone,
+      countPageDemographics: countPageDemographics,
+      tick: tick
+    };
+  })();
+  /* END generated:page-tweaks */
+  /* BEGIN generated:storage */
+  var FLStorage = (function () {
+    "use strict";
+    function memoryStore() {
+      const data = new Map();
+      return {
+        getItem(key) { return data.has(key) ? data.get(key) : null; },
+        setItem(key, value) { data.set(String(key), String(value)); },
+        removeItem(key) { data.delete(key); }
+      };
+    }
+
+    function backend() {
+      try {
+        if (typeof localStorage !== "undefined" && localStorage) return localStorage;
+      } catch (_) {}
+      return memoryStore();
+    }
+
+    const ROOT = "fl";
+
+    const LAYOUT = Object.freeze({
+      core: Object.freeze(["settings", "metadata"]),
+      basic: Object.freeze(["seen", "presets", "filters", "display", "kinks", "terms", "blocks"]),
+      pro: Object.freeze(["notes", "mutes", "snoozes", "pins", "visits", "watches", "highlighter", "whitelist", "compare", "paranoid", "shortcuts", "limits"]),
+      studio: Object.freeze(["workspaces", "timeline", "audit", "vault", "history", "undo", "facts", "rules", "followers"])
+    });
+
+    const LEGACY = Object.freeze({
+      "core.settings": Object.freeze(["fl_perf_settings"]),
+      "core.metadata": Object.freeze(["fl_settings_schema_version"]),
+      "basic.seen": Object.freeze(["fl_seen_today"]),
+      "basic.presets": Object.freeze(["fl_filter_presets"]),
+      "basic.filters": Object.freeze(["fl_profile_filter_settings", "fl_profile_filter_settings_v3", "fl_profile_filter_settings_v2"]),
+      "basic.display": Object.freeze(["fl_display_settings"]),
+      "basic.kinks": Object.freeze(["fl_own_kinks"]),
+      "basic.terms": Object.freeze(["fl_term_library"]),
+      "basic.blocks": Object.freeze(["fl_block_reasons"]),
+      "pro.notes": Object.freeze(["fl_nick_notes"]),
+      "pro.mutes": Object.freeze(["fl_feed_mutes"]),
+      "pro.snoozes": Object.freeze(["fl_snooze"]),
+      "pro.pins": Object.freeze(["fl_profile_pins"]),
+      "pro.visits": Object.freeze(["fl_visit_log"]),
+      "pro.watches": Object.freeze(["fl_profile_watches"]),
+      "pro.highlighter": Object.freeze(["fl_card_highlighter_settings"]),
+      "pro.whitelist": Object.freeze(["fl_whitelist"]),
+      "pro.compare": Object.freeze(["fl_profile_snapshots"]),
+      "pro.paranoid": Object.freeze(["fl_paranoid"]),
+      "pro.shortcuts": Object.freeze(["fl_tools_pro_shortcuts"]),
+      "pro.limits": Object.freeze(["fl_limit_history"]),
+      "studio.workspaces": Object.freeze(["fl_tools_studio_workspaces"]),
+      "studio.timeline": Object.freeze(["fl_studio_timeline"]),
+      "studio.audit": Object.freeze(["fl_studio_audit"]),
+      "studio.vault": Object.freeze(["fl_studio_vault"]),
+      "studio.history": Object.freeze(["fl_studio_history"]),
+      "studio.undo": Object.freeze(["fl_studio_undo"]),
+      "studio.facts": Object.freeze(["fl_studio_profile_facts"]),
+      "studio.rules": Object.freeze(["fl_studio_rules"]),
+      "studio.followers": Object.freeze(["fl_studio_follower_counts"])
+    });
+
+    function slotForLegacy(legacyKey) {
+      const key = String(legacyKey || "");
+      const ids = Object.keys(LEGACY);
+      for (let i = 0; i < ids.length; i += 1) {
+        if (LEGACY[ids[i]].indexOf(key) !== -1) {
+          const parts = ids[i].split(".");
+          return { id: ids[i], scope: parts[0], name: parts[1] };
+        }
+      }
+      return null;
+    }
+
+    function namespacedKeys() {
+      const keys = [];
+      Object.keys(LAYOUT).forEach(function (scope) {
+        LAYOUT[scope].forEach(function (name) {
+          keys.push(pathKey(scope, name));
+        });
+      });
+      return keys;
+    }
+
+    function pathKey(scope, name) {
+      scope = String(scope || "").toLowerCase();
+      name = String(name || "").toLowerCase();
+      if (!scope || !name) throw new TypeError("Storage path needs a scope and name");
+      return ROOT + "." + scope + "." + name;
+    }
+
+    function slotId(scope, name) {
+      return String(scope || "").toLowerCase() + "." + String(name || "").toLowerCase();
+    }
+
+    function parseItem(db, key) {
+      try {
+        const raw = db.getItem(key);
+        if (raw == null || raw === "") return undefined;
+        return JSON.parse(raw);
+      } catch (_) {
+        return undefined;
+      }
+    }
+
+    function writeItem(db, key, value) {
+      try {
+        db.setItem(key, JSON.stringify(value));
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function createStorage(prefix, store) {
+      const p = prefix == null ? "fl_" : String(prefix);
+      const db = store || backend();
+      return {
+        prefix: p,
+        key(name) { return p + name; },
+        read(name, fallback) {
+          try {
+            const raw = db.getItem(p + name);
+            if (raw == null || raw === "") return fallback;
+            return JSON.parse(raw);
+          } catch (_) {
+            return fallback;
+          }
+        },
+        write(name, value) {
+          try {
+            db.setItem(p + name, JSON.stringify(value));
+            return true;
+          } catch (_) {
+            return false;
+          }
+        },
+        remove(name) {
+          try { db.removeItem(p + name); } catch (_) {}
+        }
+      };
+    }
+
+    function namespaced(storage, getNamespace) {
+      function ns() {
+        if (typeof getNamespace === "function") return String(getNamespace() || "Default") || "Default";
+        return String(getNamespace || "Default") || "Default";
+      }
+      return {
+        prefix: storage.prefix,
+        key: storage.key,
+        read(name, fallback) {
+          const bag = storage.read(name, {});
+          if (!bag || typeof bag !== "object" || Array.isArray(bag)) return fallback;
+          const key = ns();
+          return Object.prototype.hasOwnProperty.call(bag, key) ? bag[key] : fallback;
+        },
+        write(name, value) {
+          const raw = storage.read(name, {});
+          const bag = (raw && typeof raw === "object" && !Array.isArray(raw)) ? Object.assign({}, raw) : {};
+          bag[ns()] = value;
+          return storage.write(name, bag);
+        },
+        remove(name) {
+          const raw = storage.read(name, {});
+          if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+            storage.remove(name);
+            return;
+          }
+          const bag = Object.assign({}, raw);
+          delete bag[ns()];
+          storage.write(name, bag);
+        }
+      };
+    }
+
+    function createTree(store) {
+      const db = store || backend();
+
+      function slot(scope, name) {
+        const id = slotId(scope, name);
+        const key = pathKey(scope, name);
+        const legacy = LEGACY[id] || [];
+        return {
+          id,
+          key,
+          legacy: legacy.slice(),
+          read(fallback) {
+            const next = parseItem(db, key);
+            if (next !== undefined) return next;
+            for (let i = 0; i < legacy.length; i += 1) {
+              const value = parseItem(db, legacy[i]);
+              if (value !== undefined) return value;
+            }
+            return fallback;
+          },
+          write(value) {
+            const ok = writeItem(db, key, value);
+            if (legacy.length) writeItem(db, legacy[0], value);
+            return ok;
+          },
+          remove() {
+            try { db.removeItem(key); } catch (_) {}
+            for (let i = 0; i < legacy.length; i += 1) {
+              try { db.removeItem(legacy[i]); } catch (_) {}
+            }
+          }
+        };
+      }
+
+      function ns(scope) {
+        scope = String(scope || "").toLowerCase();
+        if (!LAYOUT[scope]) throw new TypeError("Unknown storage namespace: " + scope);
+        return {
+          scope,
+          slots: LAYOUT[scope].slice(),
+          slot(name) { return slot(scope, name); },
+          read(name, fallback) { return slot(scope, name).read(fallback); },
+          write(name, value) { return slot(scope, name).write(value); },
+          remove(name) { slot(scope, name).remove(); }
+        };
+      }
+
+      function adoptLegacy() {
+        const copied = [];
+        Object.keys(LEGACY).forEach(function (id) {
+          const parts = id.split(".");
+          const cell = slot(parts[0], parts[1]);
+          if (parseItem(db, cell.key) !== undefined) return;
+          for (let i = 0; i < cell.legacy.length; i += 1) {
+            const value = parseItem(db, cell.legacy[i]);
+            if (value === undefined) continue;
+            cell.write(value);
+            copied.push(id);
+            break;
+          }
+        });
+        return copied;
+      }
+
+      return {
+        LAYOUT,
+        LEGACY,
+        pathKey,
+        slotForLegacy,
+        namespacedKeys,
+        ns,
+        slot,
+        adoptLegacy
+      };
+    }
+    var tree = createTree();
+    try { tree.adoptLegacy(); } catch (_) {}
+    function slotFor(key) {
+      var mapped = slotForLegacy(key);
+      if (mapped) return tree.slot(mapped.scope, mapped.name);
+      var match = String(key || "").match(/^fl\.([a-z]+)\.([a-z]+)$/);
+      if (match && LAYOUT[match[1]] && LAYOUT[match[1]].indexOf(match[2]) !== -1) {
+        return tree.slot(match[1], match[2]);
+      }
+      return null;
+    }
+    function get(key, fallback) {
+      var cell = slotFor(key);
+      if (cell) return cell.read(fallback);
+      try {
+        var raw = localStorage.getItem(key);
+        if (raw == null || raw === "") return fallback;
+        return JSON.parse(raw);
+      } catch (_) { return fallback; }
+    }
+    function set(key, value) {
+      var cell = slotFor(key);
+      if (cell) return cell.write(value);
+      try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch (_) { return false; }
+    }
+    function remove(key) {
+      var cell = slotFor(key);
+      if (cell) { cell.remove(); return; }
+      try { localStorage.removeItem(key); } catch (_) {}
+    }
+    return {
+      LAYOUT: LAYOUT,
+      LEGACY: LEGACY,
+      pathKey: pathKey,
+      slotForLegacy: slotForLegacy,
+      namespacedKeys: namespacedKeys,
+      tree: tree,
+      get: get,
+      set: set,
+      remove: remove,
+      adoptLegacy: function () { return tree.adoptLegacy(); }
+    };
+  })();
+  /* END generated:storage */
+  const flCandidateScanner = FLScanner.createScanner({ delayMs: 120 });
   function flStudioLive() {
     const beat = Number(document.documentElement.getAttribute("data-fl-tools-studio-beat") || 0);
     return document.documentElement.getAttribute("data-fl-tools-studio") === "live" && Date.now() - beat < 4000;
@@ -51,9 +1411,6 @@
   window.addEventListener("pagehide", () => flPublishCapabilities(false));
   flPublishCapabilities(true);
   setInterval(() => { flPublishCapabilities(true); flSyncStudioYield(); }, 1500);
-  const flStudioYieldStyle = document.createElement("style");
-  flStudioYieldStyle.textContent = "html.fl-tools-studio-primary #fl-settings-launcher{display:none!important}";
-  (document.documentElement || document.head).appendChild(flStudioYieldStyle);
   function flNormaliseObject(defaults, value) {
     const source = value && typeof value === "object" && !Array.isArray(value) ? value : {};
     const clean = {};
@@ -84,8 +1441,7 @@
   const FL_SHORTCUTS_KEY = "fl_tools_basic_shortcuts";
   const FL_SHORTCUT_DEFAULTS = { filters:"F", nsfw:"S", next:"N", top:"T" };
   function flNormaliseShortcut(value) { if (typeof value !== "string") return ""; const raw=value.trim(); if (!raw || /^off$/i.test(raw)) return ""; const parts=raw.split("+").map((v)=>v.trim()).filter(Boolean), key=parts.pop(); if(!key)return ""; const mods=["Ctrl","Alt","Shift","Meta"].filter((mod)=>parts.some((v)=>v.toLowerCase()===mod.toLowerCase())); return [...mods,key.length===1?key.toUpperCase():key].join("+"); }
-  function flLoadShortcuts() { try { const saved=JSON.parse(localStorage.getItem(FL_SHORTCUTS_KEY)||"{}"); return Object.fromEntries(Object.entries(FL_SHORTCUT_DEFAULTS).map(([key,value])=>[key,flNormaliseShortcut(saved[key]===undefined?value:saved[key])])); } catch (_) { return {...FL_SHORTCUT_DEFAULTS}; } }
-  function flSaveShortcut(action,value) { const shortcuts=flLoadShortcuts(); shortcuts[action]=flNormaliseShortcut(value); try{localStorage.setItem(FL_SHORTCUTS_KEY,JSON.stringify(shortcuts));}catch(_){} flPublishShortcutMetadata(); return shortcuts[action]; }
+  function flLoadShortcuts() { return { ...FL_SHORTCUT_DEFAULTS }; }
   function flEventShortcut(event) { return [...(event.ctrlKey?["Ctrl"]:[]),...(event.altKey?["Alt"]:[]),...(event.shiftKey?["Shift"]:[]),...(event.metaKey?["Meta"]:[]),event.key.length===1?event.key.toUpperCase():event.key].join("+"); }
   function flShortcutBlocked(shortcut){const node=document.getElementById("fl-settings-launcher"),priority=Number(node?.dataset.launcherPriority||0),id=node?.dataset.launcherId||"";return [...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el===node)return false;let shortcuts=[];try{shortcuts=JSON.parse(el.dataset.launcherShortcuts||"[]");}catch(_){}const other=Number(el.dataset.launcherPriority||0);return shortcuts.includes(shortcut)&&(other>priority||(other===priority&&(el.dataset.launcherId||"").localeCompare(id)<0));});}
   function flShortcutMatch(event,action) { const shortcut=flLoadShortcuts()[action]; return !!shortcut&&flEventShortcut(event)===shortcut&&!flShortcutBlocked(shortcut); }
@@ -99,10 +1455,10 @@
   const FL_PERF_DEFAULTS = { lightweight: false, scanDelay: 120, compactLauncher: false, paused: false, highContrast: false, updateNotifications:false, dockSide: "auto" };
   function flIsNewerVersion(latest,current){const a=String(latest).split(".").map(Number),b=String(current).split(".").map(Number);if(a.some(Number.isNaN)||b.some(Number.isNaN))return false;for(let i=0;i<Math.max(a.length,b.length);i++){const difference=(a[i]||0)-(b[i]||0);if(difference)return difference>0;}return false;}
   async function flCheckForUpdate(){const p=flLoadPerf(),launcher=document.getElementById("fl-settings-launcher");if(!p.updateNotifications){launcher?.removeAttribute("data-update-available");return;}const key="fl_tools_basic_update_check";try{const cached=JSON.parse(localStorage.getItem(key)||"null");if(cached&&Date.now()-cached.checked<86400000)return flShowUpdate(cached.latest);const response=await fetch("https://api.github.com/repos/Typical-Bits/fl-tools-basic/releases/latest",{headers:{Accept:"application/vnd.github+json"}});if(!response.ok)return;const data=await response.json(),latest=String(data.tag_name||"").replace(/^v/,"");localStorage.setItem(key,JSON.stringify({checked:Date.now(),latest}));flShowUpdate(latest);}catch(_){ }function flShowUpdate(latest){launcher?.removeAttribute("data-update-available");if(!flIsNewerVersion(latest,FL_TOOLS_VERSION))return;launcher?.setAttribute("data-update-available",latest);flSetPerfStatus("Update available: "+latest);}}
-  const FL_TELEMETRY = { scans: 0, skipped: 0, durationMs: 0, lastScanMs: 0, record(start, skipped = false) {
-    if (skipped) { this.skipped += 1; return; }
-    this.scans += 1; this.lastScanMs = performance.now() - start; this.durationMs += this.lastScanMs;
-  }, snapshot() { return { scans: this.scans, skipped: this.skipped, durationMs: Math.round(this.durationMs), lastScanMs: Math.round(this.lastScanMs) }; } };
+  const FL_TELEMETRY = {
+    record(start, skipped = false) { return flCandidateScanner.record(start, skipped); },
+    snapshot() { return flCandidateScanner.snapshot(); }
+  };
   const FL_DIAGNOSTIC_ERRORS = [];
   window.addEventListener("error", (event) => { if (/FL[_ ]?Tools/i.test(String(event.message || event.error?.stack || ""))) FL_DIAGNOSTIC_ERRORS.push(String(event.message || event.error)); });
   function flDiagnosticsText() {
@@ -112,11 +1468,11 @@
     return [`FL Tools Basic ${FL_TOOLS_VERSION}`, `Site: ${location.hostname}`, `Page: ${typeof pageKind === "function" ? pageKind() : location.pathname || "/"}`, `Active options: ${active}`, `Scans: ${telemetry.scans} · skipped ${telemetry.skipped} · last ${telemetry.lastScanMs}ms`, `Errors: ${FL_DIAGNOSTIC_ERRORS.length}${FL_DIAGNOSTIC_ERRORS.length ? " · " + FL_DIAGNOSTIC_ERRORS.at(-1) : ""}`].join("\n");
   }
   function flLoadPerf() {
-    try { return flNormaliseObject(FL_PERF_DEFAULTS, JSON.parse(localStorage.getItem(FL_PERF_KEY) || "{}")); }
+    try { return flNormaliseObject(FL_PERF_DEFAULTS, FLStorage.get(FL_PERF_KEY) || {}); }
     catch (_) { return Object.assign({}, FL_PERF_DEFAULTS); }
   }
   function flSavePerf(next) {
-    try { localStorage.setItem(FL_PERF_KEY, JSON.stringify(Object.assign({}, FL_PERF_DEFAULTS, next))); } catch (_) {}
+    try { FLStorage.set(FL_PERF_KEY, Object.assign({}, FL_PERF_DEFAULTS, next)); } catch (_) {}
   }
   function flSetPerfStatus(text) {
     const node = document.getElementById("fl-rail-status");
@@ -126,6 +1482,9 @@
     const p = flLoadPerf();
     document.documentElement.classList.toggle("fl-tools-lightweight", !!p.lightweight);
     document.documentElement.classList.toggle("fl-tools-launcher-compact", !!p.compactLauncher);
+    flCandidateScanner.setDelay(Math.max(80, Math.min(1000, Number(p.scanDelay) || 120)));
+    if (p.paused) flCandidateScanner.pause();
+    else flCandidateScanner.resume();
     flApplyAccessibility(); flSmartDockPlacement();
     flCheckForUpdate();
     flSetPerfStatus(p.paused ? "Scanning paused · changes save automatically" : (p.lightweight ? "Lightweight scanning is on · changes save automatically" : "Standard scanning · changes save automatically"));
@@ -151,17 +1510,9 @@
     document.documentElement.classList.toggle("fl-tools-high-contrast", !!p.highContrast);
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("fl-tools-reduced-motion");
   }
-  function flCopyIdentityLabel(event) {
-    const target = event.target.closest && event.target.closest(".lt-flag-hl, [data-identity-label]");
-    if (!target) return;
-    const label = target.getAttribute("aria-label") || target.title || target.textContent.trim();
-    if (!label || !navigator.clipboard) return;
-    navigator.clipboard.writeText(label).then(() => flSetPerfStatus("Copied " + label)).catch(() => {});
-  }
   function flInstallUiEnhancements() {
     if (flInstallUiEnhancements.done) return;
     flInstallUiEnhancements.done = true;
-    document.addEventListener("click", flCopyIdentityLabel);
     const dock = document.getElementById("fl-tools-dock");
     if (dock) {
       dock.addEventListener("dblclick", () => flRememberDockSide(dock.dataset.dockSide));
@@ -372,13 +1723,13 @@
     if (document.getElementById("fl-tools-core-style")) return;
     var el = document.createElement("style");
     el.id = "fl-tools-core-style";
-    el.textContent = "/* FL Tools shared dock CSS.\n   Source of truth for tokens + dock/launcher chrome + Basic surface styles.\n   Hosted on Typical-Bits/fl-tools-basic.\n   Edit this file, then run: node scripts/sync-core.mjs\n   Pro-only chrome lives in assets/fl-tools-pro.css.\n*/\n\n/* --- Design tokens + dock shell --- */\n/* Dark: neutral black/gray (no blue-slate). Accent = favicon red only. */\n#fl-tools-dock {\n  color-scheme: dark;\n  --lt-bg: #111111;\n  --lt-bg-elev: #1a1a1a;\n  --lt-bg-input: #0a0a0a;\n  --lt-border: #2e2e2e;\n  --lt-border-soft: #262626;\n  --lt-text: #f3f4f6;\n  --lt-text-muted: #a3a3a3;\n  --lt-accent: #e11d48;\n  --lt-accent-soft: rgba(225, 29, 72, 0.16);\n  --lt-gold: #a3a3a3;\n  --lt-radius: 8px;\n  --lt-ctrl-h: 28px;\n  position: fixed; right: 12px; z-index: 2147483000;\n  width: 240px; box-sizing: border-box;\n  overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable;\n  display: flex; flex-direction: column; gap: 5px;\n  font-family: ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif;\n  color: var(--lt-text);\n}\nhtml.light #fl-tools-dock {\n  color-scheme: light;\n  --lt-bg: #f9fafb;\n  --lt-bg-elev: #ffffff;\n  --lt-bg-input: #ffffff;\n  --lt-border: #d1d5db;\n  --lt-border-soft: #e5e7eb;\n  --lt-text: #171717;\n  --lt-text-muted: #737373;\n  --lt-accent: #e11d48;\n  --lt-accent-soft: rgba(225, 29, 72, 0.1);\n  --lt-gold: #737373;\n}\n#fl-tools-dock.dock-top { top: 72px; bottom: auto; transform: none; max-height: calc(100vh - 84px); }\n#fl-tools-dock.dock-center { top: 50%; bottom: auto; transform: translateY(-50%); max-height: calc(100vh - 24px); }\n#fl-tools-dock.dock-bottom { top: auto; bottom: 16px; transform: none; max-height: calc(100vh - 32px); }\n#fl-tools-dock.dragging { user-select: none; cursor: ns-resize; }\n#fl-tools-dock.lt-grow-up {\n  justify-content: flex-end;\n}\n/* Near bottom: keep header→body order so the panel name stays on top;\n   dock is bottom-anchored / flex-end so open panels expand upward. */\n#fl-tools-dock.lt-grow-up .fl-tool-panel {\n  display: flex;\n  flex-direction: column;\n}\n.fl-tool-panel {\n  background: var(--lt-bg);\n  border: 1px solid var(--lt-border-soft);\n  border-radius: var(--lt-radius);\n  padding: 7px 9px;\n  width: 100%; max-width: 100%; box-sizing: border-box;\n  color: var(--lt-text);\n  font-size: 13px; line-height: 1.45;\n  box-shadow: 0 1px 2px rgba(0,0,0,.22);\n  overflow-x: hidden;\n}\nhtml.light .fl-tool-panel {\n  background: var(--lt-bg);\n  border-color: var(--lt-border-soft);\n  box-shadow: 0 1px 2px rgba(0,0,0,.08);\n}\n.fl-tool-header {\n  display: flex; justify-content: space-between; align-items: center;\n  cursor: ns-resize; gap: 8px;\n  padding-bottom: 2px;\n}\n.fl-tool-title {\n  font-weight: 600; color: var(--lt-text);\n  font-size: 13px; letter-spacing: 0.02em;\n  line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;\n}\n/* Remembered last / currently opened panel — favicon red accent. */\n.fl-tool-panel.lt-last-panel {\n  border-color: rgba(225, 29, 72, 0.45);\n  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48;\n}\n.fl-tool-panel.lt-last-panel > .fl-tool-header .fl-tool-title::after {\n  content: \"\";\n  display: inline-block;\n  width: 6px; height: 6px; margin-left: 6px; vertical-align: middle;\n  border-radius: 50%; background: #e11d48;\n}\n.fl-tool-panel.lt-panel-open {\n  border-color: rgba(225, 29, 72, 0.65);\n  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48,\n    0 0 0 1px rgba(225, 29, 72, 0.22);\n}\nhtml.light .fl-tool-panel.lt-last-panel {\n  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48;\n}\nhtml.light .fl-tool-panel.lt-panel-open {\n  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48,\n    0 0 0 1px rgba(225, 29, 72, 0.2);\n}\n.flhp-legend { margin-top: 6px; color: var(--lt-text-muted); font-size: 11px; line-height: 1.45; font-weight: 400; }\n.flhp-legend-row { display: flex; align-items: center; gap: 6px; margin: 1px 0; }\n.fl-tool-chevron {\n  background: none; border: none; color: var(--lt-text-muted);\n  cursor: pointer; font-size: 13px; padding: 0 2px; line-height: 1;\n  transition: color .15s ease;\n}\n.fl-tool-chevron:hover { color: var(--lt-text); }\n.lt-why-hidden {\n  position: absolute; left: 6px; top: 6px; z-index: 12;\n  font-size: 10px; padding: 1px 6px; border-radius: 999px;\n  background: rgba(0,0,0,.72); color: #e5e5e5; border: 1px solid #e11d48;\n  pointer-events: none; max-width: 72%; white-space: nowrap;\n  overflow: hidden; text-overflow: ellipsis;\n}\nhtml.light .lt-why-hidden { background: rgba(255,255,255,.88); color: #171717; }\n.fl-tool-body {\n  margin-top: 6px; max-height: min(58vh, 520px);\n  overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable;\n  padding-right: 2px; box-sizing: border-box;\n}\n.fl-tool-hidden { display: none !important; }\n.fl-chip-row { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 8px; max-height: 72px; overflow: auto; }\n.fl-chip {\n  display: inline-flex; align-items: center; gap: 4px;\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border);\n  border-radius: 999px; padding: 2px 8px; font-size: 12px; color: var(--lt-text);\n}\n.fl-chip.fl-chip-saved {\n  background: transparent; border-color: var(--lt-border-soft); color: var(--lt-text-muted);\n}\n.fl-chip button { border: 0; background: none; color: var(--lt-text-muted); cursor: pointer; padding: 0 2px; font: inherit; }\n.fl-chip.fl-chip-saved button { color: var(--lt-text-muted); }\n.fl-chip button:hover { color: var(--lt-accent); }\n.fl-chip-meta { color: var(--lt-text-muted); font-size: 11px; margin: 0 0 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }\n.fl-chip-meta .fl-chip-clear-saved,\n.fl-chip-more {\n  background: none; border: 0; color: var(--lt-gold); cursor: pointer; font: inherit; font-size: 11px; padding: 0;\n}\n.fl-suggest-row { display: flex; align-items: stretch; width: 100%; }\n.fl-suggest-row .fl-suggest-pick { flex: 1; }\n.fl-suggest-row .fl-suggest-del { flex: 0 0 auto; width: auto; padding: 5px 10px; color: var(--lt-text-muted); }\n.fl-suggest {\n  display: none; max-height: 120px; overflow: auto;\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border);\n  border-radius: 6px; margin: 0 0 8px;\n}\n.fl-suggest.open { display: block; }\n.fl-suggest button {\n  display: flex; justify-content: space-between; width: 100%;\n  background: none; border: 0; color: var(--lt-text); text-align: left;\n  padding: 5px 8px; cursor: pointer; font: inherit; font-size: 12px;\n}\n.fl-suggest button:hover { background: var(--lt-accent-soft); }\n.fl-suggest .off { color: var(--lt-text-muted); }\n.fl-add-row { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }\n.fl-add-row input { flex: 1; margin: 0 !important; height: var(--lt-ctrl-h); }\n.fl-add-row .life-btn {\n  width: auto; flex: 0 0 auto; margin: 0; padding: 0 10px;\n  height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);\n}\n.fl-tool-panel input[type=\"text\"], .fl-tool-panel input[type=\"number\"],\n.fl-tool-panel input[type=\"search\"],\n.fl-tool-panel select, .fl-tool-panel textarea {\n  width: 100%; box-sizing: border-box; padding: 5px 8px;\n  background: var(--lt-bg-input) !important; color: var(--lt-text) !important;\n  border: 1px solid var(--lt-border); border-radius: 6px;\n  font: inherit; font-size: 12px; min-height: var(--lt-ctrl-h);\n  transition: border-color .15s ease;\n  color-scheme: dark;\n  -webkit-text-fill-color: var(--lt-text);\n}\nhtml.light .fl-tool-panel select,\nhtml.light .fl-tool-panel input[type=\"text\"],\nhtml.light .fl-tool-panel input[type=\"number\"],\nhtml.light .fl-tool-panel input[type=\"search\"],\nhtml.light .fl-tool-panel textarea {\n  color-scheme: light;\n}\n.fl-tool-panel select option,\n.fl-tool-panel select optgroup {\n  background: var(--lt-bg-input);\n  color: var(--lt-text);\n}\n.fl-tool-panel input:focus, .fl-tool-panel select:focus, .fl-tool-panel textarea:focus {\n  outline: none; border-color: var(--lt-accent);\n}\n.fl-tool-panel label { cursor: pointer; color: var(--lt-text); }\n.life-hint { color: var(--lt-text-muted); font-size: 11px; margin: 0 0 6px; }\n.life-subhead {\n  display: flex; justify-content: space-between; align-items: center;\n  cursor: pointer; color: var(--lt-text); font-weight: 600; margin: 4px 0;\n}\n.life-hr { border: 0; border-top: 1px solid var(--lt-border-soft); margin: 8px 0; }\n.life-btn {\n  width: 100%; padding: 0 10px; height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);\n  color: var(--lt-text); border: 1px solid var(--lt-border); border-radius: 6px;\n  cursor: pointer; margin-bottom: 6px; font: inherit; font-size: 12px;\n  background: var(--lt-bg-elev); transition: background .15s ease, border-color .15s ease;\n}\n.life-btn:hover { border-color: #525252; }\n.life-btn-red {\n  background: var(--lt-bg-elev); border-color: var(--lt-border); color: var(--lt-text);\n}\n.life-btn-red:hover { border-color: #525252; background: #1a1a1a; }\nhtml.light .life-btn-red:hover { background: #f5f5f5; border-color: #a3a3a3; }\n.life-btn-gray { background: var(--lt-bg-elev); }\n.life-toast {\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border); color: var(--lt-text);\n  padding: 8px 10px; border-radius: var(--lt-radius); font-size: 12px; line-height: 1.4;\n  cursor: pointer;\n}\n.fl-switch {\n  display: flex; align-items: center; justify-content: space-between; gap: 10px;\n  color: var(--lt-text); cursor: pointer; margin: 6px 0; width: 100%;\n  user-select: none;\n}\n.fl-switch-text { flex: 1 1 auto; min-width: 0; line-height: 1.3; }\n/* Exact AMA account-sidebar toggle: 36×18 track, 18px knob, red when on */\n.toggleSwitch {\n  position: relative; flex: none;\n  width: 36px; height: 18px;\n  background: #6b6b6b; border: 0;\n  border-radius: 12px; cursor: pointer; box-sizing: border-box;\n  padding: 0; margin: 0; appearance: none; -webkit-appearance: none;\n  transition: background .15s ease;\n  vertical-align: top;\n}\n.toggleSwitch::after {\n  content: \"\"; position: absolute; top: 0; left: 0;\n  width: 18px; height: 18px; border-radius: 12px;\n  background: #d4d4d4;\n  box-shadow: 0 1px 2px rgba(0,0,0,.35);\n  transition: transform .15s ease, background .15s ease;\n}\n.toggleSwitch[aria-checked=\"true\"] {\n  background: var(--lt-accent); /* favicon / FL red-600 family */\n}\n.toggleSwitch[aria-checked=\"true\"]::after {\n  transform: translateX(18px); background: #e8e8e8;\n}\n.fl-switch:hover .toggleSwitch::after { background: #cfcfcf; }\n.toggleSwitch[aria-checked=\"true\"]::after,\n.fl-switch:hover .toggleSwitch[aria-checked=\"true\"]::after {\n  background: #e8e8e8;\n}\n.toggleSwitch:focus-visible {\n  outline: 1px dotted currentColor; outline-offset: 2px;\n}\nhtml.light .toggleSwitch { background: #a3a3a3; }\nhtml.light .toggleSwitch::after { background: #262626; }\nhtml.light .toggleSwitch[aria-checked=\"true\"] { background: var(--lt-accent); }\nhtml.light .toggleSwitch[aria-checked=\"true\"]::after { background: #262626; }\n@media (max-width: 720px) { #fl-tools-dock { width: min(260px, calc(100vw - 16px)); } }\n#fl-dock-actions {\n  display: flex; gap: 6px; width: 100%; box-sizing: border-box; align-items: stretch;\n}\n#fl-dock-actions > button {\n  flex: 1 1 0; min-width: 0; box-sizing: border-box; padding: 6px 8px; margin: 0;\n  background: transparent; color: var(--lt-gold);\n  border: 1px solid var(--lt-border); border-radius: var(--lt-radius);\n  cursor: pointer; font: inherit; font-size: 12px; line-height: 1.45; text-align: center;\n  transition: background .15s ease, border-color .15s ease;\n}\n#fl-dock-actions > button:hover {\n  background: var(--lt-accent-soft); border-color: #e11d48; color: #e11d48;\n}\n#fl-selector-warn { color: var(--lt-gold); font-size: 12px; margin: 6px 0; }\n#fl-markup-banner {\n  display: none; width: 100%; box-sizing: border-box;\n  margin: 0 0 5px; padding: 8px 10px;\n  border-radius: var(--lt-radius, 8px);\n  border: 1px solid var(--lt-border);\n  background: var(--lt-bg-elev);\n  color: var(--lt-text, #f3f4f6);\n  font-size: 12px; line-height: 1.4;\n  opacity: 1; transition: opacity .7s ease;\n}\n#fl-markup-banner.lt-show { display: block; }\n#fl-markup-banner.lt-fade { opacity: 0; }\nhtml.light #fl-markup-banner {\n  background: rgba(139, 105, 20, 0.12);\n  border-color: rgba(139, 105, 20, 0.45);\n  color: #1a1a1a;\n}\n.life-alert-strong,\n#fl-exclude-alert {\n  background: var(--lt-bg-elev);\n  border: 1px solid var(--lt-border);\n  color: var(--lt-text, #f3f4f6);\n  padding: 8px 10px; border-radius: var(--lt-radius, 8px); font-size: 12px; line-height: 1.45;\n  box-shadow: none;\n}\n#fl-exclude-alert .life-btn {\n  width: auto; display: inline-block; margin: 6px 6px 0 0; padding: 0 10px;\n  height: 26px; line-height: 26px; font-size: 11px;\n}\n#fl-block-panel .life-alert-strong { margin-top: 8px; }\n#fl-soft-list { max-height: 220px; overflow-y: auto; margin: 4px 0 8px; }\nhtml.fl-tools-hide-banners [data-controller=\"push-notifications-banner\"],\nhtml.fl-tools-hide-banners [data-controller=\"pwa-install--prompt\"],\nhtml.fl-tools-hide-banners [data-pwa-install-cta] { display: none !important; }\nhtml.fl-tools-nsfw main img, html.fl-tools-nsfw main video,\nhtml.fl-tools-nsfw #main-content img, html.fl-tools-nsfw #main-content video,\nhtml.fl-tools-nsfw #ptr-main-element img, html.fl-tools-nsfw #ptr-main-element video,\nhtml.fl-tools-nsfw .content_container img, html.fl-tools-nsfw .content_container video,\nhtml.fl-tools-nsfw main [class*=\"blur\"], html.fl-tools-nsfw .content_container [class*=\"blur\"],\nhtml.fl-tools-nsfw #main-content [class*=\"blur\"] {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* SFW: blur page media. Profile hero/friends live in #main-content, often outside <main>. */\nhtml.fl-tools-sfw main img,\nhtml.fl-tools-sfw main picture img,\nhtml.fl-tools-sfw #main-content img,\nhtml.fl-tools-sfw #main-content picture img,\nhtml.fl-tools-sfw #ptr-main-element img,\nhtml.fl-tools-sfw #ptr-main-element picture img,\nhtml.fl-tools-sfw .content_container img,\nhtml.fl-tools-sfw .content_container picture img,\nhtml.fl-tools-sfw [data-story-uid] img,\nhtml.fl-tools-sfw [data-feed-dwell-target] img,\nhtml.fl-tools-sfw [data-test-id=\"profile-header\"] img {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\nhtml.fl-tools-sfw.fl-tools-blur-videos main video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #main-content video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #ptr-main-element video,\nhtml.fl-tools-sfw.fl-tools-blur-videos .content_container video,\nhtml.fl-tools-sfw.fl-tools-blur-videos [data-story-uid] video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #account-sidebar video {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) main video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) #main-content video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) #ptr-main-element video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) .content_container video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) [data-story-uid] video {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* Site chrome / tiny feed avatars stay sharp unless \"blur avatars\" is on.\n   Do NOT exempt bare header img — profile-header + feed story headers hold real media. */\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) nav img,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) [data-controller=\"nav\"] img,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.fl-tools-avatar,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-24px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-36px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.xs\\:size-36px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-20px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-24px {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* Account menu profile media always blurred in SFW (even if avatars stay sharp). */\nhtml.fl-tools-sfw #account-sidebar img,\nhtml.fl-tools-sfw #account-sidebar picture img {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\n#fl-tools-dock, #fl-tools-dock * {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n.w-full.rounded-sm.cursor-pointer { position: relative; }\n/* Quick actions on member cards */\n.lt-qa-bar {\n  position: absolute; right: 6px; bottom: 6px; z-index: 20;\n  display: flex; flex-wrap: wrap; gap: 3px; max-width: 55%;\n  justify-content: flex-end; pointer-events: auto;\n}\n/* Feed story actions: under avatar, never over More Options (top-right). */\n.lt-qa-bar.lt-qa-feed {\n  position: relative !important;\n  right: auto !important; left: auto !important;\n  top: auto !important; bottom: auto !important;\n  z-index: 15; max-width: 100%; width: 100%;\n  margin-top: 4px; justify-content: center; flex-direction: column; align-items: center;\n}\n.lt-qa-bar.lt-qa-feed.lt-qa-feed-inline {\n  display: inline-flex !important;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  align-items: center;\n  justify-content: flex-start;\n  width: auto !important;\n  max-width: none;\n  margin: 0 0 0 6px;\n  vertical-align: middle;\n  flex: none;\n}\n.lt-qa-status-name {\n  display: inline-flex !important;\n  align-items: center;\n  flex-wrap: wrap;\n  max-width: 100%;\n  overflow: visible !important;\n  text-overflow: clip !important;\n  white-space: normal !important;\n}\n/* Soft ghost pills — feed + card quick actions */\n.lt-qa-bar button, .lt-qa-bar a.lt-qa-btn {\n  margin: 0; padding: 1px 7px; font-size: 10px; line-height: 1.35;\n  border-radius: 999px; border: 1px solid rgba(156, 163, 175, 0.45);\n  background: rgba(17, 24, 39, 0.35); color: #d1d5db;\n  cursor: pointer; text-decoration: none; font-family: inherit;\n  backdrop-filter: blur(2px);\n  transition: background .15s ease, border-color .15s ease, color .15s ease;\n}\n.lt-qa-bar button:hover, .lt-qa-bar a.lt-qa-btn:hover {\n  background: rgba(225, 29, 72, 0.14); border-color: rgba(225, 29, 72, 0.55); color: #fff;\n}\n.lt-qa-bar.lt-qa-feed button, .lt-qa-bar.lt-qa-feed a.lt-qa-btn {\n  background: transparent; border-color: rgba(163, 163, 163, 0.35); color: #a3a3a3;\n  font-size: 10px; padding: 0 6px; height: 18px; line-height: 16px;\n}\n.lt-qa-bar.lt-qa-feed button:hover, .lt-qa-bar.lt-qa-feed a.lt-qa-btn:hover {\n  color: #f3f4f6; border-color: rgba(225, 29, 72, 0.5); background: rgba(225, 29, 72, 0.1);\n}\n.lt-qa-bar button:focus-visible, .lt-qa-bar a.lt-qa-btn:focus-visible {\n  outline: 2px solid var(--lt-accent); outline-offset: 1px;\n}\n#fl-limit-hist-list { max-height: 180px; overflow-y: auto; margin: 4px 0 8px; }\n.lt-row { display:flex; align-items:center; gap:6px; margin:0 0 4px; font-size:12px; }\n.lt-row a { color: #fda4af; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }\n.lt-row .meta { color: var(--lt-text-muted, #a3a3a3); flex:none; }\n.lt-row button { margin:0; padding:2px 8px; }\n\nmark.lt-limit-hl, .lt-limit-hl {\n  background: rgba(244, 63, 94, 0.45) !important;\n  color: inherit !important;\n  border-radius: 2px;\n  padding: 0 2px;\n  box-decoration-break: clone;\n  -webkit-box-decoration-break: clone;\n}\nhtml.light mark.lt-limit-hl, html.light .lt-limit-hl {\n  background: rgba(225, 29, 72, 0.35) !important;\n  color: #1a1a1a !important;\n}\n/* Seen chip on list cards (visit log / opened profiles + media). */\n.lt-seen-chip {\n  position: absolute; left: 6px; bottom: 6px; z-index: 18;\n  font-size: 10px; font-weight: 600; letter-spacing: 0.02em;\n  padding: 1px 6px; border-radius: 999px; pointer-events: none;\n  background: rgba(17,17,17,.82); color: #f3f4f6;\n  border: 1px solid #e11d48; line-height: 1.3;\n}\nhtml.light .lt-seen-chip {\n  background: rgba(255,255,255,.9); color: #171717;\n}\n#fl-panel-search-wrap {\n  width: 100%; box-sizing: border-box; padding: 2px 0 2px; margin: 0;\n}\n#fl-panel-search {\n  width: 100%; box-sizing: border-box; padding: 5px 8px;\n  background: var(--lt-bg-input); color: var(--lt-text);\n  border: 1px solid var(--lt-border); border-radius: 6px;\n  font: inherit; font-size: 12px; height: var(--lt-ctrl-h);\n}\n#fl-panel-search::placeholder { color: var(--lt-text-muted); }\n#fl-panel-search:focus { outline: none; border-color: var(--lt-accent); }\n.fl-tool-panel.lt-panel-search-miss { display: none !important; }\nhtml.light .lt-qa-bar button, html.light .lt-qa-bar a.lt-qa-btn {\n  background: rgba(255,255,255,0.65); color: #525252; border-color: rgba(115,115,115,0.35);\n}\nhtml.light .lt-qa-bar button:hover, html.light .lt-qa-bar a.lt-qa-btn:hover {\n  background: rgba(225, 29, 72, 0.08); border-color: rgba(225, 29, 72, 0.45); color: #111827;\n}\nhtml.light .lt-qa-bar.lt-qa-feed button, html.light .lt-qa-bar.lt-qa-feed a.lt-qa-btn {\n  background: transparent; border-color: rgba(115, 115, 115, 0.4); color: #737373;\n}\nhtml.light .lt-row a { color: #262626; }\nhtml.light .life-btn:hover { border-color: #a3a3a3; }\nhtml.light .fl-suggest-row .fl-suggest-del { color: #737373; }\n\n/* Dock-styled confirm modal (replaces window.confirm for soft-block visible). */\n#fl-confirm-overlay {\n  position: fixed; inset: 0; z-index: 2147483646;\n  background: rgba(0,0,0,.55);\n  display: flex; align-items: center; justify-content: center;\n  padding: 16px; box-sizing: border-box;\n}\n#fl-confirm-dialog {\n  width: min(320px, 100%);\n  background: var(--lt-bg, #111111);\n  color: var(--lt-text, #f3f4f6);\n  border: 1px solid var(--lt-border, #2e2e2e);\n  border-radius: var(--lt-radius, 8px);\n  box-shadow: 0 12px 40px rgba(0,0,0,.45);\n  padding: 14px 14px 12px;\n  font-family: ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif;\n  font-size: 13px; line-height: 1.45;\n}\n#fl-confirm-dialog .fl-confirm-msg { margin: 0 0 12px; color: var(--lt-text, #f3f4f6); }\n#fl-confirm-dialog .fl-confirm-actions {\n  display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;\n}\n#fl-confirm-dialog .fl-confirm-actions .life-btn { margin: 0; width: auto; min-width: 72px; }\nhtml.light #fl-confirm-dialog {\n  background: var(--lt-bg, #f9fafb);\n  color: var(--lt-text, #171717);\n  border-color: var(--lt-border, #d1d5db);\n}\n\n/* --- Launcher + settings rail chrome --- */\n#fl-settings-launcher { position:fixed!important; right:12px!important; left:auto!important; bottom:auto!important;\n  width:48px!important; height:48px!important; display:flex!important; align-items:center; justify-content:center;\n  z-index:2147483001; padding:0!important; margin:0!important; border:1px solid #e11d4866!important;\n  border-radius:12px!important; background:#171a1f!important; color:#fb7185!important;\n  box-shadow:0 4px 16px #0006; cursor:grab; touch-action:none; user-select:none; }\n#fl-settings-launcher svg { width:34px; height:34px; pointer-events:none; }\n#fl-settings-launcher:hover, #fl-settings-launcher[aria-expanded=\"true\"] { border-color:#fb7185!important; background:#252329!important; }\n#fl-settings-launcher:focus-visible { outline:2px solid #fb7185; outline-offset:3px; }\n#fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;\n  max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;\n  right:12px!important; left:auto!important; bottom:auto!important; transform:none!important;\n  display:none!important; flex-direction:column!important; justify-content:flex-start!important;\n  gap:6px!important; padding:12px!important; background:var(--lt-bg)!important;\n  border:1px solid var(--lt-border)!important; border-radius:14px!important; box-shadow:0 18px 50px #0007;\n  overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left;\n  z-index:2147483000!important; }\n#fl-tools-dock.fl-settings-rail.fl-rail-open { display:flex!important; }\n#fl-tools-dock.fl-settings-rail > * { flex-shrink:0; min-width:0; }\n#fl-rail-header { order:-3; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }\n#fl-rail-header .fl-brand-icon { width:32px; height:32px; flex:none; }\n#fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }\n#fl-rail-header .fl-brand-copy { flex:1; min-width:0; }\n#fl-perf-controls { order:20; }\n#fl-perf-controls label { display:flex; gap:7px; align-items:center; margin:4px 0; color:var(--lt-text-muted); }\n#fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }\nhtml.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }\nhtml.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }\nhtml.fl-tools-launcher-compact #fl-tools-dock.fl-settings-rail { padding:10px!important; }\nhtml.fl-tools-high-contrast #fl-tools-dock, html.fl-tools-high-contrast .fl-tool-panel { border-width:2px!important; }\nhtml.fl-tools-reduced-motion *, html.fl-tools-reduced-motion *::before, html.fl-tools-reduced-motion *::after { animation-duration:0.001ms!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }\nhtml.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }\n#fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }\n#fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:2px; }\n#fl-rail-close { background:transparent; color:var(--lt-text-muted); border:0; border-radius:8px;\n  width:32px; height:32px; flex:none; cursor:pointer; font:22px/1 Arial,sans-serif; }\n#fl-rail-close:hover { background:var(--lt-bg-elev); color:var(--lt-text); }\n#fl-rail-status { order:-2; padding:7px 9px; border:1px solid #e11d4838; border-radius:8px;\n  background:var(--lt-accent-soft); color:var(--lt-text); font-size:11px; line-height:1.5; }\n#fl-tools-dock.fl-settings-rail #fl-panel-search-wrap { order:-1; margin:0; }\n#fl-tools-dock.fl-settings-rail #fl-panel-search { height:30px; border-radius:7px; }\n#fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:8px; background:var(--lt-bg-elev); box-shadow:none; }\n#fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:36px; padding:6px 10px; cursor:pointer; }\n#fl-tools-dock.fl-settings-rail .fl-tool-title { font-size:12px; letter-spacing:0; white-space:normal; }\n#fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:26px; min-height:26px; background:none; border:none; color:var(--lt-text-muted); cursor:pointer; font-size:13px; }\n#fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 10px 8px; margin:0; max-height:none; overflow:visible; }\n#fl-tools-dock.fl-settings-rail .fl-tool-body.fl-tool-hidden { display:none !important; }\n#fl-tools-dock.fl-settings-rail .fl-switch { padding:6px 0; margin:0; gap:10px; }\n#fl-tools-dock.fl-settings-rail .fl-switch + .fl-switch { border-top:1px solid var(--lt-border-soft); }\n#fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:12px; line-height:1.3; }\n#fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:10px; color:var(--lt-text-muted); margin-top:2px; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch { width:34px; height:20px; border-radius:20px; background:#626873; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch::after { width:16px; height:16px; top:2px; left:2px; background:#fff; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"] { background:var(--lt-accent); }\n#fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"]::after { transform:translateX(14px); }\n#fl-tools-dock.fl-settings-rail :is(button,input,select,textarea):focus-visible { outline:2px solid var(--lt-accent); outline-offset:2px; }\n#fl-tools-dock.fl-settings-rail.lt-dock-compact { padding:12px!important; gap:6px!important; }\n#fl-tools-dock.fl-settings-rail.lt-dock-compact .fl-switch { padding:5px 0; }\n@media(prefers-reduced-motion:reduce) { #fl-tools-dock.fl-settings-rail * { transition:none!important; } }\n@media(forced-colors:active) {\n  #fl-settings-launcher, #fl-tools-dock.fl-settings-rail, #fl-tools-dock.fl-settings-rail .fl-tool-panel { border:1px solid CanvasText!important; }\n  #fl-tools-dock.fl-settings-rail .toggleSwitch { border:1px solid ButtonText; background:ButtonFace; forced-color-adjust:auto; }\n  #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"] { background:Highlight; }\n}\n\n\n/* --- Dual-install idle badge --- */\n/* Dual-install: Basic launcher stays visible but idle while Pro is live. */\n#fl-settings-launcher[data-fl-tools-idle=\"basic\"] { opacity: 0.55; }\n#fl-settings-launcher[data-fl-tools-idle=\"basic\"]::after {\n  content: \"Pro\";\n  position: absolute;\n  right: 4px;\n  bottom: 2px;\n  font-size: 9px;\n  font-weight: 700;\n  color: #e11d48;\n}\n";
+    el.textContent = "/* FL Tools shared dock CSS.\n   Source of truth for tokens + dock/launcher chrome + Basic surface styles.\n   Hosted on Typical-Bits/fl-tools-basic.\n   Edit this file, then run: node scripts/sync-core.mjs\n   Pro-only chrome lives in assets/fl-tools-pro.css.\n*/\n\n/* --- Design tokens + dock shell --- */\n/* Dark: neutral black/gray (no blue-slate). Accent = favicon red only. */\n#fl-tools-dock {\n  color-scheme: dark;\n  --lt-bg: #111111;\n  --lt-bg-elev: #1a1a1a;\n  --lt-bg-input: #0a0a0a;\n  --lt-border: #2e2e2e;\n  --lt-border-soft: #262626;\n  --lt-text: #f3f4f6;\n  --lt-text-muted: #a3a3a3;\n  --lt-accent: #e11d48;\n  --lt-accent-soft: rgba(225, 29, 72, 0.16);\n  --lt-gold: #a3a3a3;\n  --lt-radius: 8px;\n  --lt-ctrl-h: 28px;\n  position: fixed; right: 12px; z-index: 2147483000;\n  width: 240px; box-sizing: border-box;\n  overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable;\n  display: flex; flex-direction: column; gap: 5px;\n  font-family: ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif;\n  color: var(--lt-text);\n}\nhtml.light #fl-tools-dock {\n  color-scheme: light;\n  --lt-bg: #f9fafb;\n  --lt-bg-elev: #ffffff;\n  --lt-bg-input: #ffffff;\n  --lt-border: #d1d5db;\n  --lt-border-soft: #e5e7eb;\n  --lt-text: #171717;\n  --lt-text-muted: #737373;\n  --lt-accent: #e11d48;\n  --lt-accent-soft: rgba(225, 29, 72, 0.1);\n  --lt-gold: #737373;\n}\n#fl-tools-dock.dock-top { top: 72px; bottom: auto; transform: none; max-height: calc(100vh - 84px); }\n#fl-tools-dock.dock-center { top: 50%; bottom: auto; transform: translateY(-50%); max-height: calc(100vh - 24px); }\n#fl-tools-dock.dock-bottom { top: auto; bottom: 16px; transform: none; max-height: calc(100vh - 32px); }\n#fl-tools-dock.dragging { user-select: none; cursor: ns-resize; }\n#fl-tools-dock.lt-grow-up {\n  justify-content: flex-end;\n}\n/* Near bottom: keep header→body order so the panel name stays on top;\n   dock is bottom-anchored / flex-end so open panels expand upward. */\n#fl-tools-dock.lt-grow-up .fl-tool-panel {\n  display: flex;\n  flex-direction: column;\n}\n.fl-tool-panel {\n  background: var(--lt-bg);\n  border: 1px solid var(--lt-border-soft);\n  border-radius: var(--lt-radius);\n  padding: 7px 9px;\n  width: 100%; max-width: 100%; box-sizing: border-box;\n  color: var(--lt-text);\n  font-size: 13px; line-height: 1.45;\n  box-shadow: 0 1px 2px rgba(0,0,0,.22);\n  overflow-x: hidden;\n}\nhtml.light .fl-tool-panel {\n  background: var(--lt-bg);\n  border-color: var(--lt-border-soft);\n  box-shadow: 0 1px 2px rgba(0,0,0,.08);\n}\n.fl-tool-header {\n  display: flex; justify-content: space-between; align-items: center;\n  cursor: ns-resize; gap: 8px;\n  padding-bottom: 2px;\n}\n.fl-tool-title {\n  font-weight: 600; color: var(--lt-text);\n  font-size: 13px; letter-spacing: 0.02em;\n  line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;\n}\n/* Remembered last / currently opened panel — favicon red accent. */\n.fl-tool-panel.lt-last-panel {\n  border-color: rgba(225, 29, 72, 0.45);\n  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48;\n}\n.fl-tool-panel.lt-last-panel > .fl-tool-header .fl-tool-title::after {\n  content: \"\";\n  display: inline-block;\n  width: 6px; height: 6px; margin-left: 6px; vertical-align: middle;\n  border-radius: 50%; background: #e11d48;\n}\n.fl-tool-panel.lt-panel-open {\n  border-color: rgba(225, 29, 72, 0.65);\n  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48,\n    0 0 0 1px rgba(225, 29, 72, 0.22);\n}\nhtml.light .fl-tool-panel.lt-last-panel {\n  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48;\n}\nhtml.light .fl-tool-panel.lt-panel-open {\n  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48,\n    0 0 0 1px rgba(225, 29, 72, 0.2);\n}\n.flhp-legend { margin-top: 6px; color: var(--lt-text-muted); font-size: 11px; line-height: 1.45; font-weight: 400; }\n.flhp-legend-row { display: flex; align-items: center; gap: 6px; margin: 1px 0; }\n.fl-shortcut-fixed .flhp-legend-row { justify-content: space-between; }\n.fl-shortcut-fixed strong { color: var(--lt-text); letter-spacing: .04em; }\n.fl-shortcut-editor .flhp-legend-row { justify-content: space-between; }\n.fl-shortcut-editor input { width: 7.5rem; min-width: 0; }\n.fl-nav-focus { outline: 2px solid var(--lt-accent); outline-offset: 2px; border-radius: 8px; }\n.fl-tool-chevron {\n  background: none; border: none; color: var(--lt-text-muted);\n  cursor: pointer; font-size: 13px; padding: 0 2px; line-height: 1;\n  transition: color .15s ease;\n}\n.fl-tool-chevron:hover { color: var(--lt-text); }\n.lt-why-hidden {\n  position: absolute; left: 6px; top: 6px; z-index: 24;\n  font-size: 10px; padding: 1px 6px; border-radius: 999px;\n  background: rgba(0,0,0,.72); color: #e5e5e5; border: 1px solid #e11d48;\n  pointer-events: none; max-width: 72%; white-space: nowrap;\n  overflow: hidden; text-overflow: ellipsis;\n}\nhtml.light .lt-why-hidden { background: rgba(255,255,255,.88); color: #171717; }\n.fl-tool-body {\n  margin-top: 6px; max-height: min(58vh, 520px);\n  overflow-x: hidden; overflow-y: auto; scrollbar-gutter: stable;\n  padding-right: 2px; box-sizing: border-box;\n}\n.fl-tool-hidden { display: none !important; }\n.fl-chip-row { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 8px; max-height: 72px; overflow: auto; }\n.fl-chip {\n  display: inline-flex; align-items: center; gap: 4px;\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border);\n  border-radius: 999px; padding: 2px 8px; font-size: 12px; color: var(--lt-text);\n}\n.fl-chip.fl-chip-saved {\n  background: transparent; border-color: var(--lt-border-soft); color: var(--lt-text-muted);\n}\n.fl-chip button { border: 0; background: none; color: var(--lt-text-muted); cursor: pointer; padding: 0 2px; font: inherit; }\n.fl-chip.fl-chip-saved button { color: var(--lt-text-muted); }\n.fl-chip button:hover { color: var(--lt-accent); }\n.fl-chip-meta { color: var(--lt-text-muted); font-size: 11px; margin: 0 0 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }\n.fl-chip-meta .fl-chip-clear-saved,\n.fl-chip-more {\n  background: none; border: 0; color: var(--lt-gold); cursor: pointer; font: inherit; font-size: 11px; padding: 0;\n}\n.fl-suggest-row { display: flex; align-items: stretch; width: 100%; }\n.fl-suggest-row .fl-suggest-pick { flex: 1; }\n.fl-suggest-row .fl-suggest-del { flex: 0 0 auto; width: auto; padding: 5px 10px; color: var(--lt-text-muted); }\n.fl-suggest {\n  display: none; max-height: 120px; overflow: auto;\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border);\n  border-radius: 6px; margin: 0 0 8px;\n}\n.fl-suggest.open { display: block; }\n.fl-suggest button {\n  display: flex; justify-content: space-between; width: 100%;\n  background: none; border: 0; color: var(--lt-text); text-align: left;\n  padding: 5px 8px; cursor: pointer; font: inherit; font-size: 12px;\n}\n.fl-suggest button:hover { background: var(--lt-accent-soft); }\n.fl-suggest .off { color: var(--lt-text-muted); }\n.fl-add-row { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }\n.fl-add-row input { flex: 1; margin: 0 !important; height: var(--lt-ctrl-h); }\n.fl-add-row .life-btn {\n  width: auto; flex: 0 0 auto; margin: 0; padding: 0 10px;\n  height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);\n}\n.fl-tool-panel input[type=\"text\"], .fl-tool-panel input[type=\"number\"],\n.fl-tool-panel input[type=\"search\"],\n.fl-tool-panel select, .fl-tool-panel textarea {\n  width: 100%; box-sizing: border-box; padding: 5px 8px;\n  background: var(--lt-bg-input) !important; color: var(--lt-text) !important;\n  border: 1px solid var(--lt-border); border-radius: 6px;\n  font: inherit; font-size: 12px; min-height: var(--lt-ctrl-h);\n  transition: border-color .15s ease;\n  color-scheme: dark;\n  -webkit-text-fill-color: var(--lt-text);\n}\nhtml.light .fl-tool-panel select,\nhtml.light .fl-tool-panel input[type=\"text\"],\nhtml.light .fl-tool-panel input[type=\"number\"],\nhtml.light .fl-tool-panel input[type=\"search\"],\nhtml.light .fl-tool-panel textarea {\n  color-scheme: light;\n}\n.fl-tool-panel select option,\n.fl-tool-panel select optgroup {\n  background: var(--lt-bg-input);\n  color: var(--lt-text);\n}\n.fl-tool-panel input:focus, .fl-tool-panel select:focus, .fl-tool-panel textarea:focus {\n  outline: none; border-color: var(--lt-accent);\n}\n.fl-tool-panel label { cursor: pointer; color: var(--lt-text); }\n.life-hint { color: var(--lt-text-muted); font-size: 11px; margin: 0 0 6px; }\n.life-subhead {\n  display: flex; justify-content: space-between; align-items: center;\n  cursor: pointer; color: var(--lt-text); font-weight: 600; margin: 4px 0;\n}\n.life-hr, .fl-hr { border: 0; border-top: 1px solid var(--lt-border-soft); margin: 8px 0; }\n.life-btn {\n  width: 100%; padding: 0 10px; height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);\n  color: var(--lt-text); border: 1px solid var(--lt-border); border-radius: 6px;\n  cursor: pointer; margin-bottom: 6px; font: inherit; font-size: 12px;\n  background: var(--lt-bg-elev); transition: background .15s ease, border-color .15s ease;\n}\n.life-btn:hover { border-color: #525252; }\n.life-btn-red {\n  background: var(--lt-bg-elev); border-color: var(--lt-border); color: var(--lt-text);\n}\n.life-btn-red:hover { border-color: #525252; background: #1a1a1a; }\nhtml.light .life-btn-red:hover { background: #f5f5f5; border-color: #a3a3a3; }\n.life-btn-gray { background: var(--lt-bg-elev); }\n.life-toast {\n  background: var(--lt-bg-elev); border: 1px solid var(--lt-border); color: var(--lt-text);\n  padding: 8px 10px; border-radius: var(--lt-radius); font-size: 12px; line-height: 1.4;\n  cursor: pointer;\n}\n.fl-switch {\n  display: flex; align-items: center; justify-content: space-between; gap: 10px;\n  color: var(--lt-text); cursor: pointer; margin: 6px 0; width: 100%;\n  user-select: none;\n}\n.fl-switch-text { flex: 1 1 auto; min-width: 0; line-height: 1.3; }\n/* Exact AMA account-sidebar toggle: 36×18 track, 18px knob, red when on */\n.toggleSwitch {\n  position: relative; flex: none;\n  width: 36px; height: 18px;\n  background: #6b6b6b; border: 0;\n  border-radius: 12px; cursor: pointer; box-sizing: border-box;\n  padding: 0; margin: 0; appearance: none; -webkit-appearance: none;\n  transition: background .15s ease;\n  vertical-align: top;\n}\n.toggleSwitch::after {\n  content: \"\"; position: absolute; top: 0; left: 0;\n  width: 18px; height: 18px; border-radius: 12px;\n  background: #d4d4d4;\n  box-shadow: 0 1px 2px rgba(0,0,0,.35);\n  transition: transform .15s ease, background .15s ease;\n}\n.toggleSwitch[aria-checked=\"true\"] {\n  background: var(--lt-accent); /* favicon / FL red-600 family */\n}\n.toggleSwitch[aria-checked=\"true\"]::after {\n  transform: translateX(18px); background: #e8e8e8;\n}\n.fl-switch:hover .toggleSwitch::after { background: #cfcfcf; }\n.toggleSwitch[aria-checked=\"true\"]::after,\n.fl-switch:hover .toggleSwitch[aria-checked=\"true\"]::after {\n  background: #e8e8e8;\n}\n.toggleSwitch:focus-visible {\n  outline: 1px dotted currentColor; outline-offset: 2px;\n}\nhtml.light .toggleSwitch { background: #a3a3a3; }\nhtml.light .toggleSwitch::after { background: #262626; }\nhtml.light .toggleSwitch[aria-checked=\"true\"] { background: var(--lt-accent); }\nhtml.light .toggleSwitch[aria-checked=\"true\"]::after { background: #262626; }\n@media (max-width: 720px) { #fl-tools-dock { width: min(260px, calc(100vw - 16px)); } }\n#fl-dock-actions {\n  display: flex; gap: 6px; width: 100%; box-sizing: border-box; align-items: stretch;\n}\n#fl-dock-actions > button {\n  flex: 1 1 0; min-width: 0; box-sizing: border-box; padding: 6px 8px; margin: 0;\n  background: transparent; color: var(--lt-gold);\n  border: 1px solid var(--lt-border); border-radius: var(--lt-radius);\n  cursor: pointer; font: inherit; font-size: 12px; line-height: 1.45; text-align: center;\n  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;\n}\n#fl-dock-actions > button:hover {\n  background: var(--lt-accent-soft); border-color: #e11d48; color: #e11d48;\n  box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.22), 0 0 12px rgba(225, 29, 72, 0.32);\n}\n#fl-selector-warn { color: var(--lt-gold); font-size: 12px; margin: 6px 0; }\n#fl-markup-banner {\n  display: none; width: 100%; box-sizing: border-box;\n  margin: 0 0 5px; padding: 8px 10px;\n  border-radius: var(--lt-radius, 8px);\n  border: 1px solid var(--lt-border);\n  background: var(--lt-bg-elev);\n  color: var(--lt-text, #f3f4f6);\n  font-size: 12px; line-height: 1.4;\n  opacity: 1; transition: opacity .7s ease;\n}\n#fl-markup-banner.lt-show { display: block; }\n#fl-markup-banner.lt-fade { opacity: 0; }\nhtml.light #fl-markup-banner {\n  background: rgba(139, 105, 20, 0.12);\n  border-color: rgba(139, 105, 20, 0.45);\n  color: #1a1a1a;\n}\n.life-alert-strong,\n#fl-exclude-alert {\n  background: var(--lt-bg-elev);\n  border: 1px solid var(--lt-border);\n  color: var(--lt-text, #f3f4f6);\n  padding: 8px 10px; border-radius: var(--lt-radius, 8px); font-size: 12px; line-height: 1.45;\n  box-shadow: none;\n}\n.life-alert-strong .fl-block-actions,\n#fl-exclude-alert .fl-block-actions {\n  display: grid;\n  grid-template-columns: 1fr 1fr;\n  gap: 6px;\n  margin-top: 8px;\n}\n.life-alert-strong .fl-block-actions .fl-block-span,\n#fl-exclude-alert .fl-block-actions .fl-block-span {\n  grid-column: 1 / -1;\n}\n.life-alert-strong .life-btn,\n.life-alert-strong .fl-btn,\n#fl-exclude-alert .life-btn,\n#fl-exclude-alert .fl-btn {\n  width: 100%; display: inline-flex; align-items: center; justify-content: center;\n  margin: 0; padding: 0 10px;\n  height: 26px; line-height: 26px; font-size: 11px;\n}\n#fl-tools-dock .fl-prompt-danger {\n  border-color: #e11d48;\n  background: rgba(225, 29, 72, 0.16);\n}\n#fl-factory-reset-prompt[hidden],\n#fl-dock-prompt[hidden] { display: none !important; }\n#fl-tools-dock.fl-settings-rail #fl-dock-prompt { order: 0; }\n#fl-tools-dock #fl-confirm-overlay,\n#fl-tools-dock #fl-tools-modal-root {\n  position: static; inset: auto; background: none; display: block;\n  padding: 0; z-index: auto; box-shadow: none;\n}\n#fl-tools-dock #fl-confirm-dialog,\n#fl-tools-dock #fl-tools-modal {\n  width: 100%; max-width: none; box-shadow: none;\n  border-color: var(--lt-border);\n}\n#fl-tools-dock #fl-tools-modal-backdrop { display: none !important; }\n#fl-action-toast {\n  position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%);\n  z-index: 2147483645; max-width: min(360px, calc(100vw - 24px));\n  box-shadow: 0 8px 24px rgba(0,0,0,.45);\n}\n#fl-block-panel .life-alert-strong { margin-top: 8px; }\n#fl-soft-list { max-height: 220px; overflow-y: auto; margin: 4px 0 8px; }\nhtml.fl-tools-hide-banners [data-controller=\"push-notifications-banner\"],\nhtml.fl-tools-hide-banners [data-controller=\"pwa-install--prompt\"],\nhtml.fl-tools-hide-banners [data-pwa-install-cta] { display: none !important; }\nhtml.fl-tools-nsfw main img, html.fl-tools-nsfw main video,\nhtml.fl-tools-nsfw #main-content img, html.fl-tools-nsfw #main-content video,\nhtml.fl-tools-nsfw #ptr-main-element img, html.fl-tools-nsfw #ptr-main-element video,\nhtml.fl-tools-nsfw .content_container img, html.fl-tools-nsfw .content_container video,\nhtml.fl-tools-nsfw main [class*=\"blur\"], html.fl-tools-nsfw .content_container [class*=\"blur\"],\nhtml.fl-tools-nsfw #main-content [class*=\"blur\"] {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* SFW: blur page media. Profile hero/friends live in #main-content, often outside <main>. */\nhtml.fl-tools-sfw main img,\nhtml.fl-tools-sfw main picture img,\nhtml.fl-tools-sfw #main-content img,\nhtml.fl-tools-sfw #main-content picture img,\nhtml.fl-tools-sfw #ptr-main-element img,\nhtml.fl-tools-sfw #ptr-main-element picture img,\nhtml.fl-tools-sfw .content_container img,\nhtml.fl-tools-sfw .content_container picture img,\nhtml.fl-tools-sfw [data-story-uid] img,\nhtml.fl-tools-sfw [data-feed-dwell-target] img,\nhtml.fl-tools-sfw [data-test-id=\"profile-header\"] img {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\nhtml.fl-tools-sfw.fl-tools-blur-videos main video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #main-content video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #ptr-main-element video,\nhtml.fl-tools-sfw.fl-tools-blur-videos .content_container video,\nhtml.fl-tools-sfw.fl-tools-blur-videos [data-story-uid] video,\nhtml.fl-tools-sfw.fl-tools-blur-videos #account-sidebar video {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) main video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) #main-content video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) #ptr-main-element video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) .content_container video,\nhtml.fl-tools-sfw:not(.fl-tools-blur-videos) [data-story-uid] video {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* Site chrome / tiny feed avatars stay sharp unless \"blur avatars\" is on.\n   Do NOT exempt bare header img — profile-header + feed story headers hold real media. */\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) nav img,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) [data-controller=\"nav\"] img,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.fl-tools-avatar,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-24px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.size-36px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) .flex-none img.xs\\:size-36px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-20px,\nhtml.fl-tools-sfw:not(.fl-tools-blur-avatars) img.size-24px {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n/* Account menu profile media always blurred in SFW (even if avatars stay sharp). */\nhtml.fl-tools-sfw #account-sidebar img,\nhtml.fl-tools-sfw #account-sidebar picture img {\n  filter: blur(var(--lt-sfw-blur, 10px)) !important;\n  -webkit-filter: blur(var(--lt-sfw-blur, 10px)) !important;\n}\n#fl-tools-dock, #fl-tools-dock * {\n  filter: none !important;\n  -webkit-filter: none !important;\n}\n.w-full.rounded-sm.cursor-pointer,\n.lt-card-face {\n  position: relative !important;\n  isolation: isolate;\n}\n.w-full.rounded-sm.cursor-pointer > img,\n.w-full.rounded-sm.cursor-pointer > picture,\n.w-full.rounded-sm.cursor-pointer > a {\n  position: relative;\n  z-index: 0;\n}\n/* Quick actions on member cards */\n.lt-qa-bar {\n  position: absolute; right: 6px; bottom: 6px; z-index: 26;\n  display: flex; flex-wrap: wrap; gap: 3px; max-width: 55%;\n  justify-content: flex-end; pointer-events: auto;\n}\n/* Feed story actions: under avatar, never over More Options (top-right). */\n.lt-qa-bar.lt-qa-feed {\n  position: relative !important;\n  right: auto !important; left: auto !important;\n  top: auto !important; bottom: auto !important;\n  z-index: 15; max-width: 100%; width: 100%;\n  margin-top: 4px; justify-content: center; flex-direction: column; align-items: center;\n}\n.lt-qa-bar.lt-qa-feed.lt-qa-feed-inline {\n  display: inline-flex !important;\n  flex-direction: row;\n  flex-wrap: nowrap;\n  align-items: center;\n  justify-content: flex-start;\n  width: auto !important;\n  max-width: none;\n  margin: 0 0 0 6px;\n  vertical-align: middle;\n  flex: none;\n}\n.lt-qa-status-name {\n  display: inline-flex !important;\n  align-items: center;\n  flex-wrap: wrap;\n  max-width: 100%;\n  overflow: visible !important;\n  text-overflow: clip !important;\n  white-space: normal !important;\n}\n/* Soft ghost pills — feed + card quick actions */\n.lt-qa-bar button, .lt-qa-bar a.lt-qa-btn {\n  margin: 0; padding: 1px 7px; font-size: 10px; line-height: 1.35;\n  border-radius: 999px; border: 1px solid rgba(156, 163, 175, 0.45);\n  background: rgba(17, 24, 39, 0.35); color: #d1d5db;\n  cursor: pointer; text-decoration: none; font-family: inherit;\n  backdrop-filter: blur(2px);\n  transition: background .15s ease, border-color .15s ease, color .15s ease;\n}\n.lt-qa-bar button:hover, .lt-qa-bar a.lt-qa-btn:hover {\n  background: rgba(225, 29, 72, 0.14); border-color: rgba(225, 29, 72, 0.55); color: #fff;\n}\n.lt-qa-bar.lt-qa-feed button, .lt-qa-bar.lt-qa-feed a.lt-qa-btn {\n  background: transparent; border-color: rgba(163, 163, 163, 0.35); color: #a3a3a3;\n  font-size: 10px; padding: 0 6px; height: 18px; line-height: 16px;\n}\n.lt-qa-bar.lt-qa-feed button:hover, .lt-qa-bar.lt-qa-feed a.lt-qa-btn:hover {\n  color: #f3f4f6; border-color: rgba(225, 29, 72, 0.5); background: rgba(225, 29, 72, 0.1);\n}\n.lt-qa-bar button:focus-visible, .lt-qa-bar a.lt-qa-btn:focus-visible {\n  outline: 2px solid var(--lt-accent); outline-offset: 1px;\n}\n#fl-limit-hist-list { max-height: 180px; overflow-y: auto; margin: 4px 0 8px; }\n.lt-row { display:flex; align-items:center; gap:6px; margin:0 0 4px; font-size:12px; }\n.lt-row a { color: #fda4af; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }\n.lt-row .meta { color: var(--lt-text-muted, #a3a3a3); flex:none; }\n.lt-row button { margin:0; padding:2px 8px; }\n\nmark.lt-limit-hl, .lt-limit-hl {\n  background: rgba(244, 63, 94, 0.45) !important;\n  color: inherit !important;\n  border-radius: 2px;\n  padding: 0 2px;\n  box-decoration-break: clone;\n  -webkit-box-decoration-break: clone;\n}\nhtml.light mark.lt-limit-hl, html.light .lt-limit-hl {\n  background: rgba(225, 29, 72, 0.35) !important;\n  color: #1a1a1a !important;\n}\n/* Glanceable chips on list cards (identity + Seen). Sit on the photo, not in the dock. */\n.lt-card-chips {\n  position: absolute; left: 6px; bottom: 6px; z-index: 24;\n  display: flex; flex-wrap: wrap; gap: 4px;\n  max-width: calc(100% - 72px);\n  pointer-events: none;\n}\n.lt-card-chip,\n.lt-seen-chip,\n.lt-note-chip {\n  font-size: 10px; font-weight: 600; letter-spacing: 0.02em;\n  padding: 1px 6px; border-radius: 999px; line-height: 1.3;\n  pointer-events: none;\n  background: rgba(17,17,17,.82); color: #f3f4f6;\n  border: 1px solid #525252;\n}\n.lt-seen-chip {\n  position: absolute; left: 6px; bottom: 6px; z-index: 24;\n  border-color: #e11d48;\n}\n.lt-card-chips .lt-card-chip,\n.lt-card-chips .lt-seen-chip,\n.lt-card-chips .lt-note-chip {\n  position: static !important;\n  left: auto; top: auto; right: auto; bottom: auto;\n}\nhtml.light .lt-card-chip,\nhtml.light .lt-seen-chip,\nhtml.light .lt-note-chip {\n  background: rgba(255,255,255,.9); color: #171717;\n}\n\n/* Active filter chips stay on the page while browsing kinksters / lists. */\n#fl-browse-chips {\n  position: fixed; left: 12px; bottom: 16px; z-index: 2147482990;\n  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;\n  max-width: min(460px, calc(100vw - 88px));\n  padding: 6px 8px; border-radius: 12px;\n  background: rgba(17,17,17,.9); color: #f3f4f6;\n  border: 1px solid #2e2e2e;\n  font: 12px/1.3 ui-sans-serif, system-ui, sans-serif;\n  box-shadow: 0 8px 24px rgba(0,0,0,.35);\n}\nhtml.light #fl-browse-chips {\n  background: rgba(255,255,255,.94); color: #171717; border-color: #d1d5db;\n}\n#fl-browse-chips .lt-browse-chips-label {\n  color: #a3a3a3; font-size: 10px; font-weight: 700;\n  letter-spacing: .04em; text-transform: uppercase;\n}\nhtml.light #fl-browse-chips .lt-browse-chips-label { color: #737373; }\n#fl-browse-chips .lt-browse-chip {\n  display: inline-flex; align-items: center; gap: 4px;\n  background: #1a1a1a; border: 1px solid #3f3f3f; color: #f3f4f6;\n  border-radius: 999px; padding: 2px 8px; font-size: 12px;\n}\nhtml.light #fl-browse-chips .lt-browse-chip {\n  background: #f5f5f5; border-color: #d4d4d4; color: #171717;\n}\n#fl-browse-chips .lt-browse-chip button {\n  border: 0; background: none; color: #a3a3a3; cursor: pointer;\n  padding: 0 2px; font: inherit;\n}\n#fl-browse-chips .lt-browse-chip button:hover { color: #e11d48; }\n@media (max-width: 720px) {\n  #fl-browse-chips { left: 8px; right: 64px; bottom: 12px; max-width: none; }\n}\n#fl-panel-search-wrap {\n  width: 100%; box-sizing: border-box; padding: 2px 0 2px; margin: 0;\n}\n#fl-panel-search {\n  width: 100%; box-sizing: border-box; padding: 5px 8px;\n  background: var(--lt-bg-input); color: var(--lt-text);\n  border: 1px solid var(--lt-border); border-radius: 6px;\n  font: inherit; font-size: 12px; height: var(--lt-ctrl-h);\n}\n#fl-panel-search::placeholder { color: var(--lt-text-muted); }\n#fl-panel-search:focus { outline: none; border-color: var(--lt-accent); }\n.fl-tool-panel.lt-panel-search-miss { display: none !important; }\nhtml.light .lt-qa-bar button, html.light .lt-qa-bar a.lt-qa-btn {\n  background: rgba(255,255,255,0.65); color: #525252; border-color: rgba(115,115,115,0.35);\n}\nhtml.light .lt-qa-bar button:hover, html.light .lt-qa-bar a.lt-qa-btn:hover {\n  background: rgba(225, 29, 72, 0.08); border-color: rgba(225, 29, 72, 0.45); color: #111827;\n}\nhtml.light .lt-qa-bar.lt-qa-feed button, html.light .lt-qa-bar.lt-qa-feed a.lt-qa-btn {\n  background: transparent; border-color: rgba(115, 115, 115, 0.4); color: #737373;\n}\nhtml.light .lt-row a { color: #262626; }\nhtml.light .life-btn:hover { border-color: #a3a3a3; }\nhtml.light .fl-suggest-row .fl-suggest-del { color: #737373; }\n\n/* Dock-styled confirm modal (replaces window.confirm for soft-block visible). */\n#fl-confirm-overlay {\n  position: fixed; inset: 0; z-index: 2147483646;\n  background: rgba(0,0,0,.55);\n  display: flex; align-items: center; justify-content: center;\n  padding: 16px; box-sizing: border-box;\n}\n#fl-confirm-dialog {\n  width: min(320px, 100%);\n  background: var(--lt-bg, #111111);\n  color: var(--lt-text, #f3f4f6);\n  border: 1px solid var(--lt-border, #2e2e2e);\n  border-radius: var(--lt-radius, 8px);\n  box-shadow: 0 12px 40px rgba(0,0,0,.45);\n  padding: 14px 14px 12px;\n  font-family: ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif;\n  font-size: 13px; line-height: 1.45;\n}\n#fl-confirm-dialog .fl-confirm-msg { margin: 0 0 12px; color: var(--lt-text, #f3f4f6); }\n#fl-confirm-dialog .fl-confirm-actions {\n  display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap;\n}\n#fl-confirm-dialog .fl-confirm-actions .life-btn { margin: 0; width: auto; min-width: 72px; }\nhtml.light #fl-confirm-dialog {\n  background: var(--lt-bg, #f9fafb);\n  color: var(--lt-text, #171717);\n  border-color: var(--lt-border, #d1d5db);\n}\n\n/* --- Launcher + settings rail chrome --- */\n#fl-settings-launcher { position:fixed!important; right:12px!important; left:auto!important; bottom:auto!important;\n  width:48px!important; height:48px!important; display:flex!important; align-items:center; justify-content:center;\n  z-index:2147483001; padding:0!important; margin:0!important; border:1px solid #e11d4866!important;\n  border-radius:12px!important; background:#171a1f!important; color:#fb7185!important;\n  box-shadow:0 4px 16px #0006; cursor:grab; touch-action:none; user-select:none; }\n#fl-settings-launcher svg { width:34px; height:34px; pointer-events:none; }\n#fl-settings-launcher:hover, #fl-settings-launcher[aria-expanded=\"true\"] { border-color:#fb7185!important; background:#252329!important; }\n#fl-settings-launcher:focus-visible { outline:2px solid #fb7185; outline-offset:3px; }\n#fl-tools-dock.fl-settings-rail { width:300px!important; max-width:calc(100vw - 24px)!important;\n  max-height:calc(100vh - 84px)!important; max-height:calc(100dvh - 84px)!important;\n  right:12px!important; left:auto!important; bottom:auto!important; transform:none!important;\n  display:none!important; flex-direction:column!important; justify-content:flex-start!important;\n  gap:4px!important; padding:10px!important; background:var(--lt-bg)!important;\n  border:1px solid var(--lt-border)!important; border-radius:14px!important; box-shadow:0 18px 50px #0007;\n  overflow:auto!important; scrollbar-width:thin; scrollbar-gutter:auto; font-size:13px; text-align:left;\n  z-index:2147483000!important; }\n#fl-tools-dock.fl-settings-rail.fl-rail-open { display:flex!important; }\n#fl-tools-dock.fl-settings-rail > * { flex-shrink:0; min-width:0; }\n#fl-rail-header { order:-3; display:flex; justify-content:space-between; align-items:flex-start; gap:12px; }\n#fl-rail-header .fl-brand-icon { width:32px; height:32px; flex:none; }\n#fl-rail-header .fl-brand-icon svg { display:block; width:100%; height:100%; }\n#fl-rail-header .fl-brand-copy { flex:1; min-width:0; }\n/* Dock accordion order. Scoped to the rail so insertBefore cannot reshuffle the menu. */\n#fl-tools-dock.fl-settings-rail #fl-block-panel { order: 1; }\n#fl-tools-dock.fl-settings-rail #fl-filter-panel { order: 2; }\n#fl-tools-dock.fl-settings-rail #flhp-panel { order: 3; }\n#fl-tools-dock.fl-settings-rail #fl-profiles-panel { order: 4; }\n#fl-tools-dock.fl-settings-rail #fl-system-panel { order: 5; }\n#fl-tools-dock.fl-settings-rail #fl-dock-actions { order: 9; }\n#fl-tools-dock.fl-settings-rail .fl-tool-body > .fl-tool-panel {\n  margin: 4px 0 0;\n  background: var(--lt-bg);\n  border-color: var(--lt-border-soft);\n}\n#fl-tools-dock.fl-settings-rail .fl-tool-body > .fl-tool-panel .fl-tool-header { min-height: 24px; padding: 2px 8px; }\n#fl-tools-dock.fl-settings-rail #fl-system-body {\n  display: flex;\n  flex-direction: column;\n}\n#fl-tools-dock.fl-settings-rail #fl-advanced-panel { order: 1; }\n#fl-tools-dock.fl-settings-rail #fl-perf-controls { order: 2; }\n#fl-tools-dock.fl-settings-rail #fl-shortcuts-panel { order: 3; }\n#fl-tools-dock.fl-settings-rail #fl-dock-prompt { order: 0; }\n#fl-perf-controls label { display:flex; gap:7px; align-items:center; margin:4px 0; color:var(--lt-text-muted); }\n#fl-perf-controls select { margin-left:auto; background:var(--lt-bg-input); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:5px; }\nhtml.fl-tools-lightweight #fl-rail-status { border-color:#eab30866; background:#eab30818; }\nhtml.fl-tools-launcher-compact #fl-settings-launcher { width:40px!important; height:40px!important; border-radius:10px!important; }\nhtml.fl-tools-launcher-compact #fl-tools-dock.fl-settings-rail { padding:10px!important; }\nhtml.fl-tools-high-contrast #fl-tools-dock, html.fl-tools-high-contrast .fl-tool-panel { border-width:2px!important; }\nhtml.fl-tools-reduced-motion *, html.fl-tools-reduced-motion *::before, html.fl-tools-reduced-motion *::after { animation-duration:0.001ms!important; transition-duration:0.001ms!important; scroll-behavior:auto!important; }\nhtml.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-brand-icon { filter: brightness(1.08) saturate(.92); }\n#fl-rail-title { color:var(--lt-text); font-size:16px; font-weight:700; line-height:1.3; margin:0; }\n#fl-rail-subtitle { color:var(--lt-text-muted); font-size:11px; margin-top:2px; }\n#fl-rail-close { background:transparent; color:var(--lt-text-muted); border:0; border-radius:8px;\n  width:32px; height:32px; flex:none; cursor:pointer; font:22px/1 Arial,sans-serif; }\n#fl-rail-close:hover { background:var(--lt-bg-elev); color:var(--lt-text); }\n#fl-rail-status { order:-2; padding:7px 9px; border:1px solid #e11d4838; border-radius:8px;\n  background:var(--lt-accent-soft); color:var(--lt-text); font-size:11px; line-height:1.5; }\n#fl-tools-dock.fl-settings-rail #fl-panel-search-wrap { order:-1; margin:0; }\n#fl-tools-dock.fl-settings-rail #fl-panel-search { height:30px; border-radius:7px; }\n#fl-tools-dock.fl-settings-rail .fl-tool-panel { padding:0; border-radius:8px; background:var(--lt-bg-elev); box-shadow:none; transition:border-color .15s ease, box-shadow .15s ease; }\n#fl-tools-dock.fl-settings-rail .fl-tool-header { min-height:28px; padding:3px 8px; cursor:pointer; border-radius:8px; transition:background .15s ease; }\n#fl-tools-dock.fl-settings-rail .fl-tool-title { font-size:12px; letter-spacing:0; white-space:normal; }\n#fl-tools-dock.fl-settings-rail .fl-tool-chevron { min-width:20px; min-height:20px; background:none; border:none; color:var(--lt-text-muted); cursor:pointer; font-size:13px; }\n#fl-tools-dock.fl-settings-rail .fl-tool-header:hover {\n  background: var(--lt-accent-soft);\n}\n#fl-tools-dock.fl-settings-rail .fl-tool-header:hover .fl-tool-chevron { color: var(--lt-text); }\n#fl-tools-dock.fl-settings-rail .fl-tool-panel:has(> .fl-tool-header:hover) {\n  border-color: rgba(225, 29, 72, 0.55);\n  box-shadow: inset 3px 0 0 #e11d48, 0 0 0 1px rgba(225, 29, 72, 0.22), 0 0 14px rgba(225, 29, 72, 0.32);\n}\n#fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 10px 8px; margin:0; max-height:none; overflow:visible; }\n#fl-tools-dock.fl-settings-rail .fl-tool-body.fl-tool-hidden { display:none !important; }\n#fl-tools-dock.fl-settings-rail .fl-switch { padding:6px 0; margin:0; gap:10px; }\n#fl-tools-dock.fl-settings-rail .fl-switch + .fl-switch { border-top:1px solid var(--lt-border-soft); }\n#fl-tools-dock.fl-settings-rail .fl-switch-text { font-size:12px; line-height:1.3; }\n#fl-tools-dock.fl-settings-rail .fl-rail-description { display:block; font-size:10px; color:var(--lt-text-muted); margin-top:2px; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch { width:34px; height:20px; border-radius:20px; background:#626873; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch::after { width:16px; height:16px; top:2px; left:2px; background:#fff; }\n#fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"] { background:var(--lt-accent); }\n#fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"]::after { transform:translateX(14px); }\n#fl-tools-dock.fl-settings-rail :is(button,input,select,textarea):focus-visible { outline:2px solid var(--lt-accent); outline-offset:2px; }\n#fl-tools-dock.fl-settings-rail.lt-dock-compact { padding:8px!important; gap:3px!important; }\n#fl-tools-dock.fl-settings-rail.lt-dock-compact .fl-switch { padding:5px 0; }\n@media(prefers-reduced-motion:reduce) { #fl-tools-dock.fl-settings-rail * { transition:none!important; } }\n@media(forced-colors:active) {\n  #fl-settings-launcher, #fl-tools-dock.fl-settings-rail, #fl-tools-dock.fl-settings-rail .fl-tool-panel { border:1px solid CanvasText!important; }\n  #fl-tools-dock.fl-settings-rail .toggleSwitch { border:1px solid ButtonText; background:ButtonFace; forced-color-adjust:auto; }\n  #fl-tools-dock.fl-settings-rail .toggleSwitch[aria-checked=\"true\"] { background:Highlight; }\n}\n\n\n/* --- Dual-install idle badge --- */\n/* Dual-install: Basic launcher stays visible but idle while Pro is live. */\n#fl-settings-launcher[data-fl-tools-idle=\"basic\"] { opacity: 0.55; }\n#fl-settings-launcher[data-fl-tools-idle=\"basic\"]::after {\n  content: \"Pro\";\n  position: absolute;\n  right: 4px;\n  bottom: 2px;\n  font-size: 9px;\n  font-weight: 700;\n  color: #e11d48;\n}\n\n/* Silent page helpers: visited nicks, shared kinks, fetish groups, list pager copy. */\na.fl-visited-nick { color: #fda4af; }\nhtml.light a.fl-visited-nick { color: #be123c; }\na.fl-shared-kink { font-weight: 700; color: #fb7185; }\nhtml.light a.fl-shared-kink { color: #e11d48; }\n.fl-fetish-groups { display: flex; flex-direction: column; gap: 10px; }\n.fl-fetish-group { margin: 0; }\n.fl-fetish-group-label {\n  font-size: 11px; font-weight: 700; letter-spacing: .04em;\n  text-transform: uppercase; color: #a3a3a3; margin: 0 0 4px;\n}\nhtml.light .fl-fetish-group-label { color: #737373; }\n#fl-list-pager-clone {\n  display: flex; flex-wrap: wrap; align-items: center; gap: 6px;\n  margin: 8px 0 12px;\n}\n";
     (document.documentElement || document.head).appendChild(el);
   })();
   /* END generated:css-core */
 
 
-  /* Keep the dock pinned to the right; Advanced chooses top / center / bottom. */
+  /* Keep the dock pinned to the right. Placement is drag plus a top / center / bottom fallback. */
   let dockDidDrag = false;
   function applyDockPlacement(place) {
     const dock = document.getElementById("fl-tools-dock") || ensureDockRaw();
@@ -525,27 +1876,124 @@
       btn.setAttribute("aria-label", open ? "Collapse panel" : "Expand panel");
     }
   }
+  function dockPanelParent(panelId) {
+    return (FL_ACTION_PARENTS && FL_ACTION_PARENTS[panelId]) || "";
+  }
+  function dockSectionHost(panelId) {
+    const parent = dockPanelParent(panelId);
+    if (parent === "fl-filter-panel") return document.getElementById("fl-panel-body");
+    if (parent === "fl-system-panel") return document.getElementById("fl-system-body");
+    return ensureDockRaw();
+  }
+  function mountDockSection(el, panelId) {
+    if (!el) return;
+    const host = dockSectionHost(panelId);
+    if (!host) return;
+    host.appendChild(el);
+  }
+  function nestDockSections() {
+    ensureSystemPanel();
+    mountDockSection(document.getElementById("fl-site-panel"), "fl-site-panel");
+    mountDockSection(document.getElementById("fl-advanced-panel"), "fl-advanced-panel");
+    mountDockSection(document.getElementById("fl-perf-controls"), "fl-perf-controls");
+    mountDockSection(document.getElementById("fl-shortcuts-panel"), "fl-shortcuts-panel");
+  }
+  function ensureSystemPanel() {
+    const dock = ensureDockRaw();
+    let box = document.getElementById("fl-system-panel");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "fl-system-panel";
+      box.className = "fl-tool-panel";
+      box.innerHTML =
+        '<div class="fl-tool-header" id="fl-system-header"><div class="fl-tool-title">' + t("systemPanel") +
+        '</div><button type="button" id="fl-system-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
+        '<div id="fl-system-body" class="fl-tool-body fl-tool-hidden"></div>';
+      dock.appendChild(box);
+    }
+    bindPanelHeader("fl-system-header", "fl-system-body", "fl-system-toggle", "fl-system-panel");
+    return box;
+  }
+  function collapseInnerMenus(panel) {
+    if (!panel) return;
+    panel.querySelectorAll(".fl-tool-panel").forEach((nested) => {
+      if (nested === panel) return;
+      const body = nested.querySelector(":scope > .fl-tool-body");
+      const btn = nested.querySelector(":scope > .fl-tool-header .fl-tool-chevron");
+      if (body) body.classList.add("fl-tool-hidden");
+      if (btn) {
+        btn.textContent = "▸";
+        btn.setAttribute("aria-expanded", "false");
+        btn.setAttribute("aria-label", "Expand panel");
+      }
+    });
+    panel.querySelectorAll("#fl-rel-body, #fl-visit-log-body, #fl-settings-io-body, #fl-notes-sub-body").forEach((body) => {
+      body.classList.add("fl-tool-hidden");
+    });
+    panel.querySelectorAll("#fl-rel-chevron, #fl-visit-log-chevron, #fl-settings-io-chevron, #fl-notes-sub-chevron").forEach((chev) => {
+      chev.textContent = "▸";
+    });
+  }
   function collapseOtherPanels(exceptId) {
+    const keepParent = dockPanelParent(exceptId);
     [
       ["fl-filter-panel", "fl-panel-body", "fl-panel-toggle"],
       ["fl-site-panel", "fl-site-body", "fl-site-toggle"],
       ["fl-advanced-panel", "fl-advanced-body", "fl-advanced-toggle"],
       ["fl-block-panel", "fl-block-body", "fl-block-toggle"],
       ["fl-shortcuts-panel", "fl-shortcuts-body", "fl-shortcuts-toggle"],
-      ["fl-diagnostics-panel", "fl-diagnostics-body", "fl-diagnostics-toggle"]
+      ["fl-perf-controls", "fl-perf-body", "fl-perf-toggle"],
+      ["fl-system-panel", "fl-system-body", "fl-system-toggle"]
     ].forEach(([panelId, bodyId, toggleId]) => {
-      if (exceptId === panelId) return;
+      if (exceptId === panelId || (keepParent && panelId === keepParent)) return;
       setPanelOpenState(bodyId, toggleId, false);
+      collapseInnerMenus(document.getElementById(panelId));
     });
-    const perfBody = document.getElementById("fl-perf-body");
-    if (exceptId !== "fl-perf-controls" && perfBody) {
-      perfBody.classList.add("fl-tool-hidden");
-      const chev = document.getElementById("fl-perf-toggle");
-      if (chev) { chev.textContent = "▸"; chev.setAttribute("aria-expanded", "false"); }
-    }
+    if (exceptId && !keepParent) collapseInnerMenus(document.getElementById(exceptId));
     if (exceptId) notePanelOpen(exceptId);
     syncOpenPanelHighlight();
     syncDockGrowDirection();
+  }
+  function openCapabilityPanel(panelId, focusId) {
+    const chrome = FL_ACTION_CHROME[panelId];
+    if (!chrome) return false;
+    const panel = document.getElementById(panelId);
+    if (!panel) return false;
+    const parentId = dockPanelParent(panelId);
+    collapseOtherPanels(panelId);
+    if (parentId) {
+      const parentChrome = FL_ACTION_CHROME[parentId];
+      if (parentChrome) setPanelOpenState(parentChrome.body, parentChrome.toggle, true);
+      if (parentId === "fl-filter-panel") {
+        try { localStorage.setItem("fl_panel_collapsed", "0"); } catch (_) {}
+      }
+    }
+    setPanelOpenState(chrome.body, chrome.toggle, true);
+    try { panel.scrollIntoView({ block: "nearest" }); } catch (_) {}
+    return true;
+  }
+  function setupStudioActions() {
+    if (setupStudioActions.bound) return;
+    setupStudioActions.bound = true;
+    window.addEventListener("fltools:action", function (event) {
+      const detail = event.detail || {};
+      if (detail.protocol && detail.protocol !== FL_ACTION_PROTOCOL) return;
+      const id = flCanonicalCapability(detail.id);
+      if (id === "filter.preset") {
+        applyFilterPreset(detail.preset || "default");
+        openCapabilityPanel("fl-filter-panel");
+        return;
+      }
+      if (id === "seen.reset") {
+        resetSeen();
+        openCapabilityPanel("fl-advanced-panel");
+        return;
+      }
+      const target = FL_ACTION_TARGETS[id] || {};
+      const panelId = detail.panel || target.panel;
+      if (!panelId) return;
+      openCapabilityPanel(panelId, detail.focus || target.focus);
+    });
   }
   function bindPanelHeader(headerId, bodyId, toggleId, panelId) {
     const header = document.getElementById(headerId);
@@ -553,6 +2001,7 @@
     header.dataset.collapseBound = "1";
     header.addEventListener("click", (e) => {
       if (typeof dockDidDrag !== "undefined" && dockDidDrag) { dockDidDrag = false; return; }
+      if (dockPanelParent(panelId)) e.stopPropagation();
       if (e.target.closest("input, textarea, select, label") && !e.target.closest(".fl-tool-chevron")) return;
       const body = document.getElementById(bodyId);
       const opening = !!(body && body.classList.contains("fl-tool-hidden"));
@@ -568,10 +2017,41 @@
     bindPanelHeader("fl-advanced-header", "fl-advanced-body", "fl-advanced-toggle", "fl-advanced-panel");
     bindPanelHeader("fl-block-header", "fl-block-body", "fl-block-toggle", "fl-block-panel");
     bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
-    bindPanelHeader("fl-diagnostics-header", "fl-diagnostics-body", "fl-diagnostics-toggle", "fl-diagnostics-panel");
+    bindPanelHeader("fl-system-header", "fl-system-body", "fl-system-toggle", "fl-system-panel");
+  }
+  function aboutDiagnosticsHtml() {
+    return '<div class="flhp-legend" style="margin-top:8px"><div class="flhp-legend-row"><strong>About & diagnostics</strong></div></div>' +
+      '<pre id="fl-diagnostics-output" style="white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.35 ui-monospace,monospace;margin:4px 0 8px"></pre>' +
+      '<button type="button" class="life-btn life-btn-gray" id="fl-copy-diagnostics">Copy diagnostics</button>';
+  }
+  function refreshDiagnostics() {
+    const out = document.getElementById("fl-diagnostics-output");
+    if (out) out.textContent = flDiagnosticsText();
+  }
+  function bindAboutDiagnostics() {
+    const stale = document.getElementById("fl-diagnostics-panel");
+    if (stale) stale.remove();
+    const body = document.getElementById("fl-perf-body");
+    if (body && !document.getElementById("fl-diagnostics-output")) {
+      body.insertAdjacentHTML("beforeend", aboutDiagnosticsHtml());
+    }
+    const copy = document.getElementById("fl-copy-diagnostics");
+    if (!copy || copy.dataset.flBound === "1") return;
+    copy.dataset.flBound = "1";
+    copy.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      const text = flDiagnosticsText();
+      try {
+        await navigator.clipboard.writeText(text);
+        flSetPerfStatus("Diagnostics copied");
+      } catch (_) {
+        window.prompt("Copy diagnostics", text);
+      }
+    });
   }
   function ensureBasicSettingsPanel(dock) {
     flApplyPerf();
+    ensureSystemPanel();
     const perfControls = document.getElementById("fl-perf-controls");
     if (!perfControls) {
       const box = document.createElement("div"); box.id = "fl-perf-controls"; box.className = "fl-tool-panel";
@@ -582,8 +2062,9 @@
         switchHtml("fl-compact-launcher", "Compact launcher", false) +
         switchHtml("fl-pause-scanning", "Pause scanning", false) +
         switchHtml("fl-high-contrast", "High contrast", false) +
-        '<label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label></div>';
-      dock.appendChild(box);
+        '<label class="fl-perf-delay">Scan delay <select id="fl-scan-delay"><option value="120">Fast</option><option value="300">Balanced</option><option value="600">Low activity</option></select></label>' +
+        aboutDiagnosticsHtml() + '</div>';
+      mountDockSection(box, "fl-perf-controls");
       const p = flLoadPerf();
       const light = box.querySelector("#fl-lightweight-mode"); const updates=box.querySelector("#fl-update-notifications"); const compact = box.querySelector("#fl-compact-launcher"); const paused = box.querySelector("#fl-pause-scanning"); const contrast = box.querySelector("#fl-high-contrast"); const delay = box.querySelector("#fl-scan-delay");
       light.checked=!!p.lightweight; updates.checked=!!p.updateNotifications; compact.checked=!!p.compactLauncher; paused.checked=!!p.paused; contrast.checked=!!p.highContrast; delay.value=String(p.scanDelay);
@@ -591,21 +2072,19 @@
       light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save); contrast.addEventListener("change",save);
       box.querySelector("#fl-perf-header").addEventListener("click", (e) => {
         if (e.target.closest("input, select, label")) return;
+        e.stopPropagation();
         const body = document.getElementById("fl-perf-body");
         const opening = body.classList.contains("fl-tool-hidden");
         body.classList.toggle("fl-tool-hidden", !opening);
         const chev = document.getElementById("fl-perf-toggle");
         if (chev) { chev.textContent = opening ? "▾" : "▸"; chev.setAttribute("aria-expanded", opening ? "true" : "false"); }
-        if (opening) collapseOtherPanels("fl-perf-controls");
+        if (opening) {
+          collapseOtherPanels("fl-perf-controls");
+          refreshDiagnostics();
+        }
       });
     }
-    if (!document.getElementById("fl-diagnostics-panel")) {
-      const diagnostics = document.createElement("div"); diagnostics.id="fl-diagnostics-panel";diagnostics.className="fl-tool-panel";
-      diagnostics.innerHTML='<div class="fl-tool-header" id="fl-diagnostics-header"><div class="fl-tool-title">About & diagnostics</div><button type="button" id="fl-diagnostics-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div><div id="fl-diagnostics-body" class="fl-tool-body fl-tool-hidden"><pre id="fl-diagnostics-output" style="white-space:pre-wrap;overflow-wrap:anywhere;font:11px/1.35 ui-monospace,monospace"></pre><button type="button" class="fl-btn" id="fl-copy-diagnostics">Copy diagnostics</button></div>';
-      dock.appendChild(diagnostics);
-      diagnostics.querySelector("#fl-diagnostics-header").addEventListener("click",()=>{diagnostics.querySelector("#fl-diagnostics-output").textContent=flDiagnosticsText();});
-      diagnostics.querySelector("#fl-copy-diagnostics").addEventListener("click",async(event)=>{event.stopPropagation();const text=flDiagnosticsText();try{await navigator.clipboard.writeText(text);flSetPerfStatus("Diagnostics copied");}catch(_){window.prompt("Copy diagnostics",text);}});
-    }
+    bindAboutDiagnostics();
     dock.classList.add("fl-settings-rail");
     dock.setAttribute("role", "region");
     dock.setAttribute("aria-labelledby", "fl-rail-title");
@@ -657,7 +2136,7 @@
       window.addEventListener("resize", positionSettingsRail, { passive:true });
       document.addEventListener("pointerdown", (event) => {
         if (dock.contains(event.target) || launcher.contains(event.target)) return;
-        if (event.target.closest('[role="dialog"], [role="alertdialog"], .fl-confirm-overlay, .life-qa-menu, .lt-qa-menu')) return;
+        if (event.target.closest('[role="dialog"], [role="alertdialog"], .fl-confirm-overlay, .lt-qa-menu')) return;
         if (dock.classList.contains("fl-rail-open")) setSettingsRailOpen(false, false);
       });
       document.addEventListener("keydown", (event) => {
@@ -733,10 +2212,6 @@
     }
   }
 
-  function dockTailAnchor() {
-    return document.getElementById("fl-dock-actions")
-      || document.getElementById("fl-jump-top");
-  }
   /* Accordion: opening one panel collapses the others (Shortcuts included). */
 
   const LAST_PANEL_KEY = "fl_dock_open_panel";
@@ -746,23 +2221,10 @@
     markLastDockPanel();
   }
   function readLastPanel() {
-    try { return localStorage.getItem(LAST_PANEL_KEY) || ""; } catch (_) { return ""; }
-  }
-
-  /* Migrate away from v5.26.0 Tools nest — put panels back on the dock. */
-  function unnestFromToolsStack() {
-    const tools = document.getElementById("fl-tools-panel");
-    const dock = document.getElementById("fl-tools-dock");
-    if (!dock) return;
-    const tail = dockTailAnchor();
-    const body = document.getElementById("fl-tools-body");
-    const kids = body ? Array.from(body.children) : [];
-    kids.forEach((el) => {
-      el.classList.remove("lt-tools-nested");
-      if (tail && tail.parentNode === dock) dock.insertBefore(el, tail);
-      else dock.appendChild(el);
-    });
-    if (tools) tools.remove();
+    try {
+      const id = localStorage.getItem(LAST_PANEL_KEY) || "";
+      return id === "fl-diagnostics-panel" ? "fl-perf-controls" : id;
+    } catch (_) { return ""; }
   }
 
   function panelBodyIsOpen(panel) {
@@ -847,7 +2309,7 @@
       unsoft: "×",
       softCount: "{n} soft-blocked",
       softBackup: "Download list",
-      blockPanel: "Soft-Block / Block",
+      blockPanel: "Soft-Block | Block",
       softVisitAlert: "Soft-blocked {name}",
       softVisitWhen: "Since {date}",
       softVisitWhy: "Why: {terms}",
@@ -866,13 +2328,10 @@
       hideGender: "Gender",
       hideRole: "Role",
       hideLimits: "Limits: {terms}",
-      orgFilter: "Organization cards",
-      orgShow: "Show",
-      orgDim: "Dim",
-      orgHide: "Hide",
       advancedSettings: "Advanced",
       nsfwPanel: "NSFW / SFW",
       profileSettings: "Filters",
+      systemPanel: "System",
       addTerm: "Add",
       chipActive: "{n} active",
       chipMore: "+{n} more",
@@ -898,18 +2357,14 @@
       relFriends: "Friends",
       infiniteScroll: "Enable Infinite Scroll",
       showing: "Showing {shown} of {total} loaded",
-      loadNext: "Load Next {n}",
-      noMorePages: "No more pages",
-      loading: "Loading ({n})...",
-      loadError: "Error loading — try again",
       showToasts: "Show text-match toasts",
       hideBanners: "Hide install / push banners",
       jumpTop: "Jump to top",
       lastPlace: "Last place",
       selectorWarn: "No member cards found on this list page. FetLife markup may have changed.",
-      markupWarnFeed: "Home feed not recognized. FetLife markup may have changed — chips/filters may break.",
+      markupWarnFeed: "Home feed not recognized. FetLife markup may have changed — chips/Filters may break.",
       markupWarnProfile: "Profile layout not recognized. FetLife markup may have changed — soft-block/highlights may break.",
-      markupWarnList: "Member cards not found on this list. FetLife markup may have changed — filters may break.",
+      markupWarnList: "Member cards not found on this list. FetLife markup may have changed — Filters may break.",
       excludeAlert: "Hard Limits matched on {name}",
       limitHitsWhy: "Matched: {terms}",
       limitHitsDismiss: "Dismiss",
@@ -930,8 +2385,7 @@
       blurAvatars: "Also blur avatars and icons",
       blurVideos: "Also blur videos",
       hideAge: "Age {age} (range {min}–{max})",
-      hideOrg: "Organization",
-      hideRel: "Relationship filter",
+      hideRel: "Relationship Filter",
       nsfwHint: "Only changes how already-visible images look. Does not unlock hidden or private media.",
       qaSoftBlock: "Soft-block",
       limitHistory: "Limit-hit history",
@@ -944,10 +2398,29 @@
       citiesPh: "e.g. miami, oregon, berlin",
       hideCity: "City / area",
       panelSearchPh: "Find in panels…",
-      dimSeenToday: "Show Seen chip",
       showSeenChip: "Show Seen chip",
+      seenReset: "Reset seen",
+      seenResetHint: "Clear Seen chips so visited profiles look new again.",
+      factoryReset: "Factory Reset",
+      factoryResetHint: "Erase settings, Filters, and cached data on this device.",
+      factoryResetWarn: "This cannot be reversed. Settings, Filters, and cached FL Tools data on this device will be deleted, then the page reloads.",
+      factoryResetContinue: "Continue",
+      presetDefault: "Default",
+      presetMinimal: "Minimal",
+      presetSfw: "SFW",
+      presetHint: "Default is full browse. Minimal turns off Seen, infinite scroll, and toasts, and blurs at 1px. SFW blurs media at 6px or more and hides banners.",
+      nsfwPresetHint: "Default is NSFW (no blur). Minimal blurs at 1px. SFW blurs at 6px or more.",
+      softBlockToast: "Soft-blocked {name}: {terms}",
+      softBlockToastNone: "Soft-blocked {name}",
+      blockFetlifeAsk: "Block {name} on FetLife?",
+      blockFetlifeWhy: "Continue confirms FetLife’s built-in block. Soft block only hides them in FL Tools.",
+      blockFetlifeContinue: "Continue",
+      profileBlockHint: "Soft-block hides them in FL Tools. Block on FetLife uses the site’s block.",
+      profileBlockIgnored: "Hard limits ignored for this profile.",
       seenChip: "Seen",
       seenChipTitle: "Last seen {date}",
+      browseChips: "Active Filters",
+      browseChipRemove: "Stop filtering {term}",
       whyHidden: "Hidden: {reasons}",
       myCity: "My city",
       myCityPh: "e.g. portland, miami",
@@ -961,9 +2434,7 @@
       confirmOk: "Soft-block",
       confirmCancel: "Cancel",
       confirmTitle: "Confirm",
-      dockLabel: "FL Tools",
-      expandPanel: "Expand panel",
-      collapsePanel: "Collapse panel",
+      dockLabel: "FL Tools"
     }
   };
   function t(key, vars) {
@@ -1014,13 +2485,11 @@
     if (/\/followers(?:\/|$)/.test(p)) return "followers";
     return "other";
   }
-  /* Read JSON from localStorage, trying current key then legacy keys. */
+  /* Read JSON from the namespaced tree, trying current key then legacy keys. */
   function readJsonKey(keys) {
     for (const key of keys) {
       try {
-        const raw = localStorage.getItem(key);
-        if (!raw) continue;
-        const parsed = JSON.parse(raw);
+        const parsed = FLStorage.get(key);
         if (parsed && typeof parsed === "object") return parsed;
       } catch (_) {}
     }
@@ -1045,7 +2514,7 @@
     let raw = null;
     let fromLegacy = false;
     try {
-      if (!localStorage.getItem(FILTER_KEY)) {
+      if (FLStorage.get(FILTER_KEY) == null) {
         fromLegacy = !!(localStorage.getItem("fl_profile_filter_settings_v3") || localStorage.getItem("fl_profile_filter_settings_v2"));
       }
     } catch (_) {}
@@ -1061,6 +2530,9 @@
     const seen = {};
     merged.limits = limits.filter((term) => { if (seen[term]) return false; seen[term] = true; return true; }).join(", ");
     merged.exclude = merged.limits;
+    merged.cities = "";
+    merged.myCity = "";
+    merged.sameCityOnly = false;
     /* Write-forward legacy v2/v3 keys so a later read always hits FILTER_KEY. */
     if (fromLegacy && raw) {
       try { saveFilterSettings(merged); } catch (_) {}
@@ -1068,15 +2540,15 @@
     return merged;
   }
   function saveFilterSettings(settings) {
-    try { localStorage.setItem(FILTER_KEY, JSON.stringify(flNormaliseObject(FILTER_DEFAULTS, settings))); } catch (_) {}
+    try { FLStorage.set(FILTER_KEY, flNormaliseObject(FILTER_DEFAULTS, settings)); } catch (_) {}
   }
   function migrateFlSettings() {
     let schema = 0;
-    try { schema = Number(localStorage.getItem(FL_SETTINGS_SCHEMA_KEY) || 0); } catch (_) {}
+    try { schema = Number(FLStorage.get(FL_SETTINGS_SCHEMA_KEY) || 0); } catch (_) {}
     if (schema >= FL_SETTINGS_SCHEMA) return;
     saveFilterSettings(loadFilterSettings());
     flSavePerf(flLoadPerf());
-    try { localStorage.setItem(FL_SETTINGS_SCHEMA_KEY, String(FL_SETTINGS_SCHEMA)); } catch (_) {}
+    try { FLStorage.set(FL_SETTINGS_SCHEMA_KEY, FL_SETTINGS_SCHEMA); } catch (_) {}
   }
   migrateFlSettings();
 
@@ -1139,12 +2611,7 @@
     const btn = card.querySelector("turbo-frame[id^='relation_button'] button, turbo-frame[id^='relation_button'] span.inline-flex");
     const txt = ((btn && btn.textContent) || "").replace(/\s+/g, " ").trim();
     return /^friends?$/i.test(txt);
-  }  function parseCount(card, re) {
-    const m = (card.textContent || "").match(re);
-    return m ? parseInt(m[1].replace(/,/g, ""), 10) : 0;
   }
-  /* Media totals as shown on the card ("12 pics", "1 vid", "3 writings"). */
-  function parsePicCount(card) { return parseCount(card, /(\d[\d,]*)\s*(?:pics?|photos?|pictures?)/i); }
   function splitList(s) { return String(s || "").split(/[,;\n]+/).map((x) => x.trim().toLowerCase()).filter(Boolean); }
   function textHasTerm(text, term) {
     const raw = String(term || "").trim().toLowerCase();
@@ -1240,7 +2707,7 @@
     return lib;
   }
   function saveTermLib(lib) {
-    try { localStorage.setItem(TERM_LIB_KEY, JSON.stringify(lib)); } catch (_) {}
+    try { FLStorage.set(TERM_LIB_KEY, lib); } catch (_) {}
   }
   function rememberTerms(id, terms) {
     const key = chipLibKey(id);
@@ -1471,8 +2938,6 @@
     saveFilterSettings(next);
     applyFilter(next);
     applyExcludeBlur(next);
-    const btn = document.getElementById("fl-load-more");
-    if (btn && !btn.disabled) btn.textContent = t("loadNext", { n: currentBatchSize() });
   }
   function checked(id) { const el = document.getElementById(id); return !!(el && (typeof el.checked === "boolean" ? el.checked : el.getAttribute("aria-checked") === "true")); }
 
@@ -1542,9 +3007,6 @@
     const genders = splitList(settings.genders);
     const roles = splitList(settings.roles);
     const limits = splitList(settings.limits).concat(splitList(settings.exclude));
-    const cities = splitList(settings.cities);
-    const myCity = String(settings.myCity || "").trim().toLowerCase();
-    const sameCityOnly = !!settings.sameCityOnly && !!myCity;
     const preferRoles = splitList(settings.preferRoles);
     const minAge = settings.minAge === "" || settings.minAge == null ? 18 : toInt(settings.minAge, 18);
     const maxAge = settings.maxAge === "" || settings.maxAge == null ? null : toInt(settings.maxAge, null);
@@ -1596,7 +3058,7 @@
         score -= 45;
       }
       /* Hard limits replaced the old free-text exclude list (same storage key lineage). */
-      if ((settings.orgMode === "hide" || settings.orgMode === "dim" || settings.hideOrgs) && isOrgCard(card)) hard.push(t("hideOrg"));
+      /* Org cards moved to Pro. Basic ignores orgMode. */
       const relBtn = card.querySelector("form[action*='follow'] button, turbo-frame[id^='relation_button'] button, turbo-frame[id^='relation_button'] span.inline-flex");
       const relTxt = ((relBtn && relBtn.textContent) || "").replace(/\s+/g, " ").trim();
       const flags = {
@@ -1607,45 +3069,23 @@
       };
       const knowsRel = !!(relBtn || flags.followsYou || (pageKind() === "friends" && isOwnRelationList()));
       if (knowsRel && !relSelected.some((k) => flags[k])) hard.push(t("hideRel"));
-      let cityMiss = false;
-      const locHay = (cardLocationText(card) + " " + String(card.textContent || "")).toLowerCase();
-      if (cities.length) {
-        if (!cities.some((tok) => locHay.indexOf(tok) !== -1)) {
-          cityMiss = true;
-          hard.push(t("hideCity"));
-          score -= 50;
-        }
-      }
-      if (sameCityOnly && locHay.indexOf(myCity) === -1) {
-        cityMiss = true;
-        hard.push(t("hideSameCity"));
-        score -= 50;
-      }
       const nick = cardNickname(card);
       const blocked = loadBlockReason(nick);
       const reasons = hard.concat(soft);
       const visible = reasons.length === 0 && !blocked;
       const face = cardFace(card);
       shell.classList.remove("flhp-dim", "flhp-dim-soft", "flhp-dim-hard", "lt-seen-today");
-      if (face) face.querySelectorAll(".lt-seen-chip").forEach((n) => n.remove());
+      if (face) face.querySelectorAll(".lt-seen-chip, .lt-card-chips").forEach((n) => n.remove());
       face.classList.remove("flhp-dim", "flhp-dim-soft", "flhp-dim-hard");
       clearWhyHiddenMarkers(shell, face);
-      const orgOnly = hard.length === 1 && hard[0] === t("hideOrg") && !soft.length;
-      const hideOrg = settings.orgMode === "hide" || (settings.hideOrgs && settings.orgMode !== "dim");
       if (blocked) {
         applyWhyHiddenMarkers(shell, face, ["soft-block"], false);
         shell.style.display = "none";
         face.classList.add("lt-soft-blocked");
         face.onclick = function (e) { e.preventDefault(); e.stopPropagation(); };
-      } else if (cityMiss) {
-        applyWhyHiddenMarkers(shell, face, reasons, false);
-        shell.style.display = "none";
       } else if (visible) {
         shell.style.display = "";
         shown += 1;
-      } else if (orgOnly && hideOrg) {
-        applyWhyHiddenMarkers(shell, face, reasons, false);
-        shell.style.display = "none";
       } else {
         shell.style.display = "";
         const cls = hard.length || score <= 55 ? "flhp-dim-hard" : (soft.length ? "flhp-dim-soft" : "flhp-dim");
@@ -1669,7 +3109,7 @@
       genders: chipValue("fl-genders"), roles: chipValue("fl-roles"), limits: chipValue("fl-limits"),
       exclude: chipValue("fl-limits"),
       minPics: stored.minPics, minVids: stored.minVids, minWritings: stored.minWritings,
-      hideOrgs: (val("fl-org-mode") || stored.orgMode || "off") === "hide", orgMode: val("fl-org-mode") || stored.orgMode || "off",
+      hideOrgs: false, orgMode: "off",
       dimHidden: true,
       relFollow: checked("fl-rel-follow"), relFollowing: checked("fl-rel-following"),
       relFollowsYou: checked("fl-rel-followsyu"), relFriends: checked("fl-rel-friends"),
@@ -1682,15 +3122,15 @@
       matchScope: val("fl-match-scope") || stored.matchScope || "card",
       roleMode: val("fl-role-mode") || stored.roleMode || "must",
       preferRoles: document.getElementById("fl-prefer-roles") ? chipValue("fl-prefer-roles") : (stored.preferRoles || ""),
-      cities: chipValue("fl-cities"),
-      myCity: val("fl-my-city") || stored.myCity || "",
-      sameCityOnly: document.getElementById("fl-same-city-only") ? checked("fl-same-city-only") : !!stored.sameCityOnly,
+      cities: "",
+      myCity: "",
+      sameCityOnly: false,
       showSeenChip: document.getElementById("fl-show-seen-chip")
         ? checked("fl-show-seen-chip")
-        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(stored)),
+        : showSeenChipEnabled(stored),
       dimSeenToday: document.getElementById("fl-show-seen-chip")
         ? checked("fl-show-seen-chip")
-        : (document.getElementById("fl-dim-seen-today") ? checked("fl-dim-seen-today") : showSeenChipEnabled(stored))
+        : showSeenChipEnabled(stored)
     };
   }
   function currentBatchSize() { return Math.min(500, Math.max(20, toInt(val("fl-autoload-count") || loadFilterSettings().autoloadCount, 100))); }
@@ -1767,19 +3207,16 @@
   async function loadNextPages(opts) {
     opts = opts || {};
     if (isBlockedSettingsPage()) return;
-    const btn = document.getElementById("fl-load-more");
     const countInput = document.getElementById("fl-autoload-count");
     if (!currentNextPageUrl) currentNextPageUrl = findNextPageUrl(document);
-    if (!currentNextPageUrl) { if (btn) { btn.textContent = t("noMorePages"); btn.disabled = true; } return; }
+    if (!currentNextPageUrl) return;
     const container = cardContainer();
     const maxPages = opts.pages != null ? opts.pages : 1;
     if (countInput) countInput.disabled = true;
-    if (btn) btn.disabled = true;
     let emptyStreak = 0;
     for (let i = 0; i < maxPages; i += 1) {
       if (i > 0) await new Promise((resolve) => setTimeout(resolve, 3000));
-      if (!currentNextPageUrl) { if (btn) btn.textContent = t("noMorePages"); break; }
-      if (btn) btn.textContent = t("loading", { n: i + 1 });
+      if (!currentNextPageUrl) break;
       try {
         const before = getMemberCards().length;
         const pack = await fetchPage(currentNextPageUrl);
@@ -1805,15 +3242,12 @@
           break;
         }
       } catch (err) {
-        if (btn) { btn.textContent = t("loadError"); btn.disabled = false; }
         if (countInput) countInput.disabled = false;
         console.error("FL_Tools Filter Error:", err);
         return;
       }
     }
     if (countInput) countInput.disabled = false;
-    if (btn && currentNextPageUrl) { btn.textContent = t("loadNext", { n: currentBatchSize() }); btn.disabled = false; }
-    else if (btn) { btn.textContent = t("noMorePages"); btn.disabled = true; }
   }
   /* When enabled, load the next batch as the user nears the bottom. */
   function setupInfiniteScroll() {
@@ -1896,7 +3330,7 @@
   }
   function loadVisitMap() {
     try {
-      const rawVisit = JSON.parse(localStorage.getItem(VISIT_LOG_KEY) || "null");
+      const rawVisit = FLStorage.get(VISIT_LOG_KEY);
       if (rawVisit && typeof rawVisit === "object" && !Array.isArray(rawVisit)) {
         const out = {};
         Object.keys(rawVisit).forEach((k) => {
@@ -1911,7 +3345,7 @@
     } catch (_) {}
     /* Migrate legacy today-only set into persistent map (dated as that day). */
     try {
-      const raw = JSON.parse(localStorage.getItem(SEEN_TODAY_KEY) || "null");
+      const raw = FLStorage.get(SEEN_TODAY_KEY);
       if (raw && typeof raw === "object" && Array.isArray(raw.nicks)) {
         const day = raw.date || localDateKey();
         const out = {};
@@ -1936,7 +3370,7 @@
       keep.forEach((k) => { next[k] = trimmed[k]; });
       trimmed = next;
     }
-    try { localStorage.setItem(VISIT_LOG_KEY, JSON.stringify(trimmed)); } catch (_) {}
+    try { FLStorage.set(VISIT_LOG_KEY, trimmed); } catch (_) {}
     return trimmed;
   }
   function loadSeenToday() {
@@ -1952,7 +3386,7 @@
   function saveSeenToday(set) {
     /* Keep legacy key in sync for exporters / older backups (today slice only). */
     const payload = { date: localDateKey(), nicks: Array.from(set || []).slice(-800) };
-    try { localStorage.setItem(SEEN_TODAY_KEY, JSON.stringify(payload)); } catch (_) {}
+    try { FLStorage.set(SEEN_TODAY_KEY, payload); } catch (_) {}
   }
   function markSeenTodayNick(nick) {
     const n = String(nick || "").trim().toLowerCase();
@@ -1978,18 +3412,82 @@
       const shell = cardShell(card);
       if (shell) shell.classList.remove("lt-seen-today");
       if (!face) return;
+      face.classList.add("lt-card-face");
       face.classList.remove("lt-seen-today");
+      const oldRail = face.querySelector(".lt-card-chips");
+      if (oldRail) oldRail.remove();
       const old = face.querySelector(".lt-seen-chip");
       if (old) old.remove();
-      if (!on || !map) return;
       const nick = String(cardNickname(card) || "").toLowerCase();
-      const when = nick && map[nick];
+      const when = on && map && nick && map[nick];
       if (!when) return;
+      const rail = document.createElement("div");
+      rail.className = "lt-card-chips";
       const chip = document.createElement("span");
       chip.className = "lt-seen-chip";
       chip.textContent = t("seenChip");
       chip.title = t("seenChipTitle", { date: formatVisitDate(when) });
-      face.appendChild(chip);
+      rail.appendChild(chip);
+      face.appendChild(rail);
+    });
+    renderBrowseChipBar(settings);
+  }
+  function browseChipGroups(settings) {
+    settings = settings || loadFilterSettings();
+    return [
+      { id: "fl-genders", items: splitList(settings.genders) },
+      { id: "fl-roles", items: splitList(settings.roles) },
+      { id: "fl-limits", items: splitList(settings.limits).concat(splitList(settings.exclude)) }
+    ].map((group) => {
+      const seen = {};
+      group.items = group.items.filter((term) => {
+        if (!term || seen[term]) return false;
+        seen[term] = true;
+        return true;
+      });
+      return group;
+    }).filter((group) => group.items.length);
+  }
+  function renderBrowseChipBar(settings) {
+    let bar = document.getElementById("fl-browse-chips");
+    if (!isListPage() || isMediaPage()) {
+      if (bar) bar.remove();
+      return;
+    }
+    const groups = browseChipGroups(settings || loadFilterSettings());
+    if (!groups.length) {
+      if (bar) bar.remove();
+      return;
+    }
+    if (!bar) {
+      bar = document.createElement("div");
+      bar.id = "fl-browse-chips";
+      bar.setAttribute("aria-label", t("browseChips"));
+      document.body.appendChild(bar);
+    }
+    bar.innerHTML = "";
+    const title = document.createElement("span");
+    title.className = "lt-browse-chips-label";
+    title.textContent = t("browseChips");
+    bar.appendChild(title);
+    groups.forEach((group) => {
+      group.items.forEach((term) => {
+        const chip = document.createElement("span");
+        chip.className = "lt-browse-chip";
+        chip.appendChild(document.createTextNode(term));
+        const x = document.createElement("button");
+        x.type = "button";
+        x.textContent = "×";
+        x.title = t("browseChipRemove", { term: term });
+        x.setAttribute("aria-label", t("browseChipRemove", { term: term }));
+        x.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          removeSavedTerm(group.id, term);
+        });
+        chip.appendChild(x);
+        bar.appendChild(chip);
+      });
     });
   }
 
@@ -2151,30 +3649,6 @@
     const mode = ds.mode === "sfw" ? "nsfw" : "sfw";
     saveDisplaySettings(Object.assign({}, ds, { mode: mode }));
     applyDisplayMode(mode, ds.blurPx);
-  }
-  function sortLoadedCards(mode) {
-    mode = mode || loadFilterSettings().sortBy || "none";
-    const parent = cardContainer();
-    if (!parent || !mode || mode === "none") return;
-    const rows = getMemberCards().map((card) => {
-      const tag = parseCardTag(card);
-      return { shell: cardShell(card), name: cardNickname(card), age: tag.age || 0, pics: parsePicCount(card) };
-    });
-    const before = rows.map((r) => r.shell);
-    rows.sort((a, b) => {
-      if (mode === "name") return a.name.localeCompare(b.name) || a.shell.id.localeCompare(b.shell.id || "");
-      if (mode === "age") return a.age - b.age || a.name.localeCompare(b.name);
-      if (mode === "pics") return b.pics - a.pics || a.name.localeCompare(b.name);
-      return 0;
-    });
-    let same = before.length === rows.length;
-    if (same) {
-      for (let i = 0; i < rows.length; i += 1) {
-        if (before[i] !== rows[i].shell) { same = false; break; }
-      }
-    }
-    if (same) return;
-    rows.forEach((row) => parent.appendChild(row.shell));
   }
   function rememberPlace() {
     const path = location.pathname || "";
@@ -2511,7 +3985,7 @@
   }
   const BLOCK_REASON_KEY = "fl_block_reasons";
   function blockReasonMap() {
-    try { return JSON.parse(localStorage.getItem(BLOCK_REASON_KEY) || "{}"); } catch (_) { return {}; }
+    try { return FLStorage.get(BLOCK_REASON_KEY) || {}; } catch (_) { return {}; }
   }
   function shortBlockDate(ts) {
     try { return new Date(ts).toLocaleDateString(undefined, { year: "2-digit", month: "numeric", day: "numeric" }); }
@@ -2521,7 +3995,7 @@
     if (!nick) return;
     const map = blockReasonMap();
     map[nick] = { terms: terms || [], at: Date.now(), type: type === "official" ? "official" : "soft" };
-    try { localStorage.setItem(BLOCK_REASON_KEY, JSON.stringify(map)); } catch (_) {}
+    try { FLStorage.set(BLOCK_REASON_KEY, map); } catch (_) {}
   }
   function loadBlockReason(nick) {
     if (!nick) return null;
@@ -2551,7 +4025,7 @@
     Object.keys(map).forEach((k) => {
       if (k.toLowerCase() === lower) delete map[k];
     });
-    try { localStorage.setItem(BLOCK_REASON_KEY, JSON.stringify(map)); } catch (_) {}
+    try { FLStorage.set(BLOCK_REASON_KEY, map); } catch (_) {}
   }
   function softEntries() {
     const map = blockReasonMap();
@@ -2626,10 +4100,17 @@
     if (form) {
       if (form.requestSubmit) form.requestSubmit();
       else form.submit();
+      confirmFetLifeBlockUi();
       return;
     }
     const modalBtn = document.querySelector('[data-id="block"] [data-id="modal-main-action-button"], [data-id="block"] button[type="submit"]');
-    if (modalBtn) { modalBtn.click(); return; }
+    if (modalBtn) { modalBtn.click(); confirmFetLifeBlockUi(); return; }
+    const trigger = document.querySelector('[data-id="block"] button, [data-id="block"] a, a[href*="blockeds"]');
+    if (trigger) {
+      try { trigger.click(); } catch (_) {}
+      confirmFetLifeBlockUi();
+      return;
+    }
     const idMatch = document.documentElement.innerHTML.match(/blocked_user_id=(\d+)/);
     if (idMatch) location.href = "/blockeds?blocked_user_id=" + idMatch[1] + "&source=Profile";
   }
@@ -2712,116 +4193,129 @@
     }
     return true;
   }
+  function confirmFetLifeBlockUi() {
+    const pick = () => document.querySelector('[data-id="block"] [data-id="modal-main-action-button"], [data-id="block"] button[type="submit"]');
+    let tries = 0;
+    const timer = setInterval(() => {
+      tries += 1;
+      const btn = pick();
+      if (btn) {
+        clearInterval(timer);
+        try { btn.click(); } catch (_) {}
+        return;
+      }
+      if (tries >= 25) clearInterval(timer);
+    }, 80);
+  }
+  function showActionToast(msg) {
+    let toast = document.getElementById("fl-action-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.id = "fl-action-toast";
+      toast.className = "life-toast";
+      toast.title = "Dismiss";
+      toast.addEventListener("click", () => { toast.style.display = "none"; });
+      document.body.appendChild(toast);
+    }
+    toast.textContent = msg;
+    toast.style.display = "";
+    clearTimeout(showActionToast.hideTimer);
+    showActionToast.hideTimer = setTimeout(() => { toast.style.display = "none"; }, 6000);
+  }
+  function completeSoftBlock(nick, terms) {
+    saveBlockReason(nick, terms || [], "soft");
+    appendLimitHistory(nick, terms || [], location.pathname || "");
+    renderSoftList();
+    applyFilter(loadFilterSettings());
+    const why = (terms || []).filter(Boolean).join(", ");
+    showActionToast(why
+      ? t("softBlockToast", { name: nick, terms: why })
+      : t("softBlockToastNone", { name: nick }));
+    showSoftBlockNotice(nick, loadBlockReason(nick));
+  }
   function showProfileBlockPrompt(nick, hits) {
-    if (!nick || skippedBlockPrompt(nick) || loadBlockReason(nick)) return;
+    if (!nick || loadBlockReason(nick)) return;
     const terms = (hits || []).map((x) => String(x || "").trim()).filter(Boolean);
-    openBlockPanel();
+    const skipped = skippedBlockPrompt(nick);
+    const urgent = !!(terms.length && !skipped);
+    ensureBlockPanel();
+    if (urgent) {
+      openBlockPanel();
+      hardLimitSfwMimic = true;
+      applyDisplayMode();
+    } else {
+      hardLimitSfwMimic = false;
+      applyDisplayMode();
+    }
     const bar = dockAlert();
-    const sig = "prompt|" + nick + "|" + terms.join(",");
-    if (bar.getAttribute("data-kind") === "prompt" && bar.getAttribute("data-sig") === sig) return;
-    bar.setAttribute("data-kind", "prompt");
+    const sig = (urgent ? "prompt" : "visit") + "|" + nick + "|" + terms.join(",") + "|" + (skipped ? "skip" : "");
+    if (bar.getAttribute("data-kind") === (urgent ? "prompt" : "visit") && bar.getAttribute("data-sig") === sig) return;
+    bar.setAttribute("data-kind", urgent ? "prompt" : "visit");
     bar.setAttribute("data-sig", sig);
+    paintProfileBlockMenu(bar, nick, terms, skipped ? "ignored" : (urgent ? "prompt" : "visit"));
+  }
+  function paintProfileBlockMenu(bar, nick, terms, stage) {
     bar.innerHTML = "";
-
     const title = document.createElement("div");
     title.style.fontWeight = "bold";
-    title.textContent = t("excludeAlert", { name: nick });
     const why = document.createElement("div");
     why.style.marginTop = "4px";
-    why.textContent = terms.length
-      ? t("limitHitsWhy", { terms: terms.join(", ") })
-      : t("softVisitWhyNone");
-
+    if (stage === "fetlife") {
+      title.textContent = t("blockFetlifeAsk", { name: nick });
+      why.textContent = t("blockFetlifeWhy");
+    } else if (terms.length && stage !== "ignored") {
+      title.textContent = t("excludeAlert", { name: nick });
+      why.textContent = t("limitHitsWhy", { terms: terms.join(", ") });
+    } else if (stage === "ignored" && terms.length) {
+      title.textContent = t("profileBlockIgnored");
+      why.textContent = t("limitHitsWhy", { terms: terms.join(", ") });
+    } else {
+      title.textContent = t("blockPanel");
+      why.textContent = t("profileBlockHint");
+    }
     const row = document.createElement("div");
-    row.style.cssText = "margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;";
+    row.className = "fl-block-actions";
 
-    function finishSoft() {
-      saveBlockReason(nick, terms, "soft");
-      appendLimitHistory(nick, terms, location.pathname || "");
-      renderSoftList();
-      applyFilter(loadFilterSettings());
-      showSoftBlockNotice(nick, loadBlockReason(nick));
+    function addBtn(label, kind, span, onClick) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = (kind === "red" ? "life-btn life-btn-red" : "life-btn life-btn-gray") + (span ? " fl-block-span" : "");
+      btn.textContent = label;
+      btn.addEventListener("click", (e) => { e.stopPropagation(); onClick(); });
+      row.appendChild(btn);
+      return btn;
     }
 
-    const soft = document.createElement("button");
-    soft.type = "button";
-    soft.className = "life-btn life-btn-gray";
-    soft.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-    soft.textContent = t("blockSoft");
-    soft.addEventListener("click", (e) => {
-      e.stopPropagation();
-      finishSoft();
-    });
-
-    const hard = document.createElement("button");
-    hard.type = "button";
-    hard.className = "life-btn life-btn-red";
-    hard.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-    hard.textContent = t("blockYes");
-    hard.addEventListener("click", (e) => {
-      e.stopPropagation();
-      appendLimitHistory(nick, terms, location.pathname || "");
-      submitOfficialBlock(terms);
-    });
-
-    const no = document.createElement("button");
-    no.type = "button";
-    no.className = "life-btn life-btn-gray";
-    no.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-    no.textContent = t("blockNo");
-    no.addEventListener("click", (e) => {
-      e.stopPropagation();
-      bar.innerHTML = "";
-      const ask = document.createElement("div");
-      ask.textContent = t("blockNoSure");
-      const confirmRow = document.createElement("div");
-      confirmRow.style.cssText = "margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;";
-      const confirm = document.createElement("button");
-      confirm.type = "button";
-      confirm.className = "life-btn life-btn-red";
-      confirm.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-      confirm.textContent = t("blockNoConfirm");
-      confirm.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        skipBlockPrompt(nick);
-        bar.remove();
+    if (stage === "fetlife") {
+      addBtn(t("blockSoft"), "gray", false, () => completeSoftBlock(nick, terms));
+      addBtn(t("blockFetlifeContinue"), "red", false, () => {
+        appendLimitHistory(nick, terms, location.pathname || "");
+        submitOfficialBlock(terms);
       });
-      const cancel = document.createElement("button");
-      cancel.type = "button";
-      cancel.className = "life-btn life-btn-gray";
-      cancel.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-      cancel.textContent = t("blockNoCancel");
-      cancel.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        /* Dismiss for this visit only — allow prompt again next time. */
-        bar.remove();
-      });
-      const dismiss = document.createElement("button");
-      dismiss.type = "button";
-      dismiss.className = "life-btn life-btn-gray";
-      dismiss.style.cssText = "margin:0;width:auto;flex:1 1 auto;";
-      dismiss.textContent = t("limitHitsDismiss");
-      dismiss.addEventListener("click", (ev) => {
-        ev.stopPropagation();
-        bar.remove();
-      });
-      confirmRow.appendChild(confirm);
-      confirmRow.appendChild(cancel);
-      bar.appendChild(ask);
-      bar.appendChild(confirmRow);
-    });
-
-    row.appendChild(soft);
-    row.appendChild(hard);
-    row.appendChild(no);
+    } else {
+      addBtn(t("blockSoft"), "gray", false, () => completeSoftBlock(nick, terms));
+      addBtn(t("blockYes"), "red", false, () => paintProfileBlockMenu(bar, nick, terms, "fetlife"));
+      if (stage === "prompt") {
+        addBtn(t("blockNo"), "gray", true, () => {
+          skipBlockPrompt(nick);
+          hardLimitSfwMimic = false;
+          applyDisplayMode();
+          showProfileBlockPrompt(nick, terms);
+        });
+      }
+    }
     bar.appendChild(title);
     bar.appendChild(why);
     bar.appendChild(row);
   }
   function openBlockPanel() {
     ensureBlockPanel();
-    const panel = document.getElementById("fl-block-panel");
-    if (panel) panel.scrollIntoView({ block:"nearest" });
+    try { applyDockHidden(false); } catch (_) {}
+    setSettingsRailOpen(true, false);
+    setPanelOpenState("fl-block-body", "fl-block-toggle", true);
+    collapseOtherPanels("fl-block-panel");
+    try { document.getElementById("fl-block-panel")?.scrollIntoView({ block: "nearest" }); } catch (_) {}
+    syncOpenPanelHighlight();
   }
   function showSoftBlockNotice(nick, rec) {
     if (!nick || !rec || rec.type === "official") {
@@ -2884,27 +4378,33 @@
     const stored = loadFilterSettings();
     settings = Object.assign({}, stored, settings || {});
     if (!String(settings.limits || "").trim()) settings.limits = stored.limits || stored.exclude || "";
-    if (applyUnblockPrompt()) return;
+    if (!isMemberProfile() && !isBlockedInterstitial()) {
+      if (hardLimitSfwMimic) {
+        hardLimitSfwMimic = false;
+        applyDisplayMode();
+      }
+    }
+    if (applyUnblockPrompt()) {
+      hardLimitSfwMimic = false;
+      return;
+    }
     const nick = profileNickname();
     if (isMemberProfile() && loadBlockReason(nick)) {
+      hardLimitSfwMimic = false;
+      applyDisplayMode();
       showSoftBlockNotice(nick, loadBlockReason(nick));
       return;
     }
     if (isMemberProfile()) {
       highlightProfileLimitTerms(settings);
       const hits = profileSectionHits(settings);
-      if (hits.length) {
-        if (!skippedBlockPrompt(nick)) showProfileBlockPrompt(nick, hits);
-      } else {
-        const bar = document.getElementById("fl-exclude-alert");
-        if (bar && (bar.getAttribute("data-kind") === "prompt" || bar.getAttribute("data-kind") === "soft-visit")) bar.remove();
-      }
-      /* Soft-list DOM only when newly needed — avoid dock mutations that re-trigger the observer. */
+      showProfileBlockPrompt(nick, hits);
       if (!document.getElementById("fl-block-panel")) ensureBlockPanel();
     }
   }
   const DISPLAY_KEY = "fl_display_settings";
   const DISPLAY_DEFAULTS = { mode: "nsfw", blurPx: 4, blurAvatars: false, blurVideos: true, markReadScroll: false };
+  let hardLimitSfwMimic = false;
   function loadDisplaySettings() {
     const merged = Object.assign({}, DISPLAY_DEFAULTS, readJsonKey([DISPLAY_KEY]) || {});
     merged.mode = merged.mode === "sfw" ? "sfw" : "nsfw";
@@ -2915,12 +4415,17 @@
     return merged;
   }
   function saveDisplaySettings(s) {
-    try { localStorage.setItem(DISPLAY_KEY, JSON.stringify(s)); } catch (_) {}
+    try { FLStorage.set(DISPLAY_KEY, s); } catch (_) {}
   }
   function applyDisplayMode(mode, blurPx) {
     const ds = loadDisplaySettings();
-    mode = mode || ds.mode;
-    blurPx = blurPx == null ? ds.blurPx : blurPx;
+    if (hardLimitSfwMimic) {
+      mode = "sfw";
+      blurPx = Math.max(6, Number(ds.blurPx) || 4);
+    } else {
+      mode = mode || ds.mode;
+      blurPx = blurPx == null ? ds.blurPx : blurPx;
+    }
     document.documentElement.style.setProperty("--lt-sfw-blur", blurPx + "px");
     document.documentElement.classList.remove("fl-tools-nsfw", "fl-tools-sfw");
     if (mode === "nsfw") document.documentElement.classList.add("fl-tools-nsfw");
@@ -2945,8 +4450,40 @@
     const label = document.getElementById("fl-blur-val");
     if (label) label.textContent = String(blurPx);
   }
-  function buildDisplayPanel() {
-    applyDisplayMode(loadDisplaySettings().mode);
+  function syncDisplayForm() {
+    const ds = loadDisplaySettings();
+    setSwitchState("fl-nsfw-toggle", ds.mode !== "sfw");
+    setSwitchState("fl-blur-avatars", !!ds.blurAvatars);
+    setSwitchState("fl-blur-videos", ds.blurVideos !== false);
+    const blur = document.getElementById("fl-sfw-blur");
+    if (blur) blur.value = String(ds.blurPx);
+    const state = document.getElementById("fl-nsfw-state");
+    if (state) state.textContent = ds.mode === "sfw" ? t("modeSfw") : t("modeNsfw");
+    const label = document.getElementById("fl-blur-val");
+    if (label) label.textContent = String(ds.blurPx);
+  }
+  function applyDisplayPreset(name) {
+    const patch = FL_PRESET_DISPLAY[name];
+    if (!patch) return false;
+    const ds = loadDisplaySettings();
+    const next = Object.assign({}, ds, patch);
+    if (name === "minimal") next.blurPx = Math.max(1, Number(patch.blurPx) || 1);
+    if (name === "sfw") next.blurPx = Math.max(6, Number(ds.blurPx) || 0, Number(patch.blurPx) || 6);
+    saveDisplaySettings(next);
+    applyDisplayMode();
+    syncDisplayForm();
+    return true;
+  }
+  function bindDisplayPresetButtons() {
+    document.querySelectorAll("[data-fl-display-preset]").forEach((btn) => {
+      if (btn.dataset.presetBound) return;
+      btn.dataset.presetBound = "1";
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        applyDisplayPreset(btn.getAttribute("data-fl-display-preset"));
+      });
+    });
   }
 
   /* Limit-hit history (local). */
@@ -2960,7 +4497,7 @@
   }
   function saveLimitHistory(list) {
     const trimmed = (list || []).slice(0, LIMIT_HIST_CAP);
-    try { localStorage.setItem(LIMIT_HIST_KEY, JSON.stringify(trimmed)); } catch (_) {}
+    try { FLStorage.set(LIMIT_HIST_KEY, trimmed); } catch (_) {}
     return trimmed;
   }
   function appendLimitHistory(nick, terms, path) {
@@ -2978,95 +4515,117 @@
 
 
 
-  /* Dock-styled confirm (Escape / Cancel = false; Enter / OK = true). Replaces window.confirm. */
-  function confirmDock(message, onResult) {
-    const prev = document.getElementById("fl-confirm-overlay");
-    if (prev) prev.remove();
-    const prevFocus = document.activeElement;
-    const overlay = document.createElement("div");
-    overlay.id = "fl-confirm-overlay";
-    overlay.setAttribute("role", "presentation");
-    const dialog = document.createElement("div");
-    dialog.id = "fl-confirm-dialog";
-    dialog.setAttribute("role", "dialog");
-    dialog.setAttribute("aria-modal", "true");
-    dialog.setAttribute("aria-labelledby", "fl-confirm-title");
-    dialog.setAttribute("aria-describedby", "fl-confirm-msg");
-    /* Inherit dock tokens when dock exists. */
-    const dock = document.getElementById("fl-tools-dock");
-    if (dock) {
-      try {
-        const cs = getComputedStyle(dock);
-        ["--lt-bg", "--lt-bg-elev", "--lt-border", "--lt-text", "--lt-text-muted", "--lt-accent", "--lt-radius"].forEach((k) => {
-          const v = cs.getPropertyValue(k);
-          if (v) dialog.style.setProperty(k, v.trim());
-        });
-      } catch (_) {}
-    }
+  /* In-dock confirm (Escape / Cancel = false; Enter / Continue = true). Stays in the settings menu. */
+  function promptButtonClass(kind) {
+    return kind === "red" ? "life-btn life-btn-red" : "life-btn life-btn-gray";
+  }
+  function paintPromptBox(box, spec) {
+    spec = spec || {};
+    box.hidden = false;
+    box.classList.add("life-alert-strong", "fl-prompt-block");
+    box.classList.toggle("fl-prompt-danger", !!spec.danger);
+    box.setAttribute("role", "dialog");
+    box.innerHTML = "";
     const title = document.createElement("div");
-    title.id = "fl-confirm-title";
-    title.className = "fl-tool-title";
-    title.style.marginBottom = "8px";
-    title.textContent = t("confirmTitle");
-    const msg = document.createElement("p");
-    msg.id = "fl-confirm-msg";
-    msg.className = "fl-confirm-msg";
-    msg.textContent = message;
-    const actions = document.createElement("div");
-    actions.className = "fl-confirm-actions";
+    title.style.fontWeight = "bold";
+    title.textContent = spec.title || t("confirmTitle");
+    const msg = document.createElement("div");
+    msg.style.marginTop = "4px";
+    msg.textContent = spec.message || "";
+    const row = document.createElement("div");
+    row.className = "fl-block-actions";
     const cancel = document.createElement("button");
     cancel.type = "button";
-    cancel.className = "life-btn life-btn-gray";
-    cancel.textContent = t("confirmCancel");
+    cancel.className = promptButtonClass("gray");
+    cancel.textContent = spec.cancelLabel || t("confirmCancel");
     const ok = document.createElement("button");
     ok.type = "button";
-    ok.className = "life-btn life-btn-red";
-    ok.textContent = t("confirmOk");
-    actions.appendChild(cancel);
-    actions.appendChild(ok);
-    dialog.appendChild(title);
-    dialog.appendChild(msg);
-    dialog.appendChild(actions);
-    overlay.appendChild(dialog);
-    document.body.appendChild(overlay);
-
+    ok.className = promptButtonClass(spec.danger ? "red" : "gray");
+    ok.textContent = spec.okLabel || t("confirmOk");
+    row.append(cancel, ok);
+    box.append(title, msg, row);
+    return { cancel, ok };
+  }
+  function hidePromptBox(box) {
+    if (!box) return;
+    box.hidden = true;
+    box.textContent = "";
+  }
+  function wipeFlToolsStorage() {
+    ["localStorage", "sessionStorage"].forEach((name) => {
+      try {
+        const store = window[name];
+        const keys = [];
+        for (let i = 0; i < store.length; i += 1) {
+          const k = store.key(i);
+          if (k && /^(fl_|fls_|fl\.)/i.test(k)) keys.push(k);
+        }
+        keys.forEach((k) => store.removeItem(k));
+      } catch (_) {}
+    });
+  }
+  function bindFactoryReset() {
+    const btn = document.getElementById("fl-factory-reset");
+    const box = document.getElementById("fl-factory-reset-prompt");
+    if (!btn || !box || btn.dataset.bound) return;
+    btn.dataset.bound = "1";
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setSettingsRailOpen(true, false);
+      openCapabilityPanel("fl-advanced-panel");
+      const actions = paintPromptBox(box, {
+        danger: true,
+        title: t("factoryReset"),
+        message: t("factoryResetWarn"),
+        cancelLabel: t("confirmCancel"),
+        okLabel: t("factoryResetContinue")
+      });
+      actions.cancel.addEventListener("click", (ev) => { ev.stopPropagation(); hidePromptBox(box); });
+      actions.ok.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        wipeFlToolsStorage();
+        location.reload();
+      });
+    });
+  }
+  function confirmDock(message, onResult) {
+    const stale = document.getElementById("fl-confirm-overlay");
+    if (stale) stale.remove();
+    setSettingsRailOpen(true, false);
+    openCapabilityPanel("fl-block-panel");
+    const dock = ensureDock();
+    let host = document.getElementById("fl-dock-prompt");
+    if (!host) {
+      host = document.createElement("div");
+      host.id = "fl-dock-prompt";
+      const search = document.getElementById("fl-panel-search-wrap");
+      if (search && search.parentNode === dock) search.after(host);
+      else dock.appendChild(host);
+    }
+    const actions = paintPromptBox(host, {
+      title: t("confirmTitle"),
+      message: message,
+      cancelLabel: t("confirmCancel"),
+      okLabel: t("confirmOk")
+    });
     let settled = false;
+    function onKey(e) {
+      if (e.key !== "Escape") return;
+      e.preventDefault();
+      e.stopPropagation();
+      finish(false);
+    }
     function finish(result) {
       if (settled) return;
       settled = true;
       document.removeEventListener("keydown", onKey, true);
-      overlay.remove();
-      try { if (prevFocus && prevFocus.focus) prevFocus.focus(); } catch (_) {}
+      hidePromptBox(host);
       if (typeof onResult === "function") onResult(!!result);
     }
-    function onKey(e) {
-      if (e.key === "Escape") {
-        e.preventDefault(); e.stopPropagation();
-        finish(false);
-        return;
-      }
-      if (e.key === "Enter") {
-        /* Default action: confirm (OK is focused initially). */
-        if (document.activeElement === cancel) return;
-        e.preventDefault(); e.stopPropagation();
-        finish(true);
-        return;
-      }
-      if (e.key === "Tab") {
-        const focusables = [cancel, ok];
-        const i = focusables.indexOf(document.activeElement);
-        if (e.shiftKey) {
-          if (i <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus(); }
-        } else {
-          if (i === focusables.length - 1 || i === -1) { e.preventDefault(); focusables[0].focus(); }
-        }
-      }
-    }
-    cancel.addEventListener("click", (e) => { e.preventDefault(); finish(false); });
-    ok.addEventListener("click", (e) => { e.preventDefault(); finish(true); });
-    overlay.addEventListener("click", (e) => { if (e.target === overlay) finish(false); });
     document.addEventListener("keydown", onKey, true);
-    setTimeout(() => { try { ok.focus(); } catch (_) {} }, 0);
+    actions.cancel.addEventListener("click", (e) => { e.preventDefault(); finish(false); });
+    actions.ok.addEventListener("click", (e) => { e.preventDefault(); finish(true); });
   }
 
   function softBlockNick(nick) {
@@ -3413,10 +4972,16 @@
       '<input id="fl-sfw-blur" type="range" min="1" max="10" step="1" value="' + ds.blurPx + '">' +
       switchHtml("fl-blur-avatars", t("blurAvatars"), !!ds.blurAvatars) +
       switchHtml("fl-blur-videos", t("blurVideos"), ds.blurVideos !== false) +
+      '<div id="fl-display-preset-row" style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">' +
+      '<button type="button" class="life-btn life-btn-gray" data-fl-display-preset="default">' + t("presetDefault") + "</button>" +
+      '<button type="button" class="life-btn life-btn-gray" data-fl-display-preset="minimal">' + t("presetMinimal") + "</button>" +
+      '<button type="button" class="life-btn life-btn-gray" data-fl-display-preset="sfw">' + t("presetSfw") + "</button></div>" +
+      '<div class="life-hint">' + t("nsfwPresetHint") + "</div>" +
       "</div>";
-    ensureDock().appendChild(box);
+    mountDockSection(box, "fl-site-panel");
     bindPanelHeader("fl-site-header", "fl-site-body", "fl-site-toggle", "fl-site-panel");
     wireSiteControls();
+    bindDisplayPresetButtons();
   }
 
   function applyExtras() {
@@ -3462,7 +5027,75 @@
     });
   }
 
-  /* Build the Profile Filter UI once. Submenus: Location, Relationship Settings. */
+  function setSwitchState(id, on) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.checked = !!on;
+    el.setAttribute("aria-checked", on ? "true" : "false");
+  }
+  function syncFilterForm(s) {
+    const setVal = (id, value) => { const el = document.getElementById(id); if (el) el.value = value == null ? "" : String(value); };
+    setVal("fl-min-age", s.minAge);
+    setVal("fl-max-age", s.maxAge);
+    const chips = { "fl-genders": "genders", "fl-roles": "roles", "fl-limits": "limits" };
+    Object.keys(chips).forEach((id) => {
+      const hold = document.getElementById(id);
+      if (!hold) return;
+      hold.value = s[chips[id]] || "";
+      renderChipList(id);
+    });
+    setVal("fl-combine-mode", s.combineMode || "and");
+    setVal("fl-match-scope", s.matchScope || "card");
+    setVal("fl-role-mode", s.roleMode || "must");
+    setSwitchState("fl-auto-scroll", !!s.autoScroll);
+    setSwitchState("fl-show-toasts", s.showToasts !== false);
+    setSwitchState("fl-show-seen-chip", !!s.showSeenChip);
+    setSwitchState("fl-hide-banners", !!s.hideBanners);
+    setSwitchState("fl-rel-follow", s.relFollow !== false);
+    setSwitchState("fl-rel-following", s.relFollowing !== false);
+    setSwitchState("fl-rel-followsyu", s.relFollowsYou !== false);
+    setSwitchState("fl-rel-friends", s.relFriends !== false);
+    const ds = loadDisplaySettings();
+    setSwitchState("fl-nsfw-toggle", ds.mode !== "sfw");
+  }
+  function applyFilterPreset(name) {
+    const patch = FL_FILTER_PRESETS[name];
+    if (!patch) return false;
+    const current = loadFilterSettings();
+    const next = Object.assign({}, FILTER_DEFAULTS, current, patch, {
+      dockAnchor: current.dockAnchor,
+      orgMode: current.orgMode,
+      cities: "",
+      myCity: "",
+      sameCityOnly: false
+    });
+    saveFilterSettings(next);
+    try { localStorage.setItem("fl_filter_preset", name); } catch (_) {}
+    const displayPatch = FL_PRESET_DISPLAY[name];
+    if (displayPatch) applyDisplayPreset(name);
+    syncFilterForm(next);
+    applyFilter(next);
+    applySeenChips(next);
+    setupInfiniteScroll();
+    return true;
+  }
+  function bindPresetButtons() {
+    document.querySelectorAll("[data-fl-preset]").forEach((btn) => {
+      if (btn.dataset.presetBound) return;
+      btn.dataset.presetBound = "1";
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        applyFilterPreset(btn.getAttribute("data-fl-preset"));
+      });
+    });
+  }
+  function resetSeen() {
+    try { FLStorage.remove(VISIT_LOG_KEY); } catch (_) {}
+    try { FLStorage.set(SEEN_TODAY_KEY, { date: localDateKey(), nicks: [] }); } catch (_) {}
+    applySeenChips();
+  }
+
+  /* Build the Profile Filter UI once. Submenu: Relationship Settings. */
   function buildFilterPanel() {
     if (document.getElementById("fl-filter-panel")) return;
     registerExistingCards();
@@ -3504,14 +5137,6 @@
       '<div id="fl-filter-count" style="margin:8px 0;font-size:12px;"></div>' +
       '<div id="fl-selector-warn" class="fl-tool-hidden"></div>' +
       '<div id="fl-last-place" class="life-hint"></div>' +
-      '<div id="fl-loc-wrap"><hr class="life-hr">' +
-      '<div class="life-subhead" id="fl-loc-toggle"><span>' + t("locationSettings") + '</span><span id="fl-loc-chevron">▸</span></div>' +
-      '<div id="fl-loc-body" class="fl-tool-hidden">' +
-      chipFieldHtml("fl-cities", t("citiesFilter"), t("citiesPh"), s.cities || "") +
-      '<label style="display:block;margin-bottom:4px;">' + t("myCity") + "</label>" +
-      '<input id="fl-my-city" type="text" placeholder="' + escapeAttr(t("myCityPh")) + '" value="' + escapeAttr(s.myCity || "") + '" style="margin-bottom:6px;width:100%;box-sizing:border-box;">' +
-      switchHtml("fl-same-city-only", t("sameCityOnly"), !!s.sameCityOnly) +
-      "</div></div>" +
       '<div id="fl-rel-wrap"><hr class="life-hr">' +
       '<div class="life-subhead" id="fl-rel-toggle"><span>' + t("relSettings") + '</span><span id="fl-rel-chevron">▸</span></div>' +
       '<div id="fl-rel-body" class="fl-tool-hidden"><div class="life-hint">' + t("relHint") + "</div>" +
@@ -3542,7 +5167,6 @@
       });
     }
     bindSubmenuGroup([
-      { toggle: "fl-loc-toggle", body: "fl-loc-body", chevron: "fl-loc-chevron" },
       { toggle: "fl-rel-toggle", body: "fl-rel-body", chevron: "fl-rel-chevron" }
     ]);
 
@@ -3550,13 +5174,8 @@
       const el = document.getElementById(id);
       if (el) el.addEventListener("change", autoApplyFilters);
     });
-    const dockSel = document.getElementById("fl-dock-anchor");
-    if (dockSel) dockSel.addEventListener("change", () => {
-      const next = getCurrentFilterSettings();
-      saveFilterSettings(next);
-      applyDockPlacement(next.dockAnchor);
-    });
-    ["fl-genders", "fl-roles", "fl-limits", "fl-cities"].forEach(bindChipField);
+    ["fl-genders", "fl-roles", "fl-limits"].forEach(bindChipField);
+    bindPresetButtons();
     ["fl-min-age", "fl-max-age"].forEach((id) => {
       const el = document.getElementById(id);
       if (!el) return;
@@ -3566,20 +5185,10 @@
         el._t = setTimeout(autoApplyFilters, 400);
       });
     });
-    const sortSel = document.getElementById("fl-sort-by");
-    if (sortSel) sortSel.addEventListener("change", () => { const next = getCurrentFilterSettings(); saveFilterSettings(next); sortLoadedCards(next.sortBy); });
-    ["fl-rel-follow", "fl-rel-following", "fl-rel-followsyu", "fl-rel-friends", "fl-same-city-only"].forEach((id) => {
+    ["fl-rel-follow", "fl-rel-following", "fl-rel-followsyu", "fl-rel-friends"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.addEventListener("change", autoApplyFilters);
     });
-    const myCityEl = document.getElementById("fl-my-city");
-    if (myCityEl) {
-      myCityEl.addEventListener("change", autoApplyFilters);
-      myCityEl.addEventListener("input", () => {
-        clearTimeout(myCityEl._t);
-        myCityEl._t = setTimeout(autoApplyFilters, 400);
-      });
-    }
     const relWrap = document.getElementById("fl-rel-wrap");
     if (relWrap) relWrap.style.display = /friends|following|followers/.test(pageKind()) ? "" : "none";
     wireSiteControls();
@@ -3593,42 +5202,41 @@
     const box = document.createElement("div");
     box.id = "fl-advanced-panel";
     box.className = "fl-tool-panel";
-    const mode = s.orgMode || (s.hideOrgs ? "hide" : "off");
     box.innerHTML =
       '<div class="fl-tool-header" id="fl-advanced-header"><div class="fl-tool-title">' + t("advancedSettings") +
       '</div><button type="button" id="fl-advanced-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
       '<div id="fl-advanced-body" class="fl-tool-body fl-tool-hidden">' +
-      '<label style="display:block;margin-bottom:4px;">' + t("orgFilter") + "</label>" +
-      '<select id="fl-org-mode" style="margin-bottom:8px">' +
-      '<option value="off"' + ((mode !== "dim" && mode !== "hide") ? " selected" : "") + ">" + t("orgShow") + "</option>" +
-      '<option value="dim"' + (mode === "dim" ? " selected" : "") + ">" + t("orgDim") + "</option>" +
-      '<option value="hide"' + (mode === "hide" ? " selected" : "") + ">" + t("orgHide") + "</option>" +
-      "</select>" +
       switchHtml("fl-auto-scroll", t("infiniteScroll"), s.autoScroll) +
       switchHtml("fl-show-toasts", t("showToasts"), s.showToasts !== false) +
       switchHtml("fl-show-seen-chip", t("showSeenChip"), showSeenChipEnabled(s)) +
+      '<button type="button" id="fl-reset-seen" class="life-btn life-btn-gray">' + t("seenReset") + "</button>" +
+      '<div class="life-hint">' + t("seenResetHint") + "</div>" +
       switchHtml("fl-hide-banners", t("hideBanners"), !!s.hideBanners) +
+      '<hr class="life-hr">' +
+      '<button type="button" id="fl-factory-reset" class="life-btn life-btn-red">' + t("factoryReset") + "</button>" +
+      '<div class="life-hint">' + t("factoryResetHint") + "</div>" +
+      '<div id="fl-factory-reset-prompt" class="life-alert-strong fl-prompt-danger" hidden></div>' +
       "</div>";
-    ensureDock().appendChild(box);
+    mountDockSection(box, "fl-advanced-panel");
     bindPanelHeader("fl-advanced-header", "fl-advanced-body", "fl-advanced-toggle", "fl-advanced-panel");
 
     const applyAdv = () => {
       const next = getCurrentFilterSettings();
-      next.orgMode = val("fl-org-mode") || "off";
-      if (next.orgMode !== "off" && next.orgMode !== "dim" && next.orgMode !== "hide") next.orgMode = "off";
-      next.hideOrgs = next.orgMode === "hide";
       next.showSeenChip = checked("fl-show-seen-chip");
       next.dimSeenToday = next.showSeenChip;
       saveFilterSettings(next);
       applyFilter(next);
       applySeenChips(next);
     };
-    ["fl-org-mode", "fl-auto-scroll", "fl-show-toasts", "fl-show-seen-chip", "fl-hide-banners"].forEach((id) => {
+    ["fl-auto-scroll", "fl-show-toasts", "fl-show-seen-chip", "fl-hide-banners"].forEach((id) => {
       const el = document.getElementById(id);
       if (el) el.addEventListener("change", applyAdv);
     });
     const seenChipEl = document.getElementById("fl-show-seen-chip");
     if (seenChipEl) seenChipEl.addEventListener("change", () => applySeenChips(getCurrentFilterSettings()));
+    const resetSeenBtn = document.getElementById("fl-reset-seen");
+    if (resetSeenBtn) resetSeenBtn.addEventListener("click", (e) => { e.preventDefault(); resetSeen(); });
+    bindFactoryReset();
     setupInfiniteScroll();
   }
 
@@ -3656,15 +5264,8 @@
     if (jump.parentNode !== row) row.appendChild(jump);
     else jump.textContent = t("jumpTop");
     if (row.parentNode === dock) dock.appendChild(row);
-    const staleQuick = document.getElementById("fl-quick-save");
-    if (staleQuick) staleQuick.remove();
-    const staleHide = document.getElementById("fl-hide-dock-btn");
-    if (staleHide) staleHide.remove();
     buildShortcutsPanel();
-    const sc = document.getElementById("fl-shortcuts-panel");
-    if (sc && sc.parentNode === dock && row.parentNode === dock) {
-      dock.insertBefore(sc, row);
-    }
+    nestDockSections();
   }
 
   function syncDockPanelTitles() {
@@ -3673,7 +5274,8 @@
       "fl-panel-header": "profileSettings",
       "fl-site-header": "nsfwPanel",
       "fl-advanced-header": "advancedSettings",
-      "fl-shortcuts-header": "shortcuts"
+      "fl-shortcuts-header": "shortcuts",
+      "fl-system-header": "systemPanel"
     };
     Object.keys(map).forEach((hid) => {
       const header = document.getElementById(hid);
@@ -3688,11 +5290,11 @@
     const legendHtml =
       '<div class="flhp-legend">' +
       '<div class="flhp-legend-row"><strong>S</strong> — NSFW / SFW</div>' +
-      '<div class="flhp-legend-row"><strong>F</strong> — focus filters</div>' +
+      '<div class="flhp-legend-row"><strong>F</strong> — Filters Menu</div>' +
       '<div class="flhp-legend-row"><strong>N</strong> — next unread</div>' +
       '<div class="flhp-legend-row"><strong>T</strong> — jump to top</div>' +
+      '<div class="flhp-legend-row">Rebinding lives in Pro.</div>' +
       "</div>";
-    const editorHtml='<div class="fl-shortcut-editor">'+Object.entries({filters:"Filters panel",nsfw:"NSFW / SFW",next:"Next unread",top:"Jump to top"}).map(([key,label])=>'<label class="flhp-legend-row">'+label+'<input type="text" data-fl-shortcut="'+key+'" aria-label="'+label+' shortcut" placeholder="Off"><button type="button" data-fl-disable="'+key+'">Off</button></label>').join('')+'<div id="fl-shortcut-status" class="flhp-legend"></div></div>';
     if (!box) {
       box = document.createElement("div");
       box.id = "fl-shortcuts-panel";
@@ -3700,14 +5302,12 @@
       box.innerHTML =
         '<div class="fl-tool-header" id="fl-shortcuts-header"><div class="fl-tool-title">' + t("shortcuts") +
         '</div><button type="button" id="fl-shortcuts-toggle" class="fl-tool-chevron" aria-expanded="false" aria-label="Expand panel">▸</button></div>' +
-        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + editorHtml + "</div>";
-      ensureDock().appendChild(box);
+        '<div id="fl-shortcuts-body" class="fl-tool-body fl-tool-hidden">' + legendHtml + "</div>";
+      mountDockSection(box, "fl-shortcuts-panel");
       bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
     } else {
       bindPanelHeader("fl-shortcuts-header", "fl-shortcuts-body", "fl-shortcuts-toggle", "fl-shortcuts-panel");
     }
-    const shortcuts=flLoadShortcuts();box.querySelectorAll('[data-fl-shortcut]').forEach((input)=>{input.value=shortcuts[input.dataset.flShortcut]||'';if(input.dataset.bound)return;input.dataset.bound='1';input.addEventListener('change',()=>{input.value=flSaveShortcut(input.dataset.flShortcut,input.value);const values=Object.values(flLoadShortcuts()).filter(Boolean),external=[...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el.id==='fl-settings-launcher')return false;try{return JSON.parse(el.dataset.launcherShortcuts||'[]').includes(input.value);}catch{return false;}}),duplicate=new Set(values).size!==values.length;const status=document.getElementById('fl-shortcut-status');if(status)status.textContent=external||duplicate?'Shortcut collision detected.':'Shortcuts saved.';});});
-    box.querySelectorAll('[data-fl-disable]').forEach((button)=>{if(button.dataset.bound)return;button.dataset.bound='1';button.addEventListener('click',()=>{const input=box.querySelector('[data-fl-shortcut="'+button.dataset.flDisable+'"]');if(input)input.value=flSaveShortcut(button.dataset.flDisable,'');const status=document.getElementById('fl-shortcut-status');if(status)status.textContent='Shortcut disabled.';});});
   }
 
   function isCommentRelatedNode(node) {
@@ -3769,12 +5369,13 @@
 
   function boot() {
     try {
-      try { localStorage.removeItem("fl_filter_presets"); } catch (_) {}
-      ensureDock(); flInstallUiEnhancements(); ensurePanelSearch(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
+      try { FLStorage.remove("fl_filter_presets"); } catch (_) {}
+      ensureDock(); flInstallUiEnhancements(); ensurePanelSearch(); buildFilterPanel(); applyDisplayMode(loadDisplaySettings().mode); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); nestDockSections(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
      
       applyFilter(getCurrentFilterSettings()); applyExtras(); setupKeyboard();
       setupHomeScrollRestore(); setupThemeSync();
       if (isProfileHome()) scheduleExcludeBlur();
+      schedulePageTweaks();
     } catch (err) { console.error("FL_Tools boot error:", err); }
   }
   let debounce = null;
@@ -3782,7 +5383,7 @@
     if (debounce) clearTimeout(debounce);
     debounce = setTimeout(function () {
       try {
-        ensureDock(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
+        ensureDock(); buildFilterPanel(); applyDisplayMode(loadDisplaySettings().mode); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); nestDockSections(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders();
         /* Media detail: keep dock/panels alive, avoid full filter/extras storms while comments load. */
         if (isMediaPage()) {
           applyDisplayMode(loadDisplaySettings().mode);
@@ -3808,6 +5409,106 @@
       } catch (err) { console.error("FL_Tools schedule error:", err); }
     }, Math.max(80, Math.min(1000, Number(flLoadPerf().scanDelay) || 120)));
   }
+
+  function isPrivatePageTweaks() {
+    try { return sessionStorage.getItem("fl_private_session") === "1"; } catch (_) { return false; }
+  }
+  function loadOwnKinks() {
+    try {
+      const key = (typeof FLPageTweaks !== "undefined" && FLPageTweaks.OWN_KINKS_KEY) || "fl_own_kinks";
+      const raw = FLStorage.get(key) || [];
+      return Array.isArray(raw) ? raw.map((n) => String(n || "").trim()).filter(Boolean) : [];
+    } catch (_) { return []; }
+  }
+  function saveOwnKinks(names) {
+    if (isPrivatePageTweaks()) return;
+    try {
+      const key = (typeof FLPageTweaks !== "undefined" && FLPageTweaks.OWN_KINKS_KEY) || "fl_own_kinks";
+      FLStorage.set(key, (names || []).map((n) => String(n || "").trim()).filter(Boolean).slice(0, 400));
+    } catch (_) {}
+  }
+  function pageTweaksYield() {
+    return FL_EDITION === "basic" && typeof flLiveProActive === "function" && flLiveProActive();
+  }
+  let pageTweaksTimer = null;
+  function runPageTweaks() {
+    if (pageTweaksYield() || typeof FLPageTweaks === "undefined" || typeof FLPageTweaks.tick !== "function") return;
+    FLPageTweaks.tick({
+      document: document,
+      visitMap: loadVisitMap(),
+      isProfileHome: isProfileHome(),
+      isListPage: isListPage(),
+      ownNick: currentUserNick(),
+      profileNick: String(profileNickname() || "").toLowerCase(),
+      saveOwnKinks: saveOwnKinks,
+      ownKinks: loadOwnKinks()
+    });
+  }
+  function schedulePageTweaks() {
+    if (pageTweaksYield()) return;
+    if (pageTweaksTimer) clearTimeout(pageTweaksTimer);
+    pageTweaksTimer = setTimeout(function () {
+      pageTweaksTimer = null;
+      runPageTweaks();
+    }, 180);
+  }
+  function bindPageTweaks() {
+    if (bindPageTweaks.done) return;
+    bindPageTweaks.done = true;
+    schedulePageTweaks();
+  }
+
+  function bindCandidateScanner() {
+    if (bindCandidateScanner.done) return;
+    bindCandidateScanner.done = true;
+    flCandidateScanner.register("feed", function onFeedCandidates() {
+      const settings = document.getElementById("fl-filter-panel") ? getCurrentFilterSettings() : loadFilterSettings();
+      applyFilter(settings);
+      applySeenChips(settings);
+      applyFeedFilter(settings);
+      enhanceFeedStoryActions();
+      schedulePageTweaks();
+    }, { id: "feed", modules: ["filters", "seen"] });
+    flCandidateScanner.register("profile", function onProfileCandidates() {
+      const settings = document.getElementById("fl-filter-panel") ? getCurrentFilterSettings() : loadFilterSettings();
+      applyFilter(settings);
+      applySeenChips(settings);
+      enhanceMemberCardActions();
+      schedulePageTweaks();
+    }, { id: "profile", modules: ["filters", "seen"] });
+  }
+
+  function ingestAddedNodes(mutations) {
+    const ctx = { isComment: isCommentRelatedNode };
+    let dockTouched = false;
+    const found = [];
+    for (const mutation of mutations) {
+      for (const node of mutation.addedNodes || []) {
+        if (node.nodeType !== 1 && node.nodeType !== 3) continue;
+        if (FLScanner.isIgnored(node, ctx)) continue;
+        if (node.nodeType === 1) {
+          const id = node.id || "";
+          if (id.indexOf("relation_button") === 0 || (node.closest && node.closest("turbo-frame[id^='relation_button']"))) {
+            applyFilter(getCurrentFilterSettings());
+            return;
+          }
+          if (isProfileHome()) {
+            if (!dockTouched) { dockTouched = true; ensureDock(); }
+            scheduleExcludeBlur();
+            continue;
+          }
+          if (isMediaPage()) {
+            if (!dockTouched) { dockTouched = true; ensureDock(); }
+            continue;
+          }
+        }
+        FLScanner.collect(node, ctx).forEach((item) => found.push(item));
+      }
+    }
+    if (found.length) flCandidateScanner.queue(found);
+    schedulePageTweaks();
+  }
+
   function start() {
     setupSwitchAriaSync();
     /* Page-world single-flight. Yield only for a live Pro instance. */
@@ -3820,51 +5521,19 @@
     } catch (_) {}
     /* Another Basic already built the dock — do not double-boot. */
     if (document.getElementById("fl-tools-dock")) return;
-    try { ensureDock(); flInstallUiEnhancements(); buildFilterPanel(); buildDisplayPanel(); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); unnestFromToolsStack(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders(); } catch (err) { console.error(err); }
+    setupStudioActions();
+    try { ensureDock(); flInstallUiEnhancements(); buildFilterPanel(); applyDisplayMode(loadDisplaySettings().mode); buildSitePanel(); buildAdvancedPanel(); ensureBlockPanel(); buildJumpPanel(); nestDockSections(); syncDockPanelTitles(); restoreLastDockPanel(); bindAllPanelHeaders(); } catch (err) { console.error(err); }
     boot();
     setTimeout(boot, 800);
     setTimeout(boot, 2500);
-    /* Re-apply when the site adds page nodes (ignore dock / our chips). */
-    new MutationObserver(function (mutations) {
-      let dockTouched = false;
-      for (const m of mutations) {
-        for (const node of m.addedNodes || []) {
-          if (node.nodeType !== 1) continue;
-          if (node.closest && (node.closest("#fl-tools-dock") || node.closest(".lt-hide-reason") || node.closest(".lt-limit-hl") || node.closest("mark.lt-limit-hl"))) continue;
-          if (isCommentRelatedNode(node)) continue;
-          const id = node.id || "";
-          if (id.indexOf("relation_button") === 0 || (node.closest && node.closest("turbo-frame[id^='relation_button']"))) {
-            applyFilter(getCurrentFilterSettings());
-           
-            return;
-          }
-          /* Profile home: like media — light dock + debounced once-per-path exclude blur; no sync scan. */
-          if (isProfileHome()) {
-            if (!dockTouched) { dockTouched = true; ensureDock(); }
-            scheduleExcludeBlur();
-            continue;
-          }
-          /* Media detail: light dock ensure only; no schedule / heavy extras. */
-          if (isMediaPage()) {
-            if (!dockTouched) { dockTouched = true; ensureDock(); }
-            continue;
-          }
-          const member = (node.matches && node.matches("[data-member-card], .w-full.rounded-sm.cursor-pointer")) ||
-            (node.querySelector && node.querySelector("[data-member-card], .w-full.rounded-sm.cursor-pointer"));
-          const story = isHomeFeed() && (
-            (node.matches && node.matches("[data-story-uid]")) ||
-            (node.querySelector && node.querySelector("[data-story-uid]"))
-          );
-          if (!member && !story) continue;
-          schedule();
-          return;
-        }
-      }
-    }).observe(document.body || document.documentElement, { childList: true, subtree: true });
+    bindCandidateScanner();
+    bindPageTweaks();
+    /* Classify added nodes, then run only the modules that own that kind. */
+    new MutationObserver(ingestAddedNodes).observe(document.body || document.documentElement, { childList: true, subtree: true });
     document.addEventListener("turbo:load", () => {
       resetExcludeBlurPathState();
       schedule();
-     
+      schedulePageTweaks();
       ensurePanelSearch();
       applyThemeSync();
       scheduleMarkupSelfCheck();
