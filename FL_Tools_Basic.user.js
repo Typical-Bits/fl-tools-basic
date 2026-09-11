@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.2.6
+// @version      2.2.7
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @description  Customize FetLife with profile filters, soft-blocking, seen markers, media controls and easier navigation. Works with Studio and yields to Pro when installed.
@@ -20,7 +20,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL Tools Basic v2.2.6 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL Tools Basic v2.2.7 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -33,7 +33,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.2.6";
+  const FL_TOOLS_VERSION = "2.2.7";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -981,39 +981,9 @@
     }
 
     function applyFetishGroups(root) {
-      const host = root && root.querySelector && root.querySelector("#profile-fetishes");
-      if (!host) return 0;
-      const links = Array.prototype.slice.call(host.querySelectorAll('a[href*="/fetishes/"]'));
-      if (links.length < 4) return 0;
-      if (host.getAttribute("data-fl-fetish-count") === String(links.length) && host.querySelector(".fl-fetish-group")) return links.length;
-      const entries = links.map(function (link) {
-        const parentText = String((link.parentNode && link.parentNode.textContent) || "");
-        const after = String(link.nextSibling && link.nextSibling.textContent || "");
-        return { link: link, name: String(link.textContent || "").trim(), hint: after + " " + parentText };
-      });
-      const grouped = groupFetishEntries(entries);
-      const wrap = host.ownerDocument.createElement("div");
-      wrap.className = "fl-fetish-groups";
-      grouped.forEach(function (group) {
-        const section = host.ownerDocument.createElement("div");
-        section.className = "fl-fetish-group";
-        const title = host.ownerDocument.createElement("div");
-        title.className = "fl-fetish-group-label";
-        title.textContent = group.label;
-        section.appendChild(title);
-        group.items.forEach(function (name) {
-          const match = entries.filter(function (entry) {
-            return entry.name === name && entry.link && entry.link.parentNode;
-          })[0];
-          if (!match) return;
-          section.appendChild(match.link);
-        });
-        wrap.appendChild(section);
-      });
-      host.textContent = "";
-      host.appendChild(wrap);
-      host.setAttribute("data-fl-fetish-count", String(links.length));
-      return links.length;
+      // Native Into / Soft Limits / Hard Limits boundaries carry meaning for matching.
+      // Never flatten or move these links: doing so converts declared limits into interests.
+      return 0;
     }
 
     function applyPagerClone(root) {

@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.6](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.6)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.7](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.7)
 
 ## Features
 
@@ -82,3 +82,9 @@ Update all installed editions and reload FetLife tabs.
 - Remember ignored hard-limit matches per profile across reloads. Alert again only for a newly matched term.
 - Normalize case and whitespace; retain acknowledgments when terms disappear and return.
 - Older ignore flags use the first observed term set as their baseline.
+
+## What changed in 2.2.7
+
+- Preserve native Into, Soft Limits, and Hard Limits categories instead of regrouping their links.
+- Keep declared Hard Limits excluded from profile detection and highlighting.
+- Update all installed editions, then reload the profile to restore categories removed by older scripts.
