@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.0)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.1)
 
 ## Features
 
@@ -42,9 +42,9 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-See [2.2.0 release notes](RELEASE_NOTES.md).
+See [2.2.1 release notes](RELEASE_NOTES.md).
 
-## New in 2.2.0
+## New in 2.2.1
 
 - Adapt desktop menus to available space and reposition expanded sections into view.
 - Scroll active sections while keeping menu navigation accessible.
@@ -60,3 +60,7 @@ Update all installed editions and reload FetLife tabs.
 - Declared Hard Limits sections on profiles are excluded from term matching and highlighting.
 - Move picture previous/next navigation into the advertisement slot while preserving mobile controls.
 - Round image corners, add story footer separators and improve feed action alignment.
+
+## What changed in 2.2.1
+
+- Collapsed menus use a compact 220px width on desktop and mobile, expanding when a section opens.

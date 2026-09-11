@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.2.0
+// @version      2.2.1
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.2.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.2.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -29,7 +29,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.2.0";
+  const FL_TOOLS_VERSION = "2.2.1";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -1888,7 +1888,11 @@
       compactStyle.textContent = '@media(min-width:641px){#fl-tools-dock.fl-settings-rail .fl-tool-header{padding:4px 6px!important;min-height:26px!important}#fl-tools-dock.fl-settings-rail .fl-tool-header>button{min-height:24px!important}.lt-qa-bar .lt-qa-menu{min-width:0;width:max-content;padding:2px}.lt-qa-bar .lt-qa-menu>button{padding:3px 8px;min-height:24px;white-space:nowrap}}';
       document.documentElement.appendChild(compactStyle);
     }
-    dock.style.setProperty("width", mobile ? Math.max(0, width - 16) + "px" : "280px", "important");
+    const hasOpenSection = !!dock.querySelector(":scope > .fl-tool-panel > .fl-tool-body:not(.fl-tool-hidden), :scope > .fl-tool-panel > #flhp-main:not(.fl-tool-hidden)");
+    const menuWidth = hasOpenSection ? (mobile ? Math.max(0, width - 16) : 280) : Math.min(220, Math.max(0, width - 16));
+    dock.style.setProperty("min-width", "0", "important");
+    dock.style.setProperty("width", menuWidth + "px", "important");
+    dock.style.setProperty("left", "auto", "important");
     dock.style.setProperty("border-radius", mobile ? "16px 16px 0 0" : "12px", "important");
     const bodies = Array.from(dock.querySelectorAll(":scope > .fl-tool-panel > .fl-tool-body, :scope > .fl-tool-panel > #flhp-main"));
     for (const body of bodies) {
