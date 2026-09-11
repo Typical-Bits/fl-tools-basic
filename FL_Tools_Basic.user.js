@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL_Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.1.1
+// @version      2.1.2
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @tag          Social Media
@@ -16,7 +16,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.1.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.1.2 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -29,7 +29,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.1.1";
+  const FL_TOOLS_VERSION = "2.1.2";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -1829,7 +1829,18 @@
   }
 
   /* Settings rail: launcher button + collapsible panels. */
+  // Coordinate menus across userscript sandboxes without sharing account or page data.
+  function announceMenuOpen() {
+    window.dispatchEvent(new CustomEvent("fltools:menu-open", { detail: "settings" }));
+  }
+  window.addEventListener("fltools:menu-open", function (event) {
+    if (flBasicShouldYield()) return;
+    if (event.detail !== "studio" && event.detail !== "palette") return;
+    collapseOtherPanels("");
+    setSettingsRailOpen(false, false);
+  });
   function setSettingsRailOpen(open, focus) {
+    if (open) announceMenuOpen();
     const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     dock.classList.toggle("fl-rail-open", !!open);
@@ -1915,8 +1926,22 @@
     bindPanelHeader("fl-system-header", "fl-system-body", "fl-system-toggle", "fl-system-panel");
     return box;
   }
+  document.addEventListener("click", function (event) {
+    if (flBasicShouldYield()) return;
+    const ids = ["fl-rel", "fl-visit-log", "fl-settings-io", "fl-notes-sub"];
+    const selected = ids.find(id => event.target.closest && event.target.closest("#" + id + "-toggle"));
+    if (!selected) return;
+    const body = document.getElementById(selected + "-body");
+    if (!body || !body.classList.contains("fl-tool-hidden")) return;
+    ids.filter(id => id !== selected).forEach(id => {
+      document.getElementById(id + "-body")?.classList.add("fl-tool-hidden");
+      const chevron = document.getElementById(id + "-chevron");
+      if (chevron) chevron.textContent = "▸";
+    });
+  }, true);
   function collapseInnerMenus(panel) {
     if (!panel) return;
+    panel.querySelectorAll("details[open]").forEach(details => { details.open = false; });
     panel.querySelectorAll(".fl-tool-panel").forEach((nested) => {
       if (nested === panel) return;
       const body = nested.querySelector(":scope > .fl-tool-body");
@@ -1936,6 +1961,7 @@
     });
   }
   function collapseOtherPanels(exceptId) {
+    if (exceptId) announceMenuOpen();
     const keepParent = dockPanelParent(exceptId);
     [
       ["fl-filter-panel", "fl-panel-body", "fl-panel-toggle"],

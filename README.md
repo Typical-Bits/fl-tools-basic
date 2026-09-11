@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.1](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.1)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.2](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.2)
 
 ## Features
 
@@ -42,4 +42,11 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-See [2.1.1 release notes](RELEASE_NOTES.md).
+See [2.1.2 release notes](RELEASE_NOTES.md).
+
+## New in 2.1.2
+
+- Opening settings, Studio, or the command palette closes the other menus.
+- Keep nested menu parents accessible while closing unrelated sections.
+
+Install the attached userscript and reload FetLife tabs. Update all installed editions to get coordinated menu behavior.
