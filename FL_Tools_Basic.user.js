@@ -1428,7 +1428,6 @@
   const FL_LAUNCHER_PROTOCOL = "userscript-launcher-v1";
   const FL_SHORTCUTS_KEY = "fl_tools_basic_shortcuts";
   const FL_SHORTCUT_DEFAULTS = { filters:"F", nsfw:"S", next:"N", top:"T" };
-  function flNormaliseShortcut(value) { if (typeof value !== "string") return ""; const raw=value.trim(); if (!raw || /^off$/i.test(raw)) return ""; const parts=raw.split("+").map((v)=>v.trim()).filter(Boolean), key=parts.pop(); if(!key)return ""; const mods=["Ctrl","Alt","Shift","Meta"].filter((mod)=>parts.some((v)=>v.toLowerCase()===mod.toLowerCase())); return [...mods,key.length===1?key.toUpperCase():key].join("+"); }
   function flLoadShortcuts() { return { ...FL_SHORTCUT_DEFAULTS }; }
   function flEventShortcut(event) { return [...(event.ctrlKey?["Ctrl"]:[]),...(event.altKey?["Alt"]:[]),...(event.shiftKey?["Shift"]:[]),...(event.metaKey?["Meta"]:[]),event.key.length===1?event.key.toUpperCase():event.key].join("+"); }
   function flShortcutBlocked(shortcut){const node=document.getElementById("fl-settings-launcher"),priority=Number(node?.dataset.launcherPriority||0),id=node?.dataset.launcherId||"";return [...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el===node)return false;let shortcuts=[];try{shortcuts=JSON.parse(el.dataset.launcherShortcuts||"[]");}catch(_){}const other=Number(el.dataset.launcherPriority||0);return shortcuts.includes(shortcut)&&(other>priority||(other===priority&&(el.dataset.launcherId||"").localeCompare(id)<0));});}
@@ -2599,10 +2598,6 @@
     const text = (card.textContent || "").toLowerCase();
     return (/\borganization\b|\bgroup\b/.test(text)) && !parseCardTag(card).age;
   }
-  function relationLabel(card) {
-    const bits = Array.from(card.querySelectorAll("button, a, span.inline-flex")).map((el) => (el.textContent || "").replace(/\s+/g, " ").trim()).filter(Boolean);
-    return (bits.join(" | ") || card.textContent || "").replace(/\s+/g, " ").trim();
-  }
   /* Relationship flags from button labels + the follows-you SVG path. */
   function isFollowsYou(card) {
     return !![].find.call(card.querySelectorAll("path"), (p) => (p.getAttribute("d") || "").indexOf("M12 1v2H0v2h12v2l4-3z") === 0);
@@ -2643,41 +2638,6 @@
     if (scope === "nick") return nick;
     if (scope === "tag") return (nick + " " + tag).trim();
     return all;
-  }
-  /* Location line on member cards: "City, Region" / "Oregon, United States". */
-  function cardLocationText(card) {
-    if (!card) return "";
-    const bits = [];
-    const seen = {};
-    /* Prefer the dedicated location line under the age/gender tag on kinksters cards. */
-    const tag = card.querySelector(".text-sm.font-bold.text-gray-300");
-    if (tag) {
-      const row = tag.closest("div");
-      const locLine = row && row.nextElementSibling;
-      if (locLine && /text-sm/.test(locLine.className || "") && !locLine.querySelector("a")) {
-        const t = String(locLine.textContent || "").replace(/\s+/g, " ").trim();
-        if (t && t.length >= 2 && t.length <= 80) bits.push(t.toLowerCase());
-      }
-    }
-    card.querySelectorAll("span, div").forEach((el) => {
-      if (el.querySelector && el.querySelector("a, button, svg, img, input, strong")) {
-        /* Prefer leaf-ish nodes; nested wrappers still OK if they only have text+formatting. */
-        if (el.children && el.children.length && el.querySelector("a, button, svg, img, input")) return;
-      }
-      const t = String(el.textContent || "").replace(/\s+/g, " ").trim();
-      if (!t || t.length < 2 || t.length > 80) return;
-      if (/^\d{2,4}\s/.test(t)) return;
-      if (/\b(pics?|vids?|videos?|writings?|posts?)\b/i.test(t)) return;
-      const commaLoc = /^[A-Za-zÀ-ÿ0-9].*,\s*[A-Za-zÀ-ÿ]/.test(t);
-      const plainLoc = /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ .'-]{1,40}$/.test(t) && !/^(follow|following|friends?)$/i.test(t);
-      if (!commaLoc && !plainLoc) return;
-      const low = t.toLowerCase();
-      if (seen[low]) return;
-      seen[low] = true;
-      bits.push(low);
-    });
-    if (bits.length) return bits.join(" | ");
-    return String(card.textContent || "").replace(/\s+/g, " ").trim().toLowerCase();
   }
   /* Generic dock toast helper. */
   function showTextToast(msg, persist) {
@@ -3160,7 +3120,6 @@
         : showSeenChipEnabled(stored)
     };
   }
-  function currentBatchSize() { return Math.min(500, Math.max(20, toInt(val("fl-autoload-count") || loadFilterSettings().autoloadCount, 100))); }
   function pageNumFromHref(href) {
     try {
       const u = new URL(href, location.origin);

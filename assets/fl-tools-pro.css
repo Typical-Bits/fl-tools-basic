@@ -6,27 +6,6 @@
 
 html.fl-tools-dock-hidden #fl-tools-dock { display: none !important; }
 
-#fl-dock-show {
-  display: none;
-  position: fixed;
-  right: 12px;
-  bottom: 16px;
-  z-index: 2147483000;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 1px solid #3f3f3f;
-  background: #111;
-  color: #e11d48;
-  cursor: pointer;
-}
-
-html.fl-tools-dock-hidden #fl-dock-show {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .flhp-red, .flhp-gold, .flhp-green, .flhp-blue { position: relative !important; }
 
 .flhp-red::after,
