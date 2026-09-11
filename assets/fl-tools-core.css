@@ -163,10 +163,10 @@ html.light .lt-why-hidden { background: rgba(255,255,255,.88); color: #171717; }
 }
 .fl-suggest button:hover { background: var(--lt-accent-soft); }
 .fl-suggest .off { color: var(--lt-text-muted); }
-.fl-add-row { display: flex; align-items: center; gap: 4px; margin-bottom: 6px; }
-.fl-add-row input { flex: 1; margin: 0 !important; height: var(--lt-ctrl-h); }
+.fl-add-row { display: grid; grid-template-columns: minmax(0, 1fr) 18%; align-items: center; gap: 4px; margin-bottom: 6px; }
+.fl-add-row input { min-width: 0; margin: 0 !important; height: var(--lt-ctrl-h); }
 .fl-add-row .life-btn {
-  width: auto; flex: 0 0 auto; margin: 0; padding: 0 10px;
+  width: 100%; min-width: 0; box-sizing: border-box; margin: 0; padding: 0 4px;
   height: var(--lt-ctrl-h); line-height: var(--lt-ctrl-h);
 }
 .fl-tool-panel input[type="text"], .fl-tool-panel input[type="number"],
