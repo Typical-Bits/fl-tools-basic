@@ -42,8 +42,6 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-See [2.2.1 release notes](RELEASE_NOTES.md).
-
 ## New in 2.2.1
 
 - Adapt desktop menus to available space and reposition expanded sections into view.
