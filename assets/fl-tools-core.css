@@ -523,6 +523,7 @@ html.light mark.lt-limit-hl, html.light .lt-limit-hl {
   border: 1px solid #525252;
 }
 .lt-seen-chip {
+  pointer-events: auto; cursor: pointer; font-family: inherit;
   position: absolute; left: 6px; bottom: 6px; z-index: 24;
   border-color: #e11d48;
 }
@@ -735,8 +736,8 @@ html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-bra
 }
 
 /* Silent page helpers: visited nicks, shared kinks, fetish groups, list pager copy. */
-a.fl-visited-nick { color: #fda4af; }
-html.light a.fl-visited-nick { color: #be123c; }
+a.fl-visited-nick { color: #60a5fa; }
+html.light a.fl-visited-nick { color: #2563eb; }
 a.fl-shared-kink { font-weight: 700; color: #fb7185; }
 html.light a.fl-shared-kink { color: #e11d48; }
 .fl-fetish-groups { display: flex; flex-direction: column; gap: 10px; }
@@ -750,3 +751,8 @@ html.light .fl-fetish-group-label { color: #737373; }
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
   margin: 8px 0 12px;
 }
+
+.lt-seen-chip:hover { border-color: #60a5fa; background: #172554; color: #eff6ff; }
+.lt-seen-chip:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
+
+.lt-card-face > .lt-card-chips { position: relative; inset: auto; max-width: none; margin: 4px 8px 8px; }
