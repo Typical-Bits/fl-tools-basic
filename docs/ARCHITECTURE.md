@@ -1,15 +1,33 @@
 # FL Tools architecture
 
-Typical-Bits only. Keep these files within this organization.
+Typical-Bits only. Shared runtime lives in **fl-core**. Editions stay standalone userscripts.
 
-## Editions
+```
+FL Tools
+├── fl-core
+│   capabilities, actions, events, scanner, storage, settings,
+│   migrations, taxonomy, matcher, profile-model, UI, launcher,
+│   shortcuts, diagnostics, privacy, pins, compare, mentions,
+│   watch, vault, rules, activity
+├── Basic
+│   filters, presets, soft-block, seen, sfw-nsfw, infinite-scroll, basic-navigation
+├── Pro
+│   highlighter, whitelist, mutes, snooze, notes, visit-history,
+│   org-cards, profile-pins, profile-compare, mentions, watches,
+│   private-session, advanced-shortcuts
+└── Studio
+    orchestration, command-palette, workspaces, watch-manager,
+    profile-history, activity-timeline, encrypted vault, rules, audit,
+    undo, analytics
+```
 
 See [`docs/EDITION-MATRIX.md`](EDITION-MATRIX.md) for the public Basic vs Pro surface.
 
-- **Basic** (`Typical-Bits/fl-tools-basic`, public): filters, soft-block, NSFW/SFW, Seen, shortcuts, org cards, infinite scroll, toasts.
-- **Pro** (`Typical-Bits/fl-tools-pro-dist`, private): Basic surface plus highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride colors, dock hide, limit-hit sound, QA bar.
+- **Basic** (`Typical-Bits/fl-tools-basic`, public): filters, soft-block, NSFW/SFW, Seen, fixed navigation keys, infinite scroll.
+- **Pro** (`Typical-Bits/fl-tools-pro`, private): Basic surface plus highlighter, whitelist, mutes, snooze, notes, visit history, org cards, shortcut rebinding, profile pins, compare, @mentions, watches, and private session.
+- **Studio** (`Typical-Bits/fl-tools-studio`, private): primary launcher, workspaces, command palette, orchestration.
 
-Both may be installed at once. Pro is primary while it is *live*.
+Both Basic and Pro may be installed at once. Pro is primary while it is *live*. Studio is primary while it is live, without unlocking Pro. Studio’s launcher stays to the left of the Basic/Pro button.
 
 ## Live yield (v1.2.0)
 
@@ -17,40 +35,54 @@ Source of truth: [`core/handoff.js`](../core/handoff.js). `scripts/sync-core.mjs
 
 Pro stamps `data-fl-tools-live=pro` and `window.__FL_TOOLS_HEARTBEAT__` every 1.5s.
 
-Basic treats Pro as active only if that heartbeat is younger than 4 seconds **and** Pro UI exists (`#fl-tools-dock` or `#fl-settings-launcher`) plus a Pro edition marker (`__FL_TOOLS_BOOTED__` / `__FL_TOOLS_CLAIM__` / `FLTools.edition` / `data-fl-tools-live|claim|edition`). Disable Pro (or hide the tab) and the beat dies; Basic takes the dock without a stale claim.
+Basic treats Pro as active only if that heartbeat is younger than 4 seconds **and** Pro UI exists. Disable Pro (or hide the tab) and the beat dies; Basic takes the dock without a stale claim.
+
+Capability announcements use `fl-tools-capabilities-v1`. The protocol implementation is generated from `fl-core/src/capabilities.js`.
 
 Events:
 
 - `fltools:ready` — edition API published
 - `fltools:edition-changed` — Pro live/off
+- `fltools:capabilities-changed` / `fltools:capabilities-requested` — edition inventory
+- `fltools:action` — Studio command palette opens the owning edition's dock panel (`fl-tools-action-v1`)
 
 Shared settings stay in `localStorage` keys prefixed `fl_`.
 
-## Shared assets (single source of truth)
+## Candidate scanner
 
-Host common files on public Basic. **Edit the sources, then run `node scripts/sync-core.mjs`.** `--check` fails CI if generated output drifted.
+DOM mutations go through a **candidate classifier** in `fl-core/src/scanner.js` (inlined as `BEGIN generated:scanner`). Added nodes are classified as `profile`, `feed`, or `text`, then only the modules registered for those kinds run.
+
+| Kind | Typical nodes | Modules |
+|------|---------------|---------|
+| Profile | member cards, `/nickname` links | mentions, notes, pins, highlighter, profile model, watches |
+| Feed | `[data-story-uid]` cards, list cards | filters, seen, mutes, snooze |
+| Text | text nodes with `@name` | mentions |
+
+Do not fan out from a mutation to every module. Full dock rebuilds stay on boot / `turbo:load`. Silent page helpers (`page-tweaks.js`) piggyback on the same observer: visited nicks, absolute times, shared kinks, fetish groups, and a list pager copy.
+
+Storage is per module (`fl.basic.seen`, `fl.pro.notes`, `fl.studio.vault`), not one JSON blob. See [`ARCHITECTURE.md`](../../ARCHITECTURE.md).
+
+## Shared assets
+
+Host common CSS/handoff on public Basic. **Edit the sources, then run `node scripts/sync-core.mjs`.** `--check` fails CI if generated output drifted.
+
+Capability catalog and coordination protocol: edit `fl-core`, then run `node fl-core/scripts/sync-editions.mjs`.
 
 | Source | Role | Generated |
 |--------|------|-----------|
-| `assets/fl-tools-core.css` | Tokens + dock/launcher chrome + Basic surface CSS | `core/css-core.js` (injector, style id `fl-tools-core-style`) and the `BEGIN generated:css-core` region in `FL_Tools_Basic.user.js` |
-| `assets/fl-tools-pro.css` | Pro-only chrome (highlighter, dock hide, snooze, notes, mutes, QA extras) | `core/css-pro.js` (injector, style id `fl-tools-pro-style`). Basic does **not** load this. |
-| `core/handoff.js` | Live-yield / heartbeat API (`FLToolsCore`) | `BEGIN generated:handoff` region in `FL_Tools_Basic.user.js` |
-| `assets/fl-tools-launcher-icon.svg` | `@icon` for both editions | — |
+| `assets/fl-tools-core.css` | Tokens + dock/launcher chrome + Basic surface CSS | `core/css-core.js` and `BEGIN generated:css-core` |
+| `assets/fl-tools-pro.css` | Pro-only chrome | `core/css-pro.js`. Basic does **not** load this. |
+| `core/handoff.js` | Live-yield / heartbeat API (`FLToolsCore`) | `BEGIN generated:handoff` |
+| `fl-core/src/catalog.js` | Edition capability IDs | `BEGIN generated:catalog` in each userscript |
+| `fl-core/src/capabilities.js` | Capability protocol | `fl-tools-studio/core/coordination.js` |
 
-Basic is **inlined**, not `@require`: Tampermonkey/Violentmonkey can install `FL_Tools_Basic.user.js` alone from a Release asset or from the repo. Do not `@require` `/releases/latest/` — `latest` moves and is a supply-chain footgun.
-
-Pro remains standalone so a private install still works offline. After a version bump, Release assets also include the shared files (see publish workflow). Pro may:
-
-1. **Vendor** — copy `core/handoff.js`, `core/css-core.js` (and optionally `core/css-pro.js`) into the private repo, or run the same wrap from `assets/*.css`, or
-2. **`@require` a tagged Basic asset** (never `latest`), e.g.  
-   `https://github.com/Typical-Bits/fl-tools-basic/releases/download/v1.5.0/handoff.js`
-   Pin the tag that matches the shipped Basic CSS/handoff contract. Tagged releases attach `handoff.js`, `css-core.js`, `css-pro.js`, `fl-tools-core.css`, and `fl-tools-pro.css` alongside the userscript.
+Basic is **inlined**, not `@require`. Pro remains standalone so a private install still works offline.
 
 ## Releases
 
 Install from GitHub Release assets (what Tampermonkey polls):
 
 - Basic: `https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js`
-- Pro: `https://github.com/Typical-Bits/fl-tools-pro-dist/releases/latest/download/FL_Tools_Pro.user.js`
+- Pro: `https://github.com/Typical-Bits/fl-tools-pro/releases/latest/download/FL_Tools_Pro.user.js`
 
-Bump via **Actions → Bump release version**. No preview app. A `@version` bump is required when userscript managers should pick up the change (they key off `@version`, not file contents).
+Bump via **Actions → Bump release version**. No preview app. A `@version` bump is required when userscript managers should pick up the change.

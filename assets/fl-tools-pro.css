@@ -47,26 +47,25 @@ html.fl-tools-dock-hidden #fl-dock-show {
 .flhp-blue::after { box-shadow: inset 5px 0 0 #e11d48; }
 
 .flhp-dim { opacity: 0.45 !important; }
+.flhp-marked {
+  outline: 2px solid #e11d48;
+  outline-offset: 2px;
+}
+[data-member-card].fls-watched {
+  outline: 1px solid #8b5cf6;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
 .lt-snoozed-card { opacity: 0.38 !important; }
 .lt-story-muted { display: none !important; }
 html.fl-tools-show-muted .lt-story-muted { display: block !important; opacity: 0.45; }
-
-.lt-flag-hl {
-  display: inline !important;
-  background-image: var(--lt-flag) !important;
-  background-size: 100% 100% !important;
-  -webkit-background-clip: text !important;
-  background-clip: text !important;
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-}
 
 .lt-note-chip {
   position: absolute;
   left: 6px;
   top: 6px;
-  z-index: 18;
-  background: rgba(17, 17, 17, 0.75);
+  z-index: 24;
+  background: rgba(17, 17, 17, 0.82);
   color: #d4d4d4;
   border: 1px solid #737373;
 }

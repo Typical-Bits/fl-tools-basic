@@ -6,13 +6,19 @@ Any combination may be installed. Studio takes the launcher when present; otherw
 
 | Capability | Basic | Pro | Studio |
 |------------|:-----:|:---:|:------:|
-| Filters, soft-block, display modes and Seen chip | yes | yes | with Basic or Pro |
-| Shortcuts, org cards, infinite scroll and toasts | yes | yes | with Basic or Pro |
-| Highlighter, whitelist, mutes and snooze | — | yes | with Pro only |
-| Notes, visit log and import/export | — | yes | with Pro only |
-| Pride colours, dock controls, sound and QA | — | yes | with Pro only |
-| Unified launcher and capability inventory | — | — | yes |
-| Local workspaces | — | — | yes |
-| Visual rule builder, audit history and command palette | — | — | planned |
+| Filters, soft-block, SFW/NSFW, Seen, infinite scroll | yes | yes | with Basic or Pro |
+| Filter presets (Default, Minimal, SFW) and Reset Seen | yes | yes | with Basic or Pro |
+| Basic navigation (F / S / N / T) | yes | yes | with Basic or Pro |
+| Org cards, shortcut rebinding | — | yes | with Pro only |
+| Highlighter, whitelist, mutes, snooze | — | yes | with Pro only |
+| Notes, visit history, import/export | — | yes | with Pro only |
+| Profile pins, compare, mentions, private session | — | yes | with Pro only |
+| Profile watches | — | owns | manages via Pro |
+| Unified launcher, command palette, workspaces | — | — | yes |
+| Profile change timeline, encrypted vault, rules, audit, undo, analytics | — | — | yes |
+
+Scan delay / pause / telemetry stay diagnostics-only. Reduced motion follows the OS preference.
 
 Settings remain local. Disabling Studio restores Pro or Basic after its short liveness timeout.
+
+Storage is namespaced (`fl.basic.seen`, `fl.pro.notes`, `fl.studio.vault`) so migrations run per module. Catalog source of truth: [`fl-core/src/catalog.js`](../../fl-core/src/catalog.js). Target architecture: [`ARCHITECTURE.md`](../../ARCHITECTURE.md).

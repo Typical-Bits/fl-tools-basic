@@ -1,78 +1,41 @@
-# FL_Tools Basic
+# FL Tools Basic
 
-<p align="center">
-  Standalone FetLife userscript dock — filters, soft-block, NSFW/SFW, Seen chip, shortcuts, org cards, infinite scroll, and toasts.
-</p>
+The public FetLife userscript for everyday browsing. A compact dock on the right filters the feed, quiets people you don’t want to see, and keeps NSFW under your control.
 
 <p align="center">
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Typical-Bits/fl-tools-basic?style=flat-square&label=release" /></a>
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?style=flat-square" /></a>
-  <a href="https://github.com/Typical-Bits/fl-tools-basic/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
-  <a href="https://github.com/Typical-Bits/fl-tools-basic/network/members"><img alt="Forks" src="https://img.shields.io/github/forks/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
-  <a href="https://github.com/Typical-Bits/fl-tools-basic/issues"><img alt="Issues" src="https://img.shields.io/github/issues/Typical-Bits/fl-tools-basic?style=flat-square" /></a>
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.0.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.0.0)
-
 <p align="center"><img src="assets/fl-tools-launcher-icon.svg" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-| Stat | Value |
-|------|-------|
-| Edition | **Basic** (lighter; Pro-only features not included) |
-| Userscript | `FL_Tools_Basic.user.js` |
-| Runs on | `https://fetlife.com/*` |
-| Managers | Violentmonkey (preferred), Tampermonkey, others |
-| Storage | `localStorage` only (`@grant none`) |
-| Companion installs | Yields to Pro's feature set and to Studio's primary launcher when those editions are live. |
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.0)
 
-See the [edition matrix](docs/EDITION-MATRIX.md) for feature and companion-install behavior.
+## Features
 
-Download counts are **Release asset downloads** only (install from [Releases](https://github.com/Typical-Bits/fl-tools-basic/releases)). Hits on the raw `main` file are not counted by GitHub.
+- **Filters** — hide or keep cards by role, gender, age, and more
+- **Presets** — Default, Minimal, and SFW, plus your own saved setups
+- **Soft-Block | Block** — quiet people out of your feed, or follow through to FetLife’s block
+- **NSFW / SFW** — blur, hide, or show media the way you want it, with SFW mimic when you need a safer screen
+- **Seen** — mark profiles you’ve already looked at and reset when you want a fresh pass
+- **Page helpers** — visited nicknames, clock times, shared kinks, and a pager copy at the top of lists
+- **Shortcuts** — F opens the dock; S, N, and T for next, previous, and jump to top
+- **Infinite scroll** — keep the feed moving without hunting for the next page
+- **Factory Reset** — wipe local FL Tools data from the Advanced panel if you want a clean start
 
-## Settings UI
+Click the launcher, press **F**, or use × / Esc to close. Settings save on this device.
 
-A compact red launcher button on the right opens the settings rail. Sections use an accordion layout, and every on/off setting is a keyboard-accessible toggle. Click the launcher, press `F`, or use × / Esc / click-outside to close. Settings save automatically on this device. An optional quiet update check reads release metadata once per day and never downloads executable code.
+Highlighter, notes, watches, and profile tools live in [Pro](https://github.com/Typical-Bits/fl-tools-pro). Studio can sit beside Basic, but it does not unlock Pro.
 
 ## Install
 
-1. Install [Violentmonkey](https://violentmonkey.github.io/) (preferred) or [Tampermonkey](https://www.tampermonkey.net/).
-2. Download **`FL_Tools_Basic.user.js`** from the [latest release](https://github.com/Typical-Bits/fl-tools-basic/releases/latest).
-3. Open / confirm the install prompt in your userscript manager.
-4. Visit https://fetlife.com — the launcher appears on the right.
+1. Install [Violentmonkey](https://violentmonkey.github.io/) or [Tampermonkey](https://www.tampermonkey.net/).
+2. Download [`FL_Tools_Basic.user.js`](https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js) from the [latest release](https://github.com/Typical-Bits/fl-tools-basic/releases/latest).
+3. Confirm the install prompt, then visit [fetlife.com](https://fetlife.com).
 
-Direct asset (counted downloads + manager updates):  
-https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
-
-`@updateURL` / `@downloadURL` point at the Release asset so manager update checks increment the download counter.
-
-## What’s included
-
-- Filters + soft-block  
-- NSFW / SFW display modes  
-- Seen chip  
-- Keyboard shortcuts  
-- Org cards, infinite scroll, toasts  
-- Dock-styled confirm modal (no `window.confirm`)  
-- Automatic validation and migration of settings from older releases  
-- Copyable diagnostics with page context, active options, scan telemetry and captured errors
-- Capability-aware coordination with Pro and Studio
-- Every keyboard action can be rebound or disabled, with internal and companion-script collision warnings
-
-**Not included (Pro):** highlighter, whitelist, feed mutes, snooze, notes, visit log, import/export, pride-flag colors, dock hide chip, limit-hit sound, full QA bar. Full comparison: [edition matrix](docs/EDITION-MATRIX.md).
-
-Studio can present Basic controls when both are installed, but cannot unlock Pro capabilities unless Pro is also installed and live.
+The launcher appears on the right. If Pro is also installed, Pro takes over this dock. Studio’s button sits to the left.
 
 ## License
 
-[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — TypicalBits. Full text in [`LICENSE`](LICENSE). Header: `@license CC-BY-NC-4.0`.
-
-## Changelog
-
-See [GitHub Releases](https://github.com/Typical-Bits/fl-tools-basic/releases) for downloadable versions and notes.
-
-## Performance and accessibility
-
-The settings panel includes theme-aware icon treatment, compact launcher mode, lightweight scanning, configurable scan delay, and a pause toggle with a visible status indicator. It respects reduced-motion preferences and includes a high-contrast mode. The status line can show local scan telemetry (scans / skipped).
-
-The dock recognizes other FL Tools editions, respects their position, chooses a less crowded side of the viewport, and can remember a preferred side. Labels remain within the viewport, and identity labels can be clicked to copy their name.
+[CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) — TypicalBits. See [`LICENSE`](LICENSE).
