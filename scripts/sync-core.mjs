@@ -103,7 +103,11 @@ if (writeOrCheck("core/css-core.js", cssCoreJs)) changed.push("core/css-core.js"
 if (writeOrCheck("core/css-pro.js", cssProJs)) changed.push("core/css-pro.js");
 
 const handoffSrc = read("core/handoff.js").replace(/^\uFEFF/, "").replace(/\s+$/, "");
-const userscript = read("FL_Tools_Basic.user.js");
+let userscript = read("FL_Tools_Basic.user.js");
+// Keep the on-page launcher artwork aligned with the repository asset.
+userscript = userscript.replace(/const FL_TOOLS_ICON_SVG = [^\n]+;/, () =>
+  `const FL_TOOLS_ICON_SVG = ${JSON.stringify(read("assets/fl-tools-launcher-icon.svg").trim())};`);
+
 const nextUserscript = replaceMarked(
   replaceMarked(
     userscript,
