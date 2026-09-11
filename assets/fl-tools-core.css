@@ -430,6 +430,13 @@ html.fl-tools-sfw #account-sidebar picture img {
   display: flex; flex-wrap: wrap; gap: 3px; max-width: 55%;
   justify-content: flex-end; pointer-events: auto;
 }
+/* Member actions get their own row below native profile and Follow controls. */
+.lt-card-face > .lt-qa-bar:not(.lt-qa-feed) {
+  position: relative; inset: auto;
+  max-width: none; width: auto; box-sizing: border-box;
+  margin-top: 4px; padding: 0 8px 8px;
+  clear: both;
+}
 /* Feed story actions: under avatar, never over More Options (top-right). */
 .lt-qa-bar.lt-qa-feed {
   position: relative !important;

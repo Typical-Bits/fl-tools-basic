@@ -57,7 +57,7 @@
       s.textContent +=
         "document.documentElement.setAttribute('data-fl-tools-beat',String(Date.now()));" +
         "try{sessionStorage.setItem('fl_tools_claim','" + (live ? "pro" : "") + "');}catch(e){}" +
-        "try{window.dispatchEvent(new CustomEvent('fltools:edition-changed',{detail:{edition:live?'pro':'off'}}));}catch(e){}";
+        "try{window.dispatchEvent(new CustomEvent('fltools:edition-changed',{detail:{edition:'" + (live ? "pro" : "off") + "'}}));}catch(e){}";
       (html || document.head || document.documentElement).appendChild(s);
       s.remove();
     } catch (_) {}
@@ -93,6 +93,9 @@
   function paintBasicIdle(idle) {
     var launch = document.getElementById("fl-settings-launcher");
     var dock = document.getElementById("fl-tools-dock");
+    // Basic must never relabel or dim the active Pro launcher.
+    if ((launch && launch.getAttribute("data-launcher-id") === "fl-tools-pro") ||
+        (dock && dock.getAttribute("data-fl-tools-owner") === "pro")) return;
     if (idle) {
       if (dock) dock.setAttribute("data-fl-tools-idle", "basic");
       if (launch) {

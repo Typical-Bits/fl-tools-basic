@@ -12,6 +12,7 @@ const assert = require('node:assert/strict');
     await page.evaluate(() => {
       localStorage.setItem('fl_profile_filter_settings_v2', JSON.stringify({ minAge: '30', showToasts: false, unknown: 'drop-me' }));
       localStorage.setItem('fl_perf_settings', JSON.stringify({ lightweight: true, scanDelay: 'invalid' }));
+      localStorage.setItem('fl_tools_basic_shortcuts', JSON.stringify({ filters: 'Alt+X' }));
     });
     await page.addScriptTag({ content: fs.readFileSync('FL_Tools_Basic.user.js', 'utf8') });
     const stored = await page.evaluate(() => ({
@@ -29,10 +30,12 @@ const assert = require('node:assert/strict');
     await page.locator('#fl-perf-header').evaluate((element) => element.click());
     const version = fs.readFileSync('FL_Tools_Basic.user.js', 'utf8').match(/^\/\/ @version\s+(\S+)/m)[1];
     assert.match(await page.locator('#fl-diagnostics-output').textContent(), new RegExp(`FL Tools Basic ${version.replace(/\./g, '\\.')}[\\s\\S]*Scans:`));
-    const shortcut = page.locator('[data-fl-shortcut="filters"]');
-    await shortcut.evaluate((input) => { input.value='Alt+X'; input.dispatchEvent(new Event('change', { bubbles:true })); });
-    await page.keyboard.press('f'); assert.equal(await page.locator('#fl-tools-dock').evaluate((el) => el.classList.contains('fl-rail-open')), false);
-    await page.keyboard.press('Alt+x'); assert.equal(await page.locator('#fl-tools-dock').evaluate((el) => el.classList.contains('fl-rail-open')), true);
+    assert.equal(await page.locator('[data-fl-shortcut="filters"]').count(), 0, 'Basic has fixed shortcuts, not the Pro editor');
+    await page.keyboard.press('Escape');
+    await page.keyboard.press('Alt+x');
+    assert.equal(await page.locator('#fl-tools-dock').isVisible(), false, 'legacy rebindings do not override Basic fixed shortcuts');
+    await page.keyboard.press('f');
+    assert.equal(await page.locator('#fl-panel-body').isVisible(), true, 'F still opens filters after migrating legacy settings');
     await context.close();
     console.log('Basic settings migration OK');
   } finally { await browser.close(); }
