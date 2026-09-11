@@ -85,3 +85,8 @@ html.fl-tools-show-muted .lt-story-muted { display: block !important; opacity: 0
 }
 
 .lt-qa-bar .lt-qa-menu.open { display: flex; }
+
+/* Keep People usable without pushing its tools off-screen. */
+#fl-people-home-list { max-height: 96px; overflow-y: auto; overscroll-behavior: contain; }
+#fl-people-home-list > .lt-row { min-height: 28px; margin-bottom: 4px; }
+#fl-similar-results { max-height: 120px; overflow-y: auto; }
