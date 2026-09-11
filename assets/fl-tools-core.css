@@ -80,28 +80,28 @@ html.light .fl-tool-panel {
   font-size: 13px; letter-spacing: 0.02em;
   line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-/* Remembered last / currently opened panel — favicon red accent. */
+/* Remembered last / currently opened panel — current accent. */
 .fl-tool-panel.lt-last-panel {
-  border-color: rgba(225, 29, 72, 0.45);
-  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48;
+  border-color: color-mix(in srgb,var(--lt-accent) 45%,transparent);
+  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 var(--lt-accent);
 }
 .fl-tool-panel.lt-last-panel > .fl-tool-header .fl-tool-title::after {
   content: "";
   display: inline-block;
   width: 6px; height: 6px; margin-left: 6px; vertical-align: middle;
-  border-radius: 50%; background: #e11d48;
+  border-radius: 50%; background: var(--lt-accent);
 }
 .fl-tool-panel.lt-panel-open {
-  border-color: rgba(225, 29, 72, 0.65);
-  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 #e11d48,
-    0 0 0 1px rgba(225, 29, 72, 0.22);
+  border-color: color-mix(in srgb,var(--lt-accent) 65%,transparent);
+  box-shadow: 0 1px 2px rgba(0,0,0,.22), inset 3px 0 0 var(--lt-accent),
+    0 0 0 1px color-mix(in srgb,var(--lt-accent) 22%,transparent);
 }
 html.light .fl-tool-panel.lt-last-panel {
-  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48;
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 var(--lt-accent);
 }
 html.light .fl-tool-panel.lt-panel-open {
-  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 #e11d48,
-    0 0 0 1px rgba(225, 29, 72, 0.2);
+  box-shadow: 0 1px 2px rgba(0,0,0,.08), inset 3px 0 0 var(--lt-accent),
+    0 0 0 1px color-mix(in srgb,var(--lt-accent) 20%,transparent);
 }
 .flhp-legend { margin-top: 6px; color: var(--lt-text-muted); font-size: 11px; line-height: 1.45; font-weight: 400; }
 .flhp-legend-row { display: flex; align-items: center; gap: 6px; margin: 1px 0; }
@@ -273,8 +273,8 @@ html.light .toggleSwitch[aria-checked="true"]::after { background: #262626; }
   transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
 }
 #fl-dock-actions > button:hover {
-  background: var(--lt-accent-soft); border-color: #e11d48; color: #e11d48;
-  box-shadow: 0 0 0 1px rgba(225, 29, 72, 0.22), 0 0 12px rgba(225, 29, 72, 0.32);
+  background: var(--lt-accent-soft); border-color: var(--lt-accent); color: var(--lt-accent);
+  box-shadow: 0 0 0 1px color-mix(in srgb,var(--lt-accent) 22%,transparent), 0 0 12px color-mix(in srgb,var(--lt-accent) 32%,transparent);
 }
 #fl-selector-warn { color: var(--lt-gold); font-size: 12px; margin: 6px 0; }
 #fl-markup-banner {
@@ -476,7 +476,7 @@ html.fl-tools-sfw #account-sidebar picture img {
   transition: background .15s ease, border-color .15s ease, color .15s ease;
 }
 .lt-qa-bar button:hover, .lt-qa-bar a.lt-qa-btn:hover {
-  background: rgba(225, 29, 72, 0.14); border-color: rgba(225, 29, 72, 0.55); color: #fff;
+  background: rgba(225, 29, 72, 0.14); border-color: color-mix(in srgb,var(--lt-accent) 55%,transparent); color: #fff;
 }
 .lt-qa-bar.lt-qa-feed button, .lt-qa-bar.lt-qa-feed a.lt-qa-btn {
   background: transparent; border-color: rgba(163, 163, 163, 0.35); color: #a3a3a3;
@@ -698,8 +698,8 @@ html.fl-tools-icon-light #fl-settings-launcher, html.fl-tools-icon-light .fl-bra
 }
 #fl-tools-dock.fl-settings-rail .fl-tool-header:hover .fl-tool-chevron { color: var(--lt-text); }
 #fl-tools-dock.fl-settings-rail .fl-tool-panel:has(> .fl-tool-header:hover) {
-  border-color: rgba(225, 29, 72, 0.55);
-  box-shadow: inset 3px 0 0 #e11d48, 0 0 0 1px rgba(225, 29, 72, 0.22), 0 0 14px rgba(225, 29, 72, 0.32);
+  border-color: color-mix(in srgb,var(--lt-accent) 55%,transparent);
+  box-shadow: inset 3px 0 0 var(--lt-accent), 0 0 0 1px color-mix(in srgb,var(--lt-accent) 22%,transparent), 0 0 14px color-mix(in srgb,var(--lt-accent) 32%,transparent);
 }
 #fl-tools-dock.fl-settings-rail .fl-tool-body { padding:0 10px 8px; margin:0; max-height:none; overflow:visible; }
 #fl-tools-dock.fl-settings-rail .fl-tool-body.fl-tool-hidden { display:none !important; }
@@ -756,3 +756,15 @@ html.light .fl-fetish-group-label { color: #737373; }
 .lt-seen-chip:focus-visible { outline: 2px solid #60a5fa; outline-offset: 2px; }
 
 .lt-card-face > .lt-card-chips { position: relative; inset: auto; max-width: none; margin: 4px 8px 8px; }
+
+/* Compact status footer; keep it outside the section accordion. */
+#fl-dock-actions{flex-wrap:wrap}
+#fl-dock-actions .fl-menu-footer{display:flex;align-items:center;justify-content:center;width:100%;gap:0;white-space:nowrap;font-size:10px;line-height:24px;color:var(--lt-text-muted)}
+#fl-dock-actions .fl-menu-footer a{color:var(--lt-text-muted);text-decoration:none}
+#fl-dock-actions .fl-menu-footer a:hover{color:var(--lt-accent);text-decoration:underline}
+#fl-dock-actions .fl-footer-active{white-space:pre}
+#fl-dock-actions .fl-menu-footer button{border:0;background:transparent;color:var(--lt-text-muted);min-width:24px;min-height:24px;padding:0;font:inherit;cursor:pointer}
+#fl-dock-actions .fl-menu-footer button:hover{color:var(--lt-accent);background:var(--lt-accent-soft);border-radius:5px}
+#fl-dock-actions #fl-jump-top[hidden]{display:none!important}
+
+#fl-dock-actions .fl-menu-footer button{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;margin-left:3px;border:1px solid var(--lt-accent);border-radius:6px;color:var(--lt-accent);background:var(--lt-accent-soft)}

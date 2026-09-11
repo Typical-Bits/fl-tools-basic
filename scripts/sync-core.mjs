@@ -105,7 +105,7 @@ if (writeOrCheck("core/css-pro.js", cssProJs)) changed.push("core/css-pro.js");
 const handoffSrc = read("core/handoff.js").replace(/^\uFEFF/, "").replace(/\s+$/, "");
 let userscript = read("FL_Tools_Basic.user.js");
 
-const nextUserscript = replaceMarked(
+let nextUserscript = replaceMarked(
   replaceMarked(
     userscript,
     MARK.handoff,
@@ -116,6 +116,8 @@ const nextUserscript = replaceMarked(
   indentBlock(cssCoreJs, 2),
   "css-core"
 );
+
+nextUserscript = replaceMarked(nextUserscript, {begin: "  /* BEGIN generated:menu-footer */", end: "  /* END generated:menu-footer */"}, indentBlock(read("core/menu-footer.js").trim(), 2), "menu-footer");
 
 if (/\n\/\/ @require\b.*releases\/latest\//i.test(nextUserscript)) {
   throw new Error("Refusing to emit @require of /releases/latest/ — pin a tag or inline via this sync script.");

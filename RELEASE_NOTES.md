@@ -1,7 +1,7 @@
-# FL Tools Basic 2.2.2
+# FL Tools Basic 2.2.5
 
-- Add a clear edition-specific userscript description and manager tags.
-- Display the script name as FL Tools Basic.
-- Anonymize named test fixtures using numbered SampleUser identifiers; keep selectors and assertions consistent.
+- Add a compact footer with the installed version linked to release notes, live Studio status, and an accessible pulse-icon diagnostics button.
+- Show Jump to top only when the menu needs scrolling; keep page position unchanged.
+- Use the current accent for menu hover and active indicators.
 
-Update the existing userscript. Download filenames and update URLs are unchanged. Historical commits and older release archives are not rewritten by this release.
+Validated desktop/mobile footer behavior, diagnostics, overflow scrolling, live accent changes, and exclusive menus across installation orders.
