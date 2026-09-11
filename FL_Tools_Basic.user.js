@@ -8,9 +8,9 @@
 // @description  FetLife dock: filters, soft-block, NSFW/SFW, Seen chip, basic navigation, infinite scroll. Yields to live FL_Tools Pro.
 // @author       TypicalBits
 // @license      CC-BY-NC-4.0
-// @icon        https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png
-// @iconURL     https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png
-// @defaulticon https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png
+// @icon        https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba
+// @iconURL     https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba
+// @defaulticon https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba
 // @match        https://fetlife.com/*
 // @grant        none
 // @run-at       document-idle
@@ -1448,7 +1448,8 @@
     snapshot() { return flCandidateScanner.snapshot(); }
   };
   const FL_DIAGNOSTIC_ERRORS = [];
-  window.addEventListener("error", (event) => { if (/FL[_ ]?Tools/i.test(String(event.message || event.error?.stack || ""))) FL_DIAGNOSTIC_ERRORS.push(String(event.message || event.error)); });
+  window.addEventListener("error", (event) => {
+      if (flBasicShouldYield()) return; if (/FL[_ ]?Tools/i.test(String(event.message || event.error?.stack || ""))) FL_DIAGNOSTIC_ERRORS.push(String(event.message || event.error)); });
   function flDiagnosticsText() {
     const telemetry = FL_TELEMETRY.snapshot();
     const settings = typeof loadFilterSettings === "function" ? loadFilterSettings() : {};
@@ -1508,7 +1509,7 @@
     }
     flApplyAccessibility(); flSmartDockPlacement();
   }
-  const FL_TOOLS_ICON_HTML = '<img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png" alt="FL Tools Basic" draggable="false">';
+  const FL_TOOLS_ICON_HTML = '<img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic" draggable="false">';
   /* BEGIN generated:handoff */
   /* FL Tools edition handoff. Hosted on Typical-Bits/fl-tools-basic.
      Source of truth — edit here, then run: node scripts/sync-core.mjs
@@ -1684,7 +1685,7 @@
   function flBasicShouldYield() {
     const dock = document.getElementById("fl-tools-dock");
     const launcher = document.getElementById("fl-settings-launcher");
-    return dock?.dataset.flToolsOwner === "pro" || launcher?.dataset.launcherId === "fl-tools-pro" || flLiveProActive();
+    return document.documentElement.hasAttribute("data-fl-tools-pro-present") || dock?.dataset.flToolsOwner === "pro" || launcher?.dataset.launcherId === "fl-tools-pro" || flLiveProActive();
   }
   function flClaimBasic() {
     const core = flCore();
@@ -1697,7 +1698,7 @@
   try {
     const root = document.documentElement;
     const page = flPageRoot();
-    if (flLiveProActive()) return;
+    if (flBasicShouldYield()) return;
     /* Same-document dual Basic: DOM/page stamp only. */
     if (page && page.__FL_TOOLS_BOOTED__ === "basic") return;
     if (root.getAttribute("data-fl-tools-claim") === "basic" && document.getElementById("fl-tools-dock")) return;
@@ -1790,6 +1791,7 @@
     dock.dataset.dragReady = "1";
     let active = false, startY = 0, origTop = 0;
     dock.addEventListener("mousedown", (e) => {
+      if (flBasicShouldYield()) return;
       if (!e.target.closest(".fl-tool-header")) return;
       if (e.target.closest("input, textarea, select, label") && !e.target.closest(".fl-tool-chevron")) return;
       const r = dock.getBoundingClientRect();
@@ -1801,12 +1803,14 @@
       e.preventDefault();
     });
     window.addEventListener("mousemove", (e) => {
+      if (flBasicShouldYield()) return;
       if (!active) return;
       const dy = e.clientY - startY;
       if (Math.abs(dy) > 3) dockDidDrag = true;
       applyDockTopPx(dock, origTop + dy);
     });
     window.addEventListener("mouseup", () => {
+      if (flBasicShouldYield()) return;
       if (!active) return;
       active = false;
       dock.classList.remove("dragging");
@@ -1819,6 +1823,7 @@
     if (!setupDockDrag.resizeBound) {
       setupDockDrag.resizeBound = true;
       window.addEventListener("resize", () => {
+      if (flBasicShouldYield()) return;
         keepDockInWindow(document.getElementById("fl-tools-dock"));
       }, { passive: true });
     }
@@ -1998,6 +2003,7 @@
     if (!header || header.dataset.collapseBound) return;
     header.dataset.collapseBound = "1";
     header.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       if (typeof dockDidDrag !== "undefined" && dockDidDrag) { dockDidDrag = false; return; }
       if (dockPanelParent(panelId)) e.stopPropagation();
       if (e.target.closest("input, textarea, select, label") && !e.target.closest(".fl-tool-chevron")) return;
@@ -2069,6 +2075,7 @@
       const save=()=>{flSavePerf({lightweight:light.checked,updateNotifications:updates.checked,compactLauncher:compact.checked,paused:paused.checked,highContrast:contrast.checked,scanDelay:Number(delay.value)||120,dockSide:flLoadPerf().dockSide}); flApplyPerf();};
       light.addEventListener("change",save); compact.addEventListener("change",save); paused.addEventListener("change",save); delay.addEventListener("change",save); contrast.addEventListener("change",save);
       box.querySelector("#fl-perf-header").addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         if (e.target.closest("input, select, label")) return;
         e.stopPropagation();
         const body = document.getElementById("fl-perf-body");
@@ -2111,12 +2118,14 @@
       flPublishShortcutMetadata();launcherDeclaration.publish();
       let drag = null, didDrag = false;
       launcher.addEventListener("pointerdown", (event) => {
+      if (flBasicShouldYield()) return;
         if (event.button !== 0) return;
         drag = { y:event.clientY, top:launcher.getBoundingClientRect().top };
         didDrag = false;
         launcher.setPointerCapture(event.pointerId);
       });
       launcher.addEventListener("pointermove", (event) => {
+      if (flBasicShouldYield()) return;
         if (!drag) return;
         const delta = event.clientY - drag.y;
         if (Math.abs(delta) > 4) didDrag = true;
@@ -2125,19 +2134,24 @@
         try { localStorage.setItem("fl_settings_launcher_top", String(top)); } catch (_) {}
         positionSettingsRail();
       });
-      launcher.addEventListener("pointerup", () => { drag = null; });
-      launcher.addEventListener("pointercancel", () => { drag = null; didDrag = true; });
+      launcher.addEventListener("pointerup", () => {
+      if (flBasicShouldYield()) return; drag = null; });
+      launcher.addEventListener("pointercancel", () => {
+      if (flBasicShouldYield()) return; drag = null; didDrag = true; });
       launcher.addEventListener("click", () => {
+      if (flBasicShouldYield()) return;
         if (didDrag) { didDrag = false; return; }
         setSettingsRailOpen(!dock.classList.contains("fl-rail-open"), true);
       });
       window.addEventListener("resize", positionSettingsRail, { passive:true });
       document.addEventListener("pointerdown", (event) => {
+      if (flBasicShouldYield()) return;
         if (dock.contains(event.target) || launcher.contains(event.target)) return;
         if (event.target.closest('[role="dialog"], [role="alertdialog"], .fl-confirm-overlay, .lt-qa-menu')) return;
         if (dock.classList.contains("fl-rail-open")) setSettingsRailOpen(false, false);
       });
       document.addEventListener("keydown", (event) => {
+      if (flBasicShouldYield()) return;
         if (event.key !== "Escape" || !dock.classList.contains("fl-rail-open")) return;
         if (event.target.id === "fl-panel-search" && event.target.value) return;
         setSettingsRailOpen(false, dock.contains(document.activeElement));
@@ -2279,6 +2293,7 @@
     if (setupSwitchAriaSync.bound) return;
     setupSwitchAriaSync.bound = true;
     document.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       const control = e.target && e.target.closest ? e.target.closest("button.fl-switch-input") : null;
       if (!control) return;
       control.checked = control.getAttribute("aria-checked") !== "true";
@@ -2286,6 +2301,7 @@
       control.dispatchEvent(new Event("change", { bubbles: true }));
     }, true);
     document.addEventListener("change", (e) => {
+      if (flBasicShouldYield()) return;
       if (e.target && e.target.classList && e.target.classList.contains("fl-switch-input")) syncSwitchAria(e.target);
     }, true);
   }
@@ -2670,7 +2686,8 @@
       toast.id = "fl-text-toast";
       toast.className = "life-toast";
       toast.title = "Dismiss";
-      toast.addEventListener("click", () => { toast.style.display = "none"; });
+      toast.addEventListener("click", () => {
+      if (flBasicShouldYield()) return; toast.style.display = "none"; });
       ensureDock().appendChild(toast);
     }
     toast.textContent = persist ? msg + "  ×" : msg;
@@ -2782,6 +2799,7 @@
         clear.textContent = t("clearSaved");
         clear.title = t("clearSaved");
         clear.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
           e.stopPropagation();
           clearSavedTerms(id);
         });
@@ -2800,6 +2818,7 @@
       x.textContent = "×";
       x.title = savedOnly ? t("removeSaved") : t("removeSaved");
       x.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.stopPropagation();
         removeSavedTerm(id, term);
       });
@@ -2807,6 +2826,7 @@
       if (savedOnly) {
         chip.title = "Click × to remove from saved";
         chip.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
           if (e.target.closest("button")) return;
           e.stopPropagation();
           const cur = splitList(hold.value);
@@ -2827,6 +2847,7 @@
       more.className = "fl-chip-more";
       more.textContent = open ? t("chipLess") : t("chipMore", { n: items.length - CHIP_PREVIEW });
       more.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.stopPropagation();
         chipExpanded[id] = !open;
         renderChipList(id);
@@ -2842,6 +2863,7 @@
       moreSaved.className = "fl-chip-more";
       moreSaved.textContent = savedOpen ? t("chipLess") : t("chipMore", { n: inactive.length - CHIP_PREVIEW });
       moreSaved.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.stopPropagation();
         chipExpanded[id + "-saved"] = !savedOpen;
         renderChipList(id);
@@ -2868,6 +2890,7 @@
       row.className = "fl-suggest-pick" + (on ? "" : " off");
       row.innerHTML = "<span>" + escapeAttr(term) + "</span><span>" + (on ? "✓" : "+") + "</span>";
       row.addEventListener("mousedown", (e) => {
+      if (flBasicShouldYield()) return;
         e.preventDefault();
         if (on) hold.value = active.filter((item) => item !== term).join(", ");
         else hold.value = active.concat([term]).join(", ");
@@ -2881,6 +2904,7 @@
       del.textContent = "×";
       del.title = t("removeSaved");
       del.addEventListener("mousedown", (e) => {
+      if (flBasicShouldYield()) return;
         e.preventDefault();
         e.stopPropagation();
         removeSavedTerm(id, term);
@@ -2914,6 +2938,7 @@
       if (sug) sug.classList.remove("open");
     }
     input.addEventListener("keydown", (e) => {
+      if (flBasicShouldYield()) return;
       if (e.key === "Enter") { e.preventDefault(); commit(); }
       if (e.key === "Escape") {
         const sug = document.getElementById(id + "-suggest");
@@ -2923,12 +2948,14 @@
     input.addEventListener("focus", () => renderTermSuggest(id, input.value));
     input.addEventListener("input", () => renderTermSuggest(id, input.value));
     input.addEventListener("blur", () => {
+      if (flBasicShouldYield()) return;
       setTimeout(() => {
         const sug = document.getElementById(id + "-suggest");
         if (sug) sug.classList.remove("open");
       }, 180);
     });
-    if (add) add.addEventListener("click", (e) => { e.stopPropagation(); commit(); });
+    if (add) add.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.stopPropagation(); commit(); });
     renderChipList(id);
   }
   function autoApplyFilters() {
@@ -3253,6 +3280,7 @@
     if (setupInfiniteScroll.bound) return;
     setupInfiniteScroll.bound = true;
     window.addEventListener("scroll", () => {
+      if (flBasicShouldYield()) return;
       if (isBlockedSettingsPage()) return;
       const enabled = document.getElementById("fl-auto-scroll")
         ? checked("fl-auto-scroll")
@@ -3296,6 +3324,7 @@
     if (!setupOpenedTracking.bound) {
       setupOpenedTracking.bound = true;
       document.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         const a = e.target.closest && e.target.closest('a[href^="/"]');
         if (!a) return;
         rememberOpenedHref(a.getAttribute("href"));
@@ -3437,6 +3466,7 @@
       chip.title = t("seenChipTitle", { date: formatVisitDate(when) }) + " · Click to mark unseen";
       chip.setAttribute("aria-label", "Mark " + nick + " as unseen");
       chip.addEventListener("click", (event) => {
+      if (flBasicShouldYield()) return;
         event.preventDefault();
         event.stopPropagation();
         clearSeenNick(nick);
@@ -3495,6 +3525,7 @@
         x.title = t("browseChipRemove", { term: term });
         x.setAttribute("aria-label", t("browseChipRemove", { term: term }));
         x.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
           e.preventDefault();
           e.stopPropagation();
           removeSavedTerm(group.id, term);
@@ -3527,6 +3558,7 @@
     setupHomeScrollRestore.bound = true;
     let saveT = null;
     window.addEventListener("scroll", () => {
+      if (flBasicShouldYield()) return;
       if (homeScrollRestoreLock || !isHomeFeed()) return;
       clearTimeout(saveT);
       saveT = setTimeout(() => {
@@ -3561,14 +3593,17 @@
     }
     document.addEventListener("turbo:load", () => {
       if (flBasicShouldYield()) return;
+      if (flBasicShouldYield()) return;
       homeScrollRestoredFor = "";
       setTimeout(tryRestoreHomeScroll, 40);
     });
     window.addEventListener("pageshow", () => {
+      if (flBasicShouldYield()) return;
       homeScrollRestoredFor = "";
       setTimeout(tryRestoreHomeScroll, 40);
     });
     window.addEventListener("popstate", () => {
+      if (flBasicShouldYield()) return;
       homeScrollRestoredFor = "";
       setTimeout(tryRestoreHomeScroll, 40);
     });
@@ -3605,6 +3640,7 @@
       input.addEventListener("input", run);
       input.addEventListener("search", run);
       input.addEventListener("keydown", (e) => {
+      if (flBasicShouldYield()) return;
         if (e.key === "Escape") { input.value = ""; applyPanelSearch(""); input.blur(); }
       });
     }
@@ -3958,11 +3994,13 @@
       const softSearch = document.getElementById("fl-soft-search");
       if (softSearch) softSearch.addEventListener("input", renderSoftList);
       const backup = document.getElementById("fl-soft-backup");
-      if (backup) backup.addEventListener("click", (e) => { e.stopPropagation(); downloadSoftList(); });
+      if (backup) backup.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.stopPropagation(); downloadSoftList(); });
       const softVisB = document.getElementById("fl-soft-block-visible-block");
       if (softVisB && !softVisB.dataset.ltBound) {
         softVisB.dataset.ltBound = "1";
-        softVisB.addEventListener("click", (e) => { e.stopPropagation(); softBlockVisibleCards(); });
+        softVisB.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.stopPropagation(); softBlockVisibleCards(); });
       }
       renderSoftList();
       enhanceBlockPanelHistory();
@@ -4075,6 +4113,7 @@
       btn.style.cssText = "margin:0;padding:2px 8px;";
       btn.textContent = t("unsoft");
       btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.stopPropagation();
         e.preventDefault();
         clearBlockReason(rec.nick);
@@ -4162,6 +4201,7 @@
     unb.className = "life-btn life-btn-gray";
     unb.textContent = t("unblockYes");
     unb.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.stopPropagation();
       text.textContent = t("unblockAsk", { name: nick || "this member", date: when });
       row.innerHTML = "";
@@ -4170,6 +4210,7 @@
       yes.className = "life-btn life-btn-red";
       yes.textContent = t("unblockYes");
       yes.addEventListener("click", (ev) => {
+      if (flBasicShouldYield()) return;
         ev.stopPropagation();
         submitOfficialUnblock(nick);
       });
@@ -4178,6 +4219,7 @@
       keep.className = "life-btn life-btn-gray";
       keep.textContent = t("unblockKeep");
       keep.addEventListener("click", (ev) => {
+      if (flBasicShouldYield()) return;
         ev.stopPropagation();
         bar.removeAttribute("data-kind");
         applyUnblockPrompt();
@@ -4191,6 +4233,7 @@
     if (!applyUnblockPrompt.bound) {
       applyUnblockPrompt.bound = true;
       document.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         const form = e.target.closest && e.target.closest("form[action*='blockeds']");
         if (!form) return;
         const method = (form.querySelector("input[name='_method']") || {}).value || "";
@@ -4229,7 +4272,8 @@
       toast.id = "fl-action-toast";
       toast.className = "life-toast";
       toast.title = "Dismiss";
-      toast.addEventListener("click", () => { toast.style.display = "none"; });
+      toast.addEventListener("click", () => {
+      if (flBasicShouldYield()) return; toast.style.display = "none"; });
       document.body.appendChild(toast);
     }
     toast.textContent = msg;
@@ -4296,7 +4340,8 @@
       btn.type = "button";
       btn.className = (kind === "red" ? "life-btn life-btn-red" : "life-btn life-btn-gray") + (span ? " fl-block-span" : "");
       btn.textContent = label;
-      btn.addEventListener("click", (e) => { e.stopPropagation(); onClick(); });
+      btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.stopPropagation(); onClick(); });
       row.appendChild(btn);
       return btn;
     }
@@ -4367,6 +4412,7 @@
     remove.style.margin = "0";
     remove.textContent = t("softVisitRemove");
     remove.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.stopPropagation();
       clearBlockReason(nick);
       skipBlockPrompt(nick);
@@ -4495,6 +4541,7 @@
       if (btn.dataset.presetBound) return;
       btn.dataset.presetBound = "1";
       btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.preventDefault();
         e.stopPropagation();
         applyDisplayPreset(btn.getAttribute("data-fl-display-preset"));
@@ -4586,6 +4633,7 @@
     if (!btn || !box || btn.dataset.bound) return;
     btn.dataset.bound = "1";
     btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.preventDefault();
       e.stopPropagation();
       setSettingsRailOpen(true, false);
@@ -4597,8 +4645,10 @@
         cancelLabel: t("confirmCancel"),
         okLabel: t("factoryResetContinue")
       });
-      actions.cancel.addEventListener("click", (ev) => { ev.stopPropagation(); hidePromptBox(box); });
+      actions.cancel.addEventListener("click", (ev) => {
+      if (flBasicShouldYield()) return; ev.stopPropagation(); hidePromptBox(box); });
       actions.ok.addEventListener("click", (ev) => {
+      if (flBasicShouldYield()) return;
         ev.stopPropagation();
         wipeFlToolsStorage();
         location.reload();
@@ -4640,8 +4690,10 @@
       if (typeof onResult === "function") onResult(!!result);
     }
     document.addEventListener("keydown", onKey, true);
-    actions.cancel.addEventListener("click", (e) => { e.preventDefault(); finish(false); });
-    actions.ok.addEventListener("click", (e) => { e.preventDefault(); finish(true); });
+    actions.cancel.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.preventDefault(); finish(false); });
+    actions.ok.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.preventDefault(); finish(true); });
   }
 
   function softBlockNick(nick) {
@@ -4720,6 +4772,7 @@
       btn.className = "life-btn life-btn-gray";
       btn.textContent = "×";
       btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.preventDefault(); e.stopPropagation();
         const list = loadLimitHistory();
         const at = it.at; const nick = it.nick;
@@ -4749,6 +4802,7 @@
 
     document.getElementById("fl-limit-hist-search").addEventListener("input", renderLimitHistory);
     document.getElementById("fl-limit-hist-dl").addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.stopPropagation();
       const blob = new Blob([JSON.stringify(loadLimitHistory(), null, 2)], { type: "application/json" });
       const a = document.createElement("a");
@@ -4758,6 +4812,7 @@
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     });
     document.getElementById("fl-limit-hist-clear").addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.stopPropagation();
       saveLimitHistory([]);
       renderLimitHistory();
@@ -4836,6 +4891,7 @@
     const sb = document.createElement("button");
     decorateSoftBlockChip(sb);
     sb.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
       e.preventDefault(); e.stopPropagation();
       softBlockNick(nick);
     });
@@ -5027,6 +5083,7 @@
     if (setupKeyboard.bound) return;
     setupKeyboard.bound = true;
     document.addEventListener("keydown", (e) => {
+      if (flBasicShouldYield()) return;
       if (flBasicShouldYield() || e.defaultPrevented) return;
       const tag = (e.target && e.target.tagName) || "";
       if (/INPUT|TEXTAREA|SELECT/.test(tag) || e.target.isContentEditable) return;
@@ -5104,6 +5161,7 @@
       if (btn.dataset.presetBound) return;
       btn.dataset.presetBound = "1";
       btn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.preventDefault();
         applyFilterPreset(btn.getAttribute("data-fl-preset"));
       });
@@ -5179,6 +5237,7 @@
         if (!toggle || toggle.dataset.collapseBound) return;
         toggle.dataset.collapseBound = "1";
         toggle.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
           e.stopPropagation();
           const body = document.getElementById(item.body);
           const opening = body && body.classList.contains("fl-tool-hidden");
@@ -5201,6 +5260,7 @@
       if (!el) return;
       el.addEventListener("change", autoApplyFilters);
       el.addEventListener("input", () => {
+      if (flBasicShouldYield()) return;
         clearTimeout(el._t);
         el._t = setTimeout(autoApplyFilters, 400);
       });
@@ -5255,7 +5315,8 @@
     const seenChipEl = document.getElementById("fl-show-seen-chip");
     if (seenChipEl) seenChipEl.addEventListener("change", () => applySeenChips(getCurrentFilterSettings()));
     const resetSeenBtn = document.getElementById("fl-reset-seen");
-    if (resetSeenBtn) resetSeenBtn.addEventListener("click", (e) => { e.preventDefault(); resetSeen(); });
+    if (resetSeenBtn) resetSeenBtn.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return; e.preventDefault(); resetSeen(); });
     bindFactoryReset();
     setupInfiniteScroll();
   }
@@ -5277,6 +5338,7 @@
       jump.textContent = t("jumpTop");
       jump.title = t("jumpTop") + " (T)";
       jump.addEventListener("click", (e) => {
+      if (flBasicShouldYield()) return;
         e.stopPropagation();
         window.scrollTo({ top: 0, behavior: "smooth" });
       });
@@ -5539,7 +5601,7 @@
     setupSwitchAriaSync();
     /* Page-world single-flight. Yield only for a live Pro instance. */
     try {
-      if (flLiveProActive()) return;
+      if (flBasicShouldYield()) return;
       const page = flPageRoot();
       if (page.__FL_TOOLS_BOOTED__ === "basic" && document.getElementById("fl-tools-dock")) return;
       flClaimBasic();
@@ -5558,6 +5620,7 @@
     new MutationObserver(ingestAddedNodes).observe(document.body || document.documentElement, { childList: true, subtree: true });
     document.addEventListener("turbo:load", () => {
       if (flBasicShouldYield()) return;
+      if (flBasicShouldYield()) return;
       resetExcludeBlurPathState();
       schedule();
       schedulePageTweaks();
@@ -5566,6 +5629,7 @@
       scheduleMarkupSelfCheck();
     });
     document.addEventListener("turbo:frame-load", (e) => {
+      if (flBasicShouldYield()) return;
       if (flBasicShouldYield()) return;
       const id = (e.target && e.target.id) || "";
       if (id.indexOf("relation_button") === 0) {

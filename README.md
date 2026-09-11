@@ -8,7 +8,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey?style=flat-square" /></a>
 </p>
 
-<p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png" alt="FL Tools Basic icon" width="96" height="96"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
 **Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.1.0](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.1.0)
 
