@@ -44,8 +44,8 @@ jobs:
           grep -q "^// @version[[:space:]]*$VERSION$" "FL_Tools_Basic.user.js"
           grep -q "releases/tag/v$VERSION" README.md
           grep -qF "**Latest:** [v$VERSION]" README.md
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "TypicalBits"
+          git config user.email "325446920+Typical-Bits@users.noreply.github.com"
           git add "FL_Tools_Basic.user.js" README.md
           git commit -m "Bump release to v$VERSION"
           git push
