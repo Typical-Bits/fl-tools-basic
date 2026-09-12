@@ -19,7 +19,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.3.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.4.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
