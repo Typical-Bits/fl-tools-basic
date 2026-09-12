@@ -1,7 +1,8 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.3.0
+// @version      2.3.1
+// @require      https://raw.githubusercontent.com/Typical-Bits/fl-tools-core/v2.3.2/dist/fl-core.js
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @description  Customize FetLife with profile filters, soft-blocking, seen markers, media controls and easier navigation. Works with Studio and yields to Pro when installed.
@@ -19,7 +20,7 @@
 // @run-at       document-idle
 // ==/UserScript==
 /*
-  FL_Tools Basic v2.3.0 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
+  FL_Tools Basic v2.3.1 — standalone dock (filters, soft-block, NSFW/SFW, Seen, navigation).
   Local-only; English UI; DOM-only (no private APIs).
 */
 
@@ -32,7 +33,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.3.0";
+  const FL_TOOLS_VERSION = "2.3.1";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -986,39 +987,9 @@
     }
 
     function applyFetishGroups(root) {
-      const host = root && root.querySelector && root.querySelector("#profile-fetishes");
-      if (!host) return 0;
-      const links = Array.prototype.slice.call(host.querySelectorAll('a[href*="/fetishes/"]'));
-      if (links.length < 4) return 0;
-      if (host.getAttribute("data-fl-fetish-count") === String(links.length) && host.querySelector(".fl-fetish-group")) return links.length;
-      const entries = links.map(function (link) {
-        const parentText = String((link.parentNode && link.parentNode.textContent) || "");
-        const after = String(link.nextSibling && link.nextSibling.textContent || "");
-        return { link: link, name: String(link.textContent || "").trim(), hint: after + " " + parentText };
-      });
-      const grouped = groupFetishEntries(entries);
-      const wrap = host.ownerDocument.createElement("div");
-      wrap.className = "fl-fetish-groups";
-      grouped.forEach(function (group) {
-        const section = host.ownerDocument.createElement("div");
-        section.className = "fl-fetish-group";
-        const title = host.ownerDocument.createElement("div");
-        title.className = "fl-fetish-group-label";
-        title.textContent = group.label;
-        section.appendChild(title);
-        group.items.forEach(function (name) {
-          const match = entries.filter(function (entry) {
-            return entry.name === name && entry.link && entry.link.parentNode;
-          })[0];
-          if (!match) return;
-          section.appendChild(match.link);
-        });
-        wrap.appendChild(section);
-      });
-      host.textContent = "";
-      host.appendChild(wrap);
-      host.setAttribute("data-fl-fetish-count", String(links.length));
-      return links.length;
+      // Native Into / Soft Limits / Hard Limits boundaries carry meaning for matching.
+      // Never flatten or move these links: doing so converts declared limits into interests.
+      return 0;
     }
 
     function applyPagerClone(root) {
@@ -1446,6 +1417,7 @@
   function flPublishShortcutMetadata(){const launcher=document.getElementById("fl-settings-launcher");if(launcher)launcher.dataset.launcherShortcuts=JSON.stringify(Object.values(flLoadShortcuts()).filter(Boolean));}
   function flDeclareLauncher(node, controls, meta) {
     node.dataset.userscriptLauncher = FL_LAUNCHER_PROTOCOL; node.dataset.launcherOwner = meta.owner; node.dataset.launcherId = meta.id; node.dataset.launcherPriority = String(meta.priority); node.dataset.launcherPreferredPosition = meta.preferredPosition;
+    try { window.FLCore?.launcher?.register?.(node, meta); } catch (_) {}
     let frame = 0; const publish = () => { frame = 0; const rects = controls().filter((el) => el && el.isConnected && el.getClientRects().length).map((el) => el.getBoundingClientRect()); if (!rects.length) return; const area = { left: Math.round(Math.min(...rects.map((r) => r.left))), top: Math.round(Math.min(...rects.map((r) => r.top))), right: Math.round(Math.max(...rects.map((r) => r.right))), bottom: Math.round(Math.max(...rects.map((r) => r.bottom))) }; node.dataset.launcherOccupiedArea = JSON.stringify(area); window.dispatchEvent(new CustomEvent("userscript-launcher:change", { detail: { protocol: FL_LAUNCHER_PROTOCOL, owner: meta.owner, id: meta.id, priority: meta.priority, preferredPosition: meta.preferredPosition, occupiedArea: area } })); };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(publish); }; if (typeof ResizeObserver !== "undefined") { const observer = new ResizeObserver(schedule); controls().filter(Boolean).forEach((el) => observer.observe(el)); } window.addEventListener("resize", schedule, { passive: true }); const checkCollision=()=>{let own=[];try{own=JSON.parse(node.dataset.launcherShortcuts||"[]");}catch(_){}const collision=[...document.querySelectorAll('[data-userscript-launcher="userscript-launcher-v1"]')].some((el)=>{if(el===node)return false;try{return JSON.parse(el.dataset.launcherShortcuts||"[]").some((value)=>own.includes(value));}catch(_){return false;}});node.dataset.launcherShortcutCollision=String(collision);};window.addEventListener("userscript-launcher:change",checkCollision);queueMicrotask(checkCollision);return { publish: schedule };
   }
@@ -1865,16 +1837,32 @@
     const dock = document.getElementById("fl-tools-dock");
     const launcher = document.getElementById("fl-settings-launcher");
     if (!dock || !launcher) return;
+    const coreGrid = window.FLCore?.launcher;
+    const coreManaged = !!(coreGrid?.isGridManaged?.(launcher) || launcher.dataset.launcherGridManaged === "true");
+    if (coreManaged) coreGrid.positionGrid?.();
     const height = window.innerHeight;
-    let top = NaN;
-    try { top = parseFloat(localStorage.getItem("fl_settings_launcher_top")); } catch (_) {}
-    if (!Number.isFinite(top)) {
-      const anchor = (loadFilterSettings() || {}).dockAnchor || "bottom";
-      top = anchor === "top" ? 72 : anchor === "center" ? (height - 48) / 2 : height - 64;
+    const launcherRect = launcher.getBoundingClientRect();
+    let top = coreManaged ? launcherRect.top : NaN;
+    if (!coreManaged) {
+      try { top = parseFloat(localStorage.getItem("fl_settings_launcher_top")); } catch (_) {}
+      if (!Number.isFinite(top)) {
+        const anchor = (loadFilterSettings() || {}).dockAnchor || "bottom";
+        top = anchor === "top" ? 72 : anchor === "center" ? (height - 48) / 2 : height - 64;
+      }
+      top = Math.max(8, Math.min(Math.max(8, height - 56), top));
+      launcher.style.top = top + "px";
     }
-    top = Math.max(8, Math.min(Math.max(8, height - 56), top));
-    launcher.style.top = top + "px";
     const panelHeight = dock.getBoundingClientRect().height || 240;
+    if (dock.classList.contains("fl-rail-open")) {
+      const placement = coreGrid?.menuPlacement?.(dock, launcher);
+      if (placement) {
+        dock.style.setProperty("max-width", Math.max(0, placement.maxWidth) + "px", "important");
+        dock.style.setProperty("left", placement.left + "px", "important");
+        dock.style.setProperty("right", "auto", "important");
+        dock.style.setProperty("top", placement.top + "px", "important");
+        return;
+      }
+    }
     const desired = top > height / 2 ? top - panelHeight - 10 : top + 58;
     dock.style.setProperty("top", Math.max(8, Math.min(height - panelHeight - 8, desired)) + "px", "important");
   }
@@ -2124,11 +2112,12 @@
       launcher.setAttribute("aria-label", "Open FL Tools settings");
       launcher.innerHTML = FL_TOOLS_ICON_HTML;
       document.body.appendChild(launcher);
-      const launcherDeclaration = flDeclareLauncher(launcher, () => [launcher, dock], { owner:"TypicalBits", id:"fl-tools-basic", priority:50, preferredPosition:"right-bottom" });
+      const launcherDeclaration = flDeclareLauncher(launcher, () => [launcher, dock], { owner:"TypicalBits", id:"fl-tools-basic", priority:300, preferredPosition:"right-bottom" });
       flPublishShortcutMetadata();launcherDeclaration.publish();
       let drag = null, didDrag = false;
       launcher.addEventListener("pointerdown", (event) => {
       if (flBasicShouldYield()) return;
+        if (window.FLCore?.launcher?.isGridManaged?.(launcher) || launcher.dataset.launcherGridManaged === "true") return;
         if (event.button !== 0) return;
         drag = { y:event.clientY, top:launcher.getBoundingClientRect().top };
         didDrag = false;
@@ -2136,6 +2125,7 @@
       });
       launcher.addEventListener("pointermove", (event) => {
       if (flBasicShouldYield()) return;
+        if (window.FLCore?.launcher?.isGridManaged?.(launcher) || launcher.dataset.launcherGridManaged === "true") return;
         if (!drag) return;
         const delta = event.clientY - drag.y;
         if (Math.abs(delta) > 4) didDrag = true;
@@ -5788,4 +5778,3 @@
   if (document.readyState === "interactive" || document.readyState === "complete") start();
   else document.addEventListener("DOMContentLoaded", start, { once: true });
 })();
-
