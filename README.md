@@ -1,10 +1,11 @@
 # FL Tools Basic
 
-**Author:** TypicalBits
-
 Everyday FetLife browsing controls: filter your feed, quiet unwanted profiles, and choose how sensitive media appears.
 
-<p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png" alt="FL Tools Basic icon" width="96" height="96"></p>
+<p align="center">
+  <a href="https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js" title="Install FL Tools Basic"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png" alt="FL Tools Basic icon" width="96" height="96"></a>
+  &nbsp; <a href="https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js"><strong>Install FL Tools Basic</strong></a>
+</p>
 
 ## Features
 
