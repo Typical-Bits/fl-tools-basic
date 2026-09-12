@@ -16,3 +16,4 @@ jobs:
       - run: node tests/upgrade-matrix.cjs
       - run: node tests/handoff.test.cjs
       - run: node tests/dom-scan.test.cjs
+      - run: node tests/launcher-grid-browser.cjs

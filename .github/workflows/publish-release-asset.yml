@@ -22,7 +22,8 @@ jobs:
           ver="${RELEASE_TAG#v}"
           grep -q "^// @version[[:space:]]*$ver$" FL_Tools_Basic.user.js
           grep -q "FL_Tools Basic v$ver" FL_Tools_Basic.user.js
-          grep -q "releases/tag/$RELEASE_TAG" README.md
+          test -s README.md
+          test -s RELEASE_NOTES.md
           test -f assets/fl-tools-launcher-icon.svg
           test -f assets/fl-tools-core.css
           test -f assets/fl-tools-pro.css

@@ -1,15 +1,12 @@
 name: Update release notes
 
 on:
-  push:
-    branches: [main]
-    paths: [.github/workflows/update-release-notes.yml]
   workflow_dispatch:
     inputs:
       tag:
-        description: Release tag
+        description: Published release tag
         required: true
-        default: v1.5.0
+        type: string
 
 permissions:
   contents: write
@@ -18,11 +15,11 @@ jobs:
   notes:
     runs-on: ubuntu-latest
     steps:
-      - name: Update release notes
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ inputs.tag }}
+      - name: Update selected release notes
         env:
           GH_TOKEN: ${{ github.token }}
-          TAG: ${{ inputs.tag || 'v1.2.12' }}
-        run: >-
-          gh release edit "$TAG"
-          --repo "$GITHUB_REPOSITORY"
-          --notes "Promotes FL Tools Basic to 1.5.0 with tagged shared dock CSS and handoff assets. Windows-safe source synchronization, DOM scan, live-yield, migration, syntax, UI-contract, and multi-version upgrade checks passed."
+          TAG: ${{ inputs.tag }}
+        run: gh release edit "$TAG" --notes-file RELEASE_NOTES.md

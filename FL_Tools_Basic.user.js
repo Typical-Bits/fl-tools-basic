@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://fetlife.com/
-// @version      2.3.2
+// @version      2.4.0
 // @updateURL    https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @downloadURL  https://github.com/Typical-Bits/fl-tools-basic/releases/latest/download/FL_Tools_Basic.user.js
 // @description  Customize FetLife with profile filters, soft-blocking, seen markers, media controls and easier navigation. Works with Studio and yields to Pro when installed.
@@ -49,20 +49,9 @@
     const PROTOCOL = "userscript-launcher-grid-v2";
     const OWNER_ATTR = "data-fl-tools-grid-owner";
     const LAUNCHER_PROTOCOL = "userscript-launcher-v1";
-    const TOP_KEY = "fl_settings_launcher_top";
+    const TOP_KEY = "fl_tools_grid_anchor_top_v3";
     const PRIORITY = Object.freeze({ studio: 100, vault: 200, basic: 300, pro: 400 });
-    const GRID = Object.freeze({
-      columns: 4,
-      rows: 2,
-      gap: 12,
-      edge: 12,
-      minEdge: 8,
-      slots: Object.freeze({
-        "fl-vault-launcher": Object.freeze({ row: 0, column: 3 }),
-        "fl-studio-launcher": Object.freeze({ row: 1, column: 1 }),
-        "fl-settings-launcher": Object.freeze({ row: 1, column: 2 })
-      })
-    });
+    const GRID = Object.freeze({ columns: 2, rows: 4, gap: 12, edge: 12, minEdge: 8 });
     const SELECTOR = [
       `[data-userscript-launcher="${LAUNCHER_PROTOCOL}"]`,
       "#fl-settings-launcher",
@@ -109,14 +98,8 @@
     function ownsGrid() {
       const html = doc.documentElement;
       let current = html.getAttribute(OWNER_ATTR) || "";
-      if (provider === "basic") {
-        if (current !== "basic") {
-          html.setAttribute(OWNER_ATTR, "basic");
-          emit("userscript-launcher:grid-owner", { protocol: PROTOCOL, owner: "basic" });
-        }
-        return true;
-      }
-      if (!current) {
+      const rank = { basic: 4, pro: 3, vault: 2, studio: 1 };
+      if (!current || (rank[provider] || 0) > (rank[current] || 0)) {
         html.setAttribute(OWNER_ATTR, provider);
         current = provider;
         emit("userscript-launcher:grid-owner", { protocol: PROTOCOL, owner: provider });
@@ -162,15 +145,6 @@
       return Array.from(byKey.values()).sort(compareNodes);
     }
 
-    function slotFor(node) {
-      if (!node) return null;
-      if (node.id && GRID.slots[node.id]) return GRID.slots[node.id];
-      const id = node.dataset?.launcherId;
-      if (id === "fl-tools-vault") return GRID.slots["fl-vault-launcher"];
-      if (id === "fl-tools-studio") return GRID.slots["fl-studio-launcher"];
-      if (id === "fl-tools-basic" || id === "fl-tools-pro") return GRID.slots["fl-settings-launcher"];
-      return null;
-    }
 
     function restoreYielded(node) {
       const previous = yielded.get(node);
@@ -210,25 +184,20 @@
     }
 
     function assignSlots(nodes) {
-      const assignments = new Map();
-      const used = new Set();
       const ordered = Array.from(nodes || []).sort(compareNodes);
-      ordered.filter(node => !!slotFor(node)).forEach(node => {
-        const slot = slotFor(node);
-        const key = `${slot.row}:${slot.column}`;
-        if (!used.has(key)) {
-          assignments.set(node, slot);
-          used.add(key);
-        }
-      });
-      const available = [];
-      for (let row = 0; row < GRID.rows; row += 1) {
-        for (let column = 0; column < GRID.columns; column += 1) {
-          if (!used.has(`${row}:${column}`)) available.push({ row, column });
-        }
-      }
-      ordered.filter(node => !assignments.has(node) && !slotFor(node)).forEach(node => {
-        const slot = available.shift();
+      const anchor = ordered.find(node => node.id === "fl-settings-launcher") ||
+        ordered.find(node => node.id === "fl-vault-launcher") || ordered[0];
+      const assignments = new Map();
+      if (!anchor) return assignments;
+      assignments.set(anchor, { row: 0, column: 1 });
+      const studio = ordered.find(node => node !== anchor && node.id === "fl-studio-launcher");
+      if (studio) assignments.set(studio, { row: 0, column: 0 });
+      const free = [{ row: 1, column: 1 }, { row: 0, column: 0 },
+        { row: 1, column: 0 }, { row: 2, column: 1 }, { row: 2, column: 0 },
+        { row: 3, column: 1 }, { row: 3, column: 0 }];
+      ordered.filter(node => !assignments.has(node)).forEach(node => {
+        const slot = free.find(candidate => ![...assignments.values()].some(used =>
+          used.row === candidate.row && used.column === candidate.column));
         if (slot) assignments.set(node, slot);
       });
       return assignments;
@@ -237,7 +206,10 @@
     function readTop(fallback) {
       try {
         const value = Number.parseFloat(win.localStorage?.getItem(TOP_KEY));
-        return Number.isFinite(value) ? value : fallback;
+        if (Number.isFinite(value)) return value;
+        // The previous key stored the upper row, with the anchor one row below.
+        const legacy = Number.parseFloat(win.localStorage?.getItem("fl_settings_launcher_top"));
+        return Number.isFinite(legacy) ? legacy + 60 : fallback;
       } catch (_) {
         return fallback;
       }
@@ -249,10 +221,6 @@
 
     function clamp(value, low, high) {
       return Math.max(low, Math.min(high, value));
-    }
-
-    function dimensions(nodes) {
-      return Math.max(48, ...Array.from(nodes || []).flatMap(node => [Number(node.offsetWidth) || 0, Number(node.offsetHeight) || 0]));
     }
 
     function rectFor(node) {
@@ -280,8 +248,9 @@
       if (!area) return null;
       const width = Number(win.innerWidth) || 1024;
       const height = Number(win.innerHeight) || 768;
-      const panelWidth = Number(panel.offsetWidth) || 320;
-      const panelHeight = Number(panel.offsetHeight) || 280;
+      const measured = rectFor(panel);
+      const panelWidth = Math.ceil(measured.width || Number(panel.offsetWidth) || 320);
+      const panelHeight = Math.ceil(measured.height || Number(panel.offsetHeight) || 280);
       const gap = GRID.gap;
       const edge = GRID.minEdge;
       const zones = [
@@ -312,12 +281,12 @@
     }
 
     let queued = false;
+    let orientation = null;
+    let lastLayout = "";
     let drag = null;
     const yielded = new WeakMap();
     const yieldedNodes = new Set();
     const bound = new WeakSet();
-    const observed = new WeakSet();
-    const sizeObservers = [];
 
     function suppressClick(node) {
       node.dataset.launcherGridSuppressClick = "true";
@@ -330,6 +299,7 @@
       if (!drag || event.pointerId !== drag.pointerId) return;
       const current = drag;
       drag = null;
+      schedule();
       delete current.node.dataset.launcherGridDragging;
       if (current.moved || cancelled) suppressClick(current.node);
       try {
@@ -356,10 +326,7 @@
         drag.moved = true;
         event.preventDefault();
         event.stopPropagation();
-        const current = layout();
-        const gridHeight = current ? current.rows * current.size + (current.rows - 1) * current.gap : 48 * 2 + GRID.gap;
-        const maxTop = Math.max(GRID.minEdge, win.innerHeight - gridHeight - GRID.minEdge);
-        setTop(clamp(drag.startTop + delta, GRID.minEdge, maxTop));
+        api.setTop(clamp(drag.startTop + delta, GRID.minEdge, win.innerHeight - 48 - GRID.minEdge));
         emit("userscript-launcher:grid-position", { protocol: PROTOCOL, provider, top: readTop(0) });
       }, true);
       node.addEventListener("pointerup", event => finishDrag(event, false), true);
@@ -374,25 +341,26 @@
       node.addEventListener("dragstart", event => event.preventDefault(), true);
     }
 
-    function observeSize(node) {
-      if (observed.has(node) || typeof win.ResizeObserver !== "function") return;
-      observed.add(node);
-      const observer = new win.ResizeObserver(schedule);
-      observer.observe(node);
-      sizeObservers.push(observer);
-    }
 
     function layout() {
       if (!ownsGrid()) return null;
+      // Optional Core clients delegate here; Core never installs a competing grid.
+      doc.documentElement.__flToolsLauncherGridCoordinator__ = api;
       const state = selectedNodes();
       const list = state.selected;
       if (!list.length) return null;
-      const size = dimensions(list);
-      const gridHeight = GRID.rows * size + (GRID.rows - 1) * GRID.gap;
-      const maxTop = Math.max(GRID.minEdge, win.innerHeight - gridHeight - GRID.minEdge);
-      const defaultTop = Math.max(GRID.minEdge, win.innerHeight - gridHeight - GRID.minEdge);
-      const top = clamp(readTop(defaultTop), GRID.minEdge, maxTop);
+      const size = 48;
+      const anchorTop = clamp(readTop(win.innerHeight - size - GRID.minEdge), GRID.minEdge, win.innerHeight - size - GRID.minEdge);
+      if (!orientation) orientation = anchorTop < win.innerHeight / 2 ? "down" : "up";
+      if (!drag) {
+        if (anchorTop < win.innerHeight / 2 - 40) orientation = "down";
+        if (anchorTop > win.innerHeight / 2 + 40) orientation = "up";
+      }
       const assignments = assignSlots(list);
+      const rows = Math.max(1, ...[...assignments.values()].map(slot => slot.row + 1));
+      const occupiedHeight = rows * size + (rows - 1) * GRID.gap;
+      const top = clamp(orientation === "up" ? anchorTop - (rows - 1) * (size + GRID.gap) : anchorTop,
+        GRID.minEdge, Math.max(GRID.minEdge, win.innerHeight - occupiedHeight - GRID.minEdge));
       list.forEach(node => {
         const slot = assignments.get(node);
         if (!slot) {
@@ -401,21 +369,27 @@
         }
         restoreYielded(node);
         const right = GRID.edge + (GRID.columns - 1 - slot.column) * (size + GRID.gap);
+        for (const property of ["width", "height", "min-width", "min-height", "max-width", "max-height"]) node.style.setProperty(property, size + "px", "important");
+        node.style.setProperty("box-sizing", "border-box", "important");
+        node.style.setProperty("margin", "0", "important");
+        node.style.setProperty("transform", "none", "important");
         node.style.setProperty("position", "fixed", "important");
         node.style.setProperty("right", `${right}px`, "important");
         node.style.setProperty("left", "auto", "important");
-        node.style.setProperty("top", `${top + slot.row * (size + GRID.gap)}px`, "important");
+        node.style.setProperty("top", `${top + (orientation === "up" ? rows - 1 - slot.row : slot.row) * (size + GRID.gap)}px`, "important");
         node.style.setProperty("bottom", "auto", "important");
         node.dataset.launcherGridManaged = "true";
         node.dataset.launcherGridRow = String(slot.row);
         node.dataset.launcherGridColumn = String(slot.column);
         bind(node);
-        observeSize(node);
       });
       doc.documentElement.dataset.flLauncherGridTop = String(Math.round(top));
       doc.documentElement.dataset.flLauncherGridWidth = String(GRID.columns * size + (GRID.columns - 1) * GRID.gap);
-      doc.documentElement.dataset.flLauncherGridHeight = String(gridHeight);
-      return { top, size, gap: GRID.gap, columns: GRID.columns, rows: GRID.rows, nodes: list.slice() };
+      doc.documentElement.dataset.flLauncherGridHeight = String(occupiedHeight);
+      const actualAnchorTop = orientation === "up" ? top + (rows - 1) * (size + GRID.gap) : top;
+      const signature = [win.innerWidth, win.innerHeight, top, rows, orientation, ...list.map(nodeKey)].join(":");
+      if (signature !== lastLayout) { lastLayout = signature; emit("userscript-launcher:grid-position", { protocol: PROTOCOL, provider, top: actualAnchorTop }); }
+      return { top: actualAnchorTop, size, gap: GRID.gap, columns: GRID.columns, rows, nodes: list.slice() };
     }
 
     function schedule() {
@@ -449,6 +423,22 @@
         const state = selectedNodes();
         return menuPlacement(panel, anchor, state.selected);
       },
+      placeMenu(panel, anchor) {
+        if (!panel || panel.hidden || !anchor) return false;
+        const style = panel.style;
+        style.setProperty("box-sizing", "border-box", "important");
+        style.setProperty("max-width", "calc(100dvw - 16px)", "important");
+        style.setProperty("max-height", "calc(100dvh - 16px)", "important");
+        const placement = menuPlacement(panel, anchor, selectedNodes().selected);
+        if (!placement) return false;
+        const values = { position: "fixed", transform: "none", "min-width": "0", "min-height": "0",
+          "max-width": "min(" + placement.maxWidth + "px, calc(100dvw - 16px))",
+          "max-height": "min(" + placement.maxHeight + "px, calc(100dvh - 16px))",
+          left: placement.left + "px", top: placement.top + "px", right: "auto", bottom: "auto",
+          "overflow-y": "auto", "overscroll-behavior": "contain" };
+        for (const [key, value] of Object.entries(values)) style.setProperty(key, value, "important");
+        return true;
+      },
       setTop(value) {
         if (!Number.isFinite(Number(value))) return layout();
         writeTop(Number(value));
@@ -481,7 +471,7 @@
   /* END generated:launcher-grid */
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.3.2";
+  const FL_TOOLS_VERSION = "2.4.0";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
@@ -2260,7 +2250,12 @@
   }
 
   /* Settings rail: launcher button + collapsible panels. */
+  window.addEventListener("fltools:menu-open", event => {
+    if (!flBasicShouldYield() && event.detail !== "settings") setSettingsRailOpen(false, false);
+  });
   function setSettingsRailOpen(open, focus) {
+    if (flBasicShouldYield()) return;
+    if (open) window.dispatchEvent(new CustomEvent("fltools:menu-open", { detail: "settings" }));
     const dock = document.getElementById("fl-tools-dock");
     if (!dock) return;
     dock.classList.toggle("fl-rail-open", !!open);
@@ -2301,16 +2296,7 @@
       launcher.style.top = top + "px";
     }
     const panelHeight = dock.getBoundingClientRect().height || 240;
-    if (dock.classList.contains("fl-rail-open")) {
-      const placement = grid?.menuPlacement?.(dock, launcher);
-      if (placement) {
-        dock.style.setProperty("max-width", Math.max(0, placement.maxWidth) + "px", "important");
-        dock.style.setProperty("left", placement.left + "px", "important");
-        dock.style.setProperty("right", "auto", "important");
-        dock.style.setProperty("top", placement.top + "px", "important");
-        return;
-      }
-    }
+    if (dock.classList.contains("fl-rail-open") && grid.placeMenu(dock, launcher)) return;
     const desired = top > height / 2 ? top - panelHeight - 10 : top + 58;
     dock.style.setProperty("top", Math.max(8, Math.min(height - panelHeight - 8, desired)) + "px", "important");
   }

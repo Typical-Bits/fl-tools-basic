@@ -11,4 +11,3 @@
 
 - No remote Core dependency is required by the edition userscripts.
 - Existing published release tags and download links are preserved.
-
