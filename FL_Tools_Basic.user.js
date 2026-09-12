@@ -1896,7 +1896,7 @@
     const below = height - top - 58, above = top - 10;
     const upward = panelHeight > below && above > below;
     dock.dataset.openDirection = mobile ? "sheet" : upward ? "up" : "down";
-    const desired = mobile ? height - panelHeight - 8 : upward ? top - panelHeight - 10 : top + 58;
+    const corePlacement = window.FLCore?.launcher?.menuPlacement?.(dock, launcher); if (corePlacement && !mobile) { dock.style.setProperty("left", Math.max(8, Math.min(width - (dock.offsetWidth || 280) - 8, corePlacement.left)) + "px", "important"); dock.style.setProperty("right", "auto", "important"); dock.style.setProperty("top", Math.max(8, Math.min(height - panelHeight - 8, corePlacement.top)) + "px", "important"); return; }     const desired = mobile ? height - panelHeight - 8 : upward ? top - panelHeight - 10 : top + 58;
     dock.style.setProperty("top", (originY + Math.max(8, Math.min(height - panelHeight - 8, desired))) + "px", "important");
   }
   function setPanelOpenState(bodyId, toggleId, open) {

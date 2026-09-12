@@ -10,7 +10,7 @@ The public FetLife userscript for everyday browsing. A compact dock on the right
 
 <p align="center"><img src="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/fl-tools-basic-icon-64.png?asset=4217521d9bba" alt="FL Tools Basic icon" width="96" height="96"></p>
 
-**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:** [v2.2.8](https://github.com/Typical-Bits/fl-tools-basic/releases/tag/v2.2.8)
+**Author:** [TypicalBits](https://github.com/Typical-Bits) · **Latest:v2.2.9
 
 ## Features
 
@@ -42,47 +42,3 @@ The launcher appears on the right. If Pro is also installed, Pro takes over this
 
 ## Latest changes
 
-## New in 2.2.1
-
-- Adapt desktop menus to available space and reposition expanded sections into view.
-- Scroll active sections while keeping menu navigation accessible.
-- Use mobile bottom sheets; hide launchers while a sheet is open to keep its close button accessible.
-- Remove the scanning status strip from the settings header.
-
-Update all installed editions and reload FetLife tabs.
-
-## What changed in 2.2.0
-
-- Narrower desktop menus and tighter panel headers; mobile menu sizing is preserved.
-- Feed stories no longer trigger hard-limit/exclusion dimming from their text. Blocks, mutes and snoozes still apply.
-- Declared Hard Limits sections on profiles are excluded from term matching and highlighting.
-- Move picture previous/next navigation into the advertisement slot while preserving mobile controls.
-- Round image corners, add story footer separators and improve feed action alignment.
-
-## What changed in 2.2.1
-
-- Collapsed menus use a compact 220px width on desktop and mobile, expanding when a section opens.
-
-## What changed in 2.2.2
-
-- Add a clear edition-specific userscript description and manager tags.
-- Display the script name as FL Tools Basic.
-- Anonymize named test fixtures using numbered SampleUser identifiers; keep selectors and assertions consistent.
-
-## What changed in 2.2.5
-
-- Compact footer with release-note link, live Studio status, and pulse-icon diagnostics.
-- Show Jump to top only for overflowing menus; scroll the menu without moving the page.
-- Hover and active menu indicators follow the selected accent.
-
-## What changed in 2.2.6
-
-- Remember ignored hard-limit matches per profile across reloads. Alert again only for a newly matched term.
-- Normalize case and whitespace; retain acknowledgments when terms disappear and return.
-- Older ignore flags use the first observed term set as their baseline.
-
-## What changed in 2.2.8
-
-- Preserve native Into, Soft Limits, and Hard Limits categories instead of regrouping their links.
-- Keep declared Hard Limits excluded from profile detection and highlighting.
-- Update all installed editions, then reload the profile to restore categories removed by older scripts.

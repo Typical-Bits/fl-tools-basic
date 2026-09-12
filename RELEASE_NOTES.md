@@ -8,3 +8,8 @@ Update every installed edition and reload the profile once. Previously modified 
 
 - Force menu icons to a true 32×32 render box.
 - Show the Studio icon in its menu header.
+
+## v2.2.9
+- Shared launcher-grid menu placement is coordinated through Core.
+- Vault is recognized as a separate installed edition without inheriting Vault-only features.
+
