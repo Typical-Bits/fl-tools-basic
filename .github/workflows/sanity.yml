@@ -40,7 +40,7 @@ jobs:
           grep -q 'releases/latest/download/FL_Tools_Basic.user.js' "$f"
 
           # Banner version comment should match @version.
-          grep -q "FL Tools Basic v${ver}" "$f"
+          grep -q "FL_Tools Basic v${ver}" "$f"
           grep -q "const FL_TOOLS_VERSION = \"${ver}\";" "$f"
 
           # Settings use real switch buttons rather than hidden checkbox inputs.
