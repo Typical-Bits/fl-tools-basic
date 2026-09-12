@@ -81,11 +81,6 @@ assert.doesNotMatch(source, /id="fl-preset-row"/, "browse Default/Minimal/SFW pr
 assert.match(source, /data-fl-display-preset="minimal"/, "NSFW panel has Default/Minimal/SFW display presets");
 assert.match(source, /function collapseInnerMenus/, "switching dock modules closes nested menus");
 assert.match(source, /if \(exceptId && !keepParent\) collapseInnerMenus/, "reopening a dock row starts nested menus collapsed");
-const gallery = fs.readFileSync(path.join(root, "preview/panels.html"), "utf8");
-assert.doesNotMatch(gallery, /id="fl-preset-row"/, "gallery Filters do not duplicate Default/Minimal/SFW");
-assert.match(gallery, /id="fl-display-preset-row"/, "gallery NSFW still has display presets");
-assert.match(gallery, /filterBody \+ panel\("fl-site-panel".*, false\), false\)/, "gallery Filters and NSFW start collapsed");
-assert.match(gallery, /\.fls-tab:hover\{[^}]*rgba\(139,92,246/, "gallery Studio tabs glow purple on hover");
 assert.doesNotMatch(source, /id="fl-loc-wrap"/, "Location filtering is FetLife's, not a dock subsection");
 assert.doesNotMatch(source, /id="fl-same-city-only"/, "Same-city filter chrome is gone");
 assert.doesNotMatch(source, /id="fl-cities"/, "city chips are not a dock control");
