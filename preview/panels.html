@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FL Tools panel gallery</title>
+  <link rel="stylesheet" href="../fl-tools-basic/assets/fl-tools-core.css?v=dock-glow">
+  <link rel="stylesheet" href="../fl-tools-pro/assets/fl-tools-pro.css">
+  <style>
+    /* Preview page only — dock CSS is the real userscript CSS. */
+    html, body { margin: 0; min-height: 100%; background: #0b0b0c; color: #e5e5e5;
+      font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
+    body { padding: 0 340px 96px 24px; }
+    .fl-preview-bar {
+      position: sticky; top: 0; z-index: 5;
+      display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+      padding: 14px 0 12px; background: #0b0b0c;
+    }
+    .fl-preview-bar h1 { margin: 0 12px 0 0; font-size: 16px; font-weight: 700; }
+    .fl-preview-bar button {
+      border: 1px solid #3f3f3f; background: #171717; color: #f5f5f5;
+      border-radius: 999px; padding: 6px 12px; cursor: pointer; font: inherit;
+    }
+    .fl-preview-bar button[aria-pressed="true"] { border-color: #e11d48; color: #fb7185; }
+    .fl-preview-note { color: #a3a3a3; font-size: 12px; max-width: 52rem; margin: 0 0 16px; }
+    .fl-fake-nav {
+      display: flex; gap: 18px; align-items: center;
+      padding: 10px 0 18px; border-bottom: 1px solid #262626; margin-bottom: 18px;
+      color: #e11d48; font-weight: 700; letter-spacing: .04em;
+    }
+    .fl-fake-nav span { color: #a3a3a3; font-weight: 500; font-size: 13px; }
+    .fl-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; max-width: 720px; }
+    .fl-fake-card {
+      position: relative; isolation: isolate;
+      height: 220px; border-radius: 4px; overflow: hidden;
+      background: linear-gradient(180deg, #2a2a2e, #171717);
+      border: 1px solid #2e2e2e; cursor: pointer;
+    }
+    .fl-fake-card .meta { position: absolute; left: 8px; right: 8px; bottom: 28px; font-size: 12px; font-weight: 600; }
+    .fl-fake-card .role { color: #a3a3a3; font-size: 11px; font-weight: 400; }
+    .fl-preview-legend { margin-top: 28px; color: #a3a3a3; font-size: 13px; max-width: 52rem; }
+    .fl-preview-legend ul { margin: 8px 0 0; padding-left: 18px; }
+    #fl-settings-launcher { top: 16px !important; }
+    #fl-tools-dock.fl-settings-rail.fl-rail-open { top: 72px !important; }
+    .fl-preview-legend strong { color: #f5f5f5; }
+    .fl-btn { width:100%; padding:0 10px; height:var(--lt-ctrl-h); line-height:var(--lt-ctrl-h); color:var(--lt-text); border:1px solid var(--lt-border); border-radius:6px; cursor:pointer; margin-bottom:6px; font:inherit; font-size:12px; background:var(--lt-bg-elev); }
+    .fl-btn:hover { border-color:#525252; }
+    .fl-btn-red, .fl-btn-gray { background:var(--lt-bg-elev); }
+    .fl-hint { color:var(--lt-text-muted); font-size:11px; margin:0 0 6px; }
+    .fl-subhead { display:flex; justify-content:space-between; align-items:center; cursor:pointer; color:var(--lt-text); font-weight:600; margin:4px 0; }
+    .fl-hr { border:0; border-top:1px solid var(--lt-border-soft); margin:8px 0; }
+    /* Studio CSS (copied from FL_Tools_Studio.user.js createUi). */
+    #fl-studio-launcher{position:fixed;right:68px;top:16px;z-index:2147483646;width:48px;height:48px;padding:0;border:1px solid #8b5cf680;border-radius:12px;background:#17151d;color:#f5f3ff;box-shadow:0 6px 20px #0008;cursor:pointer;font:700 19px/1 system-ui}
+    #fl-studio-launcher:hover,#fl-studio-launcher[aria-expanded="true"]{border-color:#a78bfa;background:#211d2c}
+    #fl-studio-panel{position:fixed;right:68px;top:72px;z-index:2147483645;width:320px;max-width:calc(100vw - 24px);max-height:calc(100vh - 164px);overflow:auto;box-sizing:border-box;padding:12px;border:1px solid #3f3a4b;border-radius:14px;background:#121116;color:#f5f3ff;box-shadow:0 18px 50px #0009;font:13px/1.35 system-ui}
+    html.fl-preview-studio #fl-studio-launcher { right: 68px !important; top: 16px !important; }
+    html.fl-preview-studio #fl-studio-panel { right: 68px !important; top: 72px !important; }
+    #fl-studio-panel[hidden]{display:none!important}
+    .fls-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+    .fls-title{font-size:16px;font-weight:750}
+    .fls-subtitle,.fls-edition span:last-child{font-size:11px;color:#aaa4b5}
+    .fls-close{width:28px;height:28px;border:0;border-radius:7px;background:transparent;color:#aaa4b5;font-size:20px;cursor:pointer}
+    .fls-section{margin-top:10px;padding-top:9px;border-top:1px solid #2c2933}
+    .fls-label{margin-bottom:6px;color:#c4b5fd;font-size:10px;font-weight:750;letter-spacing:.08em;text-transform:uppercase}
+    .fls-edition{display:flex;justify-content:space-between;gap:8px;padding:5px 0}
+    .fls-row{display:flex;gap:6px}
+    .fls-row select{min-width:0;flex:1}
+    .fls-input,.fls-button,#fl-studio-panel select,.fls-textarea{box-sizing:border-box;min-height:30px;border:1px solid #3f3a4b;border-radius:7px;background:#1c1922;color:#f5f3ff;font:inherit}
+    .fls-input{width:100%;padding:5px 8px}
+    .fls-textarea{width:100%;min-height:72px;padding:6px 8px;resize:vertical}
+    .fls-button{padding:5px 9px;cursor:pointer}
+    .fls-button:hover{border-color:#8b5cf6}
+    .fls-wide{width:100%;margin-top:6px}
+    .fls-status{margin-top:8px;color:#aaa4b5;font-size:11px}
+    .fls-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+    .fls-tab{flex:1 1 28%;min-height:28px;padding:4px 6px;border:1px solid #3f3a4b;border-radius:7px;background:#1c1922;color:#c4b5fd;font:700 10px/1 system-ui;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:border-color .15s ease,box-shadow .15s ease,background .15s ease,color .15s ease}
+    .fls-tab:hover{border-color:#8b5cf6;color:#f5f3ff;background:#211d2c;box-shadow:inset 3px 0 0 #8b5cf6,0 0 0 1px rgba(139,92,246,.28),0 0 14px rgba(139,92,246,.4)}
+    .fls-tab[aria-selected="true"]{border-color:#8b5cf6;color:#f5f3ff;background:#211d2c}
+    .fls-item{display:flex;align-items:center;gap:6px;margin:0 0 6px;font-size:12px}
+    .fls-item a,.fls-linkish{color:#ddd6fe;flex:1}
+    .fls-empty{color:#aaa4b5;font-size:12px;padding:4px 0}
+    [data-studio-pane][hidden]{display:none!important}
+  </style>
+</head>
+<body>
+  <div class="fl-preview-bar">
+    <h1>FL Tools panels</h1>
+    <button type="button" data-edition="basic" aria-pressed="true">Basic</button>
+    <button type="button" data-edition="pro" aria-pressed="false">Pro</button>
+    <button type="button" data-edition="studio" aria-pressed="false">Studio</button>
+  </div>
+  <p class="fl-preview-note">
+    Real dock CSS and the same panel titles, switches, and copy as the userscripts.
+    Click a header to open it. This is a local gallery, not FetLife.
+  </p>
+  <div class="fl-fake-nav">FetLife <span>Kinksters · Austin</span></div>
+  <div class="fl-card-grid" id="fake-cards"></div>
+  <div class="fl-preview-legend" id="legend"></div>
+
+  <button type="button" id="fl-settings-launcher" aria-expanded="true" aria-label="FL Tools settings"></button>
+  <aside id="fl-tools-dock" class="fl-settings-rail fl-rail-open dock-top" role="region" aria-labelledby="fl-rail-title"></aside>
+
+  <div id="fl-browse-chips">
+    <span class="lt-browse-chips-label">Active Filters</span>
+    <span class="lt-browse-chip">switch <button type="button" aria-label="Stop filtering switch">×</button></span>
+  </div>
+
+  <button type="button" id="fl-studio-launcher" hidden aria-expanded="true">S</button>
+  <section id="fl-studio-panel" hidden></section>
+
+  <script>
+    const BASIC_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FL Tools Basic">
+      <rect width="64" height="64" rx="14" fill="#141416"/>
+      <path transform="translate(3 2) scale(.91)" fill="#c92132" d="M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z"/>
+      <rect x="2" y="43" width="43" height="18" rx="9" fill="#18202a" stroke="#b9c5d3" stroke-width="1.75"/>
+      <text x="23.5" y="55.6" fill="#e5f0fc" font-family="Arial, sans-serif" font-size="9.2" font-weight="800" letter-spacing=".2" text-anchor="middle">BASIC</text>
+    </svg>`;
+    const PRO_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="FL Tools Pro">
+      <rect width="64" height="64" rx="14" fill="#141416"/>
+      <path transform="translate(3 2) scale(.91)" fill="#c92132" d="M32 56C26 50 8 40 8 27c0-5 2-9 6-12-2-5-1-10 2-13 0 8 3 13 9 15 3 0 5 2 7 4 2-2 4-4 7-4 6-2 9-7 9-15 3 3 4 8 2 13 4 3 6 7 6 12 0 13-18 23-24 29Z"/>
+      <rect x="2" y="43" width="34" height="18" rx="9" fill="#211d12" stroke="#e0bd55" stroke-width="1.75"/>
+      <text x="19" y="55.8" fill="#ffd96b" font-family="Arial, sans-serif" font-size="10" font-weight="800" letter-spacing=".25" text-anchor="middle">PRO</text>
+    </svg>`;
+
+    function sw(id, label, desc, on) {
+      return `<div class="fl-switch"><span class="fl-switch-text" id="${id}-label">${label}${desc ? `<small class="fl-rail-description">${desc}</small>` : ""}</span><button id="${id}" type="button" class="fl-switch-input toggleSwitch" role="switch" aria-labelledby="${id}-label" aria-checked="${on ? "true" : "false"}"></button></div>`;
+    }
+    function chipField(id, label, ph, chips) {
+      const list = chips.map((c) => `<span class="fl-chip">${c}<button type="button">×</button></span>`).join("");
+      return `<label style="display:block;margin-bottom:4px;">${label}</label>
+        <div class="fl-chip-meta">${chips.length} active</div>
+        <div class="fl-add-row"><input id="${id}-add" type="text" placeholder="${ph}" autocomplete="off">
+        <button type="button" class="life-btn life-btn-gray">Add</button></div>
+        <div class="fl-chip-row">${list}</div>`;
+    }
+    function panel(id, title, bodyId, toggleId, body, open) {
+      return `<div id="${id}" class="fl-tool-panel${open ? " lt-panel-open" : ""}">
+        <div class="fl-tool-header" data-panel="${id}">
+          <div class="fl-tool-title">${title}</div>
+          <button type="button" id="${toggleId}" class="fl-tool-chevron" aria-expanded="${open ? "true" : "false"}">${open ? "▾" : "▸"}</button>
+        </div>
+        <div id="${bodyId}" class="fl-tool-body${open ? "" : " fl-tool-hidden"}">${body}</div>
+      </div>`;
+    }
+
+    const filterBody = `
+      <label style="display:block;margin-bottom:4px;">Combine Filters with</label>
+      <select id="fl-combine-mode" style="margin-bottom:8px"><option>All of these (AND)</option><option>Any of these (OR)</option></select>
+      <label style="display:block;margin-bottom:4px;">Match against</label>
+      <select style="margin-bottom:8px"><option>Whole card</option><option>Age / role tag</option><option>Nickname only</option></select>
+      <label style="display:block;margin-bottom:4px;">Role list</label>
+      <select style="margin-bottom:8px"><option>Must match</option><option>Prefer (soft dim if missing)</option></select>
+      <div class="life-hint">Age, gender, and role hide cards that do not match.</div>
+      <label style="display:block;margin-bottom:4px;">Age range</label>
+      <div style="display:flex;gap:6px;margin-bottom:8px;">
+        <input type="number" value="18" style="width:50%"><input type="number" value="80" style="width:50%">
+      </div>
+      ${chipField("fl-genders", "Gender", "e.g. M, F, NB", ["F"])}
+      ${chipField("fl-roles", "Role", "e.g. switch, sub", ["switch"])}
+      <hr class="life-hr">
+      <div class="life-hint">Hard limits dim cards that match these terms.</div>
+      ${chipField("fl-limits", "Hard Limits", "e.g. abdl, diaper", ["abdl"])}`;
+
+    const nsfwBody = `
+      <div class="life-hint">Only changes how already-visible images look. Does not unlock hidden or private media.</div>
+      ${sw("fl-nsfw-toggle", "NSFW mode", "Show unblurred media. Turn off for SFW browsing.", true)}
+      <div class="life-hint" id="fl-nsfw-state">NSFW (no blur)</div>
+      <label style="display:block;margin:8px 0 4px;">SFW blur strength (<span>4</span>px)</label>
+      <input type="range" min="1" max="10" value="4">
+      ${sw("fl-blur-avatars", "Also blur avatars and icons", "Also blur profile pictures in SFW mode.", false)}
+      ${sw("fl-blur-videos", "Also blur videos", "Also blur video previews in SFW mode.", true)}
+      <div id="fl-display-preset-row" style="display:flex;gap:6px;flex-wrap:wrap;margin:8px 0">
+        <button type="button" class="life-btn life-btn-gray">Default</button>
+        <button type="button" class="life-btn life-btn-gray">Minimal</button>
+        <button type="button" class="life-btn life-btn-gray">SFW</button>
+      </div>
+      <div class="life-hint">Default is NSFW (no blur). Minimal blurs at 1px. SFW blurs at 6px or more.</div>`;
+
+    const advancedBasic = `
+      ${sw("fl-auto-scroll", "Enable Infinite Scroll", "Load more results as you approach the end of the page.", true)}
+      ${sw("fl-show-toasts", "Show text-match toasts", "Show brief feedback after actions.", true)}
+      ${sw("fl-show-seen-chip", "Show Seen chip", "Label profiles you have already visited.", true)}
+      <button type="button" class="life-btn life-btn-gray">Reset seen</button>
+      <div class="life-hint">Clear Seen chips so visited profiles look new again.</div>
+      ${sw("fl-hide-banners", "Hide install / push banners", "Hide FL Tools informational banners.", false)}
+      <hr class="life-hr">
+      <button type="button" class="life-btn life-btn-red" id="fl-factory-reset">Factory Reset</button>
+      <div class="life-hint">Erase settings, Filters, and cached data on this device.</div>
+      <div id="fl-factory-reset-prompt" class="life-alert-strong fl-prompt-danger" hidden>
+        <div style="font-weight:bold">Factory Reset</div>
+        <div style="margin-top:4px">This cannot be reversed. Settings, Filters, and cached FL Tools data on this device will be deleted, then the page reloads.</div>
+        <div class="fl-block-actions">
+          <button type="button" class="life-btn life-btn-gray" data-factory-cancel>Cancel</button>
+          <button type="button" class="life-btn life-btn-red">Continue</button>
+        </div>
+      </div>`;
+
+    const advancedPro = `
+      <label style="display:block;margin-bottom:4px;">Organization cards</label>
+      <select style="margin-bottom:8px"><option>Show</option><option>Dim</option><option>Hide</option></select>
+      ${advancedBasic}
+      ${sw("fl-limit-hit-sound", "Beep on hard-limit hit", "", false)}
+      ${sw("fl-auto-collapse-media", "Auto-hide dock on Explore / media pages", "", true)}
+      ${sw("fl-dock-compact", "Compact dock", "", false)}
+      ${sw("fl-paranoid", "Paranoid auto-clear", "", false)}
+      <div class="fl-hint">When on, visit logs, notes, snapshots, and the Studio vault older than the TTL are wiped from this device.</div>
+      <div class="fl-subhead"><span>Visit log</span><span>▸</span></div>
+      <div class="fl-subhead"><span>Import / Export</span><span>▸</span></div>`;
+
+    const highlighterBody = `
+      <label style="display:block;margin:0 0 4px;">Sort loaded cards</label>
+      <select style="margin-bottom:8px"><option>No sort</option><option>Name</option><option>Age</option><option>Picture count</option></select>
+      <label style="display:block;margin-bottom:4px;">Low picture count threshold</label><input type="number" value="3" style="margin-bottom:6px">
+      <label style="display:block;margin-bottom:4px;">Low video count threshold</label><input type="number" value="1" style="margin-bottom:6px">
+      <label style="display:block;margin-bottom:4px;">Low writing count threshold</label><input type="number" value="1" style="margin-bottom:8px">
+      <div class="fl-hint">Priority: low media (gray) → friends (bronze) → follows you (red) → following (teal).</div>
+      ${sw("flhp-low", "Highlight low picture count", "", true)}
+      ${sw("flhp-friends", "Highlight friends", "", true)}
+      ${sw("flhp-follows-you", "Highlight people who follow you", "", true)}
+      ${sw("flhp-follow", "Highlight people I follow", "", false)}
+      <div style="margin-top:12px"><button type="button" class="fl-btn fl-btn-red">Save</button>
+      <button type="button" class="fl-btn fl-btn-gray">Clear highlights</button></div>`;
+
+    const profilesBody = `
+      ${sw("fl-private-session", "Private session", "", false)}
+      <div class="fl-hint">Visit logs and notes stay in this tab only until you close it.</div>
+      <hr class="fl-hr"><div class="fl-subhead">People</div>
+      <div class="fl-hint">2 people</div>
+      <div class="lt-row"><a href="#">Alex</a><span class="meta">pin · note · visit</span></div>
+      <div class="lt-row"><a href="#">Sam</a><span class="meta">watch · visit</span></div>
+      <hr class="fl-hr"><div class="fl-subhead">Pins</div>
+      <div class="fl-hint">2 pinned</div>
+      <div class="lt-row"><a href="#">Alex</a><span class="meta">pin</span></div>
+      <hr class="fl-hr"><div class="fl-subhead">Watches</div>
+      <div class="fl-hint">1 watched</div>
+      <div class="lt-row"><a href="#">Sam</a><span class="meta">watch</span></div>
+      <hr class="fl-hr"><div class="fl-subhead">Compare</div>
+      <div class="fl-hint">Pick two captured profiles.</div>
+      <label>Left<select><option>Alex</option></select></label>
+      <label>Right<select><option>Sam</option></select></label>
+      <button type="button" class="fl-btn fl-btn-gray">Compare</button>
+      <button type="button" class="fl-btn fl-btn-gray">Capture this profile</button>`;
+
+    const blockBasic = `
+      <div id="fl-exclude-alert" class="life-alert-strong">
+        <div style="font-weight:bold">Hard Limits matched on tdiaper</div>
+        <div style="margin-top:4px">Matched: diaper, diapers</div>
+        <div class="fl-block-actions">
+          <button type="button" class="life-btn life-btn-gray">Soft block</button>
+          <button type="button" class="life-btn life-btn-red">Block on FetLife</button>
+          <button type="button" class="life-btn life-btn-gray fl-block-span">No</button>
+        </div>
+      </div>
+      <div class="life-hint">0 soft-blocked</div>
+      <input type="text" placeholder="Search nickname" style="margin-bottom:6px">
+      <div id="fl-soft-list"></div>
+      <button type="button" class="life-btn life-btn-gray">Soft-block visible</button>
+      <button type="button" class="life-btn life-btn-gray">Download JSON</button>`;
+
+    const blockPro = blockBasic + `
+      <hr class="fl-hr">${chipField("fl-feed-mutes", "Mute on feed", "e.g. politics, nft", ["nft"])}
+      <hr class="fl-hr"><div class="fl-subhead"><span>Notes</span><span>▸</span></div>
+      <div class="fl-hint">Note bodies stay in this panel, not on cards.</div>`;
+
+    const shortcutsBasic = `<div class="flhp-legend">
+      <div class="flhp-legend-row"><strong>S</strong> — NSFW / SFW</div>
+      <div class="flhp-legend-row"><strong>F</strong> — Filters Menu</div>
+      <div class="flhp-legend-row"><strong>N</strong> — next unread</div>
+      <div class="flhp-legend-row"><strong>T</strong> — jump to top</div>
+      <div class="flhp-legend-row">Rebinding lives in Pro.</div>
+    </div>`;
+    const shortcutsPro = `<div class="flhp-legend">
+      <div class="flhp-legend-row"><strong>S</strong> — NSFW / SFW</div>
+      <div class="flhp-legend-row"><strong>F</strong> — Filters Menu</div>
+      <div class="flhp-legend-row"><strong>H</strong> — hide / show dock</div>
+      <div class="flhp-legend-row"><strong>Esc</strong> — close settings</div>
+      <div class="flhp-legend-row"><strong>T</strong> — jump to top</div>
+    </div>
+    <div class="fl-shortcut-editor">
+      <label class="flhp-legend-row">Filters Menu<input type="text" value="F"></label>
+      <label class="flhp-legend-row">Hide / show dock<input type="text" value="H"></label>
+    </div>`;
+
+    const perfBody = `
+      ${sw("fl-lightweight-mode", "Lightweight scanning", "", false)}
+      ${sw("fl-update-notifications", "Quiet update notifications", "", false)}
+      ${sw("fl-compact-launcher", "Compact launcher", "", false)}
+      ${sw("fl-pause-scanning", "Pause scanning", "", false)}
+      ${sw("fl-high-contrast", "High contrast", "", false)}
+      <label class="fl-perf-delay">Scan delay <select><option>Fast</option><option selected>Balanced</option><option>Low activity</option></select></label>
+      <div class="flhp-legend" style="margin-top:8px"><div class="flhp-legend-row"><strong>About & diagnostics</strong></div></div>
+      <pre id="fl-diagnostics-output" style="white-space:pre-wrap;font:11px/1.35 ui-monospace,monospace;margin:4px 0 8px">FL Tools 2.1.0
+edition: basic
+schema: 1</pre>
+      <button type="button" class="life-btn life-btn-gray">Copy diagnostics</button>`;
+
+    function dockHtml(edition) {
+      const pro = edition === "pro";
+      return `
+        <div id="fl-rail-header">
+          <span class="fl-brand-icon">${pro ? PRO_ICON : BASIC_ICON}</span>
+          <div class="fl-brand-copy">
+            <h2 id="fl-rail-title">FL Tools ${pro ? "Pro" : "Basic"}</h2>
+            <div id="fl-rail-subtitle">${pro ? "People · Notes and highlights" : "Settings · Your browsing preferences"}</div>
+          </div>
+          <button type="button" id="fl-rail-close" aria-label="Close settings">×</button>
+        </div>
+        <div id="fl-rail-status">Changes save automatically on this device.</div>
+        <div id="fl-panel-search-wrap"><input type="search" id="fl-panel-search" placeholder="Find in panels…"></div>
+        ${panel("fl-block-panel", "Soft-Block | Block", "fl-block-body", "fl-block-toggle", pro ? blockPro : blockBasic, false)}
+        ${panel("fl-filter-panel", "Filters", "fl-panel-body", "fl-panel-toggle", filterBody + panel("fl-site-panel", "NSFW / SFW", "fl-site-body", "fl-site-toggle", nsfwBody, false), false)}
+        ${pro ? panel("flhp-panel", "Highlighter", "flhp-main", "flhp-toggle", highlighterBody, false) : ""}
+        ${pro ? panel("fl-profiles-panel", "People", "fl-profiles-body", "fl-profiles-toggle", profilesBody, false) : ""}
+        ${panel("fl-system-panel", "System", "fl-system-body", "fl-system-toggle",
+          panel("fl-advanced-panel", "Advanced", "fl-advanced-body", "fl-advanced-toggle", pro ? advancedPro : advancedBasic, false) +
+          panel("fl-perf-controls", "Performance", "fl-perf-body", "fl-perf-toggle", perfBody, false) +
+          panel("fl-shortcuts-panel", "Shortcuts", "fl-shortcuts-body", "fl-shortcuts-toggle", pro ? shortcutsPro : shortcutsBasic, false),
+          false)}
+        <div id="fl-dock-actions">
+          <button type="button" id="fl-jump-top">Jump to top</button>
+        </div>`;
+    }
+
+    const studioHtml = `
+      <div class="fls-head"><div><div class="fls-title">FL Tools Studio</div><div class="fls-subtitle">Private workspace and coordination · Ctrl+K</div></div><button class="fls-close" type="button" aria-label="Close">×</button></div>
+      <div class="fls-section">
+        <div class="fls-label">Installed editions</div>
+        <div class="fls-edition"><span>Basic</span><span>idle</span></div>
+        <div class="fls-edition"><span>Pro</span><span>live</span></div>
+        <button class="fls-button fls-wide" type="button">Open installed edition settings</button>
+      </div>
+      <div class="fls-section">
+        <div class="fls-label">Workspace</div>
+        <div class="fls-row"><select aria-label="Active workspace"><option>Default</option></select><button class="fls-button" type="button">Delete</button></div>
+        <div class="fls-row" style="margin-top:6px"><input class="fls-input" maxlength="32" placeholder="New workspace"><button class="fls-button" type="button">Add</button></div>
+        <div class="fls-status">Workspace names and Studio tools stay on this device. Ctrl+K palette, Ctrl+Z undo.</div>
+      </div>
+      <div class="fls-tabs" role="tablist">
+        <button type="button" class="fls-tab" data-studio-tab="home" aria-selected="true">Home</button>
+        <button type="button" class="fls-tab" data-studio-tab="watch" aria-selected="false">Watch</button>
+        <button type="button" class="fls-tab" data-studio-tab="history" aria-selected="false">History</button>
+        <button type="button" class="fls-tab" data-studio-tab="vault" aria-selected="false">Vault</button>
+        <button type="button" class="fls-tab" data-studio-tab="rules" aria-selected="false">Rules</button>
+      </div>
+      <div data-studio-pane="home"><div class="fls-section"><div class="fls-label">Analytics</div><div class="fls-status">3 watches · 2 vault notes · 1 rule</div></div></div>
+      <div data-studio-pane="watch" hidden>
+        <div class="fls-section">
+          <div class="fls-label">Watch manager</div>
+          <div class="fls-row"><input class="fls-input" placeholder="Nickname"><button class="fls-button" type="button">Watch</button></div>
+          <div class="fls-item"><a href="#">Sam</a><span>watched</span></div>
+        </div>
+      </div>
+      <div data-studio-pane="history" hidden>
+        <div class="fls-section"><div class="fls-label">Profile changes</div><div class="fls-empty">No profile changes recorded yet</div></div>
+      </div>
+      <div data-studio-pane="vault" hidden>
+        <div class="fls-section">
+          <div class="fls-label">Encrypted vault</div>
+          <p class="fls-empty">Encrypted notes stay in this workspace. Set a passphrase, then unlock before saving or reading notes.</p>
+          <input class="fls-input" type="password" placeholder="Passphrase (8+ characters)">
+          <div class="fls-row" style="margin-top:6px">
+            <button class="fls-button" type="button">Set passphrase</button>
+            <button class="fls-button" type="button">Unlock</button>
+            <button class="fls-button" type="button">Lock</button>
+          </div>
+        </div>
+      </div>
+      <div data-studio-pane="rules" hidden>
+        <div class="fls-section">
+          <div class="fls-label">Rules</div>
+          <select class="fls-input" aria-label="Rule trigger"><option>Scan nickname / bio text</option><option>WHEN a profile is visited</option></select>
+          <div class="fls-row" style="margin-top:6px">
+            <select aria-label="Condition path"><option>role</option><option>location</option><option>nick</option><option>text</option><option>age</option><option>gender</option></select>
+            <select aria-label="Condition operator"><option>includes</option></select>
+          </div>
+          <select class="fls-input" aria-label="Rule action" style="margin-top:6px">
+            <option>THEN add to workspace</option>
+            <option>THEN highlight</option>
+            <option>THEN pin</option>
+            <option>THEN mute</option>
+            <option>THEN snooze 24h</option>
+            <option>THEN soft-block</option>
+            <option>THEN open note</option>
+            <option>THEN reset seen</option>
+            <option>THEN record in timeline</option>
+          </select>
+          <button class="fls-button fls-wide" type="button">Add</button>
+        </div>
+      </div>`;
+
+    const legends = {
+      basic: `<strong>Basic (Browse)</strong> all rows start collapsed: Soft-Block | Block, Filters, System, Jump to top. Switching a row closes nested menus (NSFW / SFW, then Advanced, Performance, Shortcuts inside System). Default / Minimal / SFW live only under NSFW / SFW.`,
+      pro: `<strong>Pro (People + notes)</strong> all rows start collapsed: Soft-Block | Block, Filters, Highlighter, People, System, Jump to top. Switching a row closes nested menus so Filters does not reopen with NSFW already expanded.`,
+      studio: `<strong>Studio (Organize + Automate)</strong> is a separate purple shell: Home, Watch, History, Vault, Rules. When Studio is installed, its button sits to the left of Basic/Pro.`
+    };
+
+    function bindDock() {
+      const dock = document.getElementById("fl-tools-dock");
+      function closePanel(other) {
+        const b = other.querySelector(":scope > .fl-tool-body");
+        const t = other.querySelector(":scope > .fl-tool-header .fl-tool-chevron");
+        if (b) b.classList.add("fl-tool-hidden");
+        other.classList.remove("lt-panel-open");
+        if (t) { t.textContent = "▸"; t.setAttribute("aria-expanded", "false"); }
+        other.querySelectorAll(":scope > .fl-tool-body > .fl-tool-panel").forEach(closePanel);
+      }
+      function openPanel(other) {
+        const b = other.querySelector(":scope > .fl-tool-body");
+        const t = other.querySelector(":scope > .fl-tool-header .fl-tool-chevron");
+        if (b) b.classList.remove("fl-tool-hidden");
+        other.classList.add("lt-panel-open");
+        if (t) { t.textContent = "▾"; t.setAttribute("aria-expanded", "true"); }
+      }
+      dock.querySelectorAll(".fl-tool-header").forEach((header) => {
+        header.addEventListener("click", (e) => {
+          if (e.target.closest("input, select, textarea, .toggleSwitch, .life-btn, .fl-btn")) return;
+          const panel = header.closest(".fl-tool-panel");
+          const body = panel.querySelector(":scope > .fl-tool-body");
+          const opening = body.classList.contains("fl-tool-hidden");
+          const top = panel.parentElement === dock ? panel : panel.closest("#fl-tools-dock > .fl-tool-panel");
+          dock.querySelectorAll(":scope > .fl-tool-panel").forEach((other) => {
+            if (other !== top) closePanel(other);
+          });
+          if (panel !== top) {
+            const nestHost = top.querySelector(":scope > .fl-tool-body");
+            if (nestHost) {
+              nestHost.querySelectorAll(":scope > .fl-tool-panel").forEach((sib) => {
+                if (sib !== panel) closePanel(sib);
+              });
+            }
+            if (opening) openPanel(panel); else closePanel(panel);
+            openPanel(top);
+          } else if (opening) {
+            openPanel(panel);
+            const nestHost = panel.querySelector(":scope > .fl-tool-body");
+            if (nestHost) nestHost.querySelectorAll(":scope > .fl-tool-panel").forEach(closePanel);
+          } else {
+            closePanel(panel);
+          }
+        });
+      });
+      dock.querySelectorAll(".toggleSwitch").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          btn.setAttribute("aria-checked", btn.getAttribute("aria-checked") === "true" ? "false" : "true");
+        });
+      });
+      const factory = dock.querySelector("#fl-factory-reset");
+      const factoryPrompt = dock.querySelector("#fl-factory-reset-prompt");
+      if (factory && factoryPrompt) {
+        factory.addEventListener("click", (e) => {
+          e.stopPropagation();
+          factoryPrompt.hidden = false;
+        });
+        factoryPrompt.querySelector("[data-factory-cancel]")?.addEventListener("click", (e) => {
+          e.stopPropagation();
+          factoryPrompt.hidden = true;
+        });
+      }
+    }
+
+    function setEdition(edition) {
+      document.querySelectorAll("[data-edition]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.edition === edition ? "true" : "false"));
+      const dock = document.getElementById("fl-tools-dock");
+      const launcher = document.getElementById("fl-settings-launcher");
+      const studio = document.getElementById("fl-studio-panel");
+      const studioLaunch = document.getElementById("fl-studio-launcher");
+      document.getElementById("legend").innerHTML = legends[edition];
+      if (edition === "studio") {
+        document.documentElement.classList.add("fl-preview-studio");
+        dock.classList.remove("fl-rail-open");
+        launcher.hidden = false;
+        launcher.innerHTML = PRO_ICON;
+        studio.hidden = false;
+        studioLaunch.hidden = false;
+        studioLaunch.setAttribute("aria-expanded", "true");
+        studio.innerHTML = studioHtml;
+        studio.querySelectorAll(".fls-tab").forEach((tab) => {
+          tab.addEventListener("click", () => {
+            studio.querySelectorAll(".fls-tab").forEach((t) => t.setAttribute("aria-selected", t === tab ? "true" : "false"));
+            studio.querySelectorAll("[data-studio-pane]").forEach((pane) => {
+              pane.hidden = pane.getAttribute("data-studio-pane") !== tab.dataset.studioTab;
+            });
+          });
+        });
+      } else {
+        document.documentElement.classList.remove("fl-preview-studio");
+        studio.hidden = true;
+        studioLaunch.hidden = true;
+        launcher.hidden = false;
+        launcher.innerHTML = edition === "pro" ? PRO_ICON : BASIC_ICON;
+        dock.classList.add("fl-rail-open");
+        dock.innerHTML = dockHtml(edition);
+        bindDock();
+      }
+      history.replaceState(null, "", "?e=" + edition);
+    }
+
+    document.getElementById("fake-cards").innerHTML = [
+      { name: "Alex", role: "switch", chips: ["Seen"] },
+      { name: "Sam", role: "dom", chips: [] },
+      { name: "Rio", role: "sub", chips: ["Seen"] }
+    ].map((c) => `<div class="fl-fake-card">
+      ${c.chips.length ? `<div class="lt-card-chips">${c.chips.map((x) => `<span class="lt-seen-chip">${x}</span>`).join("")}</div>` : ""}
+      <div class="meta">${c.name}<div class="role">${c.role} · Austin</div></div>
+    </div>`).join("");
+
+    document.querySelectorAll("[data-edition]").forEach((btn) => btn.addEventListener("click", () => setEdition(btn.dataset.edition)));
+    const start = new URLSearchParams(location.search).get("e") || "basic";
+    setEdition(["basic", "pro", "studio"].includes(start) ? start : "basic");
+  </script>
+</body>
+</html>
