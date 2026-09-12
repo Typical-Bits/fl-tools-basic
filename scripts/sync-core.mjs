@@ -10,6 +10,7 @@
  * Generated (do not edit by hand):
  *   core/css-core.js
  *   core/css-pro.js
+ *   core/launcher-grid.js is inlined into the standalone userscript
  *   marked regions inside FL_Tools_Basic.user.js
  *
  * Usage:
@@ -27,6 +28,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const CHECK = process.argv.includes("--check");
 
 const MARK = {
+  launcherGrid: {
+    begin: "  /* BEGIN generated:launcher-grid */",
+    end: "  /* END generated:launcher-grid */"
+  },
   handoff: {
     begin: "  /* BEGIN generated:handoff */",
     end: "  /* END generated:handoff */"
@@ -90,7 +95,7 @@ function writeOrCheck(rel, next) {
 const cssCoreJs = wrapCssInjector({
   sourceRel: "assets/fl-tools-core.css",
   styleId: "fl-tools-core-style",
-  banner: "Injects shared dock tokens + chrome for Basic (and for Pro to vendor / @require)."
+  banner: "Injects shared dock tokens + chrome for Basic and for Pro to vendor."
 });
 const cssProJs = wrapCssInjector({
   sourceRel: "assets/fl-tools-pro.css",
@@ -104,10 +109,22 @@ if (writeOrCheck("core/css-pro.js", cssProJs)) changed.push("core/css-pro.js");
 
 const handoffSrc = read("core/handoff.js").replace(/^\uFEFF/, "").replace(/\s+$/, "");
 let userscript = read("FL_Tools_Basic.user.js");
+const launcherGrid = `${read("core/launcher-grid.js").replace(/^\uFEFF/, "").replace(/\s+$/, "")}
+  const FLToolsLauncherGrid = createFLToolsLauncherGrid("basic");
+  try {
+    const pageWindow = typeof unsafeWindow !== "undefined" && unsafeWindow ? unsafeWindow : window;
+    pageWindow.FLToolsBasicGrid = FLToolsLauncherGrid;
+    pageWindow.dispatchEvent(new CustomEvent("fltools:basic-grid-ready", { detail: { protocol: FLToolsLauncherGrid.protocol, provider: "basic" } }));
+  } catch (_) {}`;
 
 const nextUserscript = replaceMarked(
   replaceMarked(
-    userscript,
+    replaceMarked(
+      userscript,
+      MARK.launcherGrid,
+      indentBlock(launcherGrid, 2),
+      "launcher-grid"
+    ),
     MARK.handoff,
     indentBlock(handoffSrc, 2),
     "handoff"

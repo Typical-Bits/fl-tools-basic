@@ -1,16 +1,17 @@
 # FL Tools architecture
 
-Typical-Bits only. Shared runtime lives in **fl-core**. Editions stay standalone userscripts.
+Typical-Bits only. Shared services live in **fl-core**. Editions stay standalone userscripts, and Basic hosts the shared launcher grid.
 
 ```
 FL Tools
 ├── fl-core
 │   capabilities, actions, events, scanner, storage, settings,
-│   migrations, taxonomy, matcher, profile-model, UI, launcher,
+│   migrations, taxonomy, matcher, profile-model, UI,
 │   shortcuts, diagnostics, privacy, pins, compare, mentions,
 │   watch, vault, rules, activity
 ├── Basic
-│   filters, presets, soft-block, seen, sfw-nsfw, infinite-scroll, basic-navigation
+│   filters, presets, soft-block, seen, sfw-nsfw, infinite-scroll, basic-navigation,
+│   shared launcher grid host
 ├── Pro
 │   highlighter, whitelist, mutes, snooze, notes, visit-history,
 │   org-cards, profile-pins, profile-compare, mentions, watches,
@@ -73,10 +74,11 @@ Capability catalog and coordination protocol: edit `fl-core`, then run `node fl-
 | `assets/fl-tools-core.css` | Tokens + dock/launcher chrome + Basic surface CSS | `core/css-core.js` and `BEGIN generated:css-core` |
 | `assets/fl-tools-pro.css` | Pro-only chrome | `core/css-pro.js`. Basic does **not** load this. |
 | `core/handoff.js` | Live-yield / heartbeat API (`FLToolsCore`) | `BEGIN generated:handoff` |
+| `core/launcher-grid.js` | Basic-owned 4×2 launcher coordinator and offline fallback source | `BEGIN generated:launcher-grid` |
 | `fl-core/src/catalog.js` | Edition capability IDs | `BEGIN generated:catalog` in each userscript |
 | `fl-core/src/capabilities.js` | Capability protocol | `fl-tools-studio/core/coordination.js` |
 
-Basic is **inlined**, not `@require`. Pro remains standalone so a private install still works offline.
+Basic is **inlined**, not `@require`. Basic claims the launcher grid when present; Pro, Studio, and Vault vendor the same coordinator as a standalone fallback and yield to Basic through the page owner marker. Core remains optional infrastructure and does not start the grid.
 
 ## Releases
 
