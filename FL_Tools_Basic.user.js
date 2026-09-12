@@ -32,7 +32,7 @@
   }
 
   const FL_EDITION = "basic";
-  const FL_TOOLS_VERSION = "2.1.0";
+  const FL_TOOLS_VERSION = "2.3.0";
   const FL_SETTINGS_SCHEMA = 1;
   const FL_SETTINGS_SCHEMA_KEY = "fl_settings_schema_version";
   const FL_CAPABILITY_PROTOCOL = "fl-tools-capabilities-v1";
