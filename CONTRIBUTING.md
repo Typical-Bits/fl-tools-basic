@@ -1,6 +1,6 @@
 # Contributing
 
-FL Tools Basic is a standalone FetLife userscript (CC BY-NC 4.0). Keep changes small and public-safe: do not copy or assume source from the private Pro repo. The public contracts are heartbeat/yield (`window.__FL_TOOLS_HEARTBEAT__`, `data-fl-tools-live=pro`, `FLToolsCore` in `core/handoff.js`) and `fl_` settings keys.
+FL_Tools Basic is a standalone FetLife userscript (CC BY-NC 4.0). Keep changes small and public-safe: do not copy or assume source from the private Pro repo. The public contracts are heartbeat/yield (`window.__FL_TOOLS_HEARTBEAT__`, `data-fl-tools-live=pro`, `FLToolsCore` in `core/handoff.js`) and `fl_` settings keys.
 
 ## Setup
 

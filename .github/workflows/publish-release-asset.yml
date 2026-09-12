@@ -23,7 +23,7 @@ jobs:
           grep -q "^// @version[[:space:]]*$ver$" FL_Tools_Basic.user.js
           grep -q "FL_Tools Basic v$ver" FL_Tools_Basic.user.js
           grep -q "releases/tag/$RELEASE_TAG" README.md
-          test -f assets/fl-tools-basic-icon.svg
+          test -f assets/fl-tools-launcher-icon.svg
           test -f assets/fl-tools-core.css
           test -f assets/fl-tools-pro.css
           test -f core/handoff.js
@@ -49,7 +49,7 @@ jobs:
             core/css-pro.js \
             assets/fl-tools-core.css \
             assets/fl-tools-pro.css \
-            assets/fl-tools-basic-icon.svg \
-            assets/fl-tools-basic-icon-64.png \
-            assets/fl-tools-basic-icon-128.png \
+            assets/fl-tools-launcher-icon.svg \
+            assets/fl-tools-launcher-icon-64.png \
+            assets/fl-tools-launcher-icon-128.png \
             --clobber
