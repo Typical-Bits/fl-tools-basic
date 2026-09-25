@@ -195,6 +195,8 @@ export class InfiniteScrollTrigger {
   #observerFactory;
   #sentinel;
   #unsubscribe;
+  #mode;
+  #signal;
 
   constructor({ controller, document, observerFactory }) {
     if (!controller?.requestNext || !document?.createElement) {
@@ -206,26 +208,26 @@ export class InfiniteScrollTrigger {
   }
 
   start({ enabled, signal, mode = 'page' }) {
+    if (!enabled || typeof this.#observerFactory !== 'function') {
+      this.stop();
+      return false;
+    }
+    if (
+      this.#sentinel?.isConnected &&
+      this.#observer &&
+      this.#mode === mode &&
+      this.#signal === signal
+    ) {
+      return true;
+    }
     this.stop();
-    if (!enabled || typeof this.#observerFactory !== 'function') return false;
+    for (const stale of this.#document.querySelectorAll('.flt-basic-scroll-sentinel')) {
+      stale.remove();
+    }
     const sentinel = this.#document.createElement('div');
     sentinel.className = 'flt-root flt-basic-scroll-sentinel';
     sentinel.dataset.fltBasicOwned = 'true';
-    const profileMode = mode === 'profile';
-    const noun = profileMode ? 'profiles' : 'page items';
-    sentinel.setAttribute('aria-label', profileMode ? 'Load more profiles' : 'Load the next page');
-    const status = this.#document.createElement('span');
-    status.textContent = profileMode
-      ? 'More profiles load near here.'
-      : 'The next page loads near here.';
-    const pause = this.#document.createElement('button');
-    pause.className = 'flt-button';
-    pause.type = 'button';
-    pause.addEventListener('click', () => {
-      if (this.#controller.state.paused) this.#controller.resume();
-      else this.#controller.pause();
-    });
-    sentinel.append(status, pause);
+    sentinel.setAttribute('aria-hidden', 'true');
     let wasPaused = this.#controller.state.paused;
     this.#unsubscribe = this.#controller.subscribe((state) => {
       if (wasPaused && !state.paused && this.#observer) {
@@ -233,36 +235,17 @@ export class InfiniteScrollTrigger {
         this.#observer.observe(sentinel);
       }
       wasPaused = state.paused;
-      pause.textContent = state.paused ? 'Resume auto-loading' : 'Pause auto-loading';
-      status.textContent = state.paused
-        ? `${state.loadedPages} additional pages loaded. Auto-loading paused.`
-        : state.loading
-          ? `Loading more ${noun}…`
-          : `${state.loadedPages} additional pages and ${state.loadedItems} items loaded this session.`;
     });
     placeAfterListing(this.#document, sentinel);
     this.#observer = this.#observerFactory(async (entries) => {
       if (!entries.some((entry) => entry.isIntersecting)) return;
-      status.textContent = `Loading more ${noun}…`;
       const result = await this.#controller.requestNext({ signal });
       if (result.status === 'APPENDED') placeAfterListing(this.#document, sentinel);
-      status.textContent =
-        result.status === 'FAILED'
-          ? `More ${noun} could not be loaded. Use native pagination or retry.`
-          : result.status === 'APPENDED'
-            ? `${result.appended} more ${noun} loaded.`
-            : `No more ${noun} were loaded.`;
-      if (result.status === 'FAILED') {
-        const retry = this.#document.createElement('button');
-        retry.className = 'flt-button';
-        retry.type = 'button';
-        retry.textContent = 'Retry';
-        retry.addEventListener('click', () => void result.retry());
-        sentinel.append(retry);
-      }
     });
     this.#observer.observe(sentinel);
     this.#sentinel = sentinel;
+    this.#mode = mode;
+    this.#signal = signal;
     return true;
   }
 
@@ -273,5 +256,10 @@ export class InfiniteScrollTrigger {
     this.#unsubscribe = undefined;
     this.#sentinel?.remove();
     this.#sentinel = undefined;
+    for (const stale of this.#document.querySelectorAll('.flt-basic-scroll-sentinel')) {
+      stale.remove();
+    }
+    this.#mode = undefined;
+    this.#signal = undefined;
   }
 }

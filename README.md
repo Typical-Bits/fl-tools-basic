@@ -21,10 +21,10 @@
 ## Install
 
 <p>
-  <a href="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/FL-Tools-Basic.user.js?v=0.0.8">
+  <a href="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/FL-Tools-Basic.user.js?v=0.0.9">
     <img alt="Install FL Tools Basic" src="https://img.shields.io/badge/Install-FL%20Tools%20Basic-b91c1c?style=flat-square">
   </a>
-  <img alt="Version 0.0.8" src="https://img.shields.io/badge/version-0.0.8-22C55E?style=flat-square">
+  <img alt="Version 0.0.9" src="https://img.shields.io/badge/version-0.0.9-22C55E?style=flat-square">
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases">
     <img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?style=flat-square&label=Downloads">
   </a>

@@ -23,10 +23,12 @@ try {
   void installBasic(pageWindow.FLTools, {
     changelog: {
       summary: [
-        'Keeps every menu fully inside the window after launcher dragging or resizing.',
-        'Preserves the launcher position when the menu closes.',
+        'Removes visible page-loading notices and follows the saved menu controls.',
+        'Applies saved media visibility immediately and keeps newly loaded media protected.',
+        'Prevents recursive page scanning that could slow down FetLife.',
+        'Combines Browse and diagnostic reset actions under one System control.',
       ],
-      version: '0.0.8',
+      version: '0.0.9',
     },
     document: pageWindow.document,
     iconUrl:
@@ -36,7 +38,7 @@ try {
     releaseUrl: 'https://github.com/Typical-Bits/fl-tools-basic/releases',
     updateUrl:
       'https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js',
-    version: '0.0.8',
+    version: '0.0.9',
     window: pageWindow,
   }).catch(report);
 } catch (error) {

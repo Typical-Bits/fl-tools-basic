@@ -234,7 +234,7 @@ export class BasicUI {
     updateUrl,
     relationshipContext = false,
     loadingMode = 'page',
-    version = '0.0.8',
+    version = '0.0.9',
   }) {
     if (!coreUI?.createShell || !document?.createElement || typeof onSettings !== 'function') {
       throw new TypeError('Basic UI dependencies are required');
@@ -276,6 +276,7 @@ export class BasicUI {
       installUrl,
       updateUrl,
       version,
+      onSystemReset: this.#onResetSettings,
       shortcutFooter: this.#shortcutFooter,
       topContent: this.#presetToolbar,
     });
@@ -1012,16 +1013,8 @@ export class BasicUI {
       );
     }
     this.#shortcutFooter = shortcutFooter(this.#document);
-    const reset = section(this.#document, 'Diagnostics', 'diagnostics');
-    reset.querySelector(':scope > .flt-basic-section-title')?.remove();
-    reset.classList.add('flt-diagnostics-actions');
-    reset.append(
-      this.#controls.button({
-        label: 'Reset Browse settings',
-        onClick: () => this.#onResetSettings?.(),
-        variant: 'danger',
-      }),
-    );
-    root.append(appearance, ...this.#editionSettingsSections, reset);
+    const diagnostics = section(this.#document, 'Diagnostics', 'diagnostics');
+    diagnostics.querySelector(':scope > .flt-basic-section-title')?.remove();
+    root.append(appearance, ...this.#editionSettingsSections, diagnostics);
   }
 }

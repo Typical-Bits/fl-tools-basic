@@ -496,6 +496,10 @@ test('native next page follows FetLife numbered links, Next labels, and member c
   });
   assert.equal(trigger.start({ enabled: true }), true);
   const sentinel = dom.window.document.querySelector('.flt-basic-scroll-sentinel');
+  assert.equal(sentinel.textContent, '');
+  assert.equal(sentinel.getAttribute('aria-hidden'), 'true');
+  assert.equal(trigger.start({ enabled: true }), true);
+  assert.equal(dom.window.document.querySelectorAll('.flt-basic-scroll-sentinel').length, 1);
   assert.equal(sentinel.previousElementSibling?.dataset.memberCard, '');
   const page = await loader.fetchPage('/explore/kinksters?page=2');
   assert.equal(page.items.length, 1);

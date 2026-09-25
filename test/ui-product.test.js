@@ -477,7 +477,7 @@ test('Basic installs through a narrow Core registration, persists settings, and 
   });
   assert.equal(dom.window.document.querySelector('.flt-notice'), null);
   [...dom.window.document.querySelectorAll('button')]
-    .find((button) => button.textContent === 'Reset Browse settings')
+    .find((button) => button.textContent === 'Reset and refresh')
     .click();
   [...dom.window.document.querySelectorAll('.flt-dialog-actions button')]
     .find((button) => button.textContent === 'Reset Browse settings')
@@ -641,6 +641,9 @@ test('Clean and SFW protect media on tag grids and newly loaded tag results', as
     window: dom.window,
   });
   await runtime.start();
+  await runtime.services.storage.setBrowseSettings(
+    applyPreset(await runtime.services.storage.getBrowseSettings(), 'sfw'),
+  );
   const installed = await installBasic(
     {
       registerProduct: (options) => runtime.registerProduct(options),
@@ -656,6 +659,14 @@ test('Clean and SFW protect media on tag grids and newly loaded tag results', as
     [...dom.window.document.querySelectorAll('.flt-preset-toolbar button')]
       .find((button) => button.textContent === label)
       .click();
+
+  await waitFor(
+    () =>
+      ['tag-avatar', 'tag-picture', 'tag-video'].every((elementId) =>
+        dom.window.document.getElementById(elementId).classList.contains('flt-media-blurred'),
+      ),
+    'Stored SFW mode did not protect media during startup',
+  );
 
   clickPreset('Clean');
   await waitFor(
@@ -678,7 +689,6 @@ test('Clean and SFW protect media on tag grids and newly loaded tag results', as
   const added = dom.window.document.createElement('img');
   added.id = 'new-tag-picture';
   dom.window.document.querySelector('[data-tag-results]').append(added);
-  runtime.services.events.emit('page:settled', { url: dom.window.document.URL });
   await waitFor(
     () => added.classList.contains('flt-media-blurred'),
     'SFW did not protect a newly loaded tag result',

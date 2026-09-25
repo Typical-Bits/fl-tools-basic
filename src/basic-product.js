@@ -56,7 +56,7 @@ export const BASIC_MANIFEST = Object.freeze({
     'ui',
   ]),
   type: 'edition',
-  version: '0.0.8',
+  version: '0.0.9',
 });
 
 const COMPONENTS = BASIC_MANIFEST.features.map((id) => ({
@@ -166,6 +166,7 @@ export class BasicProduct {
   #infiniteTrigger;
   #filterReveal = false;
   #launcher;
+  #mediaObserver;
   #navigation;
   #nativeBlock;
   #profileState;
@@ -422,6 +423,7 @@ export class BasicProduct {
         'route:changed',
         ({ current }) => {
           this.#infiniteScroll.reset();
+          this.#infiniteTrigger.stop();
           this.#filterReveal = false;
           this.#cardNavigator.clear();
           this.#applyGlobalSettings();
@@ -482,7 +484,6 @@ export class BasicProduct {
           this.#seenVisits.clear();
           this.#cardNavigator.clear();
           this.#clearCandidateState();
-          this.#requestPrivateSessionState();
           if (accountId) {
             void Promise.all([
               this.#reloadSettings(),
@@ -506,9 +507,9 @@ export class BasicProduct {
         },
         { signal: this.#abort.signal },
       );
-      this.#requestPrivateSessionState();
       this.#mountStyle();
       this.#applyGlobalSettings();
+      this.#startMediaObserver();
       this.#syncPageTools();
       this.#capabilities.scanner?.refresh(this.#document);
       return this;
@@ -538,6 +539,8 @@ export class BasicProduct {
     this.#document.removeEventListener('keydown', this.#onPreviewEscape);
     this.#window.removeEventListener('blur', this.#onWindowBlur);
     this.#navigation?.stop();
+    this.#mediaObserver?.disconnect();
+    this.#mediaObserver = undefined;
     this.#cardNavigator.clear();
     this.#pageTools.destroy();
     this.#enhancements.clear();
@@ -676,15 +679,35 @@ export class BasicProduct {
 
   #applyMediaSettings() {
     for (const element of this.#document.querySelectorAll('img, video')) {
-      if (element.closest('.flt-root, nav, [role="navigation"]')) continue;
-      const kind = element.matches('video')
-        ? 'video'
-        : element.closest('[data-flt-avatar], [data-member-card], a[href*="/users/"]')
-          ? 'avatar'
-          : 'content';
-      applyMediaPolicy(this.#capabilities.ui.presentation, element, this.#settings.media, kind);
-      this.#presentedMedia.add(element);
+      this.#applyMediaElement(element);
     }
+  }
+
+  #applyMediaElement(element) {
+    if (element.closest('.flt-root, nav, [role="navigation"]')) return;
+    const kind = element.matches('video')
+      ? 'video'
+      : element.closest('[data-flt-avatar], [data-member-card], a[href*="/users/"]')
+        ? 'avatar'
+        : 'content';
+    applyMediaPolicy(this.#capabilities.ui.presentation, element, this.#settings.media, kind);
+    this.#presentedMedia.add(element);
+  }
+
+  #startMediaObserver() {
+    if (this.#mediaObserver || typeof this.#window.MutationObserver !== 'function') return;
+    this.#mediaObserver = new this.#window.MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        for (const node of mutation.addedNodes) {
+          if (node.nodeType !== 1 || node.closest?.('.flt-root')) continue;
+          if (node.matches?.('img, video')) this.#applyMediaElement(node);
+          for (const media of node.querySelectorAll?.('img, video') ?? []) {
+            this.#applyMediaElement(media);
+          }
+        }
+      }
+    });
+    this.#mediaObserver.observe(this.#document, { childList: true, subtree: true });
   }
 
   async #applyPageEnhancements() {
@@ -871,18 +894,6 @@ export class BasicProduct {
     });
   }
 
-  #requestPrivateSessionState() {
-    try {
-      this.#capabilities.crossTab?.publish('privacy-state-query', {}, { scope: 'account' });
-    } catch (error) {
-      this.#recordError(
-        error,
-        'BASIC_PRIVACY_SYNC_FAILED',
-        'Private Session state could not be synchronized.',
-      );
-    }
-  }
-
   #relationshipContext() {
     return Boolean(this.#capabilities.routes?.context?.route?.params?.relationshipList);
   }
@@ -937,10 +948,11 @@ export class BasicProduct {
       destructive: true,
       title: 'Reset Browse settings?',
     });
-    if (!confirmed) return;
+    if (!confirmed) return false;
     await this.#capabilities.storage.resetBrowseSettings();
     await this.#reloadSettings();
     this.#capabilities.ui.announcer.announce('Browse settings were reset.');
+    return true;
   }
 
   #explainableChip(label, explanation) {
@@ -1260,7 +1272,7 @@ export class BasicProduct {
 .flt-basic-filter-chips { position: fixed; left: 12px; bottom: 16px; z-index: 2147482990; display: flex; flex-wrap: wrap; align-items: center; gap: 5px; max-width: min(460px, calc(100vw - 88px)); padding: 6px 8px; border: 1px solid var(--flt-border); border-radius: 10px; background: color-mix(in srgb, var(--flt-background) 92%, transparent); color: var(--flt-text); box-shadow: 0 8px 24px rgb(0 0 0 / 35%); }
 .flt-basic-filter-chips-title { color: var(--flt-muted); font-size: 9px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
 .flt-loaded-page { margin-top: 28px; padding-top: 16px; border-top: 1px solid color-mix(in srgb, var(--flt-border) 80%, transparent); }
-.flt-basic-scroll-sentinel { margin: 20px 0 12px; min-height: 36px; border: 1px dashed var(--flt-border); border-radius: 7px; padding: 7px; color: var(--flt-muted); }
+.flt-basic-scroll-sentinel { height: 1px; margin: 0; overflow: hidden; opacity: 0; padding: 0; pointer-events: none; }
 .flt-basic-exact-time { margin-inline-start: 5px; color: var(--flt-muted); font-size: 12px; }
 .flt-basic-visited { text-decoration: underline double; }
 .flt-basic-shared-interest { font-weight: 700; }

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.0.9
+
+- Remove visible page-loading notices and keep one invisible trigger governed by Browse settings.
+- Apply saved Clean and SFW media visibility during startup and to media added later.
+- Prevent FL Tools-owned page changes from recursively rescanning and slowing pages.
+- Replace separate Browse, session, and refresh actions with one Reset and refresh control.
+
 ## 0.0.8
 
 - Apply Clean and SFW media protection to profiles, picture pages, reaction grids, tag results, and newly loaded media.
