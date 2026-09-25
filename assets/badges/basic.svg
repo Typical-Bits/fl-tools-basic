@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">FL Tools Basic badge</title>
+  <desc id="desc">Approved Basic geometry and palette with the exact FetLife favicon. Artwork is border-free; CSS supplies the launcher and menu frames.</desc>
+  <defs>
+    <radialGradient id="surface" cx="38%" cy="28%" r="85%"><stop offset="0" stop-color="#25242a"/><stop offset=".58" stop-color="#17171a"/><stop offset="1" stop-color="#0e0e10"/></radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#surface)"/>
+  <image href="fetlife-favicon.ico" x="16" y="6" width="32" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <text x="32" y="55" fill="#D7DEE8" font-family="Arial, sans-serif" font-size="12" font-weight="800" letter-spacing=".2" text-anchor="middle">BASIC</text>
+</svg>

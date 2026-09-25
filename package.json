@@ -1,0 +1,30 @@
+{
+  "name": "@typicalbits/fl-tools-basic",
+  "version": "0.0.6",
+  "description": "Simple everyday browsing tools for FetLife",
+  "type": "module",
+  "exports": "./src/index.js",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:userscript": "node scripts/build-userscript.mjs",
+    "build:release": "node scripts/build-release.mjs",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "test": "node --test \"test/*.test.js\"",
+    "verify": "npm run format:check && npm run lint && npm run build:userscript && npm test && npm run build"
+  },
+  "dependencies": {
+    "@typicalbits/fl-tools-core": "file:../fl-tools-core"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "esbuild": "0.28.2",
+    "eslint": "10.11.0",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "30.1.0",
+    "prettier": "3.9.8"
+  }
+}

@@ -1,0 +1,4 @@
+dist/
+live-test/*.user.js
+FL-Tools-*.user.js
+node_modules/
