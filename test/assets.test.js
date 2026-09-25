@@ -5,7 +5,11 @@ import test from 'node:test';
 
 const assets = Object.freeze({
   '../assets/badges/compass.svg':
-    '03523f68e063b7e0cb48c46115480a0de65541cede7f32a886e26941d0190f8c',
+    '77aaedab12f5958e352681e69803f0a0e032ef10bd5395bc9d03e96ae3d7ff50',
+  '../assets/badges/compass-64.png':
+    '6c37e9130a4739e8d42cbff2559df10afa06c29e0f7ac9e4ea49fc99fee5ae91',
+  '../assets/badges/compass-128.png':
+    'cd4ea00eaf7ca57243eebd15593ff993c785d9e2bc9e1893fbf31ddd8286e009',
   '../assets/badges/basic.svg': '7c56d826190b1ee56e86fce086dd27590be82e25d85cb369e985c11f31b84ab3',
   '../assets/badges/basic-64.png':
     '1e629f62553a4d877b9bda1fdf324c96a59c4f7aa528c8fc9f3de45bec183be5',

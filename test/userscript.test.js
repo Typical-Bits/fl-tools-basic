@@ -25,7 +25,7 @@ test('Basic userscript is self-contained and installs shared Core', () => {
   assert.equal(compatibilityCopy, userscript);
   assert.match(userscript, /@name\s+FL Tools Basic$/m);
   assert.doesNotMatch(userscript, /Live Test/);
-  assert.match(userscript, /@version\s+0\.0\.6$/m);
+  assert.match(userscript, /@version\s+0\.0\.7$/m);
   assert.match(userscript, /@match\s+\*:\/\/fetlife\.com\/\*/);
   assert.match(userscript, /@match\s+\*:\/\/\*\.fetlife\.com\/\*/);
   assert.doesNotMatch(userscript, /@require/);

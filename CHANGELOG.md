@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.0.7
+
+- Brighten the shared Compass launcher and userscript-manager icons.
+
 ## 0.0.6
 
 - Keep the menu fully inside the viewport after launcher dragging and window resizing.

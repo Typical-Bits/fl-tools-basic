@@ -56,7 +56,7 @@ export const BASIC_MANIFEST = Object.freeze({
     'ui',
   ]),
   type: 'edition',
-  version: '0.0.6',
+  version: '0.0.7',
 });
 
 const COMPONENTS = BASIC_MANIFEST.features.map((id) => ({

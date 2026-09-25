@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://github.com/Typical-Bits
-// @version      0.0.6
+// @version      0.0.7
 // @description  Simple everyday browsing tools for FetLife.
 // @author       TypicalBits
 // @icon         data:image/png;base64,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
@@ -11355,7 +11355,7 @@ Health: ${health?.state ?? "Unavailable"}`,
       installUrl,
       updateUrl,
       relationshipContext = false,
-      version = "0.0.6"
+      version = "0.0.7"
     }) {
       if (!coreUI?.createShell || !document?.createElement || typeof onSettings !== "function") {
         throw new TypeError("Basic UI dependencies are required");
@@ -13255,7 +13255,7 @@ Health: ${health?.state ?? "Unavailable"}`,
       "ui"
     ]),
     type: "edition",
-    version: "0.0.6"
+    version: "0.0.7"
   });
   var COMPONENTS = BASIC_MANIFEST.features.map((id) => ({
     id,
@@ -14347,7 +14347,7 @@ Health: ${health?.state ?? "Unavailable"}`,
   try {
     installCore(pageWindow, {
       document: pageWindow.document,
-      version: "0.0.6",
+      version: "0.0.7",
       window: pageWindow
     });
     void installBasic(pageWindow.FLTools, {
@@ -14356,14 +14356,14 @@ Health: ${health?.state ?? "Unavailable"}`,
           "Keeps every menu fully inside the window after launcher dragging or resizing.",
           "Preserves the launcher position when the menu closes."
         ],
-        version: "0.0.6"
+        version: "0.0.7"
       },
       document: pageWindow.document,
       iconUrl: "https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/badges/basic-128.png",
       installUrl: "https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js",
       releaseUrl: "https://github.com/Typical-Bits/fl-tools-basic/releases",
       updateUrl: "https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js",
-      version: "0.0.6",
+      version: "0.0.7",
       window: pageWindow
     }).catch(report);
   } catch (error) {

@@ -8,7 +8,7 @@ const icon64 = (await readFile('assets/badges/basic-128.png')).toString('base64'
 const metadata = `// ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://github.com/Typical-Bits
-// @version      0.0.6
+// @version      0.0.7
 // @description  Simple everyday browsing tools for FetLife.
 // @author       TypicalBits
 // @icon         data:image/png;base64,${icon}
