@@ -24,7 +24,7 @@ async function waitFor(predicate, message, timeout = 1000) {
   assert.fail(message);
 }
 
-test('Basic UI exposes Browse, System and shared Diagnostics', async () => {
+test('Basic UI consolidates diagnostics under a final System menu', async () => {
   const dom = new JSDOM('<!doctype html><html><head></head><body></body></html>', {
     url: 'https://fetlife.com/home',
   });
@@ -48,7 +48,7 @@ test('Basic UI exposes Browse, System and shared Diagnostics', async () => {
   assert.equal(ui.shell.element.dataset.fltChromeContract, '1');
   assert.deepEqual(
     [...ui.shell.element.querySelectorAll('.flt-tool-title')].map((node) => node.textContent),
-    ['Browse', 'System', 'Diagnostics', 'Theme & Layout'],
+    ['Browse', 'Appearance', 'System'],
   );
   assert.equal(ui.shell.element.querySelector('.flt-nested-header'), null);
   assert.deepEqual(
@@ -98,7 +98,6 @@ test('Basic UI exposes Browse, System and shared Diagnostics', async () => {
       'Auto Page Load',
       'Maximum additional pages (1–20)',
       'Pause auto-loading for',
-      'Search recently visited',
     ],
   );
   assert.deepEqual(
@@ -136,7 +135,7 @@ test('Basic UI exposes Browse, System and shared Diagnostics', async () => {
   coreUI.stop();
 });
 
-test('Recently Visited is searchable and can remove a local visit marker', async () => {
+test('Recently Visited shows only the last three profiles and can remove a visit marker', async () => {
   const dom = new JSDOM('<!doctype html><html><head></head><body></body></html>', {
     url: 'https://fetlife.com/home',
   });
@@ -167,16 +166,26 @@ test('Recently Visited is searchable and can remove a local visit marker', async
         profileUrl: 'https://example.com/unsafe',
         seenAt: Date.UTC(2026, 8, 24),
       },
+      {
+        displayName: 'Person 8',
+        personId: '8',
+        profileUrl: 'https://fetlife.com/users/8',
+        seenAt: Date.UTC(2026, 8, 23),
+      },
+      {
+        displayName: 'Person 9',
+        personId: '9',
+        profileUrl: 'https://fetlife.com/users/9',
+        seenAt: Date.UTC(2026, 8, 22),
+      },
     ],
   });
   const history = ui.shell.element.querySelector('[data-flt-basic-section="recently-visited"]');
-  assert.equal(history.querySelectorAll('li').length, 2);
+  assert.equal(history.querySelectorAll('li').length, 3);
   assert.equal(history.querySelector('a').href, 'https://fetlife.com/users/42');
   assert.doesNotMatch(history.innerHTML, /example\.com/);
-  const search = history.querySelector('input[type="search"]');
-  search.value = '42';
-  search.dispatchEvent(new dom.window.Event('input', { bubbles: true }));
-  assert.equal(history.querySelectorAll('li').length, 1);
+  assert.equal(history.querySelector('input[type="search"]'), null);
+  assert.doesNotMatch(history.textContent, /Person 9/);
   history.querySelector('button').click();
   assert.deepEqual(removed, ['42']);
   ui.destroy();
@@ -213,7 +222,8 @@ test('Basic modes own media policy without exposing granular media controls', as
   await Promise.resolve();
   assert.equal(accepted.preset, 'minimal');
   assert.equal(accepted.media.mode, 'blur');
-  assert.equal(accepted.media.blurPixels, 1);
+  assert.equal(accepted.media.blurPixels, 4);
+  assert.equal(accepted.media.blurAvatars, true);
 
   ui.destroy();
   coreUI.stop();
@@ -348,6 +358,11 @@ test('Basic installs through a narrow Core registration, persists settings, and 
     ),
     ['Mute for session', 'Block'],
   );
+  assert.equal(
+    profile.querySelector('[data-flt-profile-card-chips]')?.parentElement,
+    profile,
+    'profile actions must stay inside the profile card',
+  );
   assert.doesNotMatch(dom.window.document.body.textContent, /Soft Block/);
   assert.equal(await runtime.services.storage.get('people', '42'), undefined);
   await runtime.services.storage.put('people', '99', {
@@ -416,18 +431,13 @@ test('Basic installs through a narrow Core registration, persists settings, and 
     async () => !runtime.services.ui.preferences.value.notifications,
     'notification setting was not persisted',
   );
-  const dock = [...dom.window.document.querySelectorAll('label')]
-    .find((item) => item.textContent.startsWith('Launcher side'))
-    .querySelector('select');
-  dock.value = 'left';
-  dock.dispatchEvent(new dom.window.Event('change', { bubbles: true }));
   await waitFor(async () => {
     const browse = await runtime.services.storage.getBrowseSettings();
     return (
       browse.ui.compact &&
       browse.ui.highContrast &&
       !runtime.services.ui.preferences.value.notifications &&
-      browse.ui.dock === 'left'
+      browse.ui.dock === 'right'
     );
   }, 'Basic appearance settings were not persisted');
   const menuWidth = [...dom.window.document.querySelectorAll('label')]
@@ -446,7 +456,7 @@ test('Basic installs through a narrow Core registration, persists settings, and 
   );
   assert.equal(
     dom.window.document.documentElement.classList.contains('flt-basic-launcher-left'),
-    true,
+    false,
   );
   assert.equal(
     dom.window.document.documentElement.classList.contains('flt-menu-width-compact'),
@@ -605,6 +615,75 @@ test('Clean and SFW focus the feed while Standard restores reaction activity', a
     .find((button) => button.textContent === 'SFW')
     .click();
   await waitFor(() => card.hidden, 'SFW did not focus reaction activity');
+
+  await installed.product.stop();
+  await runtime.stop();
+  dom.window.close();
+});
+
+test('Clean and SFW protect media on tag grids and newly loaded tag results', async () => {
+  const dom = new JSDOM(
+    `<!doctype html><html><head></head><body>
+      <nav data-nav--ama-toggle-user-id-value="1"><img id="nav-logo"></nav>
+      <div data-tag-results><a href="/Example"><img id="tag-avatar"></a><img id="tag-picture"><video id="tag-video"></video></div>
+    </body></html>`,
+    { url: 'https://fetlife.com/tags/example' },
+  );
+  let id = 0;
+  const runtime = new CoreRuntime({
+    accountId: '1',
+    channelFactory: () => new Channel(),
+    document: dom.window.document,
+    idFactory: () => `basic-tags-${++id}`,
+    indexedDB: new IDBFactory(),
+    observerFactory: (callback) => new dom.window.MutationObserver(callback),
+    version: '0.0.1',
+    window: dom.window,
+  });
+  await runtime.start();
+  const installed = await installBasic(
+    {
+      registerProduct: (options) => runtime.registerProduct(options),
+      whenReady: Promise.resolve(),
+    },
+    {
+      document: dom.window.document,
+      iconUrl: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg"/%3E',
+      window: dom.window,
+    },
+  );
+  const clickPreset = (label) =>
+    [...dom.window.document.querySelectorAll('.flt-preset-toolbar button')]
+      .find((button) => button.textContent === label)
+      .click();
+
+  clickPreset('Clean');
+  await waitFor(
+    () =>
+      ['tag-avatar', 'tag-picture', 'tag-video'].every((elementId) =>
+        dom.window.document.getElementById(elementId).classList.contains('flt-media-blurred'),
+      ),
+    'Clean did not blur tag result media',
+  );
+  assert.equal(
+    dom.window.document.getElementById('nav-logo').classList.contains('flt-media-blurred'),
+    false,
+  );
+
+  clickPreset('SFW');
+  await waitFor(
+    async () => (await runtime.services.storage.getBrowseSettings()).preset === 'sfw',
+    'SFW tag media settings were not persisted',
+  );
+  const added = dom.window.document.createElement('img');
+  added.id = 'new-tag-picture';
+  dom.window.document.querySelector('[data-tag-results]').append(added);
+  runtime.services.events.emit('page:settled', { url: dom.window.document.URL });
+  await waitFor(
+    () => added.classList.contains('flt-media-blurred'),
+    'SFW did not protect a newly loaded tag result',
+  );
+  await new Promise((resolve) => globalThis.setTimeout(resolve, 25));
 
   await installed.product.stop();
   await runtime.stop();

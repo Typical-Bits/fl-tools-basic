@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { JSDOM } from 'jsdom';
 import { PresentationPolicy } from '@typicalbits/fl-tools-core';
+import { pageLoadingMode } from '../src/basic-product.js';
 import { cardRequests } from '../src/filter-engine.js';
 import {
   InfiniteScrollController,
@@ -87,6 +88,38 @@ test('Seen records only eligible visits and reset preserves unrelated person sta
   assert.deepEqual((await storage.get('people', '42')).value.note, { body: 'Pro-owned note' });
   assert.equal((await storage.get('people', '42')).value.quietUntil, 9000);
   assert.equal((await storage.get('people', '42')).value.basic.seenAt, undefined);
+});
+
+test('Recently Visited retains only three profiles without deleting other person state', async () => {
+  const storage = new MemoryStorage();
+  let now = 0;
+  const state = new BasicProfileState({ clock: () => ++now, storage });
+  for (const personId of ['1', '2', '3', '4']) {
+    if (personId === '1') {
+      await state.setSoftBlock({ personId, presentation: 'dim', reason: 'Keep this state' });
+    }
+    await state.markSeen({
+      displayName: `Person ${personId}`,
+      personId,
+      profileUrl: `https://fetlife.com/users/${personId}`,
+      routeKind: 'PROFILE',
+    });
+  }
+  assert.deepEqual(
+    (await state.listRecentlyVisited()).map(({ personId }) => personId),
+    ['4', '3', '2'],
+  );
+  const oldest = await storage.get('people', '1');
+  assert.equal(oldest.value.basic.seenAt, undefined);
+  assert.equal(oldest.value.basic.profileUrl, undefined);
+  assert.equal(oldest.value.basic.softBlock.reason, 'Keep this state');
+});
+
+test('auto profile loading is exclusive to place kinkster lists', () => {
+  assert.equal(pageLoadingMode({ kind: 'profile', params: { placeList: true } }), 'profile');
+  assert.equal(pageLoadingMode({ kind: 'profile', params: {} }), 'page');
+  assert.equal(pageLoadingMode({ kind: 'feed', params: {} }), 'page');
+  assert.equal(pageLoadingMode({ kind: 'unknown', params: { path: '/tags/example' } }), 'page');
 });
 
 test('Soft Block is local and native Block never runs without explicit confirmation', async () => {

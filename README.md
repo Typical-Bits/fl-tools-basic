@@ -21,10 +21,10 @@
 ## Install
 
 <p>
-  <a href="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/FL-Tools-Basic.user.js?v=0.0.7">
+  <a href="https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/FL-Tools-Basic.user.js?v=0.0.8">
     <img alt="Install FL Tools Basic" src="https://img.shields.io/badge/Install-FL%20Tools%20Basic-b91c1c?style=flat-square">
   </a>
-  <img alt="Version 0.0.7" src="https://img.shields.io/badge/version-0.0.7-22C55E?style=flat-square">
+  <img alt="Version 0.0.8" src="https://img.shields.io/badge/version-0.0.8-22C55E?style=flat-square">
   <a href="https://github.com/Typical-Bits/fl-tools-basic/releases">
     <img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/Typical-Bits/fl-tools-basic/total?style=flat-square&label=Downloads">
   </a>
@@ -34,10 +34,10 @@
 
 - Offers Standard, Clean, and SFW browsing modes with mode-owned filtering and media behavior.
 - Adds conflict-aware shortcuts for modes, card navigation, opening a card, next page, and top.
-- Remembers opened content, Events, Groups, and recently visited profiles per account.
+- Remembers opened content, Events, Groups, and the three most recently visited profiles per account.
 - Adds loaded-page tools for Bookmarks and Requests while leaving native decisions under your control.
 - Provides exact timestamps, banner hiding, picture navigation, shared-interest highlighting, visited links, and an undoable session mute.
-- Provides bounded infinite scrolling with pause, retry, counts, and timed 5–60 minute pauses.
+- Provides profile loading on FetLife Places and bounded page loading elsewhere, with pause, retry, counts, and timed 5–60 minute pauses.
 - Uses an open-book shortcut and terminology card with native FetLife shortcuts, gender codes, and abbreviations.
 - Uses rounded rectangular controls, toggle switches, helper tips, shared appearance preferences, update notices, and built-in troubleshooting.
 - Works alongside other installed FL Tools products while keeping shared settings.

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.0.8
+
+- Apply Clean and SFW media protection to profiles, picture pages, reaction grids, tag results, and newly loaded media.
+- Keep only the three most recently visited profiles while preserving other saved person state.
+- Restrict profile loading to FetLife Places under `/p/` and use page loading elsewhere.
+- Place Mute and Block chips inside profile cards and keep the launcher on the right edge.
+- Consolidate troubleshooting under System, rename Appearance, collapse shortcuts, and label the Pride theme correctly.
+
 ## 0.0.7
 
 - Brighten the shared Compass launcher and userscript-manager icons.

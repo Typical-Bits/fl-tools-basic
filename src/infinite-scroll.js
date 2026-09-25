@@ -205,15 +205,19 @@ export class InfiniteScrollTrigger {
     this.#observerFactory = observerFactory;
   }
 
-  start({ enabled, signal }) {
+  start({ enabled, signal, mode = 'page' }) {
     this.stop();
     if (!enabled || typeof this.#observerFactory !== 'function') return false;
     const sentinel = this.#document.createElement('div');
     sentinel.className = 'flt-root flt-basic-scroll-sentinel';
     sentinel.dataset.fltBasicOwned = 'true';
-    sentinel.setAttribute('aria-label', 'Load more profiles');
+    const profileMode = mode === 'profile';
+    const noun = profileMode ? 'profiles' : 'page items';
+    sentinel.setAttribute('aria-label', profileMode ? 'Load more profiles' : 'Load the next page');
     const status = this.#document.createElement('span');
-    status.textContent = 'More profiles load near here.';
+    status.textContent = profileMode
+      ? 'More profiles load near here.'
+      : 'The next page loads near here.';
     const pause = this.#document.createElement('button');
     pause.className = 'flt-button';
     pause.type = 'button';
@@ -233,21 +237,21 @@ export class InfiniteScrollTrigger {
       status.textContent = state.paused
         ? `${state.loadedPages} additional pages loaded. Auto-loading paused.`
         : state.loading
-          ? 'Loading more profiles…'
+          ? `Loading more ${noun}…`
           : `${state.loadedPages} additional pages and ${state.loadedItems} items loaded this session.`;
     });
     placeAfterListing(this.#document, sentinel);
     this.#observer = this.#observerFactory(async (entries) => {
       if (!entries.some((entry) => entry.isIntersecting)) return;
-      status.textContent = 'Loading more profiles…';
+      status.textContent = `Loading more ${noun}…`;
       const result = await this.#controller.requestNext({ signal });
       if (result.status === 'APPENDED') placeAfterListing(this.#document, sentinel);
       status.textContent =
         result.status === 'FAILED'
-          ? 'More profiles could not be loaded. Use native pagination or retry.'
+          ? `More ${noun} could not be loaded. Use native pagination or retry.`
           : result.status === 'APPENDED'
-            ? `${result.appended} more profiles loaded.`
-            : 'No more profiles were loaded.';
+            ? `${result.appended} more ${noun} loaded.`
+            : `No more ${noun} were loaded.`;
       if (result.status === 'FAILED') {
         const retry = this.#document.createElement('button');
         retry.className = 'flt-button';

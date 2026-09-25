@@ -202,12 +202,12 @@ export class BasicUI {
   #onResetSettings;
   #onSettings;
   #relationshipContext;
+  #loadingMode;
   #settings;
   #settingsRoot;
   #shell;
   #visitHistory = [];
   #visitHistoryRoot;
-  #visitQuery = '';
   #expanded = new Set();
 
   constructor({
@@ -233,7 +233,8 @@ export class BasicUI {
     installUrl,
     updateUrl,
     relationshipContext = false,
-    version = '0.0.7',
+    loadingMode = 'page',
+    version = '0.0.8',
   }) {
     if (!coreUI?.createShell || !document?.createElement || typeof onSettings !== 'function') {
       throw new TypeError('Basic UI dependencies are required');
@@ -249,6 +250,7 @@ export class BasicUI {
     this.#onResetSettings = onResetSettings;
     this.#onSettings = onSettings;
     this.#relationshipContext = relationshipContext === true;
+    this.#loadingMode = loadingMode === 'profile' ? 'profile' : 'page';
     this.#settings = settings;
     this.#visitHistory = Array.isArray(visitHistory) ? visitHistory : [];
     const browse = document.createElement('div');
@@ -338,6 +340,21 @@ export class BasicUI {
     if (next === this.#relationshipContext) return;
     this.#rememberExpanded();
     this.#relationshipContext = next;
+    this.#browseRoot.replaceChildren();
+    this.#settingsRoot.replaceChildren();
+    this.#renderBrowse(this.#browseRoot);
+    this.#renderSettings(this.#settingsRoot);
+    this.#shell.setTopContent(this.#presetToolbar);
+    for (const view of this.#buildNavigation()) {
+      this.#shell.replaceViewContent(view.id, view.content);
+    }
+  }
+
+  setLoadingMode(mode) {
+    const next = mode === 'profile' ? 'profile' : 'page';
+    if (next === this.#loadingMode) return;
+    this.#rememberExpanded();
+    this.#loadingMode = next;
     this.#browseRoot.replaceChildren();
     this.#settingsRoot.replaceChildren();
     this.#renderBrowse(this.#browseRoot);
@@ -444,18 +461,22 @@ export class BasicUI {
       });
     }
     navigation.push({
-      aliases: ['settings', 'shortcuts', 'highlighter', 'people', 'personalize'],
-      content: take(settingsSections, ['appearance', 'diagnostics'], {
+      aliases: ['shortcuts', 'highlighter', 'people', 'personalize'],
+      content: take(settingsSections, ['appearance'], {
+        accordion: false,
+        retainHeadings: true,
+      }),
+      id: 'appearance',
+      label: 'Appearance',
+    });
+    navigation.push({
+      aliases: ['diagnostics', 'settings'],
+      content: take(settingsSections, ['diagnostics'], {
         accordion: false,
         retainHeadings: true,
       }),
       id: 'system',
       label: 'System',
-    });
-    navigation.push({
-      id: 'diagnostics',
-      label: 'Diagnostics',
-      content: this.#document.createElement('div'),
     });
     return navigation;
   }
@@ -492,11 +513,14 @@ export class BasicUI {
     presets.append(presetLabel, presetActions);
     this.#presetToolbar = presets;
     if (['basic', 'pro'].includes(this.#editionId)) {
+      const profileLoading = this.#loadingMode === 'profile';
       const infinite = section(
         this.#document,
-        'Page Loading',
+        profileLoading ? 'Profile Loading' : 'Page Loading',
         'infinite-scroll',
-        'Control automatic loading and pause it for the current browsing session.',
+        profileLoading
+          ? 'Load additional profile cards while browsing FetLife Places under /p/.'
+          : 'Load the next native page automatically on other supported FetLife pages.',
       );
       const pageLimit = this.#controls.textField({
         label: 'Maximum additional pages (1–20)',
@@ -509,7 +533,7 @@ export class BasicUI {
       infinite.append(
         this.#controls.toggle({
           checked: this.#settings.infiniteScroll.enabled,
-          label: 'Auto Page Load',
+          label: profileLoading ? 'Auto Profile Load' : 'Auto Page Load',
           onChange: (value) => this.#commit((next) => (next.infiniteScroll.enabled = value)),
         }).element,
         pageLimit.element,
@@ -850,21 +874,11 @@ export class BasicUI {
       this.#document,
       'Recently Visited',
       'recently-visited',
-      'Search profiles opened on this account. Mark unseen removes only the local visit marker.',
+      'Review the last three profiles opened on this account. Mark unseen removes only the local visit marker.',
     );
-    const search = this.#controls.search({
-      description: 'Filter recently visited profiles by display name or profile ID.',
-      label: 'Search recently visited',
-      onInput: (value) => {
-        this.#visitQuery = value;
-        this.#renderVisitHistoryList();
-      },
-      placeholder: 'Name or profile ID',
-      value: this.#visitQuery,
-    });
     const results = this.#document.createElement('div');
     results.dataset.fltVisitHistoryResults = 'true';
-    history.append(search.element, results);
+    history.append(results);
     this.#visitHistoryRoot = results;
     this.#renderVisitHistoryList();
     return history;
@@ -872,25 +886,15 @@ export class BasicUI {
 
   #renderVisitHistoryList() {
     if (!this.#visitHistoryRoot) return;
-    const needle = this.#visitQuery.trim().toLocaleLowerCase();
-    const matches = this.#visitHistory.filter(
-      (item) =>
-        !needle ||
-        String(item.personId).toLocaleLowerCase().includes(needle) ||
-        String(item.displayName ?? '')
-          .toLocaleLowerCase()
-          .includes(needle),
-    );
+    const matches = this.#visitHistory.slice(0, 3);
     const status = this.#document.createElement('p');
     status.className = 'flt-visit-history-status';
     status.setAttribute('role', 'status');
-    status.textContent = `${matches.length} of ${this.#visitHistory.length} visited profiles`;
+    status.textContent = `${matches.length} recent profile${matches.length === 1 ? '' : 's'}`;
     if (!matches.length) {
       const empty = this.#document.createElement('div');
       empty.className = 'flt-empty';
-      empty.textContent = this.#visitHistory.length
-        ? 'No visited profiles match this search.'
-        : 'Profiles you open will appear here.';
+      empty.textContent = 'The last three profiles you open will appear here.';
       this.#visitHistoryRoot.replaceChildren(status, empty);
       return;
     }
@@ -952,7 +956,8 @@ export class BasicUI {
     const state = this.#infiniteState;
     const summary = this.#document.createElement('p');
     summary.setAttribute('role', 'status');
-    summary.textContent = `${state.loadedPages} of ${state.limit ?? this.#settings.infiniteScroll.pageLimit} additional pages · ${state.loadedItems} items · ${state.loading ? 'loading' : state.paused ? 'paused' : state.status.toLocaleLowerCase()}`;
+    const unit = this.#loadingMode === 'profile' ? 'profile pages' : 'pages';
+    summary.textContent = `${state.loadedPages} of ${state.limit ?? this.#settings.infiniteScroll.pageLimit} additional ${unit} · ${state.loadedItems} items · ${state.loading ? 'loading' : state.paused ? 'paused' : state.status.toLocaleLowerCase()}`;
     const countdown = this.#document.createElement('span');
     countdown.dataset.fltPauseCountdown = '';
     if (state.paused && state.pauseRemainingSeconds != null)
@@ -1006,18 +1011,6 @@ export class BasicUI {
         }).element,
       );
     }
-    if (this.#editionId !== 'pro')
-      appearance.append(
-        select(this.#document, {
-          label: 'Launcher side',
-          onChange: (value) => this.#commit((next) => (next.ui.dock = value)),
-          options: [
-            ['right', 'Right'],
-            ['left', 'Left'],
-          ],
-          value: this.#settings.ui.dock,
-        }),
-      );
     this.#shortcutFooter = shortcutFooter(this.#document);
     const reset = section(this.#document, 'Diagnostics', 'diagnostics');
     reset.querySelector(':scope > .flt-basic-section-title')?.remove();

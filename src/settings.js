@@ -53,8 +53,8 @@ export const BUILT_IN_PRESETS = freeze({
     }),
     infiniteScroll: freeze({ enabled: false, pageLimit: 1 }),
     media: freeze({
-      blurAvatars: false,
-      blurPixels: 1,
+      blurAvatars: true,
+      blurPixels: 4,
       blurVideos: true,
       mode: 'blur',
       preset: 'sfw',
@@ -86,7 +86,7 @@ export const BUILT_IN_PRESETS = freeze({
     }),
     infiniteScroll: freeze({ enabled: true, pageLimit: 5 }),
     media: freeze({
-      blurAvatars: false,
+      blurAvatars: true,
       blurPixels: 6,
       blurVideos: true,
       mode: 'blur',
@@ -213,6 +213,7 @@ export function normalizeBasicSettings(value = {}) {
     softBlock,
     ui,
   } = settings;
+  ui.dock = 'right';
   const ageValid = [filters.age.minimum, filters.age.maximum].every(
     (age) => age === null || (Number.isInteger(age) && age >= 18 && age <= 999),
   );

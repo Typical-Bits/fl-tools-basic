@@ -34,7 +34,8 @@ test('Basic settings validate retained ranges and built-in presets apply atomica
   assert.equal(sfw.pageEnhancements.hideBanners, true);
   const minimal = applyPreset(sfw, 'minimal');
   assert.equal(minimal.media.preset, 'sfw');
-  assert.equal(minimal.media.blurPixels, 1);
+  assert.equal(minimal.media.blurPixels, 4);
+  assert.equal(minimal.media.blurAvatars, true);
   assert.equal(minimal.infiniteScroll.enabled, false);
   assert.equal(minimal.feed.focus, 'focused');
   assert.equal(minimal.pageEnhancements.hideBanners, true);

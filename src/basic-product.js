@@ -56,7 +56,7 @@ export const BASIC_MANIFEST = Object.freeze({
     'ui',
   ]),
   type: 'edition',
-  version: '0.0.7',
+  version: '0.0.8',
 });
 
 const COMPONENTS = BASIC_MANIFEST.features.map((id) => ({
@@ -143,6 +143,10 @@ export function isCurrentItemRoute(candidate) {
     );
   }
   return false;
+}
+
+export function pageLoadingMode(route) {
+  return route?.kind === 'profile' && route.params?.placeList ? 'profile' : 'page';
 }
 
 export class BasicProduct {
@@ -357,6 +361,7 @@ export class BasicProduct {
         installUrl: this.installUrl,
         updateUrl: this.updateUrl,
         relationshipContext: this.#relationshipContext(),
+        loadingMode: pageLoadingMode(this.#capabilities.routes?.context?.route),
         settings: this.#settings,
         visitHistory,
         version: this.version,
@@ -421,6 +426,7 @@ export class BasicProduct {
           this.#cardNavigator.clear();
           this.#applyGlobalSettings();
           this.#ui?.setRelationshipContext(Boolean(current?.route?.params?.relationshipList));
+          this.#ui?.setLoadingMode(pageLoadingMode(current?.route));
           this.#syncPageTools(current?.route);
         },
         { signal: this.#abort.signal },
@@ -642,6 +648,7 @@ export class BasicProduct {
     this.#infiniteScroll.setNext(nativeNextPage(this.#document));
     this.#infiniteTrigger.start({
       enabled: this.#settings.infiniteScroll.enabled,
+      mode: pageLoadingMode(this.#capabilities.routes?.context?.route),
       signal: this.#abort.signal,
     });
     this.#document.documentElement.classList.toggle('flt-basic-compact', this.#settings.ui.compact);
@@ -649,16 +656,14 @@ export class BasicProduct {
       'flt-basic-high-contrast',
       this.#settings.ui.highContrast,
     );
-    this.#document.documentElement.classList.toggle(
-      'flt-basic-launcher-left',
-      this.#settings.ui.dock === 'left',
-    );
+    this.#document.documentElement.classList.remove('flt-basic-launcher-left');
     this.#ui?.shell.setChrome({ contrast: this.#settings.ui.highContrast });
     this.#capabilities.ui.preferences.adopt({
       menuWidth: this.#settings.ui.menuWidth,
       notifications: this.#settings.ui.notifications,
     });
     this.#capabilities.ui.preferences.apply();
+    this.#applyMediaSettings();
     this.#syncPageTools();
     void this.#applyPageEnhancements().catch((error) =>
       this.#recordError(
@@ -667,6 +672,19 @@ export class BasicProduct {
         'Page enhancements could not be applied.',
       ),
     );
+  }
+
+  #applyMediaSettings() {
+    for (const element of this.#document.querySelectorAll('img, video')) {
+      if (element.closest('.flt-root, nav, [role="navigation"]')) continue;
+      const kind = element.matches('video')
+        ? 'video'
+        : element.closest('[data-flt-avatar], [data-member-card], a[href*="/users/"]')
+          ? 'avatar'
+          : 'content';
+      applyMediaPolicy(this.#capabilities.ui.presentation, element, this.#settings.media, kind);
+      this.#presentedMedia.add(element);
+    }
   }
 
   async #applyPageEnhancements() {
@@ -925,16 +943,6 @@ export class BasicProduct {
     this.#capabilities.ui.announcer.announce('Browse settings were reset.');
   }
 
-  #placeBesideSupporter(element, node) {
-    const supporter = element.querySelector(
-      '[aria-label*="supporter" i], [title*="supporter" i], [data-supporter], a[href*="/support"]',
-    );
-    const name = element.querySelector('h1, h2, [data-fltools-field="display-name"]');
-    const anchor = supporter ?? name;
-    if (anchor) anchor.after(node);
-    else element.prepend(node);
-  }
-
   #explainableChip(label, explanation) {
     const chip = this.#document.createElement('button');
     chip.type = 'button';
@@ -1002,7 +1010,20 @@ export class BasicProduct {
       native.setAttribute('aria-label', native.dataset.fltTip);
       actions.append(native);
     }
-    this.#placeBesideSupporter(candidate.element, actions);
+    const tray = this.#profileChipTray(candidate.element);
+    tray.append(actions);
+  }
+
+  #profileChipTray(element) {
+    element.classList.add('flt-profile-card-host');
+    let tray = element.querySelector(':scope > [data-flt-profile-card-chips="true"]');
+    if (!tray) {
+      tray = this.#document.createElement('div');
+      tray.className = 'flt-root flt-profile-card-chips';
+      tray.dataset.fltProfileCardChips = 'true';
+      element.append(tray);
+    }
+    return tray;
   }
 
   async #muteForSession(candidate) {

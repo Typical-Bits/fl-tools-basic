@@ -1,5 +1,7 @@
 import { canonicalizeFetLifeUrl } from '@typicalbits/fl-tools-core';
 
+export const RECENT_PROFILE_LIMIT = 3;
+
 export class BasicProfileState {
   #clock;
   #storage;
@@ -29,12 +31,16 @@ export class BasicProfileState {
     const record = await this.#storage.put('people', personId, next, {
       expectedRevision: current?.revision ?? 0,
     });
+    await this.#pruneRecentlyVisited();
     return Object.freeze({ revision: record.revision, status: 'RECORDED' });
   }
 
-  async listRecentlyVisited({ query = '', limit = 100 } = {}) {
+  async listRecentlyVisited({ query = '', limit = RECENT_PROFILE_LIMIT } = {}) {
     const needle = String(query).trim().toLocaleLowerCase();
-    const boundedLimit = Math.min(500, Math.max(1, Number.parseInt(limit, 10) || 100));
+    const boundedLimit = Math.min(
+      RECENT_PROFILE_LIMIT,
+      Math.max(1, Number.parseInt(limit, 10) || RECENT_PROFILE_LIMIT),
+    );
     const records = await this.#storage.list('people');
     return records
       .map((record) => record.value)
@@ -55,6 +61,27 @@ export class BasicProfileState {
         (left, right) => right.seenAt - left.seenAt || left.personId.localeCompare(right.personId),
       )
       .slice(0, boundedLimit);
+  }
+
+  async #pruneRecentlyVisited() {
+    const records = (await this.#storage.list('people'))
+      .filter((record) => Number.isFinite(record.value?.basic?.seenAt))
+      .sort(
+        (left, right) =>
+          right.value.basic.seenAt - left.value.basic.seenAt ||
+          String(left.recordKey).localeCompare(String(right.recordKey)),
+      );
+    for (const record of records.slice(RECENT_PROFILE_LIMIT)) {
+      const basic = { ...record.value.basic };
+      delete basic.seenAt;
+      delete basic.profileUrl;
+      await this.#storage.put(
+        'people',
+        record.recordKey,
+        { ...record.value, basic },
+        { expectedRevision: record.revision },
+      );
+    }
   }
 
   async markUnseen(personId) {

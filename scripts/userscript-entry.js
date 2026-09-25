@@ -17,7 +17,7 @@ const report = (error) => {
 try {
   installCore(pageWindow, {
     document: pageWindow.document,
-    version: '0.0.7',
+    version: '0.0.8',
     window: pageWindow,
   });
   void installBasic(pageWindow.FLTools, {
@@ -26,7 +26,7 @@ try {
         'Keeps every menu fully inside the window after launcher dragging or resizing.',
         'Preserves the launcher position when the menu closes.',
       ],
-      version: '0.0.7',
+      version: '0.0.8',
     },
     document: pageWindow.document,
     iconUrl:
@@ -36,7 +36,7 @@ try {
     releaseUrl: 'https://github.com/Typical-Bits/fl-tools-basic/releases',
     updateUrl:
       'https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js',
-    version: '0.0.7',
+    version: '0.0.8',
     window: pageWindow,
   }).catch(report);
 } catch (error) {

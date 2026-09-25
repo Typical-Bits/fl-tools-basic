@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FL Tools Basic
 // @namespace    https://github.com/Typical-Bits
-// @version      0.0.7
+// @version      0.0.8
 // @description  Simple everyday browsing tools for FetLife.
 // @author       TypicalBits
 // @icon         data:image/png;base64,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
@@ -2160,8 +2160,8 @@
       }),
       infiniteScroll: freeze({ enabled: false, pageLimit: 1 }),
       media: freeze({
-        blurAvatars: false,
-        blurPixels: 1,
+        blurAvatars: true,
+        blurPixels: 4,
         blurVideos: true,
         mode: "blur",
         preset: "sfw"
@@ -2193,7 +2193,7 @@
       }),
       infiniteScroll: freeze({ enabled: true, pageLimit: 5 }),
       media: freeze({
-        blurAvatars: false,
+        blurAvatars: true,
         blurPixels: 6,
         blurVideos: true,
         mode: "blur",
@@ -2315,6 +2315,7 @@
       softBlock,
       ui
     } = settings;
+    ui.dock = "right";
     const ageValid = [filters.age.minimum, filters.age.maximum].every(
       (age) => age === null || Number.isInteger(age) && age >= 18 && age <= 999
     );
@@ -6620,7 +6621,7 @@
     "Soft-blocked profiles": "Hide or dim people you have locally Soft Blocked. Native FetLife blocks remain separate.",
     "Media presentation": "Show, blur, or hide supported media already loaded on the page.",
     "Appearance and accessibility": "Control spacing, contrast, menu width, system notices, and default launcher placement.",
-    "Fixed shortcuts": "Open the ? button beside Close for shortcuts. Basic and Pro share single keys, with Alt+Shift+B reserved for the native bookmark conflict.",
+    "Fixed shortcuts": "Open the book button beside Close to review FL Tools and native FetLife shortcuts.",
     Reset: "Restore Browse defaults. Other product data is not removed by this action.",
     "Group name contains": "Filter only the loaded native Groups whose names contain this text.",
     "Event name contains": "Filter only the loaded native Events whose names contain this text.",
@@ -6637,7 +6638,7 @@
     Advanced: "Automatic next-page loading and reversible page enhancements.",
     Personalize: "Private Session, Themes swatches, menu width, launcher placement, and keyboard shortcuts.",
     Themes: "Choose a site and menu color theme. Site Default leaves the native site theme unchanged.",
-    System: "Appearance preferences and a Diagnostics submenu for export and resetting Browse settings.",
+    System: "Review page and plugin health, export diagnostics, and use product maintenance actions.",
     Settings: "Product maintenance and page/plugin diagnostics export.",
     Groups: "Filter loaded native Groups by name, membership, and source-reported activity.",
     Events: "Filter loaded native Events by name, source location, dates, and attendance mode.",
@@ -6676,7 +6677,7 @@
     "High contrast": "Increase contrast for plugin surfaces and boundaries.",
     "Menu width": "Choose Full, Compact, or Narrow plugin menu width. Other FL Tools menus on this page follow the same width.",
     "Update and system notifications": "Show product update and system notices.",
-    "Launcher side": "Choose the default docking side. You can also drag any launcher to move the whole grid.",
+    "Launcher side": "Launchers stay docked to the right edge and can move vertically.",
     "Reduce motion": "Reduce interface animations and transitions.",
     "Compact dock": "Use a narrower launcher arrangement.",
     "Hide Pro dock launcher": "Hide the Pro launcher; use the configured interface shortcut to restore it.",
@@ -6766,7 +6767,7 @@
       reduceMotion: value?.reduceMotion === true,
       notifications: value?.notifications !== false,
       menuWidth: ["full", "compact", "narrow"].includes(value?.menuWidth) ? value.menuWidth : "full",
-      themeSkin: value?.themeSkin === "gradient" ? "gradient" : "default"
+      themeSkin: ["gradient", "pride"].includes(value?.themeSkin) ? "pride" : "default"
     };
   }
   var SharedPreferences = class {
@@ -6858,7 +6859,7 @@
           "Menu theme",
           [
             ["default", "Default"],
-            ["gradient", "Gradient"]
+            ["pride", "Pride"]
           ]
         ],
         [
@@ -7436,18 +7437,15 @@
     const viewWidth = view?.innerWidth || 0;
     const viewHeight = view?.innerHeight || 0;
     return {
-      x: Math.max(
-        VIEWPORT_EDGE,
-        Math.min(origin.x, Math.max(VIEWPORT_EDGE, viewWidth - width - VIEWPORT_EDGE))
-      ),
+      x: Math.max(VIEWPORT_EDGE, viewWidth - width - VIEWPORT_EDGE),
       y: Math.max(
         VIEWPORT_EDGE,
         Math.min(origin.y, Math.max(VIEWPORT_EDGE, viewHeight - height - VIEWPORT_EDGE))
       )
     };
   }
-  function dockIsLeft(document) {
-    return document?.documentElement?.classList?.contains("flt-basic-launcher-left") === true;
+  function dockIsLeft(_document) {
+    return false;
   }
   function isSafeIconUrl(value, baseUrl) {
     try {
@@ -7616,13 +7614,13 @@
         } catch {
         }
       };
-      const place = (x, y) => {
+      const place = (_x, y) => {
         const size = launcherSize(handle);
-        this.#position = clampLauncherOrigin(view, { x, y }, size);
+        this.#position = clampLauncherOrigin(view, { x: _x, y }, size);
         Object.assign(cluster.style, {
-          left: `${this.#position.x}px`,
+          left: "auto",
           top: `${this.#position.y}px`,
-          right: "auto",
+          right: `${VIEWPORT_EDGE}px`,
           bottom: "auto"
         });
         persist();
@@ -7657,15 +7655,14 @@
         "pointermove",
         (event) => {
           if (!drag || event.pointerId !== drag.id) return;
-          const dx = event.clientX - drag.x;
           const dy = event.clientY - drag.y;
-          if (!drag.moved && Math.hypot(dx, dy) < 5) return;
+          if (!drag.moved && Math.abs(dy) < 5) return;
           drag.moved = true;
           this.#suppressClick = true;
           handle.dataset.dragging = "true";
           handle.setPointerCapture?.(event.pointerId);
           event.preventDefault();
-          place(drag.left + dx, drag.top + dy);
+          place(drag.left, drag.top + dy);
         },
         options
       );
@@ -7689,12 +7686,11 @@
       handle.addEventListener(
         "keydown",
         (event) => {
-          if (!event.altKey || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(event.key))
-            return;
+          if (!event.altKey || !["ArrowUp", "ArrowDown"].includes(event.key)) return;
           event.preventDefault();
           const rect = handle.getBoundingClientRect();
           place(
-            rect.left + (event.key === "ArrowRight" ? 16 : event.key === "ArrowLeft" ? -16 : 0),
+            rect.left,
             rect.top + (event.key === "ArrowDown" ? 16 : event.key === "ArrowUp" ? -16 : 0)
           );
         },
@@ -8054,7 +8050,7 @@ html.flt-reduce-motion .flt-root, html.flt-reduce-motion .flt-root * { animation
   --flt-z-dialog: ${UI_Z_INDEX.dialog};
 }
 .flt-root, .flt-root * { box-sizing: border-box; }
-.flt-launcher { touch-action: none; user-select: none; }
+.flt-launcher { touch-action: pan-x; user-select: none; }
 .flt-launcher[data-dragging="true"], .flt-launcher[data-dragging="true"] * { cursor: grabbing; }
 .flt-cluster {
   position: fixed;
@@ -8258,15 +8254,15 @@ html.flt-reduce-motion .flt-root, html.flt-reduce-motion .flt-root * { animation
 .flt-update-release:hover, .flt-update-release:focus-visible, .flt-update-dismiss:hover, .flt-update-dismiss:focus-visible { border-color: var(--flt-accent); color: var(--flt-text); outline: none; }
 .flt-update-dismiss:hover, .flt-update-dismiss:focus-visible { background: var(--flt-surface-raised); }
 .flt-update-release:hover, .flt-update-release:focus-visible { background: color-mix(in srgb, var(--flt-surface) 88%, var(--flt-accent) 12%); }
-.flt-update-notice[data-flt-theme-skin="gradient"] {
+.flt-update-notice[data-flt-theme-skin="pride"] {
   border: 1px solid transparent;
   background-image: linear-gradient(var(--flt-surface), var(--flt-surface)),
     linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
-.flt-update-notice[data-flt-theme-skin="gradient"] .flt-update-version,
-.flt-update-notice[data-flt-theme-skin="gradient"] .flt-update-action {
+.flt-update-notice[data-flt-theme-skin="pride"] .flt-update-version,
+.flt-update-notice[data-flt-theme-skin="pride"] .flt-update-action {
   border-color: transparent;
   background-image: linear-gradient(var(--flt-surface), var(--flt-surface)),
     linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
@@ -8451,13 +8447,13 @@ html.flt-pro-high-contrast .flt-toggle[aria-checked="true"] .flt-toggle-indicato
 }
 html[data-flt-pro-theme="pride"] .flt-toggle[aria-checked="true"],
 html[data-flt-pro-accent="pride"] .flt-toggle[aria-checked="true"],
-.flt-root[data-flt-theme-skin="gradient"] .flt-toggle[aria-checked="true"] {
+.flt-root[data-flt-theme-skin="pride"] .flt-toggle[aria-checked="true"] {
   background-image: none !important;
   border-color: color-mix(in srgb, var(--flt-border) 52%, var(--flt-accent) 48%) !important;
   background: color-mix(in srgb, var(--flt-surface) 72%, var(--flt-accent) 28%) !important;
 }
 html[data-flt-pro-theme="pride"] .flt-panel, html[data-flt-pro-accent="pride"] .flt-panel,
-.flt-root[data-flt-theme-skin="gradient"].flt-panel {
+.flt-root[data-flt-theme-skin="pride"].flt-panel {
   border: 1px solid transparent;
   background-image: linear-gradient(var(--flt-background), var(--flt-background)),
     linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
@@ -8465,7 +8461,7 @@ html[data-flt-pro-theme="pride"] .flt-panel, html[data-flt-pro-accent="pride"] .
   background-clip: padding-box, border-box;
 }
 html[data-flt-pro-theme="pride"] .flt-header-divider, html[data-flt-pro-accent="pride"] .flt-header-divider,
-.flt-root[data-flt-theme-skin="gradient"] .flt-header-divider {
+.flt-root[data-flt-theme-skin="pride"] .flt-header-divider {
   height: 2px; border-radius: 2px; opacity: .9;
   background: linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 16%, #000 84%, transparent 100%);
@@ -8473,33 +8469,33 @@ html[data-flt-pro-theme="pride"] .flt-header-divider, html[data-flt-pro-accent="
 }
 html[data-flt-pro-theme="pride"] .flt-tool-header.last-opened,
 html[data-flt-pro-accent="pride"] .flt-tool-header.last-opened,
-.flt-root[data-flt-theme-skin="gradient"] .flt-tool-header.last-opened,
-.flt-root[data-flt-theme-skin="gradient"] .flt-button.last-opened {
+.flt-root[data-flt-theme-skin="pride"] .flt-tool-header.last-opened,
+.flt-root[data-flt-theme-skin="pride"] .flt-button.last-opened {
   box-shadow: none; position: relative;
 }
 html[data-flt-pro-theme="pride"] .flt-tool-header.last-opened::before,
 html[data-flt-pro-accent="pride"] .flt-tool-header.last-opened::before,
-.flt-root[data-flt-theme-skin="gradient"] .flt-tool-header.last-opened::before,
-.flt-root[data-flt-theme-skin="gradient"] .flt-button.last-opened::before {
+.flt-root[data-flt-theme-skin="pride"] .flt-tool-header.last-opened::before,
+.flt-root[data-flt-theme-skin="pride"] .flt-button.last-opened::before {
   content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px; border-radius: 2px;
   background: linear-gradient(180deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
 }
-.flt-root[data-flt-theme-skin="gradient"] .flt-tool-header:hover,
-.flt-root[data-flt-theme-skin="gradient"] .flt-tool-header:focus-visible,
-.flt-root[data-flt-theme-skin="gradient"] .flt-tool-header[aria-expanded="true"] {
+.flt-root[data-flt-theme-skin="pride"] .flt-tool-header:hover,
+.flt-root[data-flt-theme-skin="pride"] .flt-tool-header:focus-visible,
+.flt-root[data-flt-theme-skin="pride"] .flt-tool-header[aria-expanded="true"] {
   background: color-mix(in srgb, var(--flt-surface) 88%, var(--flt-accent) 12%);
 }
-.flt-root[data-flt-theme-skin="gradient"] .flt-header-version {
+.flt-root[data-flt-theme-skin="pride"] .flt-header-version {
   border: 1px solid var(--flt-border); border-radius: 6px; background: var(--flt-background); color: var(--flt-text);
 }
-.flt-root[data-flt-theme-skin="gradient"] .flt-header-version:hover,
-.flt-root[data-flt-theme-skin="gradient"] .flt-header-version:focus-visible {
+.flt-root[data-flt-theme-skin="pride"] .flt-header-version:hover,
+.flt-root[data-flt-theme-skin="pride"] .flt-header-version:focus-visible {
   border-color: transparent;
   background-image: linear-gradient(var(--flt-surface), var(--flt-surface)),
     linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
   background-origin: border-box; background-clip: padding-box, border-box;
 }
-.flt-root[data-flt-theme-skin="gradient"] .flt-launcher-button[aria-expanded="true"] {
+.flt-root[data-flt-theme-skin="pride"] .flt-launcher-button[aria-expanded="true"] {
   border: 1px solid transparent;
   background-image: linear-gradient(var(--flt-surface), var(--flt-surface)),
     linear-gradient(90deg, #c97b83, #d29a70, #d0c07d, #70a886, #7091b6, #a27ba9);
@@ -8603,6 +8599,8 @@ html[data-flt-pro-accent="pride"] .flt-tool-header.last-opened::before,
 .flt-shortcut-help { margin: 4px 0 8px; padding: 10px; border: 1px solid var(--flt-border); border-radius: 8px; background: var(--flt-surface); color: var(--flt-text); }
 .flt-shortcut-help[hidden] { display: none !important; }
 .flt-shortcut-help h3 { margin: 0 0 6px; font-size: 13px; }
+.flt-shortcut-disclosure { margin: 0; padding: 6px 0; border-top: 1px solid var(--flt-border); }
+.flt-shortcut-disclosure summary { cursor: pointer; font-size: 12px; font-weight: 700; }
 .flt-shortcut-help p { margin: 0 0 8px; color: var(--flt-muted); font-size: 11px; line-height: 1.5; }
 .flt-shortcut-help .flt-shortcut-list { grid-template-columns: minmax(0, 1fr); margin: 0; }
 .flt-shortcut-help kbd { display: inline-block; padding: 2px 5px; border: 1px solid var(--flt-border); border-radius: 4px; background: var(--flt-background); color: var(--flt-text); font: 600 11px/1.4 ui-monospace, monospace; }
@@ -8670,6 +8668,9 @@ html[data-flt-pro-accent="pride"] .flt-tool-header.last-opened::before,
   border-radius: 5px; background: var(--flt-background); color: var(--flt-text);
   font: 600 9px/1.3 system-ui, sans-serif; cursor: help;
 }
+.flt-profile-card-host { position: relative !important; }
+.flt-profile-card-chips { position: absolute; z-index: 3; inset: 5px 5px auto auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px; max-width: calc(100% - 10px); }
+.flt-profile-card-chips .flt-button, .flt-profile-card-chips .flt-card-chip { height: auto; min-height: 0; margin: 0; padding: 2px 6px; border-radius: 5px; font-size: 9px; line-height: 1.2; }
 .flt-card-chip[data-flt-tip]:hover::after, .flt-card-chip[data-flt-tip]:focus-visible::after, .flt-card-chip[aria-expanded="true"]::after {
   content: attr(data-flt-tip);
   position: absolute; z-index: 6; left: 0; top: calc(100% + 4px); width: max-content;
@@ -8683,14 +8684,8 @@ html[data-flt-pro-accent="pride"] .flt-tool-header.last-opened::before,
 .flt-state-hidden { display: none !important; }
 .flt-media-blurred { filter: blur(var(--flt-media-blur, 4px)); }
 .flt-media-hidden { visibility: hidden !important; }
-html.flt-basic-launcher-left .flt-cluster {
-  left: 12px;
-  right: auto;
-  align-items: flex-start;
-}
 @media (max-width: 560px) {
   .flt-cluster { right: 8px; bottom: 8px; }
-  html.flt-basic-launcher-left .flt-cluster { left: 8px; right: auto; }
   .flt-panel { width: min(var(--flt-menu-width-full), calc(100vw - 24px)); border-radius: var(--flt-radius-medium); }
   .flt-panel .flt-input { width: 100%; max-width: 100%; }
   .flt-field-row { grid-template-columns: minmax(0, 1fr); }
@@ -9163,10 +9158,16 @@ html.flt-basic-launcher-left .flt-cluster {
         heading2.dataset.fltTip = "FL Tools keys work outside text fields and interactive controls. Alt+Shift is used only for conflicts. FetLife shortcuts stay unchanged.";
         heading2.setAttribute("aria-description", heading2.dataset.fltTip);
         heading2.tabIndex = 0;
+        const productShortcuts = document.createElement("details");
+        productShortcuts.className = "flt-shortcut-disclosure";
+        const productSummary = document.createElement("summary");
+        productSummary.textContent = "FL Tools shortcuts";
         this.#shortcutFooter = document.createElement("div");
+        productShortcuts.append(productSummary, this.#shortcutFooter);
         const nativeHelp = nativeShortcutHelp(document);
         nativeHelp.addEventListener("toggle", () => this.#scheduleLayout());
-        this.#shortcutHelp.append(heading2, this.#shortcutFooter, nativeHelp);
+        productShortcuts.addEventListener("toggle", () => this.#scheduleLayout());
+        this.#shortcutHelp.append(heading2, productShortcuts, nativeHelp);
         this.#shortcutHelp.append(terminologyHelp(document, () => this.#scheduleLayout()));
         this.#element.querySelector(".flt-panel-body").prepend(this.#shortcutHelp);
       }
@@ -9195,6 +9196,15 @@ html.flt-basic-launcher-left .flt-cluster {
       const resolvedId = this.#resolveViewId(id);
       const view = this.#views.get(resolvedId);
       if (!view) throw new ContractError("Unknown shell destination", { id });
+      const productContent = [...view.querySelectorAll("[data-flt-product-view-content]")].find(
+        (candidate) => candidate.dataset.fltProductViewContent === resolvedId
+      );
+      if (productContent) {
+        productContent.replaceChildren();
+        if (content) productContent.append(content);
+        this.#scheduleLayout();
+        return;
+      }
       view.replaceChildren();
       if (content) view.append(content);
       if (this.#support.has(resolvedId)) view.append(this.#support.get(resolvedId));
@@ -9285,7 +9295,7 @@ html.flt-basic-launcher-left .flt-cluster {
         else this.#element.dataset.fltMenuWidth = width;
       }
       if (themeSkin !== void 0) {
-        if (themeSkin === "gradient") this.#element.dataset.fltThemeSkin = "gradient";
+        if (themeSkin === "pride") this.#element.dataset.fltThemeSkin = "pride";
         else delete this.#element.dataset.fltThemeSkin;
       }
       this.#syncClusterChrome();
@@ -10100,12 +10110,49 @@ html.flt-basic-launcher-left .flt-cluster {
       };
       const version = options.version ?? this.#version;
       const preferences = this.preferences.mount();
+      const supplied = options.navigation.map((entry) => ({ ...entry }));
+      const appearance = supplied.find((entry) => entry.id === "appearance");
+      const diagnostics = supplied.find((entry) => entry.id === "diagnostics");
+      const system = supplied.find((entry) => entry.id === "system");
+      const combine = (id, contents, shared = []) => {
+        const root = this.#document.createElement("div");
+        root.className = "flt-control-stack";
+        const productContent = this.#document.createElement("div");
+        productContent.className = "flt-control-stack";
+        productContent.dataset.fltProductViewContent = id;
+        for (const content of contents) if (content) productContent.append(content);
+        root.append(productContent);
+        for (const content of shared) if (content) root.append(content);
+        return root;
+      };
+      const navigation = supplied.filter(
+        (entry) => !["appearance", "diagnostics", "system"].includes(entry.id)
+      );
+      navigation.push({
+        ...appearance,
+        content: combine("appearance", [appearance?.content], [preferences.element]),
+        description: appearance?.description ?? "Adjust how FL Tools menus look and behave on this browser and site.",
+        id: "appearance",
+        label: "Appearance"
+      });
+      navigation.push({
+        ...system,
+        aliases: [
+          .../* @__PURE__ */ new Set([
+            ...system?.aliases ?? [],
+            ...diagnostics?.aliases ?? [],
+            "diagnostics",
+            "settings"
+          ])
+        ],
+        content: combine("system", [system?.content, diagnostics?.content]),
+        description: system?.description ?? "Review page and plugin health, export diagnostics, and use product maintenance actions.",
+        id: "system",
+        label: "System"
+      });
       const shell = new ProductShell({
         ...options,
-        navigation: [
-          ...options.navigation,
-          { id: "appearance", label: "Theme & Layout", content: preferences.element }
-        ],
+        navigation,
         document: this.#document,
         footer,
         onDiagnostics: this.#diagnostics ? (container) => this.mountDiagnostics(container) : void 0,
@@ -11325,12 +11372,12 @@ Health: ${health?.state ?? "Unavailable"}`,
     #onResetSettings;
     #onSettings;
     #relationshipContext;
+    #loadingMode;
     #settings;
     #settingsRoot;
     #shell;
     #visitHistory = [];
     #visitHistoryRoot;
-    #visitQuery = "";
     #expanded = /* @__PURE__ */ new Set();
     constructor({
       coreUI,
@@ -11355,7 +11402,8 @@ Health: ${health?.state ?? "Unavailable"}`,
       installUrl,
       updateUrl,
       relationshipContext = false,
-      version = "0.0.7"
+      loadingMode = "page",
+      version = "0.0.8"
     }) {
       if (!coreUI?.createShell || !document?.createElement || typeof onSettings !== "function") {
         throw new TypeError("Basic UI dependencies are required");
@@ -11371,6 +11419,7 @@ Health: ${health?.state ?? "Unavailable"}`,
       this.#onResetSettings = onResetSettings;
       this.#onSettings = onSettings;
       this.#relationshipContext = relationshipContext === true;
+      this.#loadingMode = loadingMode === "profile" ? "profile" : "page";
       this.#settings = settings;
       this.#visitHistory = Array.isArray(visitHistory) ? visitHistory : [];
       const browse = document.createElement("div");
@@ -11443,6 +11492,20 @@ Health: ${health?.state ?? "Unavailable"}`,
       if (next === this.#relationshipContext) return;
       this.#rememberExpanded();
       this.#relationshipContext = next;
+      this.#browseRoot.replaceChildren();
+      this.#settingsRoot.replaceChildren();
+      this.#renderBrowse(this.#browseRoot);
+      this.#renderSettings(this.#settingsRoot);
+      this.#shell.setTopContent(this.#presetToolbar);
+      for (const view of this.#buildNavigation()) {
+        this.#shell.replaceViewContent(view.id, view.content);
+      }
+    }
+    setLoadingMode(mode) {
+      const next = mode === "profile" ? "profile" : "page";
+      if (next === this.#loadingMode) return;
+      this.#rememberExpanded();
+      this.#loadingMode = next;
       this.#browseRoot.replaceChildren();
       this.#settingsRoot.replaceChildren();
       this.#renderBrowse(this.#browseRoot);
@@ -11544,18 +11607,22 @@ Health: ${health?.state ?? "Unavailable"}`,
         });
       }
       navigation.push({
-        aliases: ["settings", "shortcuts", "highlighter", "people", "personalize"],
-        content: take(settingsSections, ["appearance", "diagnostics"], {
+        aliases: ["shortcuts", "highlighter", "people", "personalize"],
+        content: take(settingsSections, ["appearance"], {
+          accordion: false,
+          retainHeadings: true
+        }),
+        id: "appearance",
+        label: "Appearance"
+      });
+      navigation.push({
+        aliases: ["diagnostics", "settings"],
+        content: take(settingsSections, ["diagnostics"], {
           accordion: false,
           retainHeadings: true
         }),
         id: "system",
         label: "System"
-      });
-      navigation.push({
-        id: "diagnostics",
-        label: "Diagnostics",
-        content: this.#document.createElement("div")
       });
       return navigation;
     }
@@ -11591,11 +11658,12 @@ Health: ${health?.state ?? "Unavailable"}`,
       presets.append(presetLabel, presetActions);
       this.#presetToolbar = presets;
       if (["basic", "pro"].includes(this.#editionId)) {
+        const profileLoading = this.#loadingMode === "profile";
         const infinite2 = section(
           this.#document,
-          "Page Loading",
+          profileLoading ? "Profile Loading" : "Page Loading",
           "infinite-scroll",
-          "Control automatic loading and pause it for the current browsing session."
+          profileLoading ? "Load additional profile cards while browsing FetLife Places under /p/." : "Load the next native page automatically on other supported FetLife pages."
         );
         const pageLimit2 = this.#controls.textField({
           label: "Maximum additional pages (1\u201320)",
@@ -11609,7 +11677,7 @@ Health: ${health?.state ?? "Unavailable"}`,
         infinite2.append(
           this.#controls.toggle({
             checked: this.#settings.infiniteScroll.enabled,
-            label: "Auto Page Load",
+            label: profileLoading ? "Auto Profile Load" : "Auto Page Load",
             onChange: (value) => this.#commit((next) => next.infiniteScroll.enabled = value)
           }).element,
           pageLimit2.element
@@ -11934,39 +12002,26 @@ Health: ${health?.state ?? "Unavailable"}`,
         this.#document,
         "Recently Visited",
         "recently-visited",
-        "Search profiles opened on this account. Mark unseen removes only the local visit marker."
+        "Review the last three profiles opened on this account. Mark unseen removes only the local visit marker."
       );
-      const search = this.#controls.search({
-        description: "Filter recently visited profiles by display name or profile ID.",
-        label: "Search recently visited",
-        onInput: (value) => {
-          this.#visitQuery = value;
-          this.#renderVisitHistoryList();
-        },
-        placeholder: "Name or profile ID",
-        value: this.#visitQuery
-      });
       const results = this.#document.createElement("div");
       results.dataset.fltVisitHistoryResults = "true";
-      history.append(search.element, results);
+      history.append(results);
       this.#visitHistoryRoot = results;
       this.#renderVisitHistoryList();
       return history;
     }
     #renderVisitHistoryList() {
       if (!this.#visitHistoryRoot) return;
-      const needle = this.#visitQuery.trim().toLocaleLowerCase();
-      const matches = this.#visitHistory.filter(
-        (item) => !needle || String(item.personId).toLocaleLowerCase().includes(needle) || String(item.displayName ?? "").toLocaleLowerCase().includes(needle)
-      );
+      const matches = this.#visitHistory.slice(0, 3);
       const status = this.#document.createElement("p");
       status.className = "flt-visit-history-status";
       status.setAttribute("role", "status");
-      status.textContent = `${matches.length} of ${this.#visitHistory.length} visited profiles`;
+      status.textContent = `${matches.length} recent profile${matches.length === 1 ? "" : "s"}`;
       if (!matches.length) {
         const empty = this.#document.createElement("div");
         empty.className = "flt-empty";
-        empty.textContent = this.#visitHistory.length ? "No visited profiles match this search." : "Profiles you open will appear here.";
+        empty.textContent = "The last three profiles you open will appear here.";
         this.#visitHistoryRoot.replaceChildren(status, empty);
         return;
       }
@@ -12019,7 +12074,8 @@ Health: ${health?.state ?? "Unavailable"}`,
       const state = this.#infiniteState;
       const summary = this.#document.createElement("p");
       summary.setAttribute("role", "status");
-      summary.textContent = `${state.loadedPages} of ${state.limit ?? this.#settings.infiniteScroll.pageLimit} additional pages \xB7 ${state.loadedItems} items \xB7 ${state.loading ? "loading" : state.paused ? "paused" : state.status.toLocaleLowerCase()}`;
+      const unit = this.#loadingMode === "profile" ? "profile pages" : "pages";
+      summary.textContent = `${state.loadedPages} of ${state.limit ?? this.#settings.infiniteScroll.pageLimit} additional ${unit} \xB7 ${state.loadedItems} items \xB7 ${state.loading ? "loading" : state.paused ? "paused" : state.status.toLocaleLowerCase()}`;
       const countdown = this.#document.createElement("span");
       countdown.dataset.fltPauseCountdown = "";
       if (state.paused && state.pauseRemainingSeconds != null)
@@ -12067,18 +12123,6 @@ Health: ${health?.state ?? "Unavailable"}`,
           }).element
         );
       }
-      if (this.#editionId !== "pro")
-        appearance.append(
-          select(this.#document, {
-            label: "Launcher side",
-            onChange: (value) => this.#commit((next) => next.ui.dock = value),
-            options: [
-              ["right", "Right"],
-              ["left", "Left"]
-            ],
-            value: this.#settings.ui.dock
-          })
-        );
       this.#shortcutFooter = shortcutFooter(this.#document);
       const reset = section(this.#document, "Diagnostics", "diagnostics");
       reset.querySelector(":scope > .flt-basic-section-title")?.remove();
@@ -12666,15 +12710,17 @@ Health: ${health?.state ?? "Unavailable"}`,
       this.#document = document;
       this.#observerFactory = observerFactory;
     }
-    start({ enabled, signal }) {
+    start({ enabled, signal, mode = "page" }) {
       this.stop();
       if (!enabled || typeof this.#observerFactory !== "function") return false;
       const sentinel = this.#document.createElement("div");
       sentinel.className = "flt-root flt-basic-scroll-sentinel";
       sentinel.dataset.fltBasicOwned = "true";
-      sentinel.setAttribute("aria-label", "Load more profiles");
+      const profileMode = mode === "profile";
+      const noun = profileMode ? "profiles" : "page items";
+      sentinel.setAttribute("aria-label", profileMode ? "Load more profiles" : "Load the next page");
       const status = this.#document.createElement("span");
-      status.textContent = "More profiles load near here.";
+      status.textContent = profileMode ? "More profiles load near here." : "The next page loads near here.";
       const pause = this.#document.createElement("button");
       pause.className = "flt-button";
       pause.type = "button";
@@ -12691,15 +12737,15 @@ Health: ${health?.state ?? "Unavailable"}`,
         }
         wasPaused = state.paused;
         pause.textContent = state.paused ? "Resume auto-loading" : "Pause auto-loading";
-        status.textContent = state.paused ? `${state.loadedPages} additional pages loaded. Auto-loading paused.` : state.loading ? "Loading more profiles\u2026" : `${state.loadedPages} additional pages and ${state.loadedItems} items loaded this session.`;
+        status.textContent = state.paused ? `${state.loadedPages} additional pages loaded. Auto-loading paused.` : state.loading ? `Loading more ${noun}\u2026` : `${state.loadedPages} additional pages and ${state.loadedItems} items loaded this session.`;
       });
       placeAfterListing(this.#document, sentinel);
       this.#observer = this.#observerFactory(async (entries) => {
         if (!entries.some((entry) => entry.isIntersecting)) return;
-        status.textContent = "Loading more profiles\u2026";
+        status.textContent = `Loading more ${noun}\u2026`;
         const result3 = await this.#controller.requestNext({ signal });
         if (result3.status === "APPENDED") placeAfterListing(this.#document, sentinel);
-        status.textContent = result3.status === "FAILED" ? "More profiles could not be loaded. Use native pagination or retry." : result3.status === "APPENDED" ? `${result3.appended} more profiles loaded.` : "No more profiles were loaded.";
+        status.textContent = result3.status === "FAILED" ? `More ${noun} could not be loaded. Use native pagination or retry.` : result3.status === "APPENDED" ? `${result3.appended} more ${noun} loaded.` : `No more ${noun} were loaded.`;
         if (result3.status === "FAILED") {
           const retry = this.#document.createElement("button");
           retry.className = "flt-button";
@@ -12979,6 +13025,7 @@ Health: ${health?.state ?? "Unavailable"}`,
   };
 
   // src/profile-state.js
+  var RECENT_PROFILE_LIMIT = 3;
   var BasicProfileState = class {
     #clock;
     #storage;
@@ -13006,11 +13053,15 @@ Health: ${health?.state ?? "Unavailable"}`,
       const record = await this.#storage.put("people", personId, next, {
         expectedRevision: current?.revision ?? 0
       });
+      await this.#pruneRecentlyVisited();
       return Object.freeze({ revision: record.revision, status: "RECORDED" });
     }
-    async listRecentlyVisited({ query = "", limit = 100 } = {}) {
+    async listRecentlyVisited({ query = "", limit = RECENT_PROFILE_LIMIT } = {}) {
       const needle = String(query).trim().toLocaleLowerCase();
-      const boundedLimit = Math.min(500, Math.max(1, Number.parseInt(limit, 10) || 100));
+      const boundedLimit = Math.min(
+        RECENT_PROFILE_LIMIT,
+        Math.max(1, Number.parseInt(limit, 10) || RECENT_PROFILE_LIMIT)
+      );
       const records = await this.#storage.list("people");
       return records.map((record) => record.value).filter((value) => Number.isFinite(value?.basic?.seenAt)).map((value) => ({
         displayName: value.displayName ?? null,
@@ -13022,6 +13073,22 @@ Health: ${health?.state ?? "Unavailable"}`,
       ).sort(
         (left, right) => right.seenAt - left.seenAt || left.personId.localeCompare(right.personId)
       ).slice(0, boundedLimit);
+    }
+    async #pruneRecentlyVisited() {
+      const records = (await this.#storage.list("people")).filter((record) => Number.isFinite(record.value?.basic?.seenAt)).sort(
+        (left, right) => right.value.basic.seenAt - left.value.basic.seenAt || String(left.recordKey).localeCompare(String(right.recordKey))
+      );
+      for (const record of records.slice(RECENT_PROFILE_LIMIT)) {
+        const basic = { ...record.value.basic };
+        delete basic.seenAt;
+        delete basic.profileUrl;
+        await this.#storage.put(
+          "people",
+          record.recordKey,
+          { ...record.value, basic },
+          { expectedRevision: record.revision }
+        );
+      }
     }
     async markUnseen(personId) {
       if (!personId) return false;
@@ -13255,7 +13322,7 @@ Health: ${health?.state ?? "Unavailable"}`,
       "ui"
     ]),
     type: "edition",
-    version: "0.0.7"
+    version: "0.0.8"
   });
   var COMPONENTS = BASIC_MANIFEST.features.map((id) => ({
     id,
@@ -13308,6 +13375,9 @@ Health: ${health?.state ?? "Unavailable"}`,
       return candidate.kind === "group" && route.params?.view !== "list" && Boolean(route.params?.groupId);
     }
     return false;
+  }
+  function pageLoadingMode(route) {
+    return route?.kind === "profile" && route.params?.placeList ? "profile" : "page";
   }
   var BasicProduct = class {
     #abort;
@@ -13497,6 +13567,7 @@ Health: ${health?.state ?? "Unavailable"}`,
           installUrl: this.installUrl,
           updateUrl: this.updateUrl,
           relationshipContext: this.#relationshipContext(),
+          loadingMode: pageLoadingMode(this.#capabilities.routes?.context?.route),
           settings: this.#settings,
           visitHistory,
           version: this.version
@@ -13559,6 +13630,7 @@ Health: ${health?.state ?? "Unavailable"}`,
             this.#cardNavigator.clear();
             this.#applyGlobalSettings();
             this.#ui?.setRelationshipContext(Boolean(current?.route?.params?.relationshipList));
+            this.#ui?.setLoadingMode(pageLoadingMode(current?.route));
             this.#syncPageTools(current?.route);
           },
           { signal: this.#abort.signal }
@@ -13762,6 +13834,7 @@ Health: ${health?.state ?? "Unavailable"}`,
       this.#infiniteScroll.setNext(nativeNextPage(this.#document));
       this.#infiniteTrigger.start({
         enabled: this.#settings.infiniteScroll.enabled,
+        mode: pageLoadingMode(this.#capabilities.routes?.context?.route),
         signal: this.#abort.signal
       });
       this.#document.documentElement.classList.toggle("flt-basic-compact", this.#settings.ui.compact);
@@ -13769,16 +13842,14 @@ Health: ${health?.state ?? "Unavailable"}`,
         "flt-basic-high-contrast",
         this.#settings.ui.highContrast
       );
-      this.#document.documentElement.classList.toggle(
-        "flt-basic-launcher-left",
-        this.#settings.ui.dock === "left"
-      );
+      this.#document.documentElement.classList.remove("flt-basic-launcher-left");
       this.#ui?.shell.setChrome({ contrast: this.#settings.ui.highContrast });
       this.#capabilities.ui.preferences.adopt({
         menuWidth: this.#settings.ui.menuWidth,
         notifications: this.#settings.ui.notifications
       });
       this.#capabilities.ui.preferences.apply();
+      this.#applyMediaSettings();
       this.#syncPageTools();
       void this.#applyPageEnhancements().catch(
         (error) => this.#recordError(
@@ -13787,6 +13858,14 @@ Health: ${health?.state ?? "Unavailable"}`,
           "Page enhancements could not be applied."
         )
       );
+    }
+    #applyMediaSettings() {
+      for (const element of this.#document.querySelectorAll("img, video")) {
+        if (element.closest('.flt-root, nav, [role="navigation"]')) continue;
+        const kind = element.matches("video") ? "video" : element.closest('[data-flt-avatar], [data-member-card], a[href*="/users/"]') ? "avatar" : "content";
+        applyMediaPolicy(this.#capabilities.ui.presentation, element, this.#settings.media, kind);
+        this.#presentedMedia.add(element);
+      }
     }
     async #applyPageEnhancements() {
       const revision = ++this.#enhancementRevision;
@@ -14008,15 +14087,6 @@ Health: ${health?.state ?? "Unavailable"}`,
       await this.#reloadSettings();
       this.#capabilities.ui.announcer.announce("Browse settings were reset.");
     }
-    #placeBesideSupporter(element, node) {
-      const supporter = element.querySelector(
-        '[aria-label*="supporter" i], [title*="supporter" i], [data-supporter], a[href*="/support"]'
-      );
-      const name = element.querySelector('h1, h2, [data-fltools-field="display-name"]');
-      const anchor = supporter ?? name;
-      if (anchor) anchor.after(node);
-      else element.prepend(node);
-    }
     #explainableChip(label, explanation) {
       const chip = this.#document.createElement("button");
       chip.type = "button";
@@ -14080,7 +14150,19 @@ Health: ${health?.state ?? "Unavailable"}`,
         native.setAttribute("aria-label", native.dataset.fltTip);
         actions.append(native);
       }
-      this.#placeBesideSupporter(candidate.element, actions);
+      const tray = this.#profileChipTray(candidate.element);
+      tray.append(actions);
+    }
+    #profileChipTray(element) {
+      element.classList.add("flt-profile-card-host");
+      let tray = element.querySelector(':scope > [data-flt-profile-card-chips="true"]');
+      if (!tray) {
+        tray = this.#document.createElement("div");
+        tray.className = "flt-root flt-profile-card-chips";
+        tray.dataset.fltProfileCardChips = "true";
+        element.append(tray);
+      }
+      return tray;
     }
     async #muteForSession(candidate) {
       const personId = candidate.parsed.identity.value;
@@ -14347,7 +14429,7 @@ Health: ${health?.state ?? "Unavailable"}`,
   try {
     installCore(pageWindow, {
       document: pageWindow.document,
-      version: "0.0.7",
+      version: "0.0.8",
       window: pageWindow
     });
     void installBasic(pageWindow.FLTools, {
@@ -14356,14 +14438,14 @@ Health: ${health?.state ?? "Unavailable"}`,
           "Keeps every menu fully inside the window after launcher dragging or resizing.",
           "Preserves the launcher position when the menu closes."
         ],
-        version: "0.0.7"
+        version: "0.0.8"
       },
       document: pageWindow.document,
       iconUrl: "https://raw.githubusercontent.com/Typical-Bits/fl-tools-basic/main/assets/badges/basic-128.png",
       installUrl: "https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js",
       releaseUrl: "https://github.com/Typical-Bits/fl-tools-basic/releases",
       updateUrl: "https://github.com/Typical-Bits/fl-tools-basic/raw/refs/heads/main/FL-Tools-Basic.user.js",
-      version: "0.0.7",
+      version: "0.0.8",
       window: pageWindow
     }).catch(report);
   } catch (error) {
